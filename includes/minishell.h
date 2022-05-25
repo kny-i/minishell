@@ -6,7 +6,7 @@
 # include <fcntl.h>
 # include <stdbool.h>
 # include <unistd.h>
-
+# include "../libft/libft.h"
 
 
 #endif // !MINISHELL_H
