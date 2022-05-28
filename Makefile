@@ -5,7 +5,8 @@ LIBFT := ./libft
 SRCS_DIR := ./srcs
 OBJS_DIr := ./objs
 
-SRCS := $(SRCS_DIR)/main.c
+SRCS := $(SRCS_DIR)/main.c \
+		$(SRCS_DIR)/signal/signal.c
 OBJS := $(patsubst $(SRCS_DIR)%,$(OBJS_DIr)%,$(SRCS:.c=.o))
 
 .PHONY: all
