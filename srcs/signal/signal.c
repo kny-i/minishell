@@ -5,9 +5,10 @@ void	handle_sig(int sig)
 	printf("Ctrl-C\n");
 }
 
-void	hoge(int sig)
+void	signal_ignore(int sig)
 {
-	printf("Ctrl-\n");
+	printf("Ctrl-\\\n");
+	return ;
 }
 
 void	sig_input()
@@ -20,13 +21,7 @@ void	sig_input()
 	sa.sa_flags = SA_RESTART;
 	sigaction(SIGINT, &sa, NULL);*/
 	signal(SIGINT, handle_sig);
-	signal(SIGQUIT, SIG_IGN);
-	c = getchar();
-	if (c == EOF)
-	{
-		printf("exit minishell\n");
-		exit(0);
-	}
+	signal(SIGQUIT, signal_ignore);
 }
 
 

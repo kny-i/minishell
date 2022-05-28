@@ -6,15 +6,13 @@ void	launch_minishell(char *environ[])
 	size_t	len;
 	int		c;
 
+	sig_input();
 	while (1)
 	{
-		
-		
-		sig_input();
 		c = getchar();
 		if (c == EOF)
 		{
-			printf("exit minishell");
+			printf("exit minishell\n");
 			exit(0);
 		}
 
