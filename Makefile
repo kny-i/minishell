@@ -1,5 +1,5 @@
 NAME := minishell
-CFLAGS := #-Wall -Werror -Wextra
+CFLAGS := -lreadline #-Wall -Werror -Wextra
 INCLUDE := ./includes
 LIBFT := ./libft
 SRCS_DIR := ./srcs

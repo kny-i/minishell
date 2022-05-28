@@ -8,6 +8,8 @@
 # include <unistd.h>
 # include <libc.h>
 # include "../libft/libft.h"
+# include <readline/readline.h>
+# include <readline/history.h>
 
-
+void	sig_input();
 #endif // !MINISHELL_H

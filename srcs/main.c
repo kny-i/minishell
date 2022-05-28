@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 void	launch_minishell(char *environ[])
 {
@@ -9,6 +9,15 @@ void	launch_minishell(char *environ[])
 	sig_input();
 	while (1)
 	{
+		line = readline("> ");
+		if (line == NULL || ft_strlen(line) == 0)
+		{
+			free(line);
+			break;
+		}
+		printf("line is '%s'\n", line);
+		add_history(line);
+		free(line);
 		c = getchar();
 		if (c == EOF)
 		{
