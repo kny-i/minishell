@@ -14,11 +14,11 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(MAKE) -C $(LIBFT)
-	$(CC) $(CFLAGS) -I $(INCLUDE) $(OBJS) $(LIBFT)/libft.a -o $@
+	$(CC) $(CFLAGS) -I $(INCLUDE) $(OBJS) $(LIBFT)/libft.a -o $@ -lreadline
 
 $(OBJS_DIr)/%.o: $(SRCS_DIR)/%.c
 	mkdir -p $(OBJS_DIr)/$(*D)
-	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
+	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@ -lreadline
 
 .PHONY: clean
 clean:
