@@ -6,15 +6,12 @@ void	launch_minishell(char *environ[])
 	size_t	len;
 	int		c;
 
-	sig_input();
 	while (1)
 	{
-		line = readline("> ");
-		if (line == NULL || ft_strlen(line) == 0)
-		{
-			free(line);
+		sig_input();
+		line = readline("minishell> ");
+		if (line == NULL)
 			break;
-		}
 		printf("line is '%s'\n", line);
 		add_history(line);
 		free(line);
@@ -32,6 +29,8 @@ void	launch_minishell(char *environ[])
 		//lexser->paser->expanda->executer
 		//
 	}
+	printf("exit minishell\n");
+	exit(0);
 }
 
 int	main(int argc, char *argv[])

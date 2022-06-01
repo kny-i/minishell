@@ -1,5 +1,6 @@
 NAME := minishell
-CFLAGS := -lreadline #-Wall -Werror -Wextra
+CFLAGS := -I $(shell brew --prefix readline)/include #-Wall -Werror -Wextra
+LDFLAGS = -lreadline -lhistory -L$(shell brew --prefix readline)/lib
 INCLUDE := ./includes
 LIBFT := ./libft
 SRCS_DIR := ./srcs
@@ -14,11 +15,11 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(MAKE) -C $(LIBFT)
-	$(CC) $(CFLAGS) -I $(INCLUDE) $(OBJS) $(LIBFT)/libft.a -o $@ -lreadline
+	$(CC) $(CFLAGS) $(LDFLAGS) -I $(INCLUDE) $(OBJS) $(LIBFT)/libft.a -o $@
 
 $(OBJS_DIr)/%.o: $(SRCS_DIR)/%.c
 	mkdir -p $(OBJS_DIr)/$(*D)
-	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@ -lreadline
+	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
 .PHONY: clean
 clean:
