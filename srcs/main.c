@@ -1,6 +1,29 @@
 #include "minishell.h"
 
-void	launch_minishell(char *environ[])
+void	launch(char *line,char *envp[])
+{
+	char *args[] = {NULL, NULL};
+	int pid;
+	int status;
+	char *tmp;
+	char *path;
+
+
+	args[0] = line;
+	pid = fork();
+	if (pid == 0)
+	{
+
+		path  = ft_strjoin("/bin/", line);
+		execve(path, args, envp);
+	}
+	if (waitpid(pid, &status, 0) < 0)
+	{
+		ft_putstr_fd("\n", 2);
+	}
+
+}
+void	minishell(char *environ[])
 {
 	char	*line;
 	size_t	len;
@@ -14,6 +37,7 @@ void	launch_minishell(char *environ[])
 			break;
 		printf("line is '%s'\n", line);
 		add_history(line);
+		launch(line, environ);
 		free(line);
 	}
 	printf("exit minishell\n");
@@ -25,6 +49,6 @@ int	main(int argc, char *argv[])
 	extern char	**environ;
 
 	if (argc == 1)
-		launch_minishell(environ);
+		minishell(environ);
 	return (0);
 }
