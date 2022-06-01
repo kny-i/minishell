@@ -14,4 +14,5 @@
 
 
 void	sig_input();
+int		ft_strcmp(const char *s1, const char *s2);
 #endif // !MINISHELL_H

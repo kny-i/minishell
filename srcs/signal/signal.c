@@ -1,16 +1,14 @@
 #include "minishell.h"
+#include <readline/readline.h>
 
-void	handle_sig(int sig)
+void	signal_handler(int sig)
 {
-	printf("Ctrl-C\n");
+	(void) sig;
+	ft_putstr_fd("\n", 1);
+	//rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
 }
-
-void	signal_ignore(int sig)
-{
-	printf("Ctrl-\\\n");
-	return ;
-}
-
 void	sig_input()
 {
 	int	c;
@@ -20,8 +18,9 @@ void	sig_input()
 	sa.sa_handler = &handle_sig;
 	sa.sa_flags = SA_RESTART;
 	sigaction(SIGINT, &sa, NULL);*/
-	signal(SIGINT, handle_sig);
-	signal(SIGQUIT, signal_ignore);
+	signal(SIGINT, signal_handler);
+	signal(SIGQUIT, SIG_IGN);
+
 }
 
 
