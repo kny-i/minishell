@@ -13,7 +13,10 @@ OBJS_DIr := ./objs
 
 SRCS := $(SRCS_DIR)/main.c \
 		$(SRCS_DIR)/signal/signal.c \
-		$(SRCS_DIR)/utils/ft_strcmp.c
+		$(SRCS_DIR)/utils/ft_strcmp.c \
+		$(SRCS_DIR)/builtin/builtin_core.c \
+
+
 
 OBJS := $(patsubst $(SRCS_DIR)%,$(OBJS_DIr)%,$(SRCS:.c=.o))
 

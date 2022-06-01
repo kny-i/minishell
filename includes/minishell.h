@@ -17,4 +17,5 @@
 
 void	sig_input();
 int		ft_strcmp(const char *s1, const char *s2);
+bool	is_builtin(char *cmd);
 #endif // !MINISHELL_H
