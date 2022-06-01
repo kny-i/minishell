@@ -15,19 +15,6 @@ void	launch_minishell(char *environ[])
 		printf("line is '%s'\n", line);
 		add_history(line);
 		free(line);
-		c = getchar();
-		if (c == EOF)
-		{
-			printf("exit minishell\n");
-			exit(0);
-		}
-
-		//prompt
-
-		//signal
-
-		//lexser->paser->expanda->executer
-		//
 	}
 	printf("exit minishell\n");
 	exit(0);
