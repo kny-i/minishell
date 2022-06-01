@@ -1,6 +1,12 @@
 NAME := minishell
-CFLAGS := -I $(shell brew --prefix readline)/include #-Wall -Werror -Wextra
-LDFLAGS = -lreadline -lhistory -L$(shell brew --prefix readline)/lib
+ifeq ($(shell uname), Darwin)
+	CFLAGS += -I$(shell brew --prefix readline)/include
+	LDFLAGS += -L$(shell brew --prefix readline)/lib -lreadline
+else
+	LDFLAGS += -lreadline
+endif
+#CFLAGS := -I $(shell brew --prefix readline)/include #-Wall -Werror -Wextra
+#LDFLAGS = -lreadline -lhistory -L$(shell brew --prefix readline)/lib
 INCLUDE := ./includes
 LIBFT := ./libft
 SRCS_DIR := ./srcs
