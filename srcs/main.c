@@ -51,16 +51,16 @@ void	launch(char *line,char *envp[])
 	pid = fork();
 	if (pid == 0)
 	{
-
 		path  = ft_strjoin("/bin/", line);
-		execve(path, args, envp);
+		if (execve(path, args, envp) == -1)
+			exit(1);
 	}
-	if (waitpid(pid, &status, 0) < 0)
+	if (waitpid(pid, NULL, 0) < 0)
 	{
 		ft_putstr_fd("\n", 2);
 	}
-
 }
+
 void	minishell(char *environ[])
 {
 	char	*line;

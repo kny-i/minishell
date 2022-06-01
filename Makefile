@@ -1,12 +1,11 @@
 NAME := minishell
 ifeq ($(shell uname), Darwin)
-	CFLAGS += -I$(shell brew --prefix readline)/include
+	CFLAGS += -I$(shell brew --prefix readline)/include 
 	LDFLAGS += -L$(shell brew --prefix readline)/lib -lreadline
 else
-	LDFLAGS += -lreadline
+#	CFLAGS += #-Wall -Wextra -Werror
+	LDFLAGS += -L/usr/include -lreadline
 endif
-#CFLAGS := -I $(shell brew --prefix readline)/include #-Wall -Werror -Wextra
-#LDFLAGS = -lreadline -lhistory -L$(shell brew --prefix readline)/lib
 INCLUDE := ./includes
 LIBFT := ./libft
 SRCS_DIR := ./srcs
@@ -23,7 +22,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(MAKE) -C $(LIBFT)
-	$(CC) $(CFLAGS) $(LDFLAGS) -I $(INCLUDE) $(OBJS) $(LIBFT)/libft.a -o $@
+	$(CC) $(CFLAGS) -I $(INCLUDE) $(OBJS) $(LDFLAGS) $(LIBFT)/libft.a -o $@
 
 $(OBJS_DIr)/%.o: $(SRCS_DIR)/%.c
 	mkdir -p $(OBJS_DIr)/$(*D)
