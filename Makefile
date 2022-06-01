@@ -7,7 +7,9 @@ SRCS_DIR := ./srcs
 OBJS_DIr := ./objs
 
 SRCS := $(SRCS_DIR)/main.c \
-		$(SRCS_DIR)/signal/signal.c
+		$(SRCS_DIR)/signal/signal.c \
+		$(SRCS_DIR)/utils/ft_strcmp.c
+
 OBJS := $(patsubst $(SRCS_DIR)%,$(OBJS_DIr)%,$(SRCS:.c=.o))
 
 .PHONY: all
