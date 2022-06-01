@@ -13,9 +13,9 @@ void	launch(char *line,char *envp[])
 
 	if (is_builtin(line) == 1)
 	{
+		execute_builtin(args, envp);
 		return ;
 	}
-		//return(execute_builtin(args, envp));
 	pid = fork();
 	if (pid == 0)
 	{

@@ -15,6 +15,12 @@ SRCS := $(SRCS_DIR)/main.c \
 		$(SRCS_DIR)/signal/signal.c \
 		$(SRCS_DIR)/utils/ft_strcmp.c \
 		$(SRCS_DIR)/builtin/builtin_core.c \
+		$(SRCS_DIR)/builtin/cd.c \
+		$(SRCS_DIR)/builtin/echo.c \
+		$(SRCS_DIR)/builtin/exit.c \
+		$(SRCS_DIR)/builtin/export.c \
+		$(SRCS_DIR)/builtin/pwd.c \
+		$(SRCS_DIR)/builtin/unset.c \
 
 
 
