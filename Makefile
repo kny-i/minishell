@@ -21,6 +21,7 @@ SRCS := $(SRCS_DIR)/main.c \
 		$(SRCS_DIR)/builtin/export.c \
 		$(SRCS_DIR)/builtin/pwd.c \
 		$(SRCS_DIR)/builtin/unset.c \
+		$(SRCS_DIR)/lexer/lexer.c
 
 
 
