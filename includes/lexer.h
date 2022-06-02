@@ -16,7 +16,7 @@ typedef enum	e_token_type
 	CHAR_GREATER		= '>',
 	CHAR_LESSER			= '<',
 	CHAR_NULL			= 0,
-	e_token_type		= -1,
+	TOKEN				= -1,
 }	t_token_type;
 
 typedef enum	e_status
@@ -43,6 +43,6 @@ typedef struct s_lexer
 	int		num_token;
 }	t_lexer;
 
-
+int	lexer_build(char *input, int size, t_lexer *lexerbuf);
 
 #endif // !LEXER_H
