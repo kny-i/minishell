@@ -43,6 +43,18 @@ void	token_init(t_token *token, int datasize)
 	token->next = NULL;
 }
 
+/*
+int	lexer_build(char *input, int size, t_lexer *lexerbuf)
+{
+	t_token	*token;
+	char	*tmp;
+
+	if (lexerbuf == NULL)
+
+	
+}*/
+
+
 int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 {
 	t_token	*token;
@@ -64,37 +76,34 @@ int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 	char	c;
 	int		state = STATE_GENERAL;
 
-	c = input[i];
-	while (c != '\0')
+	
+	do
 	{
+		c = input[i];
 		int	char_type = get_char_type(c);
-		if (state == STATE_GENERAL)
+/*		if (state == STATE_GENERAL)
 		{
 			if  (char_type == CHAR_QOUTE)
 			{
 				state = STATE_IN_QUOTE;
 				token->data[j++] = CHAR_QOUTE;
 				token->type = TOKEN;
-				break ;
 			}
 			else if (char_type == CHAR_DQOUTE)
 			{
 				state = STATE_IN_DQUOTE;
 				token->data[j++] = CHAR_DQOUTE;
 				token->type = TOKEN;
-				break ;
 			}
 			else if (char_type == CHAR_ESCAPESEQUENCE)
 			{
 				token->data[j++] = input[++i];
 				token->type = TOKEN;
-				break ;
 			}
 			else if (char_type == CHAR_GENERAL)
 			{
 				token->data[j++] = c;
 				token->type = TOKEN;
-				break ;
 			}
 			else if (char_type == CHAR_WHITESPACE)
 			{
@@ -104,10 +113,10 @@ int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 					token->next = malloc(sizeof(t_token));
 					token = token->next;
 					token_init(token, size - i);
+					j = 0;
 				}
-				break ;
 			}
-			else (char_type != CHAR_NEWLINE || char_type != CHAR_NULL || char_type != CHAR_TAB)
+			else if (char_type != CHAR_NEWLINE || char_type != CHAR_NULL || char_type != CHAR_TAB)
 			{
 				if (j > 0)
 				{
@@ -123,8 +132,78 @@ int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 				token->next = malloc(sizeof(t_token));
 				token = token->next;
 				token_init(token, size - i);
-				break ;
 			}
+		}*/
+		if (state == STATE_GENERAL)
+		{
+//			switch (char_type) 
+//			{
+				if (char_type == CHAR_QOUTE)
+				{
+					state = STATE_IN_QUOTE;
+					token->data[j++] = CHAR_QOUTE;
+					token->type = TOKEN;
+//					break;
+				}
+					
+				else if (char_type == CHAR_DQOUTE)
+				{
+					state = STATE_IN_DQUOTE;
+					token->data[j++] = CHAR_DQOUTE;
+					token->type = TOKEN;
+				//	break;
+				}
+					
+				else if (char_type == CHAR_ESCAPESEQUENCE)
+				{
+					token->data[j++] = input[++i];
+					token->type = TOKEN;
+				//	break;
+				}
+					
+				else if (char_type == CHAR_GENERAL)
+				{
+					token->data[j++] = c;
+					token->type = TOKEN;
+				//	break;
+				}	
+				else if (char_type == CHAR_WHITESPACE)
+				{
+					if (j > 0) {
+						token->data[j] = 0;
+						token->next = malloc(sizeof(t_token));
+						token = token->next;
+						token_init(token, size - i);
+						j = 0;
+					}
+				//	break;
+				}	
+				else if (char_type == CHAR_SEMICOLON || \
+				char_type == CHAR_GREATER || \
+				char_type == CHAR_LESSER || \
+				char_type == CHAR_AMPERSAND || \
+				char_type == CHAR_PIPE)
+				{
+					// end the token that was being read before
+					if (j > 0) {
+						token->data[j] = 0;
+						token->next = malloc(sizeof(t_token));
+						token = token->next;
+						token_init(token, size - i);
+						j = 0;
+					}
+					
+					// next token
+					token->data[0] = char_type;
+					token->data[1] = 0;
+					token->type = char_type;
+					
+					token->next = malloc(sizeof(t_token));
+					token = token->next;
+					token_init(token, size - i);
+				//	break;
+				}
+			//}
 		}
 		else if (state == STATE_IN_DQUOTE)
 		{
@@ -143,9 +222,15 @@ int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 			if (j > 0)
 			{
 				token->data[j] = 0;
-				num_tem_token += 1;
+				num_tem_token++;
 				j = 0;
 			}
 		}
-	}
+		i++;
+	}while (c != '\0');
+	printf("i = %d\n", i);
+	t_token	*tmp = lexerbuf->list_token;
+//	printf("data = %s\n", tmp->data);
+	for (;tmp != NULL; tmp = tmp->next)
+		printf("data = %s\n", tmp->data);
 }
