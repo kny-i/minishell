@@ -16,7 +16,11 @@ typedef enum	e_token_type
 	CHAR_GREATER		= '>',
 	CHAR_LESSER			= '<',
 	CHAR_NULL			= 0,
+<<<<<<< HEAD
 	TOKEN				= -1,
+=======
+	e_token_type		= -1,
+>>>>>>> 9fb93dd70719210dc92fcd38dc9d5afe2bc36d58
 }	t_token_type;
 
 typedef enum	e_status
