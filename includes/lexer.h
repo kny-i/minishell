@@ -1,6 +1,8 @@
 #ifndef LEXER_H
 # define LEXER_H
 
+# include <glob.h>
+
 typedef enum	e_token_type
 {
 	CHAR_GENERAL		= -1,

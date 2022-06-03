@@ -49,6 +49,7 @@ void	minishell(char *environ[])
 	//	add_history(line);
 	//	launch(line, environ);
 		free(line);
+		
 	}
 	printf("exit minishell\n");
 	exit(0);
