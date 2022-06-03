@@ -14,6 +14,7 @@
 # include <sys/wait.h>
 # include <stdbool.h>
 # include "../libft/libft.h"
+# include "./lexer.h"
 # define FAILURE 1
 # define SUCCESS 0
 
@@ -29,5 +30,8 @@ int	execute_builtin(char **argv,char **enpvp);
 int 	cd_core(char **args);
 //pwd.c
 int	pwd_core(char **argv);
+
+//lexer/lexer.c
+int	lexer_build(char *input, int size, t_lexer *lexerbuf);
 
 #endif
