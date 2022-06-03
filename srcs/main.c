@@ -35,7 +35,11 @@ void	minishell(char *environ[])
 	char	*line;
 	size_t	len;
 	int		c;
+<<<<<<< HEAD
 	t_lexer	lexerbuf;
+=======
+	t_lexer lexerbuf;
+>>>>>>> dfd27a0ba862fec25e273142ed90ee201a198466
 
 	while (1)
 	{
@@ -45,9 +49,15 @@ void	minishell(char *environ[])
 			break;
 		int	size = ft_strlen(line);
 		lexer_build(line, size, &lexerbuf);
+<<<<<<< HEAD
 	//	printf("line is '%s'\n", line);
 	//	add_history(line);
 	//	launch(line, environ);
+=======
+	/*	printf("line is '%s'\n", line);
+		add_history(line);
+		launch(line, environ);*/
+>>>>>>> dfd27a0ba862fec25e273142ed90ee201a198466
 		free(line);
 		
 	}
