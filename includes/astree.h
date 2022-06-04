@@ -10,7 +10,7 @@ typedef enum{
 	NODE_CMD_PATH		= (1 << 5),
 	NODE_ARGUMENT	    = (1 << 6),
 	NODE_DATA	 		= (1 <<7),
-}; NodeType;
+}	NodeType;
 
 typedef struct s_ASTreeNode
 {
@@ -19,3 +19,12 @@ typedef struct s_ASTreeNode
 	struct ASTreeNode *left;
 	struct ASTreeNode *right;
 }	t_ASTreeNode;
+
+#define NODETYPE(a) (a & (~NODE_DATA))	// get the type of the nodes
+
+void ASTreeAttachBinaryBranch (t_ASTreeNode * root , t_ASTreeNode * leftNode , t_ASTreeNode * rightNode);
+void ASTreeNodeSetType (t_ASTreeNode * node , NodeType nodetype );
+void ASTreeNodeSetData (t_ASTreeNode * node , char * data );
+void ASTreeNodeDelete (t_ASTreeNode * node );
+
+#endif
