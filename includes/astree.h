@@ -12,3 +12,10 @@ typedef enum{
 	NODE_DATA	 		= (1 <<7),
 }; NodeType;
 
+typedef struct s_ASTreeNode
+{
+	int type;
+	char *szData;
+	struct ASTreeNode *left;
+	struct ASTreeNode *right;
+}	t_ASTreeNode;
