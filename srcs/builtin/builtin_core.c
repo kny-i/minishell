@@ -1,28 +1,40 @@
 #include "minishell.h"
 
-/*int builtin_cd(char **args)
-{
-	if (args[1] == NULL)
-		return (cd_to_home(argv));
-}
-int	execute_builtin(char **argv)
+int	execute_builtin(char **argv,char **enpvp)
 {
 	if (ft_strcmp("cd", argv[0]) == 0)
-		return (builtin_cd(argv));
+		return (cd_core(argv));
 	if (ft_strcmp("echo", argv[0]) == 0)
-		return (builtin_echo(argv));
+	{
+		return (0);
+		//return (echo_core(argv));
+	}
 	if (ft_strcmp("env", argv[0]) == 0)
-		return (builtin_env(argv));
+	{
+		return (0);
+		//return (env_core(argv));
+	}
 	if (ft_strcmp("exit", argv[0]) == 0)
-		return (builtin_exit(argv));
+	{
+		return (0);
+		//return (exit_core(argv));
+	}
 	if (ft_strcmp("export", argv[0]) == 0)
-		return (builtin_export(argv));
+	{
+		return (0);
+		//return (export_core(argv));
+	}
 	if (ft_strcmp("pwd", argv[0]) == 0)
-		return (builtin_pwd(argv));
+	{
+		return (pwd_core(argv));
+	}
 	if (ft_strcmp("unset", argv[0]) == 0)
-		return (builtin_unset(argv));
+	{
+		return (0);
+		//return (unset_core(argv));
+	}
 	return (1);
-}*/
+}
 
 bool	is_builtin(char *cmd)
 {
