@@ -43,7 +43,6 @@ void	token_init(t_token *token, int datasize)
 	token->next = NULL;
 }
 
-<<<<<<< HEAD
 void	strip_quotes(char *src, char *dest)
 {
 	int	n;
@@ -67,20 +66,6 @@ void	strip_quotes(char *src, char *dest)
 	}
 	dest[j] = 0;
 }
-
-=======
->>>>>>> dfd27a0ba862fec25e273142ed90ee201a198466
-/*
-int	lexer_build(char *input, int size, t_lexer *lexerbuf)
-{
-	t_token	*token;
-	char	*tmp;
-
-	if (lexerbuf == NULL)
-
-	
-}*/
-
 
 int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 {
@@ -109,124 +94,13 @@ int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 	{
 		c = input[i];
 		int	char_type = get_char_type(c);
-/*		if (state == STATE_GENERAL)
-		{
-<<<<<<< HEAD
-				if (char_type == CHAR_QOUTE)
-				{
-					state = STATE_IN_QUOTE;
-					token->data[j++] = CHAR_QOUTE;
-					token->type = TOKEN;
-				}
-					
-				else if (char_type == CHAR_DQOUTE)
-				{
-					state = STATE_IN_DQUOTE;
-					token->data[j++] = CHAR_DQOUTE;
-					token->type = TOKEN;
-				}
-					
-				else if (char_type == CHAR_ESCAPESEQUENCE)
-				{
-					token->data[j++] = input[++i];
-					token->type = TOKEN;
-				}
-					
-				else if (char_type == CHAR_GENERAL)
-				{
-					token->data[j++] = c;
-					token->type = TOKEN;
-				}	
-				else if (char_type == CHAR_WHITESPACE)
-=======
-			if  (char_type == CHAR_QOUTE)
-			{
-				state = STATE_IN_QUOTE;
-				token->data[j++] = CHAR_QOUTE;
-				token->type = TOKEN;
-			}
-			else if (char_type == CHAR_DQOUTE)
-			{
-				state = STATE_IN_DQUOTE;
-				token->data[j++] = CHAR_DQOUTE;
-				token->type = TOKEN;
-			}
-			else if (char_type == CHAR_ESCAPESEQUENCE)
-			{
-				token->data[j++] = input[++i];
-				token->type = TOKEN;
-			}
-			else if (char_type == CHAR_GENERAL)
-			{
-				token->data[j++] = c;
-				token->type = TOKEN;
-			}
-			else if (char_type == CHAR_WHITESPACE)
-			{
-				if (j > 0)
-				{
-					token->data[j] = 0;
-					token->next = malloc(sizeof(t_token));
-					token = token->next;
-					token_init(token, size - i);
-					j = 0;
-				}
-			}
-			else if (char_type != CHAR_NEWLINE || char_type != CHAR_NULL || char_type != CHAR_TAB)
-			{
-				if (j > 0)
->>>>>>> dfd27a0ba862fec25e273142ed90ee201a198466
-				{
-					if (j > 0) {
-						token->data[j] = 0;
-						token->next = malloc(sizeof(t_token));
-						token = token->next;
-						token_init(token, size - i);
-						j = 0;
-					}
-				}	
-				else if (char_type == CHAR_SEMICOLON || \
-				char_type == CHAR_GREATER || \
-				char_type == CHAR_LESSER || \
-				char_type == CHAR_AMPERSAND || \
-				char_type == CHAR_PIPE)
-				{
-					if (j > 0) {
-						token->data[j] = 0;
-						token->next = malloc(sizeof(t_token));
-						token = token->next;
-						token_init(token, size - i);
-						j = 0;
-					}
-					
-					token->data[0] = char_type;
-					token->data[1] = 0;
-					token->type = char_type;
-					
-					token->next = malloc(sizeof(t_token));
-					token = token->next;
-					token_init(token, size - i);
-				}
-<<<<<<< HEAD
-=======
-				token->data[0] = char_type;
-				token->data[1] = 0;
-				token->type = char_type;
-				token->next = malloc(sizeof(t_token));
-				token = token->next;
-				token_init(token, size - i);
-			}
-		}*/
 		if (state == STATE_GENERAL)
 		{
-//			switch (char_type) 
-//			{
 				if (char_type == CHAR_QOUTE)
 				{
 					state = STATE_IN_QUOTE;
 					token->data[j++] = CHAR_QOUTE;
 					token->type = TOKEN;
-//					break;
 				}
 					
 				else if (char_type == CHAR_DQOUTE)
@@ -234,22 +108,19 @@ int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 					state = STATE_IN_DQUOTE;
 					token->data[j++] = CHAR_DQOUTE;
 					token->type = TOKEN;
-				//	break;
 				}
 					
 				else if (char_type == CHAR_ESCAPESEQUENCE)
 				{
 					token->data[j++] = input[++i];
 					token->type = TOKEN;
-				//	break;
 				}
 					
 				else if (char_type == CHAR_GENERAL)
 				{
 					token->data[j++] = c;
 					token->type = TOKEN;
-				//	break;
-				}	
+				}
 				else if (char_type == CHAR_WHITESPACE)
 				{
 					if (j > 0) {
@@ -259,8 +130,7 @@ int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 						token_init(token, size - i);
 						j = 0;
 					}
-				//	break;
-				}	
+				}
 				else if (char_type == CHAR_SEMICOLON || \
 				char_type == CHAR_GREATER || \
 				char_type == CHAR_LESSER || \
@@ -284,10 +154,7 @@ int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 					token->next = malloc(sizeof(t_token));
 					token = token->next;
 					token_init(token, size - i);
-				//	break;
 				}
-			//}
->>>>>>> dfd27a0ba862fec25e273142ed90ee201a198466
 		}
 		else if (state == STATE_IN_DQUOTE)
 		{
@@ -312,9 +179,6 @@ int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 		}
 		i++;
 	}while (c != '\0');
-<<<<<<< HEAD
-
-
 	for (t_token	*tmp = lexerbuf->list_token; tmp != NULL; tmp = tmp->next)
 		printf("data = %s\n", tmp->data);
 
@@ -358,12 +222,10 @@ int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 		token = token->next;
 	}
 	lexerbuf->num_token = k;
-	return (k);
-=======
 	printf("i = %d\n", i);
 	t_token	*tmp = lexerbuf->list_token;
 //	printf("data = %s\n", tmp->data);
 	for (;tmp != NULL; tmp = tmp->next)
 		printf("data = %s\n", tmp->data);
->>>>>>> dfd27a0ba862fec25e273142ed90ee201a198466
+	return (k);
 }
