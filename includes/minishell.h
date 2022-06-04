@@ -15,6 +15,9 @@
 # include <stdbool.h>
 # include "../libft/libft.h"
 # include "./lexer.h"
+# include "./parser.h"
+# include "./astree.h"
+
 # define FAILURE 1
 # define SUCCESS 0
 

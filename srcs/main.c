@@ -37,6 +37,7 @@ void	minishell(char *environ[])
 	int		c;
 
 	t_lexer	lexerbuf;
+	t_ASTreeNode *tree;
 
 	while (1)
 	{
@@ -44,8 +45,12 @@ void	minishell(char *environ[])
 		line = readline("minishell> ");
 		if (line == NULL)
 			break;
-		int	size = ft_strlen(line);
+		int	size = (int)ft_strlen(line);
 		lexer_build(line, size, &lexerbuf);
+		free(line);
+		if (parse(&lexerbuf, &tree) != 0)
+			continue;
+
 	//	printf("line is '%s'\n", line);
 	//	add_history(line);
 	//	launch(line, environ);
