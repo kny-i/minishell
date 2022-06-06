@@ -48,13 +48,14 @@ void	minishell(char *environ[])
 		int	size = (int)ft_strlen(line);
 		lexer_build(line, size, &lexerbuf);
 		free(line);
-		if (parse(&lexerbuf, &tree) != 0)
-			continue;
+		line = NULL;
+//		if (parse(&lexerbuf, &tree) != 0)
+//			continue;
 
 	//	printf("line is '%s'\n", line);
 	//	add_history(line);
 	//	launch(line, environ);
-		free(line);
+	//	free(line);
 		
 	}
 	printf("exit minishell\n");
