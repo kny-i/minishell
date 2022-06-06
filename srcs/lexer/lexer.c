@@ -179,8 +179,6 @@ int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 		}
 		i++;
 	}while (c != '\0');
-	for (t_token	*tmp = lexerbuf->list_token; tmp != NULL; tmp = tmp->next)
-		printf("data = %s\n", tmp->data);
 
 	token = lexerbuf->list_token;
 	int	k = 0;
@@ -209,13 +207,10 @@ int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 			}
 			else
 			{
-				printf("*******************************************\n");
-				printf("data = %s\n", token->data);
 				char	*stripped = malloc(ft_strlen(token->data) + 1);
 				strip_quotes(token->data, stripped);
 				free(token->data);
 				token->data = stripped;
-				printf("after\ndata = %s\n", token->data);
 				k++;
 			}
 		}
@@ -223,7 +218,6 @@ int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 	}
 
 	lexerbuf->num_token = k;
-	printf("i = %d\n", i);
 	t_token	*tmp = lexerbuf->list_token;
 //	printf("data = %s\n", tmp->data);
 	for (;tmp != NULL; tmp = tmp->next)

@@ -1,7 +1,8 @@
 #ifndef ASTREE_H
 #define ASTREE_H
 
-typedef enum{
+typedef enum	e_NodeType
+{
 	NODE_PIPE	 		= (1 << 0),
 	NODE_BACKGRND 		= (1 << 1),
 	NODE_SEQ	 		= (1 << 2),
@@ -9,15 +10,17 @@ typedef enum{
 	NODE_REDIRECT_OUT   = (1 << 4),
 	NODE_CMD_PATH		= (1 << 5),
 	NODE_ARGUMENT	    = (1 << 6),
-	NODE_DATA	 		= (1 <<7),
+	NODE_DATA	 		= (1 << 7),
 }	NodeType;
+
+typedef struct s_ASTreeNode t_ASTreeNode;
 
 typedef struct s_ASTreeNode
 {
 	int type;
 	char *szData;
-	struct ASTreeNode *left;
-	struct ASTreeNode *right;
+	t_ASTreeNode *left;
+	t_ASTreeNode *right;
 }	t_ASTreeNode;
 
 #define NODETYPE(a) (a & (~NODE_DATA))	// get the type of the nodes
