@@ -51,7 +51,7 @@ void	minishell(char *environ[])
 		line = NULL;
 //		if (parse(&lexerbuf, &tree) != 0)
 //			continue;
-
+		execute(&lexerbuf, environ);
 	//	printf("line is '%s'\n", line);
 	//	add_history(line);
 	//	launch(line, environ, lexerbuf);
