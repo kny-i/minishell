@@ -221,6 +221,12 @@ int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 	t_token	*tmp = lexerbuf->list_token;
 //	printf("data = %s\n", tmp->data);
 	for (;tmp != NULL; tmp = tmp->next)
+	{
 		printf("data = %s\n", tmp->data);
+		printf("char_type = %d\n", tmp->type);
+	}
+	printf("[%d]\n", lexerbuf->num_token);
+
+
 	return (k);
 }

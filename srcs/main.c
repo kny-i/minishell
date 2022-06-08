@@ -1,7 +1,7 @@
 #include "minishell.h"
 #include "lexer.h"
 
-void	launch(char *line,char *envp[], t_lexer lexerbuf)
+void	launch(char *line,char *envp[], t_lexer *lexerbuf)
 {
 	char *args[] = {NULL, NULL};
 	int pid;
