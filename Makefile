@@ -14,7 +14,6 @@ OBJS_DIr := ./objs
 SRCS := $(SRCS_DIR)/main.c \
 		$(SRCS_DIR)/signal/signal.c \
 		$(SRCS_DIR)/utils/ft_strcmp.c \
-		$(SRCS_DIR)/builtin/builtin_core.c \
 		$(SRCS_DIR)/builtin/cd.c \
 		$(SRCS_DIR)/builtin/echo.c \
 		$(SRCS_DIR)/builtin/exit.c \
