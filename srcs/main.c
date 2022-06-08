@@ -1,7 +1,7 @@
 #include "minishell.h"
 #include "lexer.h"
 
-void	launch(char *line,char *envp[])
+void	launch(char *line,char *envp[], t_lexer lexerbuf)
 {
 	char *args[] = {NULL, NULL};
 	int pid;
@@ -14,7 +14,7 @@ void	launch(char *line,char *envp[])
 
 	if (is_builtin(line) == 1)
 	{
-		execute_builtin(args, envp);
+		execute(lexerbuf, envp);
 		return ;
 	}
 	pid = fork();
@@ -54,7 +54,7 @@ void	minishell(char *environ[])
 
 	//	printf("line is '%s'\n", line);
 	//	add_history(line);
-	//	launch(line, environ);
+	//	launch(line, environ, lexerbuf);
 	//	free(line);
 		
 	}

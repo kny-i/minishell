@@ -22,6 +22,10 @@ SRCS := $(SRCS_DIR)/main.c \
 		$(SRCS_DIR)/builtin/pwd.c \
 		$(SRCS_DIR)/builtin/unset.c \
 		$(SRCS_DIR)/lexer/lexer.c \
+		$(SRCS_DIR)/astree/astree.c \
+		$(SRCS_DIR)/utils/x_func.c \
+		$(SRCS_DIR)/execute/execute.c \
+
 #		$(SRCS_DIR)/parser/parser.c
 
 

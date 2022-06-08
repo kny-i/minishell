@@ -17,6 +17,8 @@
 # include "./lexer.h"
 # include "./parser.h"
 # include "./astree.h"
+# include "./utils.h"
+# include "./execute.h"
 
 # define FAILURE 1
 # define SUCCESS 0

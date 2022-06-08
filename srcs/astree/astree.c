@@ -4,4 +4,5 @@ void	astree_make_branch(t_ASTreeNode *root, t_ASTreeNode *left_node, t_ASTreeNod
 {
 	root->left = left_node;
 	root->right = right_node;
+	root->right = right_node;
 }
