@@ -25,3 +25,16 @@ int	x_fork(void)
 	}
 	return (pid);
 }
+
+int x_waitpid(pid_t pid)
+{
+	int status;
+
+	status = 0;
+	if (waitpid(pid, &status, 0) == -1)
+	{
+		perror("waitpid error");
+		exit(1);
+	}
+	return (status);
+}
