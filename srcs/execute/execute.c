@@ -23,7 +23,7 @@ void	do_pipe(t_lexer *lexerbuf, char **envp, int cmd_index)
 		{
 			dup2(fd[1], 1);
 			close(fd[1]);
-			do_pipe(lexerbuf, cmd_index + 1);
+			do_pipe(lexerbuf, envp, cmd_index + 1);
 		}
 		else
 		{
