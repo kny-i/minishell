@@ -25,7 +25,6 @@ void	do_pipe(t_lexer *lexerbuf, char **envp, int cmd_index)
 	int fd[2];
 	static int i;
 
-
 	if (cmd_index == lexerbuf->num_token )
 		execute_cmd(lexerbuf, cmd_index, envp);
 	else
