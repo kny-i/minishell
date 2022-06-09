@@ -25,7 +25,8 @@ SRCS := $(SRCS_DIR)/main.c \
 		$(SRCS_DIR)/utils/x_func.c \
 		$(SRCS_DIR)/execute/execute.c \
 		$(SRCS_DIR)/builtin/builtin_core.c \
-		$(SRCS_DIR)/builtin/builtin_utils.c
+		$(SRCS_DIR)/builtin/builtin_utils.c \
+		$(SRCS_DIR)/env/status.c
 
 
 #		$(SRCS_DIR)/parser/parser.c

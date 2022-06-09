@@ -20,6 +20,7 @@
 # include "./utils.h"
 # include "./execute.h"
 # include "./builtin.h"
+# include "./env.h"
 
 # define FAILURE 1
 # define SUCCESS 0
