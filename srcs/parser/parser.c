@@ -1,22 +1,76 @@
-#include "../../includes/minishell.h"
+#include "./parser.h"
 
+void get_cmd_name(t_cmd *cmd_node, t_token **token)
+{
+	cmd_node->cmd = ft_strdup((*token)->data);
+	(*token) = (*token)->next;
+}
+void get_cmd_args(t_cmd *cmd, t_token **token)
+{
+	while ((*token) != NULL && strcmp((*token)->data, "|") != 0)
+	{
+		ft_lstadd_back(&(cmd->args), ft_lstnew((*token)->data));
+		(*token) = (*token)->next;
+	}
+}
 
+void parse_metachar(t_cmd *list, t_token **token)
+{
+	while ((*token) != NULL)
+	{
+		if (ft_strncmp((*token)->data, "|", 2) == 0)
+			break ;
+		else if (ft_strncmp((*token)->data, "<", 2) == 0)
+		{
+			//input_file_specify(cmd, token);
+		}
+		else if (ft_strncmp((*token)->data, "<<", 3) == 0)
+		{
+			//heredoc(cmd, token);
+		}
+		else if (ft_strncmp((*token)->data, ">>", 3) == 0)
+		{
+			//output_file_specify(cmd, token, O_APPEND);
+		}
+		else if (ft_strncmp((*token)->data, ">", 2) == 0)
+		{
+			//output_file_specify(cmd, token, !O_APPEND);
+		}
+		*token = (*token)->next;
+	}
+}
+void set_cmd_info(t_cmd *list, t_token **token)
+{
+	while ((*token) != NULL)
+	{
+		if (ft_strncmp((*token)->data, "|", 2) == 0)
+		{
+			*token = (*token)->next;
+			break;
+		}
+		get_cmd_name(list, token);
+		get_cmd_args(list, token);
+		parse_metachar(list, token);
+	}
+}
 t_cmd *init_t_cmd(t_lexer *lexerbuf)
 {
 	t_cmd *list;
 	t_cmd *new_node;
-	t_lexer *tmp_lex;
+	t_token *token;
 
 
 	list = NULL;
 	new_node = NULL;
-	tmp_lex = lexerbuf;
-	set_cmd(list, tmp_lex);
-	while (new_node != NULL)
+	token = lexerbuf->list_token;
+	while (token != NULL)
 	{
 		cmd_add_back(&list, cmd_new(NULL));
-		list = list->next;
-		set_cmd(list, &tmp_lex);
+		if (new_node == NULL)
+			new_node = list;
+		else
+			new_node = new_node->next;
+		set_cmd_info(new_node, &token);
 	}
 	return (list);
 

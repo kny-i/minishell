@@ -60,7 +60,6 @@ int execute(t_lexer *lexerbuf, char *envp[])
 
 
 	i = 0;
-	while (i < lexerbuf->num_token)
 	if (is_only_builtin(lexerbuf))
 	{
 		execute_builtin(lexerbuf, envp);

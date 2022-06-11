@@ -3,6 +3,7 @@
 
 #include "astree.h"
 #include "lexer.h"
+#include "minishell.h"
 typedef struct s_cmd
 {
 	char			*cmd;
@@ -15,5 +16,7 @@ typedef struct s_cmd
 }					t_cmd;
 
 t_cmd *parse(t_lexer *lexerbuf);
+void	cmd_add_back(t_cmd **lst, t_cmd *new);
+t_cmd	*cmd_new(char *cmd);
 
 #endif
