@@ -43,6 +43,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(MAKE) -C $(LIBFT)
+	$(MAKE) -C $(LIBFT) bonus
 	$(CC) $(CFLAGS) -I $(INCLUDE) $(OBJS) $(LDFLAGS) $(LIBFT)/libft.a -o $@
 
 $(OBJS_DIr)/%.o: $(SRCS_DIR)/%.c
