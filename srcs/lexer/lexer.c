@@ -4,27 +4,23 @@
 int	get_char_type(char c)
 {
 	char	res;
-	if (c == CHAR_QOUTE)
+	if (c == '\'')
 		res = CHAR_QOUTE;
-	else if (c == CHAR_DQOUTE)
+	else if (c == '\"')
 		res = CHAR_DQOUTE;
-	else if (c == CHAR_PIPE)
+	else if (c == '|')
 		res = CHAR_PIPE;
-	else if (c == CHAR_AMPERSAND)
-		res = CHAR_AMPERSAND;
-	else if (c == CHAR_WHITESPACE)
+	else if (c == ' ')
 		res = CHAR_WHITESPACE;
-	else if (c == CHAR_SEMICOLON)
-		res = CHAR_SEMICOLON;
-	else if (c == CHAR_ESCAPESEQUENCE)
+	else if (c == '\\')
 		res = CHAR_ESCAPESEQUENCE;
-	else if (c == CHAR_TAB)
+	else if (c == '\t')
 		res = CHAR_TAB;
-	else if (c == CHAR_NEWLINE)
+	else if (c == '\n')
 		res = CHAR_NEWLINE;
-	else if (c == CHAR_GREATER)
+	else if (c == '>')
 		res = CHAR_GREATER;
-	else if (c == CHAR_LESSER)
+	else if (c == '<')
 		res = CHAR_LESSER;
 	else if (c == CHAR_NULL)
 		res = CHAR_NULL;
@@ -180,6 +176,14 @@ int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 		i++;
 	}while (c != '\0');
 
+	t_token	*tmp = lexerbuf->list_token;
+//	printf("data = %s\n", tmp->data);
+	for (;tmp != NULL; tmp = tmp->next)
+	{
+		printf("data = %s\n", tmp->data);
+	//	printf("char_type = %d\n", tmp->type);
+	}
+
 	token = lexerbuf->list_token;
 	int	k = 0;
 	while (token != NULL)
@@ -218,14 +222,14 @@ int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 	}
 
 	lexerbuf->num_token = k;
-	t_token	*tmp = lexerbuf->list_token;
+//	t_token	*tmp = lexerbuf->list_token;
 //	printf("data = %s\n", tmp->data);
-	for (;tmp != NULL; tmp = tmp->next)
+/*	for (;tmp != NULL; tmp = tmp->next)
 	{
 		printf("data = %s\n", tmp->data);
 		printf("char_type = %d\n", tmp->type);
 	}
-	printf("[%d]\n", lexerbuf->num_token);
+	printf("[%d]\n", lexerbuf->num_token);*/
 
 
 	return (k);

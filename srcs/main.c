@@ -46,7 +46,8 @@ void	minishell(char *environ[])
 		if (line == NULL)
 			break;
 		int	size = (int)ft_strlen(line);
-		lexer_build(line, size, &lexerbuf);
+	//	lexer_build(line, size, &lexerbuf);
+		lexer_build_01(line, size, &lexerbuf);
 		free(line);
 		line = NULL;
 //		if (parse(&lexerbuf, &tree) != 0)

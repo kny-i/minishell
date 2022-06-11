@@ -1,5 +1,27 @@
 #include "execute.h"
 
+int execute(t_lexer *lexerbuf, char *envp[])
+{
+	t_token	*tmp;
+	int		i;
+
+	tmp = lexerbuf->list_token;
+	i = 0;
+	while (tmp->next != NULL)
+	{
+		if (tmp->type == CHAR_PIPE)
+		{
+		}
+		else
+		{
+		}
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+
+/*
 int execute_cmd(t_lexer *lexerbuf, int num_of_cmd)
 {
 	printf("No%d[%s]\n", num_of_cmd, "execute_cmd");
@@ -60,3 +82,4 @@ int execute(t_lexer *lexerbuf, char *envp[])
 	}
 	return (0);
 }
+*/

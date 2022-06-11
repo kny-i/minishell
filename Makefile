@@ -21,6 +21,7 @@ SRCS := $(SRCS_DIR)/main.c \
 		$(SRCS_DIR)/builtin/pwd.c \
 		$(SRCS_DIR)/builtin/unset.c \
 		$(SRCS_DIR)/lexer/lexer.c \
+		$(SRCS_DIR)/lexer/lexer_01.c \
 		$(SRCS_DIR)/astree/astree.c \
 		$(SRCS_DIR)/utils/x_func.c \
 		$(SRCS_DIR)/execute/execute.c \
@@ -38,7 +39,7 @@ OBJS := $(patsubst $(SRCS_DIR)%,$(OBJS_DIr)%,$(SRCS:.c=.o))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(MAKE) -C $(LIBFT)
+	$(MAKE) bonus -C $(LIBFT)
 	$(CC) $(CFLAGS) -I $(INCLUDE) $(OBJS) $(LDFLAGS) $(LIBFT)/libft.a -o $@
 
 $(OBJS_DIr)/%.o: $(SRCS_DIR)/%.c
