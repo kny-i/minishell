@@ -22,6 +22,7 @@
 # include "./builtin.h"
 # include "./env.h"
 # include "./get_next_line.h"
+# include "./expand.h"
 
 # define FAILURE 1
 # define SUCCESS 0
