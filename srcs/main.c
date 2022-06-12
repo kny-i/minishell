@@ -61,12 +61,12 @@ void	minishell(char *environ[])
 			cmd_list = cmd_list->next;
 			i++;
 		}
-	//	execute(&lexerbuf, environ);
-	//	printf("line is '%s'\n", line);
-	//	add_history(line);
-	//	launch(line, environ, lexerbuf);
-	//	free(line);
-		
+		//	execute(&lexerbuf, environ);
+		//	printf("line is '%s'\n", line);
+		//	add_history(line);
+		//	launch(line, environ, lexerbuf);
+		//	free(line);
+
 	}
 	printf("exit minishell\n");
 	exit(0);

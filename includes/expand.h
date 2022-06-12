@@ -3,6 +3,7 @@
 
 //# include "./minishell.h"
 # include "parser.h"
+# include  "env.h"
 
 void expand(t_cmd *cmd);
 #endif
