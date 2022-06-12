@@ -1,5 +1,16 @@
 #include "./parser.h"
 
+void set_input_info(t_cmd *cmd, t_token **token)
+{
+	char *file;
+	int  fd;
+	char *line;
+
+	file = (*token)->next->data;
+	fd = x_open(file);
+	line = get_next_line(fd);
+
+}
 void get_cmd_name(t_cmd *cmd_node, t_token **token)
 {
 	cmd_node->cmd = ft_strdup((*token)->data);
@@ -22,19 +33,19 @@ void parse_metachar(t_cmd *list, t_token **token)
 			break ;
 		else if (ft_strncmp((*token)->data, "<", 2) == 0)
 		{
-			//input_file_specify(cmd, token);
+			//set_input_infio(cmd, token);
 		}
 		else if (ft_strncmp((*token)->data, "<<", 3) == 0)
 		{
-			//heredoc(cmd, token);
+			//set_heredoc_info(cmd, token);
 		}
 		else if (ft_strncmp((*token)->data, ">>", 3) == 0)
 		{
-			//output_file_specify(cmd, token, O_APPEND);
+			//set_postdoc_info(cmd, token, O_APPEND);
 		}
 		else if (ft_strncmp((*token)->data, ">", 2) == 0)
 		{
-			//output_file_specify(cmd, token, !O_APPEND);
+			//set_output_info(cmd, token, !O_APPEND);
 		}
 		*token = (*token)->next;
 	}

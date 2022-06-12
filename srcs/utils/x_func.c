@@ -38,3 +38,16 @@ int x_waitpid(pid_t pid)
 	}
 	return (status);
 }
+
+int x_open(char *file)
+{
+	int fd;
+
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+	{
+		perror("waitpid error");
+		exit(1);
+	}
+	return (fd);
+}
