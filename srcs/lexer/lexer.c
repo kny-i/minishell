@@ -1,30 +1,26 @@
-#include "minishell.h"
+//#include "minishell.h"
 #include "lexer.h"
+#include "parser.h"
 
-int	get_char_type(char c)
+int	get_char_type_01(char c)
 {
 	char	res;
-	if (c == CHAR_QOUTE)
+
+	if (c == '\'')
 		res = CHAR_QOUTE;
-	else if (c == CHAR_DQOUTE)
+	else if (c == '\"')
 		res = CHAR_DQOUTE;
-	else if (c == CHAR_PIPE)
+	else if (c == '|')
 		res = CHAR_PIPE;
-	else if (c == CHAR_AMPERSAND)
-		res = CHAR_AMPERSAND;
-	else if (c == CHAR_WHITESPACE)
+	else if (c == ' ')
 		res = CHAR_WHITESPACE;
-	else if (c == CHAR_SEMICOLON)
-		res = CHAR_SEMICOLON;
-	else if (c == CHAR_ESCAPESEQUENCE)
-		res = CHAR_ESCAPESEQUENCE;
-	else if (c == CHAR_TAB)
+	else if (c == '\t')
 		res = CHAR_TAB;
-	else if (c == CHAR_NEWLINE)
+	else if (c == '\n')
 		res = CHAR_NEWLINE;
-	else if (c == CHAR_GREATER)
+	else if (c == '>')
 		res = CHAR_GREATER;
-	else if (c == CHAR_LESSER)
+	else if (c == '<')
 		res = CHAR_LESSER;
 	else if (c == CHAR_NULL)
 		res = CHAR_NULL;
@@ -33,191 +29,178 @@ int	get_char_type(char c)
 	return (res);
 }
 
-void	token_init(t_token *token, int datasize)
+t_token	*token_init_01(t_cmd_len **len)
 {
-	token->data = malloc(datasize + 1);
-	if (token->data == NULL)
+	t_token	*new;
+
+	new = malloc(sizeof(t_token));
+	if (new == NULL)
 		exit(1);
-	token->data[0] = 0;
-	token->type = CHAR_NULL;
-	token->next = NULL;
+	new->data = malloc(sizeof((*len)->len + 1));
+	if (new->data == NULL)
+		exit(1);
+	ft_bzero(new->data, (*len)->len);
+	new->next = NULL;
+	if ((*len)->next != NULL)
+		*len = (*len)->next;
+	return (new);
 }
 
-void	strip_quotes(char *src, char *dest)
+int	chstatus_start(t_token *token, int *i_token, char input, int status)
 {
-	int	n;
-	n = ft_strlen(src);
-	if (n <= 1)
-	{
-		strcpy(dest, src);
-		return ;
-	}
-	char	lasquote = 0;
-	int		j = 0;
-	for (int i = 0; i < n; i++)
-	{
-		char	c = src[i];
-		if ((c == '\'' || c == '\"') && lasquote == 0)
-			lasquote = c;
-		else if (c == lasquote)
-			lasquote = 0;
-		else
-			dest[j++] = c;
-	}
-	dest[j] = 0;
+	token->data[*i_token] = input;
+	*i_token += 1;
+	return (status);
 }
 
-int	lexer_build(char *input, int size, t_lexer *lexerbuf)
+int	chstatus_end(t_token *token, int *i_token, char input, int char_type, int status)
 {
-	t_token	*token;
-	
-	if (lexerbuf == NULL)
-		return (-1);
-	if (size == 0)
+	token->data[*i_token] = input;
+	*i_token += 1;
+	if (char_type == CHAR_QOUTE)
+		return (STATE_GENERAL);
+	else if (char_type == CHAR_DQOUTE)
+		return (STATE_GENERAL);
+	return (status);
+}
+
+void	check_return_status(t_token ***token, int *i_token, t_cmd_len ***len)
+{
+	if (*i_token > 0)
 	{
-		lexerbuf->num_token = 0;
-		return (0);
+		(**token)->data[*i_token] = '\0';
+		(**token)->next = token_init_01(*len);
+		**token = (**token)->next;
+		*i_token = 0;
 	}
-	lexerbuf->list_token = malloc(sizeof(t_token));
-	if (lexerbuf->list_token == NULL)
-		exit(1);
-	
-	token = lexerbuf->list_token;
-	token_init(token, size);
+}
 
-	int	i = 0, j = 0, num_tem_token = 0;
-	char	c;
-	int		state = STATE_GENERAL;
+void	assign_token(t_token ***token, int *i_token, char input, t_cmd_len ***len)
+{
+	(**token)->data[*i_token] = input;
+	*i_token += 1;
+	(**token)->data[*i_token] = '\0';
+	*i_token = 0;
+	(**token)->next = token_init_01(*len);
+	**token = (**token)->next;
+}
 
-	
-	do
+int	assign_general(t_token **token, int *i_token, int char_type, char input, t_cmd_len **len)
+{
+	int	status = STATE_GENERAL;
+
+	if (char_type == CHAR_QOUTE)
+		status = chstatus_start(*token, &(*i_token), input, STATE_IN_QUOTE);
+	else if (char_type == CHAR_DQOUTE)
+		status = chstatus_start(*token, &(*i_token), input, STATE_IN_DQUOTE);
+	else if (char_type == CHAR_GENERAL)
+		status = chstatus_start(*token, &(*i_token), input, STATE_GENERAL);
+	else if (char_type == CHAR_WHITESPACE)
+		check_return_status(&token, i_token, &len);
+	else if (char_type == CHAR_PIPE || char_type == CHAR_GREATER || char_type == CHAR_LESSER)
 	{
-		c = input[i];
-		int	char_type = get_char_type(c);
-		if (state == STATE_GENERAL)
+		check_return_status(&token, i_token, &len);
+		assign_token(&token, i_token, input, &len);
+	}
+	return (status);
+}
+
+t_cmd_len	*cmd_list_new()
+{
+	t_cmd_len	*new;
+
+	new = (t_cmd_len *)malloc(sizeof(t_cmd_len));
+	if (new == NULL)
+		exit(1);
+	new->len = 0;
+	new->stauts = STATE_GENERAL;
+	new->next = NULL;
+	return (new);
+}
+
+t_cmd_len	*len_until_space(char *input, t_cmd_len *len)
+{
+	int	i;
+	int	char_type;
+	t_cmd_len	*res;
+
+	len = cmd_list_new();
+	res = len;
+	i = 0;
+	while (input[i] != '\0')
+	{
+		char_type = get_char_type_01(input[i]);
+		if (len->stauts == STATE_GENERAL)
 		{
-				if (char_type == CHAR_QOUTE)
-				{
-					state = STATE_IN_QUOTE;
-					token->data[j++] = CHAR_QOUTE;
-					token->type = TOKEN;
-				}
-					
-				else if (char_type == CHAR_DQOUTE)
-				{
-					state = STATE_IN_DQUOTE;
-					token->data[j++] = CHAR_DQOUTE;
-					token->type = TOKEN;
-				}
-					
-				else if (char_type == CHAR_ESCAPESEQUENCE)
-				{
-					token->data[j++] = input[++i];
-					token->type = TOKEN;
-				}
-					
-				else if (char_type == CHAR_GENERAL)
-				{
-					token->data[j++] = c;
-					token->type = TOKEN;
-				}
-				else if (char_type == CHAR_WHITESPACE)
-				{
-					if (j > 0) {
-						token->data[j] = 0;
-						token->next = malloc(sizeof(t_token));
-						token = token->next;
-						token_init(token, size - i);
-						j = 0;
-					}
-				}
-				else if (char_type == CHAR_SEMICOLON || \
-				char_type == CHAR_GREATER || \
-				char_type == CHAR_LESSER || \
-				char_type == CHAR_AMPERSAND || \
-				char_type == CHAR_PIPE)
-				{
-					// end the token that was being read before
-					if (j > 0) {
-						token->data[j] = 0;
-						token->next = malloc(sizeof(t_token));
-						token = token->next;
-						token_init(token, size - i);
-						j = 0;
-					}
-					
-					// next token
-					token->data[0] = char_type;
-					token->data[1] = 0;
-					token->type = char_type;
-					
-					token->next = malloc(sizeof(t_token));
-					token = token->next;
-					token_init(token, size - i);
-				}
-		}
-		else if (state == STATE_IN_DQUOTE)
-		{
-			token->data[j++] = c;
-			if (char_type == CHAR_DQOUTE)
-				state = STATE_GENERAL;
-		}
-		else if (state == STATE_IN_QUOTE)
-		{
-			token->data[j++] = c;
 			if (char_type == CHAR_QOUTE)
-				state = STATE_GENERAL;
-		}
-		if (char_type == CHAR_NULL)
-		{
-			if (j > 0)
 			{
-				token->data[j] = 0;
-				num_tem_token++;
-				j = 0;
+				len->len += 1;
+				len->stauts = STATE_IN_QUOTE;
 			}
-		}
-		i++;
-	}while (c != '\0');
-
-	token = lexerbuf->list_token;
-	int	k = 0;
-/*	while (token != NULL)
-	{
-		if (token->type == TOKEN)
-		{
-			glob_t	globbuf;
-			glob(token->data, GLOB_TILDE, NULL, &globbuf);
-			if (globbuf.gl_pathc > 0)
+			else if (char_type == CHAR_DQOUTE)
 			{
-				k += globbuf.gl_pathc;
-				t_token	*saved = token->next;
-				free(token->data);
-				token->data = malloc(ft_strlen(globbuf.gl_pathv[0]) + 1);
-				strcpy(token->data, globbuf.gl_pathv[0]);
-				for (int i = 1; i < globbuf.gl_pathc; i++)
+				len->len += 1;
+				len->stauts = STATE_IN_DQUOTE;
+			}
+			else if (char_type == CHAR_GENERAL)
+				len->len += 1;
+			else if (char_type == CHAR_WHITESPACE)
+			{
+				if (len->len > 0)
 				{
-					token->next = malloc(sizeof(t_token));
-					token_init(token->next, ft_strlen(globbuf.gl_pathv[i]));
-					token = token->next;
-					token->type = TOKEN;
-					strcpy(token->data, globbuf.gl_pathv[i]);
+					len->next = cmd_list_new();
+					len = len->next;
 				}
-				token->next = saved;
 			}
-			else
+			else if (char_type == CHAR_PIPE || char_type == CHAR_GREATER || char_type == CHAR_LESSER)
 			{
-				char	*stripped = malloc(ft_strlen(token->data) + 1);
-				strip_quotes(token->data, stripped);
-				free(token->data);
-				token->data = stripped;
-				k++;
+				len->len += 1;
+				len->next = cmd_list_new();
+				len = len->next;
 			}
 		}
-		token = token->next;
+		else if (len->stauts == STATE_IN_QUOTE)
+		{
+			len->len += 1;
+			if (char_type == CHAR_QOUTE)
+				len->stauts = STATE_GENERAL;
+		}
+		else if (len->stauts == STATE_IN_DQUOTE)
+		{
+			len->len += 1;
+			if (char_type == CHAR_DQOUTE)
+				len->stauts = STATE_GENERAL;
+		}
+		i += 1;
 	}
+	return (res);
+}
 
-	lexerbuf->num_token = k;
-	t_token	*tmp = lexerbuf->list_token;*/
-	return (k);
+void	lexer_build(char *input, t_lexer *lexerbuf)
+{
+	int 		i_input;
+	int			i_token;
+	int 		status;
+	int			char_type;
+	t_cmd_len	*len;
+	t_token 	*token;
+
+	i_input = 0;
+	i_token = 0;
+	len = len_until_space(input, len);
+	token = token_init_01(&len);
+	lexerbuf->list_token = token;
+	status = STATE_GENERAL;
+	while (input[i_input] != '\0')
+	{
+		char_type = get_char_type_01(input[i_input]);
+		if (status == STATE_GENERAL)
+			status = assign_general(&token, &i_token, char_type, input[i_input], &len);
+		else if (status == STATE_IN_QUOTE)
+			status = chstatus_end(token, &i_token, input[i_input], char_type, STATE_IN_QUOTE);
+		else if (status == STATE_IN_DQUOTE)
+			status = chstatus_end(token, &i_token, input[i_input], char_type, STATE_IN_DQUOTE);
+		i_input += 1;
+	}
+	token->data[i_token] = '\0';
 }
