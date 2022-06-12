@@ -2,7 +2,6 @@
 #define ENV_H
 
 # include "./minishell.h"
-void set_status(char **envp, int status);
 
 
 typedef struct s_envp
@@ -12,4 +11,6 @@ typedef struct s_envp
 	char 		*content;
 }				t_envp;
 
+void set_status(char **envp, int status);
+t_envp *creat_tenv(char **envp);
 #endif

@@ -1,7 +1,8 @@
 #include "minishell.h"
 #include "lexer.h"
 #include "parser.h"
-
+#include "env.h"
+/*
 void	launch(char *line,char *envp[], t_lexer *lexerbuf)
 {
 	char *args[] = {NULL, NULL};
@@ -29,13 +30,16 @@ void	launch(char *line,char *envp[], t_lexer *lexerbuf)
 	{
 		ft_putstr_fd("\n", 2);
 	}
-}
+}*/
 
 void	minishell(char *environ[])
 {
 	char	*line;
 	t_cmd *cmd_list;
+	t_envp *env_list;
 
+
+	env_list = creat_tenv(environ);
 	while (1)
 	{
 		sig_input();

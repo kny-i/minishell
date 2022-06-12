@@ -1,4 +1,5 @@
 #include "execute.h"
+#include "utils.h"
 
 int execute_cmd(t_lexer *lexerbuf, int num_of_cmd, char **env)
 {
@@ -76,6 +77,6 @@ int execute(t_lexer *lexerbuf, char *envp[])
 		}
 		status = x_waitpid(pid);
 	}
-	set_status(envp, status);
+	//set_status(envp, status);
 	return (0);
 }
