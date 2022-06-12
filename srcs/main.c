@@ -37,7 +37,6 @@ void	minishell(char *environ[])
 	int		c;
 	t_cmd *cmd_list;
 	t_lexer	lexerbuf;
-	t_ASTreeNode *tree;
 	int i;
 	int k;
 
