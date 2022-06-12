@@ -53,6 +53,7 @@ void	minishell(char *environ[])
 		free(line);
 		line = NULL;
 		cmd_list = parse(&lexerbuf);
+		//expand(cmd_list);
 		i = 0;
 		k = 0;
 		while (cmd_list != NULL)

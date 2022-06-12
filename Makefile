@@ -30,8 +30,8 @@ SRCS := $(SRCS_DIR)/main.c \
 		$(SRCS_DIR)/env/status.c \
 		$(SRCS_DIR)/parser/parse_utils.c \
 		$(SRCS_DIR)/parser/parser.c \
-		$(SRCS_DIR)/get_next_line/get_next_line.c \
-		$(SRCS_DIR)/get_next_line/get_next_line_utils.c \
+		$(SRCS_DIR)/gnl/get_next_line.c \
+		$(SRCS_DIR)/gnl/get_next_line_utils.c \
 		$(SRCS_DIR)/expand/expand.c
 
 
