@@ -1,78 +1,64 @@
-#include "../../includes/minishell.h"
+#include "./parser.h"
 
-bool	term(t_token *cur_tok, int tok_type, char **buf_ptr)
+void get_cmd_name(t_cmd *cmd_node, t_token **token)
 {
-	if (cur_tok == NULL)
-		return (false);
-	if (cur_tok->type ==  tok_type)
+	cmd_node->cmd = ft_strdup((*token)->data);
+	if (cmd_node->cmd == NULL)
 	{
-		if (buf_ptr != NULL)
+		exit(1);
+	}
+	(*token) = (*token)->next;
+}
+void get_cmd_args(t_cmd *cmd, t_token **token)
+{
+	while ((*token) != NULL && strcmp((*token)->data, "|") != 0)
+	{
+		ft_lstadd_back(&(cmd->args), ft_lstnew((*token)->data));
+		(*token) = (*token)->next;
+	}
+}
+
+void set_cmd_info(t_cmd *list, t_token **token)
+{
+	while ((*token) != NULL)
+	{
+		if (ft_strncmp((*token)->data, "|", 2) == 0)
 		{
-			*buf_ptr = malloc(ft_strlen(cur_tok->data) + 1);
-			strcpy(*buf_ptr, cur_tok->data);
+			*token = (*token)->next;
+			break;
 		}
-		cur_tok = cur_tok->next;
-		return (true);
+		get_cmd_name(list, token);
+		get_cmd_args(list, token);
 	}
-	cur_tok = cur_tok->next;
-	return (false);
 }
-
-t_ASTreeNode *cmdline(t_token *currect_tok)
+t_cmd *init_t_cmd(t_lexer *lexerbuf)
 {
-	t_token *tmp = currect_tok;
-	t_ASTreeNode *node;
+	t_cmd *list;
+	t_cmd *new_node;
+	t_token *token;
 
-	currect_tok = tmp;
-	if (node = cmdline1(currect_tok) != NULL)
-		return (node);
-	currect_tok = tmp;
-	if (node = cmdline2(currect_tok) != NULL)
-		return (node);
-	currect_tok = tmp;
-	if (node = cmdline3(currect_tok) != NULL)
-		return (node);
-	currect_tok = tmp;
-	if (node = cmdline4(currect_tok) != NULL)
-		return (node);
-	currect_tok = tmp;
-	if (node = cmdline5(currect_tok) != NULL)
-		return (node);
-	return (NULL);
-}
 
-t_ASTreeNode	*cmdline1(t_token *cur_tok)
-{
-	t_ASTreeNode	*job_node;
-	t_ASTreeNode	*cmd_node;
-	t_ASTreeNode	*res;
-
-	if ((job_node = job()) == NULL)
-		return (NULL);
-	if (term(cur_tok, CHAR_SEMICOLON, NULL) != NULL)
+	list = NULL;
+	new_node = NULL;
+	token = lexerbuf->list_token;
+	while (token != NULL)
 	{
-		astree_del(job_node);
-		return (NULL);
+		cmd_add_back(&list, cmd_new(NULL));
+		if (new_node == NULL)
+			new_node = list;
+		else
+			new_node = new_node->next;
+		set_cmd_info(new_node, &token);
 	}
-	if ((cmd_node = cmdline())== NULL)
-	{
-		astree_del(job_node);
-		return (NULL);
-	}
-	res = malloc(sizeof(*res));
-	astree_settype(res, NODE_SEQ);
-	astree_binary_branch(res, job_node, cmd_node);
-	return (res);
+	return (list);
+
+
 }
-
-int	parse(t_lexer *lexbuf, t_ASTreeNode **tree)
+t_cmd *parse(t_lexer *lexerbuf)
 {
-	t_token *current_tok;
+	t_cmd *ret;
 
-	current_tok = NULL;		//init系統の関数を通したい<-global??  staticでもokそう
-	if (lexbuf->num_token == 0)
-		return (-1);
-	current_tok = lexbuf->list_token;
-	*tree = cmdline(current_tok);
-	return (0);
+	//lexerした値のvalidateをする
+	ret = init_t_cmd(lexerbuf);
+	return (ret);
 }

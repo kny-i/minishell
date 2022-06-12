@@ -182,7 +182,7 @@ int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 
 	token = lexerbuf->list_token;
 	int	k = 0;
-	while (token != NULL)
+/*	while (token != NULL)
 	{
 		if (token->type == TOKEN)
 		{
@@ -218,15 +218,6 @@ int	lexer_build(char *input, int size, t_lexer *lexerbuf)
 	}
 
 	lexerbuf->num_token = k;
-	t_token	*tmp = lexerbuf->list_token;
-//	printf("data = %s\n", tmp->data);
-	for (;tmp != NULL; tmp = tmp->next)
-	{
-		printf("data = %s\n", tmp->data);
-		printf("char_type = %d\n", tmp->type);
-	}
-	printf("[%d]\n", lexerbuf->num_token);
-
-
+	t_token	*tmp = lexerbuf->list_token;*/
 	return (k);
 }

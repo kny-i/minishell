@@ -1,0 +1,22 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory '/home/hoge/hgoe/minishell_pa'
+mkdir -p ./objs/.
+cc  -I ./includes -c srcs/main.c -o objs/main.o
+ 
+mkdir -p ./objs/lexer
+cc  -I ./includes -c srcs/lexer/lexer_01.c -o objs/lexer/lexer_01.o
+ 
+make -C ./libft
+ 
+make[1]: Entering directory '/home/hoge/hgoe/minishell_pa/libft'
+make[1]: 'libft.a' is up to date.
+make[1]: Leaving directory '/home/hoge/hgoe/minishell_pa/libft'
+make -C ./libft bonus
+ 
+make[1]: Entering directory '/home/hoge/hgoe/minishell_pa/libft'
+ar rcs libft.a ft_isalpha.o ft_isdigit.o ft_isalnum.o ft_isascii.o ft_isprint.o ft_strlen.o ft_memset.o ft_bzero.o ft_memcpy.o ft_memmove.o ft_strlcpy.o ft_strlcat.o ft_toupper.o ft_tolower.o ft_strchr.o ft_strrchr.o ft_strncmp.o ft_memchr.o ft_memcmp.o ft_strnstr.o ft_atoi.o ft_calloc.o ft_strdup.o ft_substr.o ft_strjoin.o ft_strtrim.o ft_split.o ft_itoa.o ft_strmapi.o ft_striteri.o ft_putchar_fd.o ft_putstr_fd.o ft_putendl_fd.o ft_putnbr_fd.o ft_lstnew.o ft_lstadd_front.o ft_lstsize.o ft_lstlast.o ft_lstadd_back.o ft_lstdelone.o ft_lstclear.o ft_lstiter.o ft_lstmap.o
+make[1]: Leaving directory '/home/hoge/hgoe/minishell_pa/libft'
+ 
+cc  -I ./includes ./objs/main.o ./objs/signal/signal.o ./objs/utils/ft_strcmp.o ./objs/builtin/cd.o ./objs/builtin/echo.o ./objs/builtin/exit.o ./objs/builtin/export.o ./objs/builtin/pwd.o ./objs/builtin/unset.o ./objs/lexer/lexer.o ./objs/lexer/lexer_01.o ./objs/astree/astree.o ./objs/utils/x_func.o ./objs/execute/execute.o ./objs/builtin/builtin_core.o ./objs/builtin/builtin_utils.o ./objs/env/status.o ./objs/parser/parse_utils.o ./objs/parser/parser.o -L/usr/include -lreadline ./libft/libft.a -o minishell
+make: Leaving directory '/home/hoge/hgoe/minishell_pa'
+ 

@@ -56,7 +56,7 @@ $(NAME): $(OBJS)
 bonus:$(OBJS) $(B_OBJS)
 	ar rcs $(NAME) $(OBJS) $(B_OBJS)
 
-all:$(NAME) bonus
+all:$(NAME)
 
 clean:
 	rm -f $(OBJS) $(B_OBJS)
