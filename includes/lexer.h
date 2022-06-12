@@ -2,7 +2,11 @@
 # define LEXER_H
 
 # include <glob.h>
-# include "./minishell.h"
+# include <stdlib.h>
+# include <stdio.h>
+# include "../libft/libft.h"
+
+//# include "./minishell.h"
 
 typedef enum	e_token_type
 {
@@ -31,7 +35,7 @@ typedef enum	e_status
 	STATE_GENERAL,
 }	t_status;
 
-
+/*
 typedef struct s_cmdline	t_cmdline;
 typedef struct	s_cmdline
 {
@@ -39,7 +43,7 @@ typedef struct	s_cmdline
 	t_list		*cmd_args;
 	t_cmdline	*next;
 }	t_cmdline;
-
+*/
 
 
 typedef struct s_token	t_token;

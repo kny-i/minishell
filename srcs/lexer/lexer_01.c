@@ -1,4 +1,4 @@
-#include "minishell.h"
+//#include "minishell.h"
 #include "lexer.h"
 
 int	get_char_type_01(char c)
