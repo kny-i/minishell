@@ -16,13 +16,13 @@
 # include "../libft/libft.h"
 # include "./lexer.h"
 # include "./parser.h"
-# include "./astree.h"
-# include "./utils.h"
+//# include "./astree.h"
+//# include "./utils.h"
 # include "./execute.h"
 # include "./builtin.h"
-# include "./env.h"
-# include "./get_next_line.h"
-# include "./expand.h"
+//# include "./env.h"
+//# include "./get_next_line.h"
+//# include "./expand.h"
 
 # define FAILURE 1
 # define SUCCESS 0
@@ -37,8 +37,5 @@ int		ft_strcmp(const char *s1, const char *s2);
 int 	cd_core(char **args);
 //pwd.c
 int	pwd_core(char **argv);
-
-//lexer/lexer.c
-int	lexer_build(char *input, int size, t_lexer *lexerbuf);
 
 #endif

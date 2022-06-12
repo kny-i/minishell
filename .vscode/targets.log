@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Jun 12 06:42:02 2022
+# Make data base, printed on Sun Jun 12 12:22:12 2022
 
 # Variables
 
@@ -27,7 +27,7 @@ VSCODE_LOG_NATIVE = false
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /home/hoge/hgoe/minishell_pa
+CURDIR := /home/hoge/hgoe/minishell
 # makefile
 SHELL = /bin/sh
 # environment
@@ -40,8 +40,8 @@ MAKEFILE_LIST :=  Makefile
 GNUMAKEFLAGS := 
 # environment
 VSCODE_VERBOSE_LOGGING = true
-# makefile (from 'Makefile', line 40)
-OBJS := ./objs/main.o ./objs/signal/signal.o ./objs/utils/ft_strcmp.o ./objs/builtin/cd.o ./objs/builtin/echo.o ./objs/builtin/exit.o ./objs/builtin/export.o ./objs/builtin/pwd.o ./objs/builtin/unset.o ./objs/lexer/lexer.o ./objs/lexer/lexer_01.o ./objs/astree/astree.o ./objs/utils/x_func.o ./objs/execute/execute.o ./objs/builtin/builtin_core.o ./objs/builtin/builtin_utils.o ./objs/env/status.o ./objs/parser/parse_utils.o ./objs/parser/parser.o
+# makefile (from 'Makefile', line 39)
+OBJS := ./objs/main.o ./objs/signal/signal.o ./objs/utils/ft_strcmp.o ./objs/builtin/cd.o ./objs/builtin/echo.o ./objs/builtin/exit.o ./objs/builtin/export.o ./objs/builtin/pwd.o ./objs/builtin/unset.o ./objs/lexer/lexer.o ./objs/lexer/lexer_01.o ./objs/astree/astree.o ./objs/utils/x_func.o ./objs/execute/execute.o ./objs/builtin/builtin_core.o ./objs/builtin/builtin_utils.o ./objs/env/status.o ./objs/parser/parse_utils.o ./objs/parser/parser.o ./objs/gnl/get_next_line.o ./objs/gnl/get_next_line_utils.o ./objs/expand/expand.o
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -50,12 +50,14 @@ VSCODE_CWD = /mnt/c/Users/c4191/AppData/Local/Programs/Microsoft VS Code
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
 PATH = /home/hoge/.vscode-server/bin/4af164ea3a06f701fe3e89a2bcbb421d2026b68f/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/PowerShell/7/:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin:/mnt/c/Users/c4191/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/c4191/AppData/Local/Programs/Microsoft VS Code/bin
+# environment
+XDG_RUNTIME_DIR = /mnt/wslg/runtime-dir
 # makefile (from 'Makefile', line 11)
 SRCS_DIR := ./srcs
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-2505294a-e92c-4c10-8d42-f106d3adb336.sock
+VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-ba344de4-fd2e-4f9d-a2cb-5153baed6298.sock
 # makefile (from 'Makefile', line 7)
 LDFLAGS = -L/usr/include -lreadline
 # default
@@ -65,15 +67,19 @@ LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:
 # automatic
 %F = $(notdir $%)
 # environment
+DISPLAY = :0
+# environment
 VSCODE_PIPE_LOGGING = true
 # environment
-PWD = /home/hoge/hgoe/minishell_pa
+PWD = /home/hoge/hgoe/minishell
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/170_interop
+WSL_INTEROP = /run/WSL/167_interop
 # environment
-WT_SESSION = c382fe95-0685-46d9-ab9f-680216dfdaca
+PULSE_SERVER = /mnt/wslg/PulseServer
+# environment
+WT_SESSION = 768b170a-3010-4093-95bd-b5b327018c1e
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -95,7 +101,7 @@ MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
 # makefile (from 'Makefile', line 14)
-SRCS := ./srcs/main.c ./srcs/signal/signal.c ./srcs/utils/ft_strcmp.c ./srcs/builtin/cd.c ./srcs/builtin/echo.c ./srcs/builtin/exit.c ./srcs/builtin/export.c ./srcs/builtin/pwd.c ./srcs/builtin/unset.c ./srcs/lexer/lexer.c ./srcs/lexer/lexer_01.c ./srcs/astree/astree.c ./srcs/utils/x_func.c ./srcs/execute/execute.c ./srcs/builtin/builtin_core.c ./srcs/builtin/builtin_utils.c ./srcs/env/status.c ./srcs/parser/parse_utils.c ./srcs/parser/parser.c
+SRCS := ./srcs/main.c ./srcs/signal/signal.c ./srcs/utils/ft_strcmp.c ./srcs/builtin/cd.c ./srcs/builtin/echo.c ./srcs/builtin/exit.c ./srcs/builtin/export.c ./srcs/builtin/pwd.c ./srcs/builtin/unset.c ./srcs/lexer/lexer.c ./srcs/lexer/lexer_01.c ./srcs/astree/astree.c ./srcs/utils/x_func.c ./srcs/execute/execute.c ./srcs/builtin/builtin_core.c ./srcs/builtin/builtin_utils.c ./srcs/env/status.c ./srcs/parser/parse_utils.c ./srcs/parser/parser.c ./srcs/gnl/get_next_line.c ./srcs/gnl/get_next_line_utils.c ./srcs/expand/expand.c
 # environment
 SHLVL = 1
 # makefile (from 'Makefile', line 10)
@@ -150,6 +156,8 @@ HOSTTYPE = x86_64
 ^F = $(notdir $^)
 # default
 SUFFIXES := 
+# environment
+WAYLAND_DISPLAY = wayland-0
 # default
 .INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
 # default
@@ -163,7 +171,7 @@ VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 # environment
 WSL_DISTRO_NAME = Ubuntu-20.04_dev
 # variable set hash-table stats:
-# Load=76/1024=7%, Rehash=0, Collisions=8/141=6%
+# Load=80/1024=8%, Rehash=0, Collisions=8/148=5%
 
 # Pattern-specific Variable Values
 
@@ -171,15 +179,15 @@ WSL_DISTRO_NAME = Ubuntu-20.04_dev
 
 # Directories
 
-# . (device 2096, inode 13161): 13 files, no impossibilities.
-# srcs (device 2096, inode 19848): 12 files, no impossibilities so far.
+# . (device 2112, inode 6780): 11 files, no impossibilities.
+# srcs (device 2112, inode 13213): 14 files, no impossibilities so far.
 
 # 25 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
 objs/%.o: srcs/%.c
-#  recipe to execute (from 'Makefile', line 51):
+#  recipe to execute (from 'Makefile', line 50):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
@@ -202,7 +210,7 @@ objs/utils/ft_strcmp.o:
 objs/main.o: srcs/main.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'main'
-#  Last modified 2022-06-12 06:40:32.521076568
+#  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # automatic
@@ -223,7 +231,7 @@ objs/main.o: srcs/main.c
 # ? := srcs/main.c
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=2/19=11%
-#  recipe to execute (from 'Makefile', line 51):
+#  recipe to execute (from 'Makefile', line 50):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
@@ -269,15 +277,15 @@ objs/utils/x_func.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-12 06:41:55.135980423
+ 
+#  Last modified 2022-06-12 12:22:00.83651157
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
- 
 srcs/main.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-12 06:41:42.465980174
+#  Last modified 2022-06-12 12:22:00.83651157
 #  File has been updated.
 #  Successfully updated.
 
@@ -299,14 +307,14 @@ objs/parser/parser.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-minishell: objs/main.o objs/signal/signal.o objs/utils/ft_strcmp.o objs/builtin/cd.o objs/builtin/echo.o objs/builtin/exit.o objs/builtin/export.o objs/builtin/pwd.o objs/builtin/unset.o objs/lexer/lexer.o objs/lexer/lexer_01.o objs/astree/astree.o objs/utils/x_func.o objs/execute/execute.o objs/builtin/builtin_core.o objs/builtin/builtin_utils.o objs/env/status.o objs/parser/parse_utils.o objs/parser/parser.o
+minishell: objs/main.o objs/signal/signal.o objs/utils/ft_strcmp.o objs/builtin/cd.o objs/builtin/echo.o objs/builtin/exit.o objs/builtin/export.o objs/builtin/pwd.o objs/builtin/unset.o objs/lexer/lexer.o objs/lexer/lexer_01.o objs/astree/astree.o objs/utils/x_func.o objs/execute/execute.o objs/builtin/builtin_core.o objs/builtin/builtin_utils.o objs/env/status.o objs/parser/parse_utils.o objs/parser/parser.o objs/gnl/get_next_line.o objs/gnl/get_next_line_utils.o objs/expand/expand.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-06-12 06:40:33.561076589
+#  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/8=0%
-#  recipe to execute (from 'Makefile', line 46):
+#  recipe to execute (from 'Makefile', line 45):
 	$(MAKE) -C $(LIBFT)
 	$(MAKE) -C $(LIBFT) bonus
 	$(CC) $(CFLAGS) -I $(INCLUDE) $(OBJS) $(LDFLAGS) $(LIBFT)/libft.a -o $@
@@ -316,9 +324,15 @@ fclean: clean
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 61):
+#  recipe to execute (from 'Makefile', line 60):
 	$(MAKE) fclean -C $(LIBFT)
 	$(RM) $(NAME)
+
+# Not a target:
+objs/gnl/get_next_line_utils.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .DEFAULT:
@@ -337,7 +351,7 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 56):
+#  recipe to execute (from 'Makefile', line 55):
 	$(MAKE) clean -C $(LIBFT)
 	$(RM) -rf $(OBJS_DIr)
 
@@ -384,6 +398,18 @@ objs/lexer/lexer.o:
 #  File has not been updated.
 
 # Not a target:
+objs/expand/expand.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/gnl/get_next_line.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 objs/builtin/builtin_core.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -396,19 +422,19 @@ objs/execute/execute.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=29/1024=3%, Rehash=0, Collisions=3/77=4%
+# Load=32/1024=3%, Rehash=0, Collisions=5/83=6%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 54 / storage = 665 B / avg = 12 B
-# current buf: size = 8162 B / used = 665 B / count = 54 / avg = 12 B
+# strcache buffers: 1 (0) / strings = 58 / storage = 748 B / avg = 12 B
+# current buf: size = 8162 B / used = 748 B / count = 58 / avg = 12 B
 
-# strcache performance: lookups = 85 / hit rate = 36%
+# strcache performance: lookups = 88 / hit rate = 34%
 # hash-table stats:
-# Load=54/8192=1%, Rehash=0, Collisions=2/85=2%
-# Finished Make data base on Sun Jun 12 06:42:02 2022
+# Load=58/8192=1%, Rehash=0, Collisions=2/88=2%
+# Finished Make data base on Sun Jun 12 12:22:12 2022
 
  
