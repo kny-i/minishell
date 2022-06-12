@@ -1,5 +1,6 @@
 #include "minishell.h"
 #include "lexer.h"
+#include "parser.h"
 
 void	launch(char *line,char *envp[], t_lexer *lexerbuf)
 {
@@ -33,12 +34,7 @@ void	launch(char *line,char *envp[], t_lexer *lexerbuf)
 void	minishell(char *environ[])
 {
 	char	*line;
-	size_t	len;
-	int		c;
 	t_cmd *cmd_list;
-	t_lexer	lexerbuf;
-	int i;
-	int k;
 
 	while (1)
 	{
@@ -47,17 +43,15 @@ void	minishell(char *environ[])
 		if (line == NULL)
 			break;
 		int	size = (int)ft_strlen(line);
-//		lexer_build(line, size, &lexerbuf);
-		lexer_build_01(line, size, &lexerbuf);
+		cmd_list = lex_pars(line);
 		free(line);
 		line = NULL;
-		cmd_list = parse(&lexerbuf);
 		//expand(cmd_list);
-		i = 0;
-		k = 0;
+		int i = 0;
 		while (cmd_list != NULL)
 		{
 			printf("cmd[%d] = [%s]\n", i,  cmd_list->cmd);
+			int k = 0;
 			while (cmd_list->args != NULL)
 			{
 				printf("args[%d][%d] = [%s]\n", i, k, cmd_list->args->content);
@@ -67,7 +61,7 @@ void	minishell(char *environ[])
 			cmd_list = cmd_list->next;
 			i++;
 		}
-		execute(&lexerbuf, environ);
+	//	execute(&lexerbuf, environ);
 	//	printf("line is '%s'\n", line);
 	//	add_history(line);
 	//	launch(line, environ, lexerbuf);
