@@ -66,7 +66,7 @@ typedef struct s_lexer
 {
 	t_token	*list_token;
 	int		num_token;
-}	t_lexer;
+}			t_lexer;
 
 int	lexer_build(char *input, int size, t_lexer *lexerbuf);
 

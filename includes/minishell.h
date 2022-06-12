@@ -25,6 +25,7 @@
 # define FAILURE 1
 # define SUCCESS 0
 
+typedef struct s_lexer	t_lexer;
 
 //signal.c
 void	sig_input();

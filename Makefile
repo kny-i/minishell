@@ -31,12 +31,6 @@ SRCS := $(SRCS_DIR)/main.c \
 		$(SRCS_DIR)/parser/parse_utils.c \
 		$(SRCS_DIR)/parser/parser.c
 
-
-
-#		$(SRCS_DIR)/parser/parser.c
-
-
-
 OBJS := $(patsubst $(SRCS_DIR)%,$(OBJS_DIr)%,$(SRCS:.c=.o))
 
 .PHONY: all
