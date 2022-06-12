@@ -7,6 +7,7 @@ t_cmd	*cmd_new(char *cmd)
 	res = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
 	if (res == NULL)
 		return (NULL);
+	res->next = NULL;
 	res->cmd = cmd;
 	res->fd_out = 1;
 	return (res);
@@ -24,6 +25,6 @@ void	cmd_add_back(t_cmd **lst, t_cmd *new)
 		while (now->next != NULL)
 			now = now->next;
 		now->next = new;
-		new->prev = now;
+//		new->prev = now;
 	}
 }
