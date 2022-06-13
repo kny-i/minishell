@@ -1,9 +1,135 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/hoge/hgoe/minishell'
 mkdir -p ./objs/.
 cc  -I ./includes -c srcs/main.c -o objs/main.o
+mkdir -p ./objs/signal
+cc  -I ./includes -c srcs/signal/signal.c -o objs/signal/signal.o
+mkdir -p ./objs/utils
+cc  -I ./includes -c srcs/utils/ft_strcmp.c -o objs/utils/ft_strcmp.o
+mkdir -p ./objs/builtin
+cc  -I ./includes -c srcs/builtin/cd.c -o objs/builtin/cd.o
+mkdir -p ./objs/builtin
+cc  -I ./includes -c srcs/builtin/echo.c -o objs/builtin/echo.o
+mkdir -p ./objs/builtin
+cc  -I ./includes -c srcs/builtin/exit.c -o objs/builtin/exit.o
+mkdir -p ./objs/builtin
+cc  -I ./includes -c srcs/builtin/export.c -o objs/builtin/export.o
+mkdir -p ./objs/builtin
+cc  -I ./includes -c srcs/builtin/pwd.c -o objs/builtin/pwd.o
+mkdir -p ./objs/builtin
+cc  -I ./includes -c srcs/builtin/unset.c -o objs/builtin/unset.o
+mkdir -p ./objs/lexer
+cc  -I ./includes -c srcs/lexer/lexer.c -o objs/lexer/lexer.o
+mkdir -p ./objs/astree
+cc  -I ./includes -c srcs/astree/astree.c -o objs/astree/astree.o
+mkdir -p ./objs/utils
+cc  -I ./includes -c srcs/utils/x_func.c -o objs/utils/x_func.o
+mkdir -p ./objs/execute
+cc  -I ./includes -c srcs/execute/execute.c -o objs/execute/execute.o
+mkdir -p ./objs/builtin
+cc  -I ./includes -c srcs/builtin/builtin_core.c -o objs/builtin/builtin_core.o
+mkdir -p ./objs/builtin
+cc  -I ./includes -c srcs/builtin/builtin_utils.c -o objs/builtin/builtin_utils.o
+mkdir -p ./objs/env
+cc  -I ./includes -c srcs/env/status.c -o objs/env/status.o
+mkdir -p ./objs/env
+cc  -I ./includes -c srcs/env/env_list.c -o objs/env/env_list.o
+mkdir -p ./objs/parser
+cc  -I ./includes -c srcs/parser/parse_utils.c -o objs/parser/parse_utils.o
+mkdir -p ./objs/parser
+cc  -I ./includes -c srcs/parser/parser.c -o objs/parser/parser.o
+mkdir -p ./objs/gnl
+cc  -I ./includes -c srcs/gnl/get_next_line.c -o objs/gnl/get_next_line.o
+mkdir -p ./objs/gnl
+cc  -I ./includes -c srcs/gnl/get_next_line_utils.c -o objs/gnl/get_next_line_utils.o
+mkdir -p ./objs/expand
+cc  -I ./includes -c srcs/expand/expand.c -o objs/expand/expand.o
+make -C ./libft
  
-make: *** No rule to make target 'objs/lexer/lexer.o', needed by 'minishell'.
-
+make[1]: Entering directory '/home/hoge/hgoe/minishell/libft'
+gcc -Wall -Wextra -Werror   -c -o ft_isalpha.o ft_isalpha.c
+gcc -Wall -Wextra -Werror   -c -o ft_isdigit.o ft_isdigit.c
+gcc -Wall -Wextra -Werror   -c -o ft_isalnum.o ft_isalnum.c
+gcc -Wall -Wextra -Werror   -c -o ft_isascii.o ft_isascii.c
+gcc -Wall -Wextra -Werror   -c -o ft_isprint.o ft_isprint.c
+gcc -Wall -Wextra -Werror   -c -o ft_strlen.o ft_strlen.c
+gcc -Wall -Wextra -Werror   -c -o ft_memset.o ft_memset.c
+gcc -Wall -Wextra -Werror   -c -o ft_bzero.o ft_bzero.c
+gcc -Wall -Wextra -Werror   -c -o ft_memcpy.o ft_memcpy.c
+gcc -Wall -Wextra -Werror   -c -o ft_memmove.o ft_memmove.c
+gcc -Wall -Wextra -Werror   -c -o ft_strlcpy.o ft_strlcpy.c
+gcc -Wall -Wextra -Werror   -c -o ft_strlcat.o ft_strlcat.c
+gcc -Wall -Wextra -Werror   -c -o ft_toupper.o ft_toupper.c
+gcc -Wall -Wextra -Werror   -c -o ft_tolower.o ft_tolower.c
+gcc -Wall -Wextra -Werror   -c -o ft_strchr.o ft_strchr.c
+gcc -Wall -Wextra -Werror   -c -o ft_strrchr.o ft_strrchr.c
+gcc -Wall -Wextra -Werror   -c -o ft_strncmp.o ft_strncmp.c
+gcc -Wall -Wextra -Werror   -c -o ft_memchr.o ft_memchr.c
+gcc -Wall -Wextra -Werror   -c -o ft_memcmp.o ft_memcmp.c
+gcc -Wall -Wextra -Werror   -c -o ft_strnstr.o ft_strnstr.c
+gcc -Wall -Wextra -Werror   -c -o ft_atoi.o ft_atoi.c
+gcc -Wall -Wextra -Werror   -c -o ft_calloc.o ft_calloc.c
+gcc -Wall -Wextra -Werror   -c -o ft_strdup.o ft_strdup.c
+gcc -Wall -Wextra -Werror   -c -o ft_substr.o ft_substr.c
+gcc -Wall -Wextra -Werror   -c -o ft_strjoin.o ft_strjoin.c
+gcc -Wall -Wextra -Werror   -c -o ft_strtrim.o ft_strtrim.c
+gcc -Wall -Wextra -Werror   -c -o ft_split.o ft_split.c
+gcc -Wall -Wextra -Werror   -c -o ft_itoa.o ft_itoa.c
+gcc -Wall -Wextra -Werror   -c -o ft_strmapi.o ft_strmapi.c
+gcc -Wall -Wextra -Werror   -c -o ft_striteri.o ft_striteri.c
+gcc -Wall -Wextra -Werror   -c -o ft_putchar_fd.o ft_putchar_fd.c
+gcc -Wall -Wextra -Werror   -c -o ft_putstr_fd.o ft_putstr_fd.c
+gcc -Wall -Wextra -Werror   -c -o ft_putendl_fd.o ft_putendl_fd.c
+gcc -Wall -Wextra -Werror   -c -o ft_putnbr_fd.o ft_putnbr_fd.c
+ar rcs libft.a ft_isalpha.o ft_isdigit.o ft_isalnum.o ft_isascii.o ft_isprint.o ft_strlen.o ft_memset.o ft_bzero.o ft_memcpy.o ft_memmove.o ft_strlcpy.o ft_strlcat.o ft_toupper.o ft_tolower.o ft_strchr.o ft_strrchr.o ft_strncmp.o ft_memchr.o ft_memcmp.o ft_strnstr.o ft_atoi.o ft_calloc.o ft_strdup.o ft_substr.o ft_strjoin.o ft_strtrim.o ft_split.o ft_itoa.o ft_strmapi.o ft_striteri.o ft_putchar_fd.o ft_putstr_fd.o ft_putendl_fd.o ft_putnbr_fd.o
+make[1]: Leaving directory '/home/hoge/hgoe/minishell/libft'
+make -C ./libft bonus
+make[1]: Entering directory '/home/hoge/hgoe/minishell/libft'
+gcc -Wall -Wextra -Werror   -c -o ft_isalpha.o ft_isalpha.c
+gcc -Wall -Wextra -Werror   -c -o ft_isdigit.o ft_isdigit.c
+gcc -Wall -Wextra -Werror   -c -o ft_isalnum.o ft_isalnum.c
+gcc -Wall -Wextra -Werror   -c -o ft_isascii.o ft_isascii.c
+gcc -Wall -Wextra -Werror   -c -o ft_isprint.o ft_isprint.c
+gcc -Wall -Wextra -Werror   -c -o ft_strlen.o ft_strlen.c
+gcc -Wall -Wextra -Werror   -c -o ft_memset.o ft_memset.c
+gcc -Wall -Wextra -Werror   -c -o ft_bzero.o ft_bzero.c
+gcc -Wall -Wextra -Werror   -c -o ft_memcpy.o ft_memcpy.c
+gcc -Wall -Wextra -Werror   -c -o ft_memmove.o ft_memmove.c
+gcc -Wall -Wextra -Werror   -c -o ft_strlcpy.o ft_strlcpy.c
+gcc -Wall -Wextra -Werror   -c -o ft_strlcat.o ft_strlcat.c
+gcc -Wall -Wextra -Werror   -c -o ft_toupper.o ft_toupper.c
+gcc -Wall -Wextra -Werror   -c -o ft_tolower.o ft_tolower.c
+gcc -Wall -Wextra -Werror   -c -o ft_strchr.o ft_strchr.c
+gcc -Wall -Wextra -Werror   -c -o ft_strrchr.o ft_strrchr.c
+gcc -Wall -Wextra -Werror   -c -o ft_strncmp.o ft_strncmp.c
+gcc -Wall -Wextra -Werror   -c -o ft_memchr.o ft_memchr.c
+gcc -Wall -Wextra -Werror   -c -o ft_memcmp.o ft_memcmp.c
+gcc -Wall -Wextra -Werror   -c -o ft_strnstr.o ft_strnstr.c
+gcc -Wall -Wextra -Werror   -c -o ft_atoi.o ft_atoi.c
+gcc -Wall -Wextra -Werror   -c -o ft_calloc.o ft_calloc.c
+gcc -Wall -Wextra -Werror   -c -o ft_strdup.o ft_strdup.c
+gcc -Wall -Wextra -Werror   -c -o ft_substr.o ft_substr.c
+gcc -Wall -Wextra -Werror   -c -o ft_strjoin.o ft_strjoin.c
+gcc -Wall -Wextra -Werror   -c -o ft_strtrim.o ft_strtrim.c
+gcc -Wall -Wextra -Werror   -c -o ft_split.o ft_split.c
+gcc -Wall -Wextra -Werror   -c -o ft_itoa.o ft_itoa.c
+gcc -Wall -Wextra -Werror   -c -o ft_strmapi.o ft_strmapi.c
+gcc -Wall -Wextra -Werror   -c -o ft_striteri.o ft_striteri.c
+gcc -Wall -Wextra -Werror   -c -o ft_putchar_fd.o ft_putchar_fd.c
+gcc -Wall -Wextra -Werror   -c -o ft_putstr_fd.o ft_putstr_fd.c
+gcc -Wall -Wextra -Werror   -c -o ft_putendl_fd.o ft_putendl_fd.c
+gcc -Wall -Wextra -Werror   -c -o ft_putnbr_fd.o ft_putnbr_fd.c
+gcc -Wall -Wextra -Werror   -c -o ft_lstnew.o ft_lstnew.c
+gcc -Wall -Wextra -Werror   -c -o ft_lstadd_front.o ft_lstadd_front.c
+gcc -Wall -Wextra -Werror   -c -o ft_lstsize.o ft_lstsize.c
+gcc -Wall -Wextra -Werror   -c -o ft_lstlast.o ft_lstlast.c
+gcc -Wall -Wextra -Werror   -c -o ft_lstadd_back.o ft_lstadd_back.c
+gcc -Wall -Wextra -Werror   -c -o ft_lstdelone.o ft_lstdelone.c
+gcc -Wall -Wextra -Werror   -c -o ft_lstclear.o ft_lstclear.c
+gcc -Wall -Wextra -Werror   -c -o ft_lstiter.o ft_lstiter.c
+gcc -Wall -Wextra -Werror   -c -o ft_lstmap.o ft_lstmap.c
+ar rcs libft.a ft_isalpha.o ft_isdigit.o ft_isalnum.o ft_isascii.o ft_isprint.o ft_strlen.o ft_memset.o ft_bzero.o ft_memcpy.o ft_memmove.o ft_strlcpy.o ft_strlcat.o ft_toupper.o ft_tolower.o ft_strchr.o ft_strrchr.o ft_strncmp.o ft_memchr.o ft_memcmp.o ft_strnstr.o ft_atoi.o ft_calloc.o ft_strdup.o ft_substr.o ft_strjoin.o ft_strtrim.o ft_split.o ft_itoa.o ft_strmapi.o ft_striteri.o ft_putchar_fd.o ft_putstr_fd.o ft_putendl_fd.o ft_putnbr_fd.o ft_lstnew.o ft_lstadd_front.o ft_lstsize.o ft_lstlast.o ft_lstadd_back.o ft_lstdelone.o ft_lstclear.o ft_lstiter.o ft_lstmap.o
+make[1]: Leaving directory '/home/hoge/hgoe/minishell/libft'
+cc  -I ./includes ./objs/main.o ./objs/signal/signal.o ./objs/utils/ft_strcmp.o ./objs/builtin/cd.o ./objs/builtin/echo.o ./objs/builtin/exit.o ./objs/builtin/export.o ./objs/builtin/pwd.o ./objs/builtin/unset.o ./objs/lexer/lexer.o ./objs/astree/astree.o ./objs/utils/x_func.o ./objs/execute/execute.o ./objs/builtin/builtin_core.o ./objs/builtin/builtin_utils.o ./objs/env/status.o ./objs/env/env_list.o ./objs/parser/parse_utils.o ./objs/parser/parser.o ./objs/gnl/get_next_line.o ./objs/gnl/get_next_line_utils.o ./objs/expand/expand.o -L/usr/include -lreadline ./libft/libft.a -o minishell
 make: Leaving directory '/home/hoge/hgoe/minishell'
  

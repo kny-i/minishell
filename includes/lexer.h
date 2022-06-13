@@ -58,5 +58,6 @@ typedef struct s_lexer
 }			t_lexer;
 
 void	lexer_build(char *input, t_lexer *lexerbuf);
+int		get_char_type_01(char c);
 
 #endif // !LEXER_H
