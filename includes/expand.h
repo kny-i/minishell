@@ -5,5 +5,5 @@
 # include "parser.h"
 # include  "env.h"
 
-void expand(t_cmd *cmd);
+void expand(t_cmd **cmd, t_envp **envp);
 #endif

@@ -24,8 +24,11 @@ void set_cmd_info(t_cmd *list, t_token **token)
 {
 	while ((*token) != NULL)
 	{
-		if ((*token)->data == CHAR_PIPE);
-		
+
+		if ((*token)->data == CHAR_PIPE)
+		{
+
+		}
 		if (ft_strncmp((*token)->data, "|", 2) == 0)
 		{
 			*token = (*token)->next;
