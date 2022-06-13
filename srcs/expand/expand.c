@@ -8,23 +8,6 @@ char	*for_free(char *res, char *free_str)
 	return(res);
 }
 
-char	*get_env_cmd(char *str, t_envp **envp_list)
-{
-	int		i;
-	int		start;
-	char	*s;
-
-	i = 0;
-	start = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == '\"' || str[i] == '$');
-		i += 1;
-	}
-	s = ft_substr(str, start, i);
-	return (s);
-}
-
 char	*get_env_cmd_general(char *cmd, t_envp **envp_list)
 {
 	int		i;
