@@ -2,6 +2,7 @@
 #include "lexer.h"
 #include "parser.h"
 #include "env.h"
+#include "expand.h"
 /*
 void	launch(char *line,char *envp[], t_lexer *lexerbuf)
 {
@@ -50,7 +51,7 @@ void	minishell(char *environ[])
 		cmd_list = lex_pars(line);
 		free(line);
 		line = NULL;
-		//expand(cmd_list);
+		expand(&cmd_list, &env_list);
 		int i = 0;
 		while (cmd_list != NULL)
 		{
