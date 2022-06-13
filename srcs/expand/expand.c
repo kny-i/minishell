@@ -17,14 +17,14 @@ char	*get_env_cmd_general(char *cmd, t_envp **envp_list)
 	while (ft_isalpha(cmd[i]))
 		i += 1;
 	tmp = ft_substr(cmd, 0, i);
-	while (envp_list != NULL)
+	while ((*envp_list)->next != NULL)
 	{
 		if (ft_strcmp((*envp_list)->env_name, tmp + 1) == 0)
 			return (ft_substr((*envp_list)->content, 0, ft_strlen((*envp_list)->content)));
 		*envp_list = (*envp_list)->next;
 	}
 	free(tmp);
-	return (NULL);
+	return (ft_substr(cmd, 0, ft_strlen(cmd)));
 }
 
 char	*expand_dquot(char *cmd, t_envp **envp_list)
@@ -39,7 +39,7 @@ char	*expand_dquot(char *cmd, t_envp **envp_list)
 	{
 		if (cmd[i] == '$')
 		{
-			new_str = ft_substr(cmd, 0, i);
+			new_str = ft_substr(cmd, 0, i);							//<-  ここで＄前までをsubstr
 			expand_str = get_env_cmd_general(cmd + i, envp_list);
 			new_str = for_free(ft_strjoin(new_str, expand_str), new_str);
 			while (ft_isalpha(cmd[i + 1]))
@@ -73,7 +73,15 @@ char	*check_cmd(char *cmd, t_envp **envp_list)
 
 void	check_args(t_list *args, t_envp **envp_list)
 {
+	t_list	*tmp;
 
+	tmp = args;
+	while (tmp != NULL)
+	{
+		if (*tmp->content != '\0')
+			tmp->content = for_free(check_cmd(tmp->content, envp_list), tmp->content);
+		tmp = tmp->next;
+	}
 }
 
 void	expand_env(t_cmd **cmd, t_envp **envp_list)
@@ -85,7 +93,7 @@ void	expand_env(t_cmd **cmd, t_envp **envp_list)
 	{
 		if (*cur_cmd->cmd != '\0')
 			cur_cmd->cmd = for_free(check_cmd(cur_cmd->cmd, envp_list), cur_cmd->cmd);
-//		check_args(cur_cmd->args, envp_list);
+		check_args(cur_cmd->args, envp_list);
 		cur_cmd = cur_cmd->next;
 	}
 
@@ -191,8 +199,18 @@ void expand_quot_args(t_cmd **cmd)
 	}
 }
 
+void	print_env_01(t_envp **envp)
+{
+	t_envp	*tmp;
+
+	tmp = *envp;
+	for (; tmp->next != NULL; tmp = tmp->next)
+		printf("%s\n", tmp->env_name);
+}
+
 void expand(t_cmd **cmd, t_envp **envp)
 {
+//	print_env_01(envp);
 	expand_env(cmd,envp);
 //	expand_quot_cmd(cmd);
 //	expand_quot_args(cmd);
