@@ -27,23 +27,21 @@ t_envp *creat_tenv(char **envp)
 	int j;
 
 	i = 0;
-	k = 0;
-	j = 0;
 	env_tmp = ft_envnew(0);
 	env_list = env_tmp;
 	while(envp[i] != NULL)
 	{
+		k = 0;
 		while (envp[i][k] != '=')
 			k++;
 		env_tmp->env_name = ft_substr(envp[i], 0, k);
+		j = 0;
 		while (envp[i][j] != '\0')
 			j++;
 		env_tmp->content = ft_substr(envp[i], k + 1, j);
 		env_tmp->next = ft_envnew(0);
 		env_tmp = env_tmp->next;
 		i++;
-		k = 0;
-		j = 0;
 	}
 	return (env_list);
 }

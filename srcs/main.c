@@ -33,6 +33,18 @@ void	launch(char *line,char *envp[], t_lexer *lexerbuf)
 	}
 }*/
 
+void	print_env(t_envp *env)
+{
+	t_envp	*tmp;
+
+	tmp = env;
+	for (; tmp != NULL; tmp = tmp->next)
+	{
+		printf("name     = %s\n", tmp->env_name);
+		printf("contents = %s\n", tmp->content);
+	}
+}
+
 void	minishell(char *environ[])
 {
 	char	*line;
@@ -47,7 +59,6 @@ void	minishell(char *environ[])
 		line = readline("minishell> ");
 		if (line == NULL)
 			break;
-		int	size = (int)ft_strlen(line);
 		cmd_list = lex_pars(line);
 		free(line);
 		line = NULL;
