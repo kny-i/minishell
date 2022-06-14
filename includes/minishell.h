@@ -31,8 +31,7 @@ typedef struct s_lexer	t_lexer;
 
 //signal.c
 void	sig_input();
-//utils.c
-int		ft_strcmp(const char *s1, const char *s2);
+
 //cd.c
 int 	cd_core(char **args);
 //pwd.c
