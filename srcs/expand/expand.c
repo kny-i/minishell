@@ -8,20 +8,22 @@ char	*for_free(char *res, char *free_str)
 	return(res);
 }
 
-char	*get_env_cmd_general(char *cmd, t_envp **envp_list)
+char	*get_env_cmd_general(char *cmd, t_envp **env_list)
 {
 	int		i;
 	char	*tmp;
+	t_envp *tmp_list;
 
 	i = 1;
 	while (ft_isalpha(cmd[i]))
 		i += 1;
+	tmp_list = *env_list;
 	tmp = ft_substr(cmd, 0, i);
-	while ((*envp_list)->next != NULL)
+	while (tmp_list->next != NULL)
 	{
-		if (ft_strcmp((*envp_list)->env_name, tmp + 1) == 0)
-			return (ft_substr((*envp_list)->content, 0, ft_strlen((*envp_list)->content)));
-		*envp_list = (*envp_list)->next;
+		if (ft_strcmp(tmp_list->env_name, tmp + 1) == 0)
+			return (ft_substr(tmp_list->content, 0, ft_strlen(tmp_list->content)));
+		tmp_list = tmp_list->next;
 	}
 	free(tmp);
 	return (ft_substr(cmd, 0, ft_strlen(cmd)));
