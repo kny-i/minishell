@@ -52,7 +52,7 @@ int x_open(char *file)
 	return (fd);
 }
 
-char	*x_calloc(size_t count, size_t size)
+void	*x_calloc(size_t count, size_t size)
 {
 	char	*tmp;
 
