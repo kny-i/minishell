@@ -59,7 +59,7 @@ void	*x_calloc(size_t count, size_t size)
 	tmp = ft_calloc(count, size);
 	if (tmp == NULL)
 	{
-		perror("malloc");
+		perror("malloc errror");
 		exit(1);
 	}
 	return (tmp);
@@ -72,8 +72,20 @@ void 	x_close(int fildes)
 	status = close(fildes);
 	if (status == -1)
 	{
-		perror("close");
+		perror("close error");
 		exit(1);
 	}
 	return ;
+}
+
+void 	x_dup2(int fd1, int fd2)
+{
+	int	status;
+
+	status = dup2(fd1, fd2);
+	if (status == -1)
+	{
+		perror("dup2 error");
+		exit(1);
+	}
 }

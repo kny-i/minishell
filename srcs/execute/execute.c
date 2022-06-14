@@ -43,9 +43,23 @@ int set_output(t_cmd *cmd, int i, int cmd_num, int fd[2][2])
 	return (ret);
 }
 
-void execute_cmd(t_cmd *cmd, t_list *env, int input_fd, int output_fd)
+void execute_cmd(t_cmd *cmd, t_envp *env)
 {
 
+}
+
+void allocate_fd(int inputfd, int output_fd)
+{
+	if(inputfd != 0)
+	{
+		x_dup2(inputfd, 0);
+		x_close(inputfd);
+	}
+	if (output_fd != 1)
+	{
+		x_dup2(output_fd, 1);
+		x_close(inputfd);
+	}
 }
 void execute(t_cmd **cmd, t_envp *envp)
 {
@@ -66,8 +80,8 @@ void execute(t_cmd **cmd, t_envp *envp)
 		pid[i] = x_fork();
 		if (pid[i] == 0)
 		{
-			execute_cmd(tmp_cmd, envp, set_input(tmp_cmd, i, fd), set_output(tmp_cmd, i, cmd_num,  fd))
-
+			allocate_fd(set_input(tmp_cmd, i, fd), set_output(tmp_cmd, i, cmd_num,  fd));
+			execute_cmd(tmp_cmd, envp);
 		}
 		i++;
 	}
