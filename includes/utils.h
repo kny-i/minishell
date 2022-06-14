@@ -9,5 +9,5 @@ int	x_fork(void);
 int x_waitpid(pid_t pid);
 int x_open(char *file);
 void 	*x_calloc(size_t count, size_t size);
-
+void 	x_close(int fildes);
 #endif

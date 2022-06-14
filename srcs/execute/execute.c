@@ -13,6 +13,33 @@ int count_cmd(t_cmd *cmd)
 	}
 	return (cmd_cnt);
 }
+
+int set_input(t_cmd *cmd, int i, int fd[2][2])
+{
+	int ret;
+
+	if (i == 0)
+	{
+		ret = 0;
+	}
+	else
+		ret = fd[i % 2 + 1][0];
+	return (ret);
+}
+
+int set_output(t_cmd *cmd, int i, int cmd_num, int fd[2][2])
+{
+	int ret;
+
+	if (i == cmd_num - 1)
+	{
+		ret = 1;
+	}
+	else
+	{
+		x_close()
+	}
+}
 void execute(t_cmd **cmd, t_envp *envp)
 {
 	t_cmd *tmp_cmd;
@@ -32,8 +59,9 @@ void execute(t_cmd **cmd, t_envp *envp)
 		pid[i] = x_fork();
 		if (pid[i] == 0)
 		{
-			get_input(tmp_cmd, i, fd);
-			get_output(tmp_cmd, i, fd);
+			set_input(tmp_cmd, i, fd);
+			set_output(tmp_cmd, i, cmd_num,  fd);
+			execute_cmd
 
 		}
 		i++;

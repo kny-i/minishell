@@ -64,3 +64,16 @@ void	*x_calloc(size_t count, size_t size)
 	}
 	return (tmp);
 }
+
+void 	x_close(int fildes)
+{
+	int	status;
+
+	status = close(fildes);
+	if (status == -1)
+	{
+		perror("close");
+		exit(1);
+	}
+	return ;
+}
