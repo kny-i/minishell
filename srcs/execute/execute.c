@@ -16,8 +16,10 @@ void execute(t_cmd **cmd, t_envp *envp)
 {
 	t_cmd *tmp_cmd;
 	int cmd_num;
+	int *pid;
 
 	tmp_cmd = *cmd;
 	cmd_num = count_cmd(tmp_cmd);
+	pid = ft
 
 }
