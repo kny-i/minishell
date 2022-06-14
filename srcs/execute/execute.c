@@ -37,8 +37,15 @@ int set_output(t_cmd *cmd, int i, int cmd_num, int fd[2][2])
 	}
 	else
 	{
-		x_close()
+		x_close(fd[i % 2][0]);
+		ret = fd[i % 2][1];
 	}
+	return (ret);
+}
+
+void execute_cmd(t_cmd *cmd, t_list *env, int input_fd, int output_fd)
+{
+
 }
 void execute(t_cmd **cmd, t_envp *envp)
 {
@@ -59,9 +66,7 @@ void execute(t_cmd **cmd, t_envp *envp)
 		pid[i] = x_fork();
 		if (pid[i] == 0)
 		{
-			set_input(tmp_cmd, i, fd);
-			set_output(tmp_cmd, i, cmd_num,  fd);
-			execute_cmd
+			execute_cmd(tmp_cmd, envp, set_input(tmp_cmd, i, fd), set_output(tmp_cmd, i, cmd_num,  fd))
 
 		}
 		i++;
