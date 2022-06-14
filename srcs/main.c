@@ -77,7 +77,7 @@ void	minishell(char *environ[])
 			cmd_list = cmd_list->next;
 			i++;
 		}
-		//	execute(&lexerbuf, environ);
+		//	execute(&cmd_list, environ);
 		//	printf("line is '%s'\n", line);
 		//	add_history(line);
 		//	launch(line, environ, lexerbuf);
