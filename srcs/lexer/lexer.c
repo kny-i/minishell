@@ -194,6 +194,8 @@ void	lexer_build(char *input, t_lexer *lexerbuf)
 	while (input[i_input] != '\0')
 	{
 		char_type = get_char_type_01(input[i_input]);
+		if (char_type == CHAR_PIPE)
+			lexerbuf->num_token += 1;
 		if (status == STATE_GENERAL)
 			status = assign_general(&token, &i_token, char_type, input[i_input], &len);
 		else if (status == STATE_IN_QUOTE)

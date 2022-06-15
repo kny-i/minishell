@@ -60,6 +60,7 @@ t_cmd	*lex_pars(char *input)
 	t_cmd	*cmd_list;
 	t_lexer	lexerbuf;
 
+	lexerbuf.num_token = 0;
 	lexer_build(input, &lexerbuf);
 	cmd_list = parse(&lexerbuf);
 	return (cmd_list);
