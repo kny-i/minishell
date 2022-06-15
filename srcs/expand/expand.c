@@ -1,5 +1,6 @@
-# include "../../includes/expand.h"
+#include "../../includes/expand.h"
 #include "lexer.h"
+#include "utils.h"
 
 char	*for_free(char *res, char *free_str)
 {

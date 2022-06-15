@@ -32,9 +32,6 @@ typedef struct s_lexer	t_lexer;
 //signal.c
 void	sig_input();
 
-//cd.c
-int 	cd_core(char **args);
-//pwd.c
-int	pwd_core(char **argv);
+
 
 #endif

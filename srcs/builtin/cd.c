@@ -2,9 +2,9 @@
 #include <unistd.h>
 
 
-int cd_core(char **args)
+int cd_core(t_list *args)
 {
-	if (args[1] == NULL)
+	/*if (args[1] == NULL)
 	{
 		return(0);
 		//return (cd_to_home(args));
@@ -14,5 +14,5 @@ int cd_core(char **args)
 		perror(args[0]);
 		return (FAILURE);
 	}
-	return (SUCCESS);
+	return (SUCCESS);*/
 }

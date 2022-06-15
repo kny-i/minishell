@@ -6,6 +6,8 @@ int count_cmd(t_cmd *cmd)
 	int cmd_cnt;
 
 	cmd_cnt = 0;
+	//printf("[%s]\n", cmd->cmd);
+
 	while (cmd != NULL)
 	{
 		cmd_cnt++;
@@ -43,9 +45,13 @@ int set_output(t_cmd *cmd, int i, int cmd_num, int fd[2][2])
 	return (ret);
 }
 
-void execute_cmd(t_cmd *cmd, t_envp *env)
+void execute_cmd(t_cmd *cmd_list, t_envp *env)
 {
-
+	char *path;
+	if (is_builtin(cmd_list->cmd))
+		execute_builtin(cmd_list, env);
+	printf("in execute [%s]\n", cmd_list->cmd);
+	//path = get_path(cmd_list);
 }
 
 void allocate_fd(int inputfd, int output_fd)
@@ -73,6 +79,7 @@ void execute(t_cmd **cmd, t_envp *envp)
 	cmd_num = count_cmd(tmp_cmd);
 	pid = (int *)x_calloc(cmd_num, sizeof(int));
 	i = 0;
+	printf("[%d]\n", cmd_num);
 	while (i < cmd_num)
 	{
 		if (i != cmd_num - 1)
@@ -83,6 +90,7 @@ void execute(t_cmd **cmd, t_envp *envp)
 			allocate_fd(set_input(tmp_cmd, i, fd), set_output(tmp_cmd, i, cmd_num,  fd));
 			execute_cmd(tmp_cmd, envp);
 		}
+		tmp_cmd = tmp_cmd->next;
 		i++;
 	}
 
