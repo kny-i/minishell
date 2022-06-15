@@ -64,7 +64,7 @@ void	minishell(char *environ[])
 		line = NULL;
 		expand(&cmd_list, &env_list);
 		int i = 0;
-		while (cmd_list != NULL)
+	/*	while (cmd_list != NULL)
 		{
 			printf("cmd[%d] = [%s]\n", i,  cmd_list->cmd);
 			int k = 0;
@@ -76,7 +76,7 @@ void	minishell(char *environ[])
 			}
 			cmd_list = cmd_list->next;
 			i++;
-		}
+		}*/
 		execute(&cmd_list, env_list);
 		//	printf("line is '%s'\n", line);
 		//	add_history(line);
