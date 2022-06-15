@@ -1,4 +1,5 @@
 #include "builtin.h"
+#include "utils.h"
 
 bool	is_only_builtin(t_lexer *lexerbuf)
 {

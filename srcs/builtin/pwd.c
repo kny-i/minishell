@@ -1,10 +1,9 @@
 #include "minishell.h"
 
-int pwd_core(char **argv)
+int pwd_core(void)
 {
 	char	*pwd_path;
 
-	(void)argv;
 	pwd_path = getcwd(NULL, 0);
 	if (pwd_path == NULL)
 		return (FAILURE);

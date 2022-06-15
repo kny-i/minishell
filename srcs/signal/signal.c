@@ -11,8 +11,6 @@ void	signal_handler(int sig)
 }
 void	sig_input()
 {
-	int	c;
-
 /*	struct sigaction	sa;
 
 	sa.sa_handler = &handle_sig;
