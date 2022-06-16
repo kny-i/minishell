@@ -187,7 +187,7 @@ void expand_quot_args(t_cmd **cmd)
 			}
 			i = 0;
 			k = 0;
-			printf("[%s]\n", new_str);
+	//		printf("[%s]\n", new_str);
 			cur_list->content = new_str;
 			free(old_str);
 			cur_list = cur_list->next;

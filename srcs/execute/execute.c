@@ -1,6 +1,61 @@
 #include "execute.h"
 #include "utils.h"
 
+extern char	**environ;
+
+int cnt_env(t_envp *envp)
+{
+    int env_cnt;
+
+    env_cnt = 0;
+    while (envp != NULL)
+    {
+        env_cnt++;
+        envp = envp->next;
+    }
+    return (env_cnt);
+}
+
+char **list_to_env(t_envp *envp)
+{
+    char **str;
+    int i;
+    int num_env;
+    
+    i = 0;
+    str = NULL;
+    num_env = cnt_env(envp);
+    str = (char **) ft_calloc(num_env + 1, sizeof (char *));
+    if (str == NULL)
+    {
+        perror("calloc error");
+        exit(1);
+    }
+    while (envp != NULL)
+    {
+        str[i] = ft_substr(envp->env_name, 0, ft_strlen(envp->env_name) + 1);
+        str[i] = for_free(ft_strjoin(str[i], "="), str[i]);
+        str[i] = for_free(ft_strjoin(str[i], envp->content), str[i]);
+        i++;
+        envp = envp->next;
+    }
+    str[i] = NULL;
+    return (str);
+}
+
+void	print_env_array(char **ar)
+{
+	char	**tmp;
+
+	tmp = ar;
+	while (*tmp != NULL)
+	{
+		printf("%s", *tmp);
+		*tmp++;
+	}
+	putchar('\n');
+}
+
 int count_cmd(t_cmd *cmd)
 {
 	int cmd_cnt;
@@ -12,6 +67,54 @@ int count_cmd(t_cmd *cmd)
 		cmd = cmd->next;
 	}
 	return (cmd_cnt);
+}
+
+int	get_list_size(t_list *args)
+{
+	t_list	*tmp;
+	int		i;
+
+	i = 0;
+	while (tmp != NULL)
+		i += 1;
+	return (i);
+}
+
+char	**list_to_args(t_cmd *cmd)
+{
+	char	**res;
+	t_list	*tmp;
+	int		len;
+
+	tmp = cmd->args;
+	len = get_list_size(cmd->args);
+	res = malloc(sizeof(char *) * len + 2);
+	if (res == NULL)
+		exit(1);
+	char	**res_1 = res;
+	*res = ft_substr(cmd->cmd, 0, ft_strlen(cmd->cmd));
+//	printf("res = %s\n", *res);
+	*res++;
+	while (tmp != NULL)
+	{
+		*res = ft_substr(tmp->content, 0, ft_strlen(tmp->content));
+		tmp = tmp->next;
+		*res++;
+	}
+	*res = NULL;
+	return (res_1);
+}
+
+void	print_args(char **args)
+{
+	char	**tmp = args;
+	printf("***********************\n");
+	while (*tmp != NULL)
+	{
+		printf("data = %s ", *tmp);
+		*tmp++;
+	}
+	putchar('\n');
 }
 
 /*
@@ -152,15 +255,19 @@ void execute(t_cmd **cmd_list, t_envp *envp)
 				x_close(fd[j - 2]);
 			}
 		
+			char	**args = list_to_args(tmp_cmd);
+			char	**env_array = list_to_env(envp);
+		//	print_env_array(env_array);
+	//		print_args(args);
 			tmp_cmd->cmd = for_free(ft_strjoin("/", tmp_cmd->cmd), tmp_cmd->cmd);
 			while (*env_path_split != NULL)
 			{
 				*env_path_split = for_free(ft_strjoin(*env_path_split, tmp_cmd->cmd), *env_path_split);
 	//			printf("%s\n", *env_path_split);
-				if (execve(*env_path_split, &tmp_cmd->cmd, NULL) != -1)
-					break ;
+				execve(*env_path_split, args, environ);
 				*env_path_split++;
 			}
+			exit(1);
 
 	/*		char *path = "/usr/bin/";
 			char *cmd;
