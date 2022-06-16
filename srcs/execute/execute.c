@@ -21,7 +21,7 @@ char **list_to_env(t_envp *envp)
     char **str;
     int i;
     int num_env;
-    
+
     i = 0;
     str = NULL;
     num_env = cnt_env(envp);
@@ -51,7 +51,7 @@ void	print_env_array(char **ar)
 	while (*tmp != NULL)
 	{
 		printf("%s", *tmp);
-		*tmp++;
+		tmp++;
 	}
 	putchar('\n');
 }
@@ -75,8 +75,12 @@ int	get_list_size(t_list *args)
 	int		i;
 
 	i = 0;
+	tmp = args;
 	while (tmp != NULL)
+	{
 		i += 1;
+		tmp = tmp->next;
+	}
 	return (i);
 }
 
@@ -85,23 +89,27 @@ char	**list_to_args(t_cmd *cmd)
 	char	**res;
 	t_list	*tmp;
 	int		len;
+	int 	i;
+
 
 	tmp = cmd->args;
 	len = get_list_size(cmd->args);
-	res = malloc(sizeof(char *) * len + 2);
+	res = (char **)malloc(sizeof(char *) * len + 2);
 	if (res == NULL)
 		exit(1);
 	char	**res_1 = res;
-	*res = ft_substr(cmd->cmd, 0, ft_strlen(cmd->cmd));
+	i = 0;
+	res[i] = ft_substr(cmd->cmd, 0, ft_strlen(cmd->cmd));
+	i++;
 //	printf("res = %s\n", *res);
-	*res++;
+	//*res++;
 	while (tmp != NULL)
 	{
-		*res = ft_substr(tmp->content, 0, ft_strlen(tmp->content));
+		res[i] = ft_substr(tmp->content, 0, ft_strlen(tmp->content));
 		tmp = tmp->next;
-		*res++;
+		i++;
 	}
-	*res = NULL;
+	res[i] = NULL;
 	return (res_1);
 }
 
@@ -112,7 +120,7 @@ void	print_args(char **args)
 	while (*tmp != NULL)
 	{
 		printf("data = %s ", *tmp);
-		*tmp++;
+		tmp++;
 	}
 	putchar('\n');
 }
@@ -205,7 +213,7 @@ char	*get_path(t_envp *envp)
 	t_envp	*tmp;
 
 	tmp = envp;
-	while (strcmp(tmp->env_name, "PATH"))
+	while (ft_strcmp(tmp->env_name, "PATH"))
 	{
 		tmp = tmp->next;
 	}
@@ -239,6 +247,7 @@ void execute(t_cmd **cmd_list, t_envp *envp)
 		i++;
 	}
 	i = 0;
+
 	while (tmp_cmd != NULL)
 	{
 		pid = x_fork();
@@ -254,18 +263,19 @@ void execute(t_cmd **cmd_list, t_envp *envp)
 				x_dup2(fd[j - 2], 0);
 				x_close(fd[j - 2]);
 			}
-		
+
 			char	**args = list_to_args(tmp_cmd);
 			char	**env_array = list_to_env(envp);
-		//	print_env_array(env_array);
-	//		print_args(args);
+			//print_env_array(env_array);
+			//print_args(args);
 			tmp_cmd->cmd = for_free(ft_strjoin("/", tmp_cmd->cmd), tmp_cmd->cmd);
 			while (*env_path_split != NULL)
 			{
 				*env_path_split = for_free(ft_strjoin(*env_path_split, tmp_cmd->cmd), *env_path_split);
 	//			printf("%s\n", *env_path_split);
-				execve(*env_path_split, args, environ);
-				*env_path_split++;
+
+				execve(*env_path_split, args, env_array);
+				env_path_split++;
 			}
 			exit(1);
 
