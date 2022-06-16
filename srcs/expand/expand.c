@@ -64,7 +64,7 @@ char	*check_cmd(char *cmd, t_envp **envp_list)
 	}
 	else
 		new_str = ft_substr(cmd, 0, ft_strlen(cmd));
-	printf("%s\n", new_str);
+//	printf("%s\n", new_str);
 	return (new_str);
 }
 
