@@ -97,6 +97,18 @@ void execute(t_cmd **cmd, t_envp *envp)
 }
 */
 
+char	*get_path(t_envp *envp)
+{
+	t_envp	*tmp;
+
+	tmp = envp;
+	while (strcmp(tmp->env_name, "PATH"))
+	{
+		tmp = tmp->next;
+	}
+	return (tmp->content);
+}
+
 void execute(t_cmd **cmd_list, t_envp *envp)
 {
 	int i;
@@ -104,6 +116,14 @@ void execute(t_cmd **cmd_list, t_envp *envp)
 	pid_t pid;
 	int cmd_cnt;
 	t_cmd *tmp_cmd;
+
+	char	*env_path = get_path(envp);
+	char	**env_path_split = ft_split(env_path, ':');
+/*	while (*env_path_split != NULL)
+	{
+		printf("%s\n", *env_path_split);
+		*(env_path_split)++;
+	}*/
 
 	i = 0;
 	j = 0;
@@ -131,7 +151,18 @@ void execute(t_cmd **cmd_list, t_envp *envp)
 				x_dup2(fd[j - 2], 0);
 				x_close(fd[j - 2]);
 			}
-			char *path = "/bin/";
+		
+			tmp_cmd->cmd = for_free(ft_strjoin("/", tmp_cmd->cmd), tmp_cmd->cmd);
+			while (*env_path_split != NULL)
+			{
+				*env_path_split = for_free(ft_strjoin(*env_path_split, tmp_cmd->cmd), *env_path_split);
+	//			printf("%s\n", *env_path_split);
+				if (execve(*env_path_split, &tmp_cmd->cmd, NULL) != -1)
+					break ;
+				*env_path_split++;
+			}
+
+	/*		char *path = "/usr/bin/";
 			char *cmd;
 			cmd = tmp_cmd->cmd;
 			while (tmp_cmd->args != NULL)
@@ -143,7 +174,7 @@ void execute(t_cmd **cmd_list, t_envp *envp)
 			{
 				perror("exec error");
 				exit(1);
-			}
+			}*/
 		}
 		j += 2;
 		tmp_cmd = tmp_cmd->next;

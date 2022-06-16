@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Jun 15 18:43:30 2022
+# Make data base, printed on Thu Jun 16 21:45:48 2022
 
 # Variables
 
@@ -27,11 +27,11 @@ VSCODE_LOG_NATIVE = false
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /home/hoge/hgoe/minishell
+CURDIR := /home/hoge/hoge/minishell
 # makefile
 SHELL = /bin/sh
 # environment
-VSCODE_NLS_CONFIG = {"locale":"ja","availableLanguages":{"*":"ja"},"_languagePackId":"3cd3bd15e30fa0124a3f232cbca66525.ja","_translationsConfigFile":"/home/hoge/.vscode-server/data/clp/3cd3bd15e30fa0124a3f232cbca66525.ja/tcf.json","_cacheRoot":"/home/hoge/.vscode-server/data/clp/3cd3bd15e30fa0124a3f232cbca66525.ja","_resolvedLanguagePackCoreLocation":"/home/hoge/.vscode-server/data/clp/3cd3bd15e30fa0124a3f232cbca66525.ja/4af164ea3a06f701fe3e89a2bcbb421d2026b68f","_corruptedFile":"/home/hoge/.vscode-server/data/clp/3cd3bd15e30fa0124a3f232cbca66525.ja/corrupted.info","_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"ja","availableLanguages":{"*":"ja"},"_languagePackId":"3cd3bd15e30fa0124a3f232cbca66525.ja","_translationsConfigFile":"/home/hoge/.vscode-server/data/clp/3cd3bd15e30fa0124a3f232cbca66525.ja/tcf.json","_cacheRoot":"/home/hoge/.vscode-server/data/clp/3cd3bd15e30fa0124a3f232cbca66525.ja","_resolvedLanguagePackCoreLocation":"/home/hoge/.vscode-server/data/clp/3cd3bd15e30fa0124a3f232cbca66525.ja/30d9c6cd9483b2cc586687151bcbcd635f373630","_corruptedFile":"/home/hoge/.vscode-server/data/clp/3cd3bd15e30fa0124a3f232cbca66525.ja/corrupted.info","_languagePackSupport":true}
 # environment
 _ = /mnt/c/Users/c4191/AppData/Local/Programs/Microsoft VS Code/bin/code
 # makefile (from 'Makefile', line 1)
@@ -40,8 +40,8 @@ MAKEFILE_LIST :=  Makefile
 GNUMAKEFLAGS := 
 # environment
 VSCODE_VERBOSE_LOGGING = true
-# makefile (from 'Makefile', line 41)
-OBJS := ./objs/main.o ./objs/signal/signal.o ./objs/utils/ft_strcmp.o ./objs/builtin/cd.o ./objs/builtin/echo.o ./objs/builtin/exit.o ./objs/builtin/export.o ./objs/builtin/pwd.o ./objs/builtin/unset.o ./objs/lexer/lexer.o ./objs/astree/astree.o ./objs/utils/x_func.o ./objs/execute/execute.o ./objs/builtin/builtin_core.o ./objs/builtin/builtin_utils.o ./objs/env/status.o ./objs/env/env_list.o ./objs/parser/parse_utils.o ./objs/parser/parser.o ./objs/gnl/get_next_line.o ./objs/gnl/get_next_line_utils.o ./objs/expand/expand.o ./objs/expand/expand_env_cmd.o
+# makefile (from 'Makefile', line 42)
+OBJS := ./objs/main.o ./objs/signal/signal.o ./objs/utils/ft_strcmp.o ./objs/utils/free.o ./objs/builtin/cd.o ./objs/builtin/echo.o ./objs/builtin/exit.o ./objs/builtin/export.o ./objs/builtin/pwd.o ./objs/builtin/unset.o ./objs/lexer/lexer.o ./objs/astree/astree.o ./objs/utils/x_func.o ./objs/execute/execute.o ./objs/builtin/builtin_core.o ./objs/builtin/builtin_utils.o ./objs/env/status.o ./objs/env/env_list.o ./objs/parser/parse_utils.o ./objs/parser/parser.o ./objs/gnl/get_next_line.o ./objs/gnl/get_next_line_utils.o ./objs/expand/expand.o ./objs/expand/expand_env_cmd.o
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -49,7 +49,7 @@ VSCODE_CWD = /mnt/c/Users/c4191/AppData/Local/Programs/Microsoft VS Code
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
-PATH = /home/hoge/.vscode-server/bin/4af164ea3a06f701fe3e89a2bcbb421d2026b68f/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/PowerShell/7/:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin:/mnt/c/Users/c4191/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/c4191/AppData/Local/Programs/Microsoft VS Code/bin
+PATH = /home/hoge/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/PowerShell/7/:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin:/mnt/c/Users/c4191/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/c4191/AppData/Local/Programs/Microsoft VS Code/bin
 # environment
 XDG_RUNTIME_DIR = /mnt/wslg/runtime-dir
 # makefile (from 'Makefile', line 11)
@@ -57,7 +57,7 @@ SRCS_DIR := ./srcs
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-b40f30f0-9b00-4fa0-9cab-237f5ab6d987.sock
+VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-3c9e9dd8-9d88-4776-b4fd-42f8f0dd5b2f.sock
 # makefile (from 'Makefile', line 7)
 LDFLAGS = -L/usr/include -lreadline
 # default
@@ -71,15 +71,15 @@ DISPLAY = :0
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
-PWD = /home/hoge/hgoe/minishell
+PWD = /home/hoge/hoge/minishell
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/167_interop
+WSL_INTEROP = /run/WSL/166_interop
 # environment
 PULSE_SERVER = /mnt/wslg/PulseServer
 # environment
-WT_SESSION = cd32b46b-ba17-48cd-be5f-4977e6bcbc15
+WT_SESSION = 4f3cb276-aed1-4646-bc12-708ca8eef47b
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -101,7 +101,7 @@ MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
 # makefile (from 'Makefile', line 14)
-SRCS := ./srcs/main.c ./srcs/signal/signal.c ./srcs/utils/ft_strcmp.c ./srcs/builtin/cd.c ./srcs/builtin/echo.c ./srcs/builtin/exit.c ./srcs/builtin/export.c ./srcs/builtin/pwd.c ./srcs/builtin/unset.c ./srcs/lexer/lexer.c ./srcs/astree/astree.c ./srcs/utils/x_func.c ./srcs/execute/execute.c ./srcs/builtin/builtin_core.c ./srcs/builtin/builtin_utils.c ./srcs/env/status.c ./srcs/env/env_list.c ./srcs/parser/parse_utils.c ./srcs/parser/parser.c ./srcs/gnl/get_next_line.c ./srcs/gnl/get_next_line_utils.c ./srcs/expand/expand.c ./srcs/expand/expand_env_cmd.c 
+SRCS := ./srcs/main.c ./srcs/signal/signal.c ./srcs/utils/ft_strcmp.c ./srcs/utils/free.c ./srcs/builtin/cd.c ./srcs/builtin/echo.c ./srcs/builtin/exit.c ./srcs/builtin/export.c ./srcs/builtin/pwd.c ./srcs/builtin/unset.c ./srcs/lexer/lexer.c ./srcs/astree/astree.c ./srcs/utils/x_func.c ./srcs/execute/execute.c ./srcs/builtin/builtin_core.c ./srcs/builtin/builtin_utils.c ./srcs/env/status.c ./srcs/env/env_list.c ./srcs/parser/parse_utils.c ./srcs/parser/parser.c ./srcs/gnl/get_next_line.c ./srcs/gnl/get_next_line_utils.c ./srcs/expand/expand.c ./srcs/expand/expand_env_cmd.c 
 # environment
 SHLVL = 1
 # makefile (from 'Makefile', line 10)
@@ -171,7 +171,7 @@ VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 # environment
 WSL_DISTRO_NAME = Ubuntu-20.04_dev
 # variable set hash-table stats:
-# Load=80/1024=8%, Rehash=0, Collisions=7/141=5%
+# Load=80/1024=8%, Rehash=0, Collisions=7/142=5%
 
 # Pattern-specific Variable Values
 
@@ -184,7 +184,7 @@ WSL_DISTRO_NAME = Ubuntu-20.04_dev
 # . (device 2112, inode 6780): 14 files, no impossibilities.
 # srcs/env (device 2112, inode 13228): 2 files, no impossibilities so far.
 # srcs/gnl (device 2112, inode 17021): 4 files, no impossibilities.
-# srcs/utils (device 2112, inode 17048): 2 files, no impossibilities so far.
+# srcs/utils (device 2112, inode 17048): 3 files, no impossibilities so far.
 # srcs/builtin (device 2112, inode 13218): 8 files, no impossibilities so far.
 # srcs/signal (device 2112, inode 17046): 1 files, no impossibilities so far.
 # srcs (device 2112, inode 13214): 14 files, no impossibilities so far.
@@ -192,12 +192,13 @@ WSL_DISTRO_NAME = Ubuntu-20.04_dev
 # srcs/lexer (device 2112, inode 17025): 1 files, no impossibilities so far.
 # srcs/parser (device 2112, inode 17042): 2 files, no impossibilities so far.
 
-# 54 files, no impossibilities in 12 directories.
+# 55 files, no impossibilities in 12 directories.
 
 # Implicit Rules
 
 objs/%.o: srcs/%.c
-#  recipe to execute (from 'Makefile', line 52):
+#  recipe to execute (from 'Makefile', line 53):
+ 
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
@@ -208,10 +209,10 @@ objs/%.o: srcs/%.c
 objs/astree/astree.o: srcs/astree/astree.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'astree/astree'
-#  Last modified 2022-06-15 18:43:11.154484256
+#  Last modified 2022-06-16 19:27:02.262414306
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 52):
+#  recipe to execute (from 'Makefile', line 53):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
@@ -225,10 +226,10 @@ srcs/builtin/echo.c:
 objs/utils/ft_strcmp.o: srcs/utils/ft_strcmp.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'utils/ft_strcmp'
-#  Last modified 2022-06-15 18:43:11.034484254
+#  Last modified 2022-06-16 19:27:02.122414304
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 52):
+#  recipe to execute (from 'Makefile', line 53):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
@@ -249,10 +250,10 @@ srcs/builtin/builtin_utils.c:
 objs/main.o: srcs/main.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'main'
-#  Last modified 2022-06-15 18:43:10.984484253
+#  Last modified 2022-06-16 19:27:02.052414302
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 52):
+#  recipe to execute (from 'Makefile', line 53):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
@@ -267,14 +268,13 @@ all: minishell
 # Not a target:
 srcs/lexer/lexer.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-14 22:53:12.166777341
+#  Last modified 2022-06-15 18:48:40.770226248
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 srcs/gnl/get_next_line.c:
 #  Implicit rule search has been done.
- 
 #  Last modified 2022-06-14 00:39:10.250933087
 #  File has been updated.
 #  Successfully updated.
@@ -287,20 +287,20 @@ srcs/gnl/get_next_line.c:
 objs/env/status.o: srcs/env/status.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'env/status'
-#  Last modified 2022-06-15 18:43:11.264484258
+#  Last modified 2022-06-16 19:27:02.402414309
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 52):
+#  recipe to execute (from 'Makefile', line 53):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
 objs/builtin/exit.o: srcs/builtin/exit.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'builtin/exit'
-#  Last modified 2022-06-15 18:43:11.074484254
+#  Last modified 2022-06-16 19:27:02.162414304
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 52):
+#  recipe to execute (from 'Makefile', line 53):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
@@ -314,24 +314,24 @@ srcs/builtin/builtin_core.c:
 # Not a target:
 srcs/execute/execute.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-15 18:42:49.213235414
+#  Last modified 2022-06-16 21:42:52.156569496
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 srcs/expand/expand.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-15 18:42:49.213235414
+#  Last modified 2022-06-16 21:43:59.118494044
 #  File has been updated.
 #  Successfully updated.
 
 objs/expand/expand_env_cmd.o: srcs/expand/expand_env_cmd.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'expand/expand_env_cmd'
-#  Last modified 2022-06-15 18:43:11.444484262
+#  Last modified 2022-06-16 19:27:02.612414313
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 52):
+#  recipe to execute (from 'Makefile', line 53):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
@@ -345,34 +345,34 @@ srcs/utils/ft_strcmp.c:
 objs/utils/x_func.o: srcs/utils/x_func.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'utils/x_func'
-#  Last modified 2022-06-15 18:43:11.174484256
+#  Last modified 2022-06-16 19:27:02.302414307
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 52):
+#  recipe to execute (from 'Makefile', line 53):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-14 00:39:10.250933087
+#  Last modified 2022-06-16 21:45:09.934624256
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 srcs/main.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-15 18:42:49.213235414
+#  Last modified 2022-06-15 18:57:32.442603084
 #  File has been updated.
 #  Successfully updated.
 
 objs/builtin/unset.o: srcs/builtin/unset.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'builtin/unset'
-#  Last modified 2022-06-15 18:43:11.114484255
+#  Last modified 2022-06-16 19:27:02.212414305
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 52):
+#  recipe to execute (from 'Makefile', line 53):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
@@ -413,19 +413,19 @@ srcs/expand/expand_env_cmd.c:
 objs/parser/parser.o: srcs/parser/parser.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'parser/parser'
-#  Last modified 2022-06-15 18:43:11.34448426
+#  Last modified 2022-06-16 19:27:02.472414311
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 52):
+#  recipe to execute (from 'Makefile', line 53):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
-minishell: objs/main.o objs/signal/signal.o objs/utils/ft_strcmp.o objs/builtin/cd.o objs/builtin/echo.o objs/builtin/exit.o objs/builtin/export.o objs/builtin/pwd.o objs/builtin/unset.o objs/lexer/lexer.o objs/astree/astree.o objs/utils/x_func.o objs/execute/execute.o objs/builtin/builtin_core.o objs/builtin/builtin_utils.o objs/env/status.o objs/env/env_list.o objs/parser/parse_utils.o objs/parser/parser.o objs/gnl/get_next_line.o objs/gnl/get_next_line_utils.o objs/expand/expand.o objs/expand/expand_env_cmd.o
+minishell: objs/main.o objs/signal/signal.o objs/utils/ft_strcmp.o objs/utils/free.o objs/builtin/cd.o objs/builtin/echo.o objs/builtin/exit.o objs/builtin/export.o objs/builtin/pwd.o objs/builtin/unset.o objs/lexer/lexer.o objs/astree/astree.o objs/utils/x_func.o objs/execute/execute.o objs/builtin/builtin_core.o objs/builtin/builtin_utils.o objs/env/status.o objs/env/env_list.o objs/parser/parse_utils.o objs/parser/parser.o objs/gnl/get_next_line.o objs/gnl/get_next_line_utils.o objs/expand/expand.o objs/expand/expand_env_cmd.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-06-15 18:43:12.224484277
+#  Last modified 2022-06-16 21:45:12.364624304
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 47):
+#  recipe to execute (from 'Makefile', line 48):
 	$(MAKE) -C $(LIBFT)
 	$(MAKE) -C $(LIBFT) bonus
 	$(CC) $(CFLAGS) -I $(INCLUDE) $(OBJS) $(LDFLAGS) $(LIBFT)/libft.a -o $@
@@ -442,7 +442,7 @@ fclean: clean
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 62):
+#  recipe to execute (from 'Makefile', line 63):
 	$(MAKE) fclean -C $(LIBFT)
 	$(RM) $(NAME)
 
@@ -456,10 +456,20 @@ srcs/builtin/unset.c:
 objs/gnl/get_next_line_utils.o: srcs/gnl/get_next_line_utils.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'gnl/get_next_line_utils'
-#  Last modified 2022-06-15 18:43:11.394484261
+#  Last modified 2022-06-16 19:27:02.552414312
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 52):
+#  recipe to execute (from 'Makefile', line 53):
+	mkdir -p $(OBJS_DIr)/$(*D)
+	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
+
+objs/utils/free.o: srcs/utils/free.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'utils/free'
+#  Last modified 2022-06-16 21:45:11.924624295
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 53):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
@@ -472,27 +482,28 @@ objs/gnl/get_next_line_utils.o: srcs/gnl/get_next_line_utils.c
 # Not a target:
 srcs/parser/parser.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-14 22:53:33.419277169
+ 
+#  Last modified 2022-06-15 18:48:40.770226248
 #  File has been updated.
 #  Successfully updated.
 
 objs/parser/parse_utils.o: srcs/parser/parse_utils.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'parser/parse_utils'
-#  Last modified 2022-06-15 18:43:11.314484259
+#  Last modified 2022-06-16 19:27:02.45241431
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 52):
+#  recipe to execute (from 'Makefile', line 53):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
 objs/env/env_list.o: srcs/env/env_list.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'env/env_list'
-#  Last modified 2022-06-15 18:43:11.294484259
+#  Last modified 2022-06-16 19:27:02.42241431
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 52):
+#  recipe to execute (from 'Makefile', line 53):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
@@ -501,27 +512,27 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 57):
+#  recipe to execute (from 'Makefile', line 58):
 	$(MAKE) clean -C $(LIBFT)
 	$(RM) -rf $(OBJS_DIr)
 
 objs/builtin/pwd.o: srcs/builtin/pwd.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'builtin/pwd'
-#  Last modified 2022-06-15 18:43:11.104484255
+#  Last modified 2022-06-16 19:27:02.202414305
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 52):
+#  recipe to execute (from 'Makefile', line 53):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
 objs/builtin/cd.o: srcs/builtin/cd.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'builtin/cd'
-#  Last modified 2022-06-15 18:43:11.054484254
+#  Last modified 2022-06-16 19:27:02.142414304
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 52):
+#  recipe to execute (from 'Makefile', line 53):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
@@ -539,34 +550,40 @@ srcs/gnl/get_next_line_utils.c:
 #  File has been updated.
 #  Successfully updated.
 
+# Not a target:
+srcs/utils/free.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-16 21:44:32.862205117
+#  File has been updated.
+#  Successfully updated.
+
 objs/signal/signal.o: srcs/signal/signal.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'signal/signal'
-#  Last modified 2022-06-15 18:43:11.004484253
+#  Last modified 2022-06-16 19:27:02.082414303
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 52):
+#  recipe to execute (from 'Makefile', line 53):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
 objs/builtin/echo.o: srcs/builtin/echo.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'builtin/echo'
-#  Last modified 2022-06-15 18:43:11.064484254
+#  Last modified 2022-06-16 19:27:02.152414304
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 52):
+#  recipe to execute (from 'Makefile', line 53):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
 objs/builtin/export.o: srcs/builtin/export.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'builtin/export'
- 
-#  Last modified 2022-06-15 18:43:11.084484255
+#  Last modified 2022-06-16 19:27:02.172414305
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 52):
+#  recipe to execute (from 'Makefile', line 53):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
@@ -587,10 +604,10 @@ srcs/env/env_list.c:
 objs/builtin/builtin_utils.o: srcs/builtin/builtin_utils.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'builtin/builtin_utils'
-#  Last modified 2022-06-15 18:43:11.244484258
+#  Last modified 2022-06-16 19:27:02.372414309
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 52):
+#  recipe to execute (from 'Makefile', line 53):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
@@ -604,50 +621,50 @@ srcs/builtin/pwd.c:
 objs/lexer/lexer.o: srcs/lexer/lexer.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'lexer/lexer'
-#  Last modified 2022-06-15 18:43:11.144484256
+#  Last modified 2022-06-16 19:27:02.242414306
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 52):
+#  recipe to execute (from 'Makefile', line 53):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
 objs/expand/expand.o: srcs/expand/expand.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'expand/expand'
-#  Last modified 2022-06-15 18:43:11.424484261
+#  Last modified 2022-06-16 21:45:12.094624298
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 52):
+#  recipe to execute (from 'Makefile', line 53):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
 objs/gnl/get_next_line.o: srcs/gnl/get_next_line.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'gnl/get_next_line'
-#  Last modified 2022-06-15 18:43:11.36448426
+#  Last modified 2022-06-16 19:27:02.512414311
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 52):
+#  recipe to execute (from 'Makefile', line 53):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
 objs/builtin/builtin_core.o: srcs/builtin/builtin_core.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'builtin/builtin_core'
-#  Last modified 2022-06-15 18:43:11.224484257
+#  Last modified 2022-06-16 19:27:02.352414308
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 52):
+#  recipe to execute (from 'Makefile', line 53):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
 objs/execute/execute.o: srcs/execute/execute.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'execute/execute'
-#  Last modified 2022-06-15 18:43:11.204484257
+#  Last modified 2022-06-16 21:45:12.014624297
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 52):
+#  recipe to execute (from 'Makefile', line 53):
 	mkdir -p $(OBJS_DIr)/$(*D)
 	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
 
@@ -659,19 +676,19 @@ srcs/signal/signal.c:
 #  Successfully updated.
 
 # files hash-table stats:
-# Load=55/1024=5%, Rehash=0, Collisions=14/173=8%
+# Load=57/1024=6%, Rehash=0, Collisions=14/179=8%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 137 / storage = 1972 B / avg = 14 B
-# current buf: size = 8162 B / used = 1972 B / count = 137 / avg = 14 B
+# strcache buffers: 1 (0) / strings = 141 / storage = 2026 B / avg = 14 B
+# current buf: size = 8162 B / used = 2026 B / count = 141 / avg = 14 B
 
-# strcache performance: lookups = 194 / hit rate = 29%
+# strcache performance: lookups = 199 / hit rate = 29%
 # hash-table stats:
-# Load=137/8192=2%, Rehash=0, Collisions=7/194=4%
-# Finished Make data base on Wed Jun 15 18:43:30 2022
+# Load=141/8192=2%, Rehash=0, Collisions=7/199=4%
+# Finished Make data base on Thu Jun 16 21:45:48 2022
 
  

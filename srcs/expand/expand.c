@@ -2,13 +2,6 @@
 #include "lexer.h"
 #include "utils.h"
 
-char	*for_free(char *res, char *free_str)
-{
-	free(free_str);
-	free_str = NULL;
-	return(res);
-}
-
 char	*get_env_cmd_general(char *cmd, t_envp **env_list)
 {
 	int		i;
@@ -16,7 +9,7 @@ char	*get_env_cmd_general(char *cmd, t_envp **env_list)
 	t_envp *tmp_list;
 
 	i = 1;
-	while (ft_isalpha(cmd[i]))
+	while (ft_isalpha(cmd[i]) || cmd[i] == '?')
 		i += 1;
 	tmp_list = *env_list;
 	tmp = ft_substr(cmd, 0, i);
@@ -26,8 +19,9 @@ char	*get_env_cmd_general(char *cmd, t_envp **env_list)
 			return (ft_substr(tmp_list->content, 0, ft_strlen(tmp_list->content)));
 		tmp_list = tmp_list->next;
 	}
-	free(tmp);
-	return (ft_substr(cmd, 0, ft_strlen(cmd)));
+//	free(tmp);
+//	return (ft_substr(cmd, 0, ft_strlen(cmd)));
+	return (tmp);
 }
 
 char	*expand_dquot(char *cmd, t_envp **envp_list)
@@ -45,7 +39,7 @@ char	*expand_dquot(char *cmd, t_envp **envp_list)
 			new_str = ft_substr(cmd, 0, i);							//<-  ここで＄前までをsubstr
 			expand_str = get_env_cmd_general(cmd + i, envp_list);
 			new_str = for_free(ft_strjoin(new_str, expand_str), new_str);
-			while (ft_isalpha(cmd[i + 1]))
+			while (ft_isalpha(cmd[i + 1]) || cmd[i] == '?')
 				i += 1;
 			start = i + 1;
 		}
@@ -70,7 +64,7 @@ char	*check_cmd(char *cmd, t_envp **envp_list)
 	}
 	else
 		new_str = ft_substr(cmd, 0, ft_strlen(cmd));
-//	printf("%s\n", new_str);
+	printf("%s\n", new_str);
 	return (new_str);
 }
 

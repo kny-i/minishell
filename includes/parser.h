@@ -17,7 +17,7 @@ typedef struct s_cmd
 	int		fd_out;
 //	t_cmd	*prev;
 	t_cmd	*next;
-}					t_cmd;
+}	t_cmd;
 
 t_cmd	*lex_pars(char *input);;
 void	cmd_add_back(t_cmd **lst, t_cmd *new);
