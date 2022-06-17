@@ -2,18 +2,18 @@
 #include <unistd.h>
 
 
-int cd_core(t_list *args)
+
+int cd_core(t_cmd *cmd, t_envp *env)
 {
-	/*if (args[1] == NULL)
+
+
+	char	**args = list_to_args(tmp_cmd);
+	char	**env_array = list_to_env(envp);
+	if (cmd->args == NULL)
 	{
-		return(0);
-		//return (cd_to_home(args));
+		cd_home(0, env);
 	}
-	if(chdir(args[1]) == -1)
-	{
-		perror(args[0]);
-		return (FAILURE);
-	}
-	return (SUCCESS);*/
+
+
 	return (0);
 }

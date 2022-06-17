@@ -11,4 +11,6 @@ typedef struct s_envp    t_envp;
 typedef struct s_lexer	t_lexer;
 void execute(t_cmd **cmd, t_envp *env);
 int count_cmd(t_cmd *cmd);
+char	**list_to_args(t_cmd *cmd);
+char **list_to_env(t_envp *envp);
 #endif
