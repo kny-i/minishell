@@ -9,6 +9,7 @@ void get_cmd_name(t_cmd *cmd_node, t_token **token)
 		exit(1);
 	}
 	(*token) = (*token)->next;
+
 }
 
 void get_cmd_args(t_cmd *cmd, t_token **token)
@@ -34,6 +35,41 @@ void set_cmd_info(t_cmd *list, t_token **token)
 	}
 }
 
+void set_input_info(char *input, t_cmd *cmd)
+{
+	char *file_name;
+
+	file_name = input;
+	cmd->input_file = file_name;
+}
+
+void set_output_info(char *output, t_cmd *cmd)
+{
+	char *file_name;
+
+	file_name = output;
+	cmd->output_file = file_name;
+}
+void set_io_info(t_cmd **cmd)
+{
+	t_cmd *tmp;
+
+	tmp = *cmd;
+	while (tmp != NULL)
+	{
+		while (tmp->args != NULL)
+		{
+			if (strcmp(tmp->args->content, "<") == 0)
+				set_input_info(tmp->args->next->content, tmp);
+			if (strcmp(tmp->args->content, ">") == 0)
+				set_output_info(tmp->args->next->content, tmp);
+			tmp->args = tmp->args->next;
+		}
+		tmp = tmp->next;
+	}
+
+}
+
 t_cmd *parse(t_lexer *lexerbuf)
 {
 	t_cmd *list;
@@ -51,6 +87,7 @@ t_cmd *parse(t_lexer *lexerbuf)
 		else
 			new_node = new_node->next;
 		set_cmd_info(new_node, &token);
+		set_io_info(&new_node);
 	}
 	return (list);
 }

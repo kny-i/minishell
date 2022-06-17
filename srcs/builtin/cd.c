@@ -15,4 +15,5 @@ int cd_core(t_list *args)
 		return (FAILURE);
 	}
 	return (SUCCESS);*/
+	return (0);
 }
