@@ -34,6 +34,16 @@ void set_cmd_info(t_cmd *list, t_token **token)
 		get_cmd_args(list, token);
 	}
 }
+
+void set_input_info(char *input, t_cmd *tmp)
+{
+	char *file_name;
+
+	file_name = input;
+	tmp->input_file = file_name;
+}
+
+
 void set_io_info(t_cmd *cmd)
 {
 	t_cmd *tmp;
@@ -41,7 +51,14 @@ void set_io_info(t_cmd *cmd)
 	tmp = cmd;
 	while (tmp != NULL)
 	{
-
+		while (tmp->args != NULL)
+		{
+			if (strcmp(tmp->args->content, "<") == 0)
+				set_input_info(tmp->args->next->content, tmp);
+			if (strcmp(tmp->args->content, ">") == 0)
+				set_input_info(tmp->args->next->content, tmp);
+			tmp->args = tmp->args->next;
+		}
 		tmp = tmp->next;
 	}
 
