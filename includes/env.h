@@ -13,4 +13,5 @@ typedef struct s_envp
 
 void set_status(char **envp, int status);
 t_envp *creat_tenv(void);
+char *get_env(char *name, t_envp *en_list);
 #endif
