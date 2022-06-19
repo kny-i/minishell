@@ -32,6 +32,10 @@ int cd_core(t_cmd *cmd, t_envp *env)
 	{
 		cd_home(env);
 	}
-
+	if (chdir(args[1]) == -1)
+	{
+		perror("chdir error");
+		exit(1);
+	}
 	return (0);
 }
