@@ -239,6 +239,8 @@ void execute(t_cmd **cmd_list, t_envp *envp)
 	i = 0;
 	j = 0;
 	cmd_cnt = count_cmd(*cmd_list);
+	if (is_only_builtin(*cmd_list))
+		execute_builtin(*cmd_list, envp);
 	int fd[2 * cmd_cnt];
 	tmp_cmd = *cmd_list;
 	while (i < cmd_cnt)
