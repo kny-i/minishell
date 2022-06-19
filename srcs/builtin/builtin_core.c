@@ -8,7 +8,7 @@ int	execute_builtin(t_cmd *cmd_list,t_envp *enpvp)
 
 	tmp = cmd_list->cmd;
 	if (ft_strcmp("cd", tmp) == 0)
-		return (cd_core(cmd_list->args));
+		return (cd_core(cmd_list, enpvp));
 	if (ft_strcmp("echo", tmp) == 0)
 	{
 		return (0);
