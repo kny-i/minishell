@@ -2,7 +2,11 @@
 #include <unistd.h>
 
 
+void cd_home(void)
+{
+	char *home_path;
 
+}
 int cd_core(t_cmd *cmd, t_envp *env)
 {/*
 	char	**args;
@@ -14,7 +18,7 @@ int cd_core(t_cmd *cmd, t_envp *env)
 	if (cmd->args == NULL)
 	{
 		cd_home(env);
-	}*/
-
+	}
+*/
 	return (0);
 }

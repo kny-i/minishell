@@ -12,5 +12,5 @@ typedef struct s_envp
 }				t_envp;
 
 void set_status(char **envp, int status);
-t_envp *creat_tenv(char **envp);
+t_envp *creat_tenv(void);
 #endif

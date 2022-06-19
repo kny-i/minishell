@@ -45,14 +45,14 @@ void	print_env(t_envp *env)
 	}
 }
 
-void	minishell(char *environ[])
+void	minishell(void)
 {
 	char	*line;
 	t_cmd *cmd_list;
 	t_envp *env_list;
 
 
-	env_list = creat_tenv(environ);
+	env_list = creat_tenv();
 	while (1)
 	{
 		sig_input();
@@ -90,9 +90,7 @@ void	minishell(char *environ[])
 
 int	main(int argc, char *argv[])
 {
-	extern char	**environ;
-
 	if (argc == 1)
-		minishell(environ);
+		minishell();
 	return (0);
 }
