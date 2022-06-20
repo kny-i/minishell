@@ -54,6 +54,6 @@ dkms.conf
 
 
 #add order
-.idea
-.vscode
-.DS_*
+*.idea
+*.vscode
+*.DS_Store
