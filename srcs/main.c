@@ -77,7 +77,6 @@ void	minishell(char *environ[])
 			cmd_list = cmd_list->next;
 			i++;
 		}*/
-//		execute(&cmd_list, env_list);
 		execute_test(&cmd_list, env_list);
 		//	printf("line is '%s'\n", line);
 		//	add_history(line);
