@@ -96,6 +96,7 @@ void	expand_env(t_cmd **cmd, t_envp **envp_list)
 
 }
 
+/*
 void expand_quot_cmd(t_cmd **cmd)
 {
 	t_cmd *cur_cmd;
@@ -204,6 +205,7 @@ void	print_env_01(t_envp **envp)
 	for (; tmp->next != NULL; tmp = tmp->next)
 		printf("%s\n", tmp->env_name);
 }
+*/
 
 void expand(t_cmd **cmd, t_envp **envp)
 {
