@@ -43,19 +43,6 @@ char **list_to_env(t_envp *envp)
     return (str);
 }
 
-void	print_env_array(char **ar)
-{
-	char	**tmp;
-
-	tmp = ar;
-	while (*tmp != NULL)
-	{
-		printf("%s", *tmp);
-		*tmp += 1;
-	}
-	putchar('\n');
-}
-
 int count_cmd(t_cmd *cmd)
 {
 	int cmd_cnt;
@@ -97,7 +84,6 @@ char	**list_to_args(t_cmd *cmd)
 		exit(1);
 	len = 0;
 	res[len] = ft_substr(cmd->cmd, 0, ft_strlen(cmd->cmd));
-//	printf("res = %s\n", res[len]);
 	len += 1;
 	while (tmp != NULL)
 	{
@@ -123,107 +109,75 @@ char	*get_path(t_envp *envp)
 
 void	execve_cmd(t_cmd *cmd_list, char **env_path_split)
 {
-	t_cmd	*tmp;
+	int		i;
 	char	**args;
 	char	**path_tmp;
 
-	tmp = cmd_list;
+	i = 0;
+	args = list_to_args(cmd_list);
 	path_tmp = env_path_split;
-	args = list_to_args(tmp);
-	tmp->cmd = for_free(ft_strjoin("/", tmp->cmd), tmp->cmd);
-	while (*path_tmp != NULL)
+	cmd_list->cmd = for_free(ft_strjoin("/", cmd_list->cmd), cmd_list->cmd);
+	while (path_tmp[i] != NULL)
 	{
-		*path_tmp = for_free(ft_strjoin(*path_tmp, tmp->cmd), *path_tmp);
-		execve(*path_tmp, args, environ);
-		*path_tmp++;
+		path_tmp[i] = for_free(ft_strjoin(path_tmp[i], cmd_list->cmd), path_tmp[i]);
+		execve(path_tmp[i], args, environ);
+		i += 1;
 	}
 	exit(1);
 }
 
-void	print_cmd_list(t_cmd **cmd_list)
+void	close_dup(int fd[], int std_fd, int std, bool flg)
 {
-	t_cmd	*tmp;
-
-	tmp = *cmd_list;
-	while (tmp != NULL)
-	{
-		printf("cmdline = %s ", tmp->cmd);
-		t_list	*tmp_list = tmp->args;
-		while (tmp_list != NULL)
-		{
-			printf("%s ", tmp_list->content);
-			tmp_list = tmp_list->next;
-		}
-		putchar('\n');
-		tmp = tmp->next;
-	}
-
+	if (flg)
+		x_dup2(std_fd, std);
+	x_close(fd[0]);
+	x_close(fd[1]);
 }
 
-void execute_test(t_cmd **cmd_list, t_envp *envp)
+void	execve_test(int i, int fd[][2], t_cmd *tmp_cmd, char **env_path_split)
 {
-	int i;
-	int j;
-	pid_t pid;
-	int cmd_cnt;
-	t_cmd *tmp_cmd;
+	if (tmp_cmd->next != NULL)
+		close_dup(fd[i], fd[i][1], 1, true);
+	if (i != 0)
+		close_dup(fd[i - 1], fd[i - 1][0], 0, true);
+	execve_cmd(tmp_cmd, env_path_split);
+}
 
-	char	*env_path = get_path(envp);
-	char	**env_path_split = ft_split(env_path, ':');
+void	execute_test_util(t_cmd **cmd_list, int num_cmd, char **env_path_split)
+{
+	t_cmd	*tmp_cmd;
+	int		i;
+	int		fd[num_cmd][2];
+	pid_t	pid;
 
 	i = 0;
-	j = 0;
-	cmd_cnt = count_cmd(*cmd_list);
-	int fd[cmd_cnt][2];
 	tmp_cmd = *cmd_list;
-
-	while (i < cmd_cnt)
-	{
-		x_pipe(fd[i]);
-		i++;
-	}
+	while (i < num_cmd)
+		x_pipe(fd[i++]);
 	i = 0;
-//	while (tmp_cmd != NULL)
-	while (i <  cmd_cnt)
+	while (i < num_cmd)
 	{
 		pid = x_fork();
 		if (pid == 0)
-		{
-			if (i != cmd_cnt - 1)
-			{
-				x_dup2(fd[i][1], 1);
-				x_close(fd[i][0]);
-				x_close(fd[i][1]);
-			}
-			if (i != 0)
-			{
-				x_dup2(fd[i - 1][0], 0);
-				x_close(fd[i - 1][0]);
-				x_close(fd[i - 1][1]);
-			}
-			char	**args = list_to_args(tmp_cmd);
-			tmp_cmd->cmd = for_free(ft_strjoin("/", tmp_cmd->cmd), tmp_cmd->cmd);
-			char	**path_tmp = env_path_split;
-			while (*path_tmp != NULL)
-			{
-				*path_tmp = for_free(ft_strjoin(*path_tmp, tmp_cmd->cmd), *path_tmp);
-				execve(*path_tmp, args, environ);
-				*path_tmp++;
-			}
-			exit(1);
-		}
+			execve_test(i, fd, tmp_cmd, env_path_split);
 		else if (i > 0)
-		{
-			x_close(fd[i - 1][1]);
-			x_close(fd[i - 1][0]);
-		}
+			close_dup(fd[i - 1], 0, 0, false);
 		i += 1;
 		tmp_cmd = tmp_cmd->next;
 	}
 	i = 0;
-	while (i < cmd_cnt)
-	{
+	while (i++ < num_cmd)
 		wait(NULL);
-		i++;
-	}
+}
+
+void execute_test(t_cmd **cmd_list, t_envp *envp)
+{
+	int		cmd_cnt;
+	char	*env_path;
+	char	**env_path_split;
+
+	cmd_cnt = count_cmd(*cmd_list);
+	env_path = get_path(envp);
+	env_path_split = ft_split(env_path, ':');
+	execute_test_util(cmd_list, cmd_cnt, env_path_split);
 }
