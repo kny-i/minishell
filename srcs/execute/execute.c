@@ -109,19 +109,6 @@ char	**list_to_args(t_cmd *cmd)
 	return (res);
 }
 
-void	print_args(char **args)
-{
-	char	**tmp = args;
-	int	i = 0;
-	printf("***********************\n");
-	while (tmp[i] != NULL)
-	{
-		printf("data = %s ", tmp[i]);
-		i += 1;
-	}
-	putchar('\n');
-}
-
 char	*get_path(t_envp *envp)
 {
 	t_envp	*tmp;
@@ -153,7 +140,7 @@ void execute(t_cmd **cmd_list, t_envp *envp)
 	tmp_cmd = *cmd_list;
 	while (i < cmd_cnt)
 	{    
-		x_pipe(fd[i]);                       // cmd1         cmd2         cmd3
+		x_pipe(fd[i]);
 		i++;
 	}
 	i = 0;
@@ -259,12 +246,9 @@ void execute_test(t_cmd **cmd_list, t_envp *envp)
 	int fd[cmd_cnt][2];
 	tmp_cmd = *cmd_list;
 
-//	print_cmd_list(cmd_list);
-
-
 	while (i < cmd_cnt)
-	{                           // cmd1         cmd2         cmd3
-		x_pipe(fd[i]); // fd[0] fd[1]. fd[2] fd[3], fd[4] fd[5]
+	{
+		x_pipe(fd[i]);
 		i++;
 	}
 	i = 0;
@@ -276,43 +260,22 @@ void execute_test(t_cmd **cmd_list, t_envp *envp)
 		{
 			if (i != cmd_cnt - 1)
 			{
-			//	x_close(fd[i][0]);
 				x_dup2(fd[i][1], 1);
 				x_close(fd[i][0]);
 				x_close(fd[i][1]);
 			}
 			if (i != 0)
 			{
-			//	x_close(fd[i][1]);
 				x_dup2(fd[i - 1][0], 0);
 				x_close(fd[i - 1][0]);
 				x_close(fd[i - 1][1]);
 			}
-
-	//		for (int l = 0; l < cmd_cnt; l++)
-	//		{
-	//			x_close(fd[l][0]);
-	//			x_close(fd[l][1]);
-	//		}
-
-
 			char	**args = list_to_args(tmp_cmd);
 			tmp_cmd->cmd = for_free(ft_strjoin("/", tmp_cmd->cmd), tmp_cmd->cmd);
-
-	//		printf("[%s]\n", tmp_cmd->args->content);
-
 			char	**path_tmp = env_path_split;
 			while (*path_tmp != NULL)
 			{
-				
 				*path_tmp = for_free(ft_strjoin(*path_tmp, tmp_cmd->cmd), *path_tmp);
-		//		printf("path_tmp = %s\n", *path_tmp);
-
-		//		char	**tmp_args = args;
-		//		for (; *tmp_args != NULL; *tmp_args++)
-		//			printf("%s ", *tmp_args);
-		//		putchar('\n');
-
 				execve(*path_tmp, args, environ);
 				*path_tmp++;
 			}
@@ -321,7 +284,6 @@ void execute_test(t_cmd **cmd_list, t_envp *envp)
 		else if (i > 0)
 		{
 			x_close(fd[i - 1][1]);
-	//		dup2(fd[i][0], 0);
 			x_close(fd[i - 1][0]);
 		}
 		i += 1;
