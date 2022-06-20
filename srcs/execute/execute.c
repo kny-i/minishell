@@ -292,3 +292,138 @@ void execute(t_cmd **cmd_list, t_envp *envp)
 		i++;
 	}
 }
+
+void	execve_cmd(t_cmd *cmd_list, char **env_path_split)
+{
+	t_cmd	*tmp;
+	char	**args;
+	char	**path_tmp;
+
+	tmp = cmd_list;
+	path_tmp = env_path_split;
+	args = list_to_args(tmp);
+	tmp->cmd = for_free(ft_strjoin("/", tmp->cmd), tmp->cmd);
+	while (*path_tmp != NULL)
+	{
+		*path_tmp = for_free(ft_strjoin(*path_tmp, tmp->cmd), *path_tmp);
+		execve(*path_tmp, args, environ);
+		*path_tmp++;
+	}
+	exit(1);
+}
+
+void	print_cmd_list(t_cmd **cmd_list)
+{
+	t_cmd	*tmp;
+
+	tmp = *cmd_list;
+	while (tmp != NULL)
+	{
+		printf("cmdline = %s ", tmp->cmd);
+		t_list	*tmp_list = tmp->args;
+		while (tmp_list != NULL)
+		{
+			printf("%s ", tmp_list->content);
+			tmp_list = tmp_list->next;
+		}
+		putchar('\n');
+		tmp = tmp->next;
+	}
+
+}
+
+void execute_test(t_cmd **cmd_list, t_envp *envp)
+{
+	int i;
+	int j;
+	pid_t pid;
+	int cmd_cnt;
+	t_cmd *tmp_cmd;
+
+	char	*env_path = get_path(envp);
+	char	**env_path_split = ft_split(env_path, ':');
+
+	i = 0;
+	j = 0;
+	cmd_cnt = count_cmd(*cmd_list);
+	int fd[cmd_cnt][2];
+	tmp_cmd = *cmd_list;
+
+//	print_cmd_list(cmd_list);
+
+
+	while (i < cmd_cnt)
+	{                           // cmd1         cmd2         cmd3
+		x_pipe(fd[i]); // fd[0] fd[1]. fd[2] fd[3], fd[4] fd[5]
+		i++;
+	}
+	i = 0;
+//	while (tmp_cmd != NULL)
+	while (i <  cmd_cnt)
+	{
+		pid = x_fork();
+		if (pid == 0)
+		{
+			if (tmp_cmd->next != NULL)
+			{
+			//	x_close(fd[i][0]);
+				x_dup2(fd[i][1], 1);
+				x_close(fd[i][0]);
+				x_close(fd[i][1]);
+			}
+			if (i != 0)
+			{
+			//	x_close(fd[i][1]);
+				x_dup2(fd[i][0], 0);
+				x_close(fd[i][0]);
+				x_close(fd[i][1]);
+			}
+			char	**args = list_to_args(tmp_cmd);
+			tmp_cmd->cmd = for_free(ft_strjoin("/", tmp_cmd->cmd), tmp_cmd->cmd);
+
+	printf("[%s]\n", tmp_cmd->args->content);
+
+			char	**path_tmp = env_path_split;
+			while (*path_tmp != NULL)
+			{
+				
+				*path_tmp = for_free(ft_strjoin(*path_tmp, tmp_cmd->cmd), *path_tmp);
+		//		printf("path_tmp = %s\n", *path_tmp);
+
+		//		char	**tmp_args = args;
+		//		for (; *tmp_args != NULL; *tmp_args++)
+		//			printf("%s ", *tmp_args);
+		//		putchar('\n');
+
+				execve(*path_tmp, args, environ);
+				*path_tmp++;
+			}
+			exit(1);
+
+
+/*			while (*env_path_split != NULL)
+			{
+				
+				*env_path_split = for_free(ft_strjoin(*env_path_split, tmp_cmd->cmd), *env_path_split);
+				execve(*env_path_split, args, environ);
+				*env_path_split++;
+			}
+			exit(1);*/
+	//		execve_cmd(tmp_cmd, env_path_split);
+		}
+		else
+		{
+			x_close(fd[i][1]);
+		//	dup2(fd[i][0], 0);
+			x_close(fd[i][0]);
+		}
+		i += 1;
+		tmp_cmd = tmp_cmd->next;
+	}
+	i = 0;
+	while (i < cmd_cnt)
+	{
+		wait(NULL);
+		i++;
+	}
+}
