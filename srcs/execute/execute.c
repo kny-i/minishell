@@ -318,19 +318,14 @@ void execute_test(t_cmd **cmd_list, t_envp *envp)
 			}
 			exit(1);
 		}
-	//	else
-	//	{
-	//		x_close(fd[i - 1][1]);
-		//	dup2(fd[i][0], 0);
-	//		x_close(fd[i - 1][0]);
-	//	}
+		else if (i > 0)
+		{
+			x_close(fd[i - 1][1]);
+	//		dup2(fd[i][0], 0);
+			x_close(fd[i - 1][0]);
+		}
 		i += 1;
 		tmp_cmd = tmp_cmd->next;
-	}
-	for (int l = 0; l < cmd_cnt; l++)
-	{
-		x_close(fd[l][0]);
-		x_close(fd[l][1]);
 	}
 	i = 0;
 	while (i < cmd_cnt)
