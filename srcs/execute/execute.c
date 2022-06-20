@@ -51,7 +51,7 @@ void	print_env_array(char **ar)
 	while (*tmp != NULL)
 	{
 		printf("%s", *tmp);
-		*tmp++;
+		*tmp += 1;
 	}
 	putchar('\n');
 }
@@ -75,8 +75,12 @@ int	get_list_size(t_list *args)
 	int		i;
 
 	i = 0;
+	tmp = args;
 	while (tmp != NULL)
+	{
+		tmp = tmp->next;
 		i += 1;
+	}
 	return (i);
 }
 
@@ -88,31 +92,32 @@ char	**list_to_args(t_cmd *cmd)
 
 	tmp = cmd->args;
 	len = get_list_size(cmd->args);
-	res = malloc(sizeof(char *) * len + 2);
+	res = (char **)malloc(sizeof(char *) * (len + 2));
 	if (res == NULL)
 		exit(1);
-	char	**res_1 = res;
-	*res = ft_substr(cmd->cmd, 0, ft_strlen(cmd->cmd));
-//	printf("res = %s\n", *res);
-	*res++;
+	len = 0;
+	res[len] = ft_substr(cmd->cmd, 0, ft_strlen(cmd->cmd));
+//	printf("res = %s\n", res[len]);
+	len += 1;
 	while (tmp != NULL)
 	{
-		*res = ft_substr(tmp->content, 0, ft_strlen(tmp->content));
+		res[len] = ft_substr(tmp->content, 0, ft_strlen(tmp->content));
 		tmp = tmp->next;
-		*res++;
+		len += 1;
 	}
-	*res = NULL;
-	return (res_1);
+	res[len] = NULL;
+	return (res);
 }
 
 void	print_args(char **args)
 {
 	char	**tmp = args;
+	int	i = 0;
 	printf("***********************\n");
-	while (*tmp != NULL)
+	while (tmp[i] != NULL)
 	{
-		printf("data = %s ", *tmp);
-		*tmp++;
+		printf("data = %s ", tmp[i]);
+		i += 1;
 	}
 	putchar('\n');
 }
@@ -222,6 +227,13 @@ void execute(t_cmd **cmd_list, t_envp *envp)
 
 	char	*env_path = get_path(envp);
 	char	**env_path_split = ft_split(env_path, ':');
+
+/*	for (char **tmp = env_path_split; *tmp != NULL; *tmp++)
+	{
+		printf("%s\n", *tmp);
+	}*/
+
+
 /*	while (*env_path_split != NULL)
 	{
 		printf("%s\n", *env_path_split);
@@ -231,43 +243,64 @@ void execute(t_cmd **cmd_list, t_envp *envp)
 	i = 0;
 	j = 0;
 	cmd_cnt = count_cmd(*cmd_list);
-	int fd[2 * cmd_cnt];
+	int	fd[cmd_cnt][2];
+//	int fd[2 * cmd_cnt];
 	tmp_cmd = *cmd_list;
 	while (i < cmd_cnt)
-	{                           // cmd1         cmd2         cmd3
-		x_pipe(fd + i * 2); // fd[0] fd[1]. fd[2] fd[3], fd[4] fd[5]
+	{    
+		x_pipe(fd[i]);                       // cmd1         cmd2         cmd3
+	//	x_pipe(fd + i * 2); // fd[0] fd[1]. fd[2] fd[3], fd[4] fd[5]
 		i++;
 	}
 	i = 0;
 	while (tmp_cmd != NULL)
 	{
+	//	printf("test\n");
 		pid = x_fork();
 		if (pid == 0)
 		{
-			if (tmp_cmd->next != NULL)
+	//		printf("test_01\n");
+//			if (tmp_cmd->next != NULL)
+			if (i != cmd_cnt - 1)
 			{
-				x_dup2(fd[j + 1], 1);
-				x_close(fd[j + 1]);
+			//	x_close(fd[i][0]);
+				x_dup2(fd[i][1], 1);
+				x_close(fd[i][1]);
 			}
-			if (j != 0)
+			if (i != 0)
 			{
-				x_dup2(fd[j - 2], 0);
-				x_close(fd[j - 2]);
+			//	x_close(fd[i][1]);
+				x_dup2(fd[i][0], 0);
+				x_close(fd[i][0]);
 			}
 		
 			char	**args = list_to_args(tmp_cmd);
+		//	printf("args[0] = %s\n", args[0]);
+		//	printf("args[1] = %s\n", args[1]);
 			char	**env_array = list_to_env(envp);
 		//	print_env_array(env_array);
-	//		print_args(args);
+		//	print_args(args);
 			tmp_cmd->cmd = for_free(ft_strjoin("/", tmp_cmd->cmd), tmp_cmd->cmd);
+	//		printf("tmp_cmd->cmd = %s\n", tmp_cmd->cmd);
 			while (*env_path_split != NULL)
 			{
 				*env_path_split = for_free(ft_strjoin(*env_path_split, tmp_cmd->cmd), *env_path_split);
-	//			printf("%s\n", *env_path_split);
+	//			printf("env_path_split = %s\n", *env_path_split);
+	//			for (char **tmp_arg = args; *tmp_arg != NULL; *tmp_arg++)
+	//			{
+	//				printf("args = %s ", *tmp_arg);
+	//			}
+	//			putchar('\n');
 				execve(*env_path_split, args, environ);
 				*env_path_split++;
 			}
 			exit(1);
+		}
+		else
+		{
+			x_close(fd[i][0]);
+			x_close(fd[i][1]);
+		}
 
 	/*		char *path = "/usr/bin/";
 			char *cmd;
@@ -281,11 +314,13 @@ void execute(t_cmd **cmd_list, t_envp *envp)
 			{
 				perror("exec error");
 				exit(1);
-			}*/
+			}
 		}
-		j += 2;
+		j += 2;*/
+		i += 1;
 		tmp_cmd = tmp_cmd->next;
 	}
+	i = 0;
 	while (i < cmd_cnt)
 	{
 		wait(NULL);
@@ -293,6 +328,12 @@ void execute(t_cmd **cmd_list, t_envp *envp)
 	}
 }
 
+void	execute_test_01(t_cmd **cmd_list, t_envp *envp)
+{
+	//再帰の実装をしたい
+	
+
+}
 void	execve_cmd(t_cmd *cmd_list, char **env_path_split)
 {
 	t_cmd	*tmp;
