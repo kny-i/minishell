@@ -3,35 +3,6 @@
 #include "parser.h"
 #include "env.h"
 #include "expand.h"
-/*
-void	launch(char *line,char *envp[], t_lexer *lexerbuf)
-{
-	char *args[] = {NULL, NULL};
-	int pid;
-	int status;
-	char *tmp;
-	char *path;
-
-
-	args[0] = line;
-
-	if (is_builtin(line) == 1)
-	{
-		execute(lexerbuf, envp);
-		return ;
-	}
-	pid = fork();
-	if (pid == 0)
-	{
-		path  = ft_strjoin("/bin/", line);
-		if (execve(path, args, envp) == -1)
-			exit(1);
-	}
-	if (waitpid(pid, NULL, 0) < 0)
-	{
-		ft_putstr_fd("\n", 2);
-	}
-}*/
 
 void	print_env(t_envp *env)
 {
