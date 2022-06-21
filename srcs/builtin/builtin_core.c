@@ -6,6 +6,7 @@ int	execute_builtin(t_cmd *cmd_list,t_envp *enpvp)
 	char *tmp;
 	int i;
 
+
 	tmp = cmd_list->cmd;
 	if (ft_strcmp("cd", tmp) == 0)
 		return (cd_core(cmd_list->args));

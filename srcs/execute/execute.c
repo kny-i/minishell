@@ -100,7 +100,7 @@ char	*get_path(t_envp *envp)
 	t_envp	*tmp;
 
 	tmp = envp;
-	while (strcmp(tmp->env_name, "PATH"))
+	while (ft_strcmp(tmp->env_name, "PATH"))
 	{
 		tmp = tmp->next;
 	}
@@ -177,6 +177,8 @@ void execute_test(t_cmd **cmd_list, t_envp *envp)
 	char	**env_path_split;
 
 	cmd_cnt = count_cmd(*cmd_list);
+	if (cmd_cnt == 1 && is_builtin(*cmd_list) == 1)
+		execute_builtin(*cmd_list, envp);
 	env_path = get_path(envp);
 	env_path_split = ft_split(env_path, ':');
 	execute_test_util(cmd_list, cmd_cnt, env_path_split);
