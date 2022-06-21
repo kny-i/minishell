@@ -18,8 +18,7 @@ int	execute_builtin(t_cmd *cmd_list,t_envp *enpvp)
 	}
 	if (ft_strcmp("env", tmp) == 0)
 	{
-		return (0);
-		//return (env_core(argv));
+		return (env_core(enpvp));
 	}
 	if (ft_strcmp("exit", tmp) == 0)
 	{

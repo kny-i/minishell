@@ -12,4 +12,5 @@ int		execute_builtin(t_cmd *cmd_list,t_envp *envp);
 int 	cd_core(char **args);
 int echo_core(char **str);
 int pwd_core(void);
+int env_core(t_envp *env);
 #endif
