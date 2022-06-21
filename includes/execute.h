@@ -10,7 +10,7 @@ typedef struct s_envp    t_envp;
 
 typedef struct s_lexer	t_lexer;
 int count_cmd(t_cmd *cmd);
-
+char	**list_to_args(t_cmd *cmd);
 void execute_test(t_cmd **cmd_list, t_envp *envp);
 
 #endif

@@ -2,7 +2,7 @@
 #include <unistd.h>
 
 
-int cd_core(t_list *args)
+int cd_core(char **args)
 {
 	/*if (args[1] == NULL)
 	{
