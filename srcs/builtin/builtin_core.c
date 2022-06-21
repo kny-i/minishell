@@ -12,7 +12,7 @@ int	execute_builtin(t_cmd *cmd_list,t_envp *enpvp)
 	args = list_to_args(cmd_list);
 	tmp = cmd_list->cmd;
 	if (ft_strcmp("cd", tmp) == 0)
-		return (cd_core(args));
+		return (cd_core(args, enpvp));
 	if (ft_strcmp("echo", tmp) == 0)
 	{
 		return (echo_core(args));

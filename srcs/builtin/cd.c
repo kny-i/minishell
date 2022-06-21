@@ -1,19 +1,36 @@
 #include "minishell.h"
 #include <unistd.h>
+#include "env.h"
 
-
-int cd_core(char **args)
+int cd_to_home(char **args, t_envp *env)
 {
-	/*if (args[1] == NULL)
+	char *home_path;
+
+	home_path = get_env_content(env, "HOME");
+	if (home_path == NULL)
 	{
-		return(0);
-		//return (cd_to_home(args));
+		perror("HOME not found");
+		exit(1);
+	}
+	if (chdir(home_path) == -1)
+	{
+		free(home_path);
+		perror("chdir error");
+		exit(1);
+	}
+	return (0);
+}
+
+int cd_core(char **args, t_envp *env)
+{
+	if (args[1] == NULL)
+	{
+		return (cd_to_home(args, env));
 	}
 	if(chdir(args[1]) == -1)
 	{
 		perror(args[0]);
-		return (FAILURE);
+		return (1);
 	}
-	return (SUCCESS);*/
-	return (1);
+	return (0);
 }

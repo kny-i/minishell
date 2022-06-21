@@ -1,4 +1,5 @@
 #include "env.h"
+#include "utils.h"
 
 
 t_envp *ft_envnew(char *data)
@@ -44,4 +45,15 @@ t_envp *creat_tenv(char **envp)
 		i++;
 	}
 	return (env_list);
+}
+
+char *get_env_content(t_envp *env, char *name)
+{
+	while (env != NULL)
+	{
+		if (ft_strcmp(name, env->env_name) == 0)
+			return (ft_strdup(env->content));
+		env = env->next;
+	}
+	return (NULL);
 }
