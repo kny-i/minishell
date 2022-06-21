@@ -10,7 +10,7 @@ int echo_core(char **str)
 
 	i = 1;// skip the first str which is "echo"
 	is_noption = false;
-	if (ft_strcmp("-n", str[1]) == 0)
+	if (str[1] != NULL && ft_strcmp("-n", str[1]) == 0)
 	{
 		is_noption = true;
 		i++;

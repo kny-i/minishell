@@ -8,6 +8,7 @@ int	execute_builtin(t_cmd *cmd_list,t_envp *enpvp)
 	int i;
 	char **args;
 
+	printf("[%s]\n", "original builtins");
 	args = list_to_args(cmd_list);
 	tmp = cmd_list->cmd;
 	if (ft_strcmp("cd", tmp) == 0)
