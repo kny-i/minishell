@@ -53,7 +53,6 @@ void	minishell(char *environ[])
 		//	add_history(line);
 		//	launch(line, environ, lexerbuf);
 		//	free(line);
-
 	}
 	printf("exit minishell\n");
 	exit(0);
