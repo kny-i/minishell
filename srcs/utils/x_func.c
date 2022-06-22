@@ -75,7 +75,6 @@ void 	x_close(int fildes)
 		perror("close error");
 		exit(1);
 	}
-	return ;
 }
 
 void 	x_dup2(int fd1, int fd2)
@@ -88,4 +87,17 @@ void 	x_dup2(int fd1, int fd2)
 		perror("dup2 error");
 		exit(1);
 	}
+}
+
+char 	*x_strdpu(char *str)
+{
+	char *line;
+
+	line = ft_strdup(str);
+	if (line == NULL)
+	{
+		perror("malloc error");
+		exit(1);
+	}
+	return (line);
 }
