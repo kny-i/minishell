@@ -12,8 +12,6 @@ bool	is_exit_status(char *num)
 		i++;
 	}
 	return (true);
-
-
 }
 int exit_core(char **args)
 {
