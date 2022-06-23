@@ -2,7 +2,7 @@
 #include "utils.h"
 
 
-t_envp *ft_envnew(char *data)
+t_envp *ft_envnew(char *env_name, char *content)
 {
 	t_envp *envp_list;
 
@@ -12,9 +12,9 @@ t_envp *ft_envnew(char *data)
 		perror("calloc error");
 		exit(1);
 	}
-	envp_list->content = NULL;
+	envp_list->content = content;
 	envp_list->next = NULL;
-	envp_list->env_name = data;
+	envp_list->env_name = env_name;
 	return (envp_list);
 
 }
@@ -28,7 +28,7 @@ t_envp *creat_tenv(char **envp)
 	int j;
 
 	i = 0;
-	env_tmp = ft_envnew(0);
+	env_tmp = ft_envnew(NULL, NULL);
 	env_list = env_tmp;
 	while(envp[i] != NULL)
 	{
@@ -40,7 +40,7 @@ t_envp *creat_tenv(char **envp)
 		while (envp[i][j] != '\0')
 			j++;
 		env_tmp->content = ft_substr(envp[i], k + 1, j);
-		env_tmp->next = ft_envnew(0);
+		env_tmp->next = ft_envnew(NULL, NULL);
 		env_tmp = env_tmp->next;
 		i++;
 	}

@@ -2,17 +2,6 @@
 #include "env.h"
 #include "utils.h"
 
-t_envp *env_new(char *env_name, char *content)
-{
-	t_envp *new;
-
-	new = x_calloc(sizeof (t_envp), 1);
-	new->next = NULL;
-	new->content = content;
-	new->env_name = env_name;
-	return (new);
-}
-
 void 	env_add_back(t_envp **envp, t_envp *new)
 {
 	t_envp *tmp;
@@ -20,6 +9,7 @@ void 	env_add_back(t_envp **envp, t_envp *new)
 	tmp = *envp;
 	while (tmp != NULL)
 		tmp = tmp->next;
+
 }
 
 int	export_core(char **args, t_envp **env)
