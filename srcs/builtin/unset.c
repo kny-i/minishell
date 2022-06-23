@@ -1,6 +1,15 @@
 #include "builtin.h"
 #include "utils.h"
 
+void	ft_envlst_delone(t_envp *envp, void (*del)(void *))
+{
+	if (envp != NULL || del != NULL)
+	{
+		del(envp->content);
+		del(envp->env_name);
+		free(envp);
+	}
+}
 
 int	unset_core(char **args, t_envp **envp)
 {
