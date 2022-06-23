@@ -35,7 +35,7 @@ SRCS := $(SRCS_DIR)/main.c \
 		$(SRCS_DIR)/gnl/get_next_line_utils.c \
 		$(SRCS_DIR)/expand/expand.c \
 		$(SRCS_DIR)/expand/expand_env_cmd.c \
-		$(SRCS_DIR)/builtin/env.c \
+		$(SRCS_DIR)/builtin/env.c
 
 
 

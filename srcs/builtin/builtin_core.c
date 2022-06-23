@@ -36,8 +36,7 @@ int	execute_builtin(t_cmd *cmd_list,t_envp **enpvp)
 	}
 	if (ft_strcmp("unset", tmp) == 0)
 	{
-		return (0);
-		//return (unset_core(argv));
+		return (unset_core(args, enpvp));
 	}
 	return (1);
 }
