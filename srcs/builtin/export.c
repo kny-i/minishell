@@ -88,7 +88,6 @@ int	export_core(char **args, t_envp **env)
 			//free(line);
 			continue;
 		}
-
 		free(line);
 		i++;
 	}
