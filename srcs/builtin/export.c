@@ -24,6 +24,7 @@ bool has_char(const char *str, char c)
 	}
 	return (false);
 }
+
 char *strcpy_untill_c(char *dst,const char *src, char c)
 {
 	int i;
