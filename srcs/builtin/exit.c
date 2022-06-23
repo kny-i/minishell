@@ -13,6 +13,7 @@ bool	is_exit_status(char *num)
 	}
 	return (true);
 }
+
 int exit_core(char **args)
 {
 	if(args[1] == NULL)
