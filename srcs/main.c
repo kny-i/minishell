@@ -22,7 +22,6 @@ void	minishell(char *environ[])
 	t_cmd *cmd_list;
 	t_envp *env_list;
 
-
 	env_list = creat_tenv(environ);
 	while (1)
 	{
