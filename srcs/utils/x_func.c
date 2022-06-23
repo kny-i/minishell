@@ -89,7 +89,7 @@ void 	x_dup2(int fd1, int fd2)
 	}
 }
 
-char 	*x_strdpu(char *str)
+char 	*x_strdup(char *str)
 {
 	char *line;
 
