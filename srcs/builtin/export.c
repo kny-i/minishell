@@ -57,6 +57,17 @@ void print_env_expo(t_envp *envp)
 	}
 }
 
+bool is_env(char *env_name, t_envp *envp)
+{
+	while(envp != NULL)
+	{
+		if (strcmp(env_name, envp->env_name) == 0)
+			return (true);
+		envp = envp->next;
+	}
+	return (false);
+}
+
 int	export_core(char **args, t_envp **env)
 {
 	char **tmp;
@@ -85,7 +96,10 @@ int	export_core(char **args, t_envp **env)
 		content = line;
 		if (env_name != NULL)
 		{
-			env_add_back(env, ft_envnew(env_name,content));
+			if (is_env(env_name, env) == 1)
+
+			else
+				env_add_back(env, ft_envnew(env_name,content));
 			i++;
 			//free(line);
 			continue;
