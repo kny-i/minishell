@@ -15,4 +15,6 @@ int echo_core(char **str);
 int pwd_core(void);
 int env_core(t_envp *env);
 int	unset_core(char **args, t_envp **envp);
+int exit_core(char **args);
+
 #endif

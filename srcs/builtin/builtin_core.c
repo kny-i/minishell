@@ -23,8 +23,7 @@ int	execute_builtin(t_cmd *cmd_list,t_envp **enpvp)
 	}
 	if (ft_strcmp("exit", tmp) == 0)
 	{
-		return (0);
-		//return (exit_core(argv));
+		return (exit_core(args));
 	}
 	if (ft_strcmp("export", tmp) == 0)
 	{
