@@ -49,7 +49,9 @@ void print_env_expo(t_envp *envp)
 		ft_putstr_fd("export ", 1);
 		ft_putstr_fd(envp->env_name, 1);
 		ft_putchar_fd('=', 1);
+		ft_putchar_fd('"', 1);
 		ft_putstr_fd(envp->content, 1);
+		ft_putchar_fd('"', 1);
 		ft_putchar_fd('\n', 1);
 		envp= envp->next;
 	}
