@@ -101,3 +101,16 @@ char 	*x_strdpu(char *str)
 	}
 	return (line);
 }
+
+char **x_split(char *str, char c)
+{
+	char **ret;
+
+	ret = ft_split(str, c);
+	if (ret == NULL)
+	{
+		perror("malloc error");
+		exit(1);
+	}
+	return (ret);
+}
