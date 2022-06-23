@@ -11,6 +11,7 @@ void 	env_add_back(t_envp **envp, t_envp *new)
 		tmp = tmp->next;
 	tmp->next = new;
 }
+
 bool has_char(const char *str, char c)
 {
 	int i;
