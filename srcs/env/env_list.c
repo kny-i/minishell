@@ -40,6 +40,8 @@ t_envp *creat_tenv(char **envp)
 		while (envp[i][j] != '\0')
 			j++;
 		env_tmp->content = ft_substr(envp[i], k + 1, j);
+		if (envp[i + 1] == NULL)
+			break;
 		env_tmp->next = ft_envnew(NULL, NULL);
 		env_tmp = env_tmp->next;
 		i++;

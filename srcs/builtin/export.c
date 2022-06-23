@@ -42,6 +42,19 @@ char *strcpy_untill_c(char *dst,const char *src, char c)
 	return (dst);
 }
 
+void print_env_expo(t_envp *envp)
+{
+	while (envp!= NULL)
+	{
+		ft_putstr_fd("export ", 1);
+		ft_putstr_fd(envp->env_name, 1);
+		ft_putchar_fd('=', 1);
+		ft_putstr_fd(envp->content, 1);
+		ft_putchar_fd('\n', 1);
+		envp= envp->next;
+	}
+}
+
 int	export_core(char **args, t_envp **env)
 {
 	char **tmp;
@@ -53,7 +66,7 @@ int	export_core(char **args, t_envp **env)
 	tmp = args;
 	i = 1; //skip the first str which is expor
 	if (tmp[i] == NULL)
-		env_core(*env);
+		print_env_expo(*env);
 	while (tmp[i] != NULL)
 	{
 		line = x_strdup(tmp[i]);
