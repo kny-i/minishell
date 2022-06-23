@@ -2,7 +2,7 @@
 #include "execute.h"
 #include "utils.h"
 
-int	execute_builtin(t_cmd *cmd_list,t_envp *enpvp)
+int	execute_builtin(t_cmd *cmd_list,t_envp **enpvp)
 {
 	char *tmp;
 	int i;
@@ -12,14 +12,14 @@ int	execute_builtin(t_cmd *cmd_list,t_envp *enpvp)
 	args = list_to_args(cmd_list);
 	tmp = cmd_list->cmd;
 	if (ft_strcmp("cd", tmp) == 0)
-		return (cd_core(args, enpvp));
+		return (cd_core(args, *enpvp));
 	if (ft_strcmp("echo", tmp) == 0)
 	{
 		return (echo_core(args));
 	}
 	if (ft_strcmp("env", tmp) == 0)
 	{
-		return (env_core(enpvp));
+		return (env_core(*enpvp));
 	}
 	if (ft_strcmp("exit", tmp) == 0)
 	{
@@ -28,8 +28,7 @@ int	execute_builtin(t_cmd *cmd_list,t_envp *enpvp)
 	}
 	if (ft_strcmp("export", tmp) == 0)
 	{
-		return (0);
-		//return (export_core(argv));
+		return (export_core(args, enpvp));
 	}
 	if (ft_strcmp("pwd", tmp) == 0)
 	{

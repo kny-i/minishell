@@ -11,7 +11,8 @@ int x_open(char *file);
 void 	*x_calloc(size_t count, size_t size);
 void 	x_close(int fildes);
 void 	x_dup2(int fd1, int fd2);
-
+char	*x_strdup(char *str);
+char **x_split(char *str, char c);
 char	*for_free(char *res, char *free_str);
 
 #endif
