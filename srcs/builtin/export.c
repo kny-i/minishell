@@ -61,11 +61,24 @@ bool is_env(char *env_name, t_envp *envp)
 {
 	while(envp != NULL)
 	{
-		if (strcmp(env_name, envp->env_name) == 0)
+		if (ft_strcmp(env_name, envp->env_name) == 0)
 			return (true);
 		envp = envp->next;
 	}
 	return (false);
+}
+
+void env_content_change(char *env_name, char *content, t_envp **envp)
+{
+	t_envp *tmp;
+
+	tmp = *envp;
+	while (tmp != NULL)
+	{
+		if (ft_strcmp(env_name, tmp->env_name) == 0)
+			tmp->content = content;
+		tmp = tmp->next;
+	}
 }
 
 int	export_core(char **args, t_envp **env)
@@ -96,8 +109,8 @@ int	export_core(char **args, t_envp **env)
 		content = line;
 		if (env_name != NULL)
 		{
-			if (is_env(env_name, env) == 1)
-
+			if (is_env(env_name, *env) == 1)
+				env_content_change(env_name, content, env);
 			else
 				env_add_back(env, ft_envnew(env_name,content));
 			i++;
