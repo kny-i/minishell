@@ -68,11 +68,39 @@ char	*check_cmd(char *cmd, t_envp **envp_list)
 	return (new_str);
 }
 
-void	check_args(t_list *args, t_envp **envp_list)
+void	check_redirect(t_cmd *cmd_list)
 {
 	t_list	*tmp;
 
-	tmp = args;
+	tmp = cmd_list->args;
+	while (tmp != NULL)
+	{
+		if (*tmp->content == '>')
+		{
+			if (*tmp->next->content == '>')
+			{
+				tmp = tmp->next;
+				cmd_list->fd_out = open(tmp->next->content, O_WRONLY | O_APPEND, S_IWUSR | S_IRUSR);
+			//	open_append(cmd_list, tmp->next->content);
+				return ;
+			}
+			cmd_list->fd_out = open(tmp->next->content, O_WRONLY | O_CREAT, S_IWUSR | S_IRUSR);
+			printf("cmd_list->fd_out = %d\n", cmd_list->fd_out);
+		//	open_create(cmd_list, tmp->next->content);
+			return ;
+		}
+		tmp = tmp->next;
+	}
+	cmd_list->fd_out = 1;
+	return ;
+}
+
+void	check_args(t_cmd *cmd_list, t_envp **envp_list)
+{
+	t_list	*tmp;
+
+	check_redirect(cmd_list);
+	tmp = cmd_list->args;
 	while (tmp != NULL)
 	{
 		if (*tmp->content != '\0')
@@ -90,7 +118,7 @@ void	expand_env(t_cmd **cmd, t_envp **envp_list)
 	{
 		if (*cur_cmd->cmd != '\0')
 			cur_cmd->cmd = for_free(check_cmd(cur_cmd->cmd, envp_list), cur_cmd->cmd);
-		check_args(cur_cmd->args, envp_list);
+		check_args(cur_cmd, envp_list);
 		cur_cmd = cur_cmd->next;
 	}
 
