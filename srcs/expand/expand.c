@@ -92,7 +92,6 @@ void	check_redirect(t_cmd *cmd_list)
 		tmp = tmp->next;
 	}
 	cmd_list->fd_out = 1;
-	return ;
 }
 
 void	check_args(t_cmd *cmd_list, t_envp **envp_list)
