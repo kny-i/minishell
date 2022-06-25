@@ -5,7 +5,6 @@
 int	execute_builtin(t_cmd *cmd_list,t_envp **enpvp)
 {
 	char *tmp;
-	int i;
 	char **args;
 
 	printf("[%s]\n", "original builtins");
