@@ -14,7 +14,8 @@ int	execute_builtin(t_cmd *cmd_list,t_envp **enpvp)
 		return (cd_core(args, *enpvp));
 	if (ft_strcmp("echo", tmp) == 0)
 	{
-		return (echo_core(args));
+		return (echo_core_test(cmd_list));
+//		return (echo_core(args));
 	}
 	if (ft_strcmp("env", tmp) == 0)
 	{
