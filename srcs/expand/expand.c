@@ -84,7 +84,7 @@ void	check_redirect(t_cmd *cmd_list)
 			//	open_append(cmd_list, tmp->next->content);
 				return ;
 			}
-			cmd_list->fd_out = open(tmp->next->content, O_WRONLY | O_CREAT, S_IWUSR | S_IRUSR);
+			cmd_list->fd_out = open(tmp->next->content, O_WRONLY | O_CREAT | O_TRUNC, S_IWUSR | S_IRUSR);
 			printf("cmd_list->fd_out = %d\n", cmd_list->fd_out);
 		//	open_create(cmd_list, tmp->next->content);
 			return ;

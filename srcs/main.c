@@ -47,6 +47,7 @@ void	minishell(char *environ[])
 			i++;
 		}*/
 		execute_test(&cmd_list, &env_list);
+	//	execute(&cmd_list, environ);
 		//	printf("line is '%s'\n", line);
 		//	add_history(line);
 		//	launch(line, environ, lexerbuf);
