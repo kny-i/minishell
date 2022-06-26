@@ -148,15 +148,9 @@ void	execve_test(int i, int fd[][2], t_cmd *tmp_cmd, char **env_path_split, int 
 		close_dup(fd[i][0], fd[i][1], 1, true);
 	}
 	if (i != 0)
-<<<<<<< HEAD
-//		close_dup(fd[i][1], fd[i][0], 0, true);
-		close_dup(fd[i - 1][1], fd[i - 1][0], 0, true);
-	execve_cmd(tmp_cmd, env_path_split);
-=======
 		close_dup(fd[i][1], fd[i][0], 0, true);
 //		close_dup(fd[i - 1][1], fd[i - 1][0], 0, true);
 	execve_cmd(tmp_cmd, env_path_split, envp);
->>>>>>> 1f686deb7e2937d5823c6a9f41a1ca4e0267982d
 }
 
 void	execute_test_util(t_cmd **cmd_list, int num_cmd, char **env_path_split, t_envp **envp)
@@ -178,7 +172,6 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, char **env_path_split, t_e
 	{
 		pid = x_fork();
 		if (pid == 0)
-<<<<<<< HEAD
 		{
 				if (tmp_cmd->fd_out != 1)
 				{
@@ -200,7 +193,7 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, char **env_path_split, t_e
 				x_close(fd[i - 1][0]);
 				x_close(fd[i - 1][1]);
 			}
-			execve_cmd(tmp_cmd, env_path_split);
+			execve_cmd(tmp_cmd, env_path_split, envp);
 		}
 //			execve_test(i, fd, tmp_cmd, env_path_split, num_cmd);
 		else //if (i > 0)
@@ -214,11 +207,6 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, char **env_path_split, t_e
 			}
 		}
 //			close_dup(fd[i][1], fd[i][0], 0, false);
-=======
-			execve_test(i, fd, tmp_cmd, env_path_split, num_cmd, envp);
-		else if (i > 0)
-			close_dup(fd[i][1], fd[i][0], 0, false);
->>>>>>> 1f686deb7e2937d5823c6a9f41a1ca4e0267982d
 //			close_dup(fd[i - 1][1], fd[i - 1][0], 0, false);
 		i += 1;
 		tmp_cmd = tmp_cmd->next;
