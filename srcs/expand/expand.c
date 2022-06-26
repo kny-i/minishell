@@ -94,6 +94,8 @@ void	check_redirect(t_cmd *cmd_list)
 	cmd_list->fd_out = 1;
 }
 
+
+
 void	check_args(t_cmd *cmd_list, t_envp **envp_list)
 {
 	t_list	*tmp;
