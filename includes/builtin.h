@@ -13,6 +13,7 @@ int cd_core(char **args, t_envp *env);
 int	export_core(char **args, t_envp **env);
 int echo_core(char **str);
 int pwd_core(void);
+//int env_core(t_cmd *cmd, t_envp *env)
 int env_core(t_envp *env);
 int	unset_core(char **args, t_envp **envp);
 int exit_core(char **args);

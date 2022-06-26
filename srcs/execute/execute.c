@@ -119,7 +119,7 @@ void	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
 	if (is_builtin(cmd_list) == 1)
 	{
 		execute_builtin(cmd_list, envp);
-		return ;
+		exit(0);
 	}
 	args = list_to_args(cmd_list);
 	path_tmp = env_path_split;
@@ -225,8 +225,8 @@ int execute_test(t_cmd **cmd_list, t_envp **envp)
 	char	**env_path_split;
 
 	cmd_cnt = count_cmd(*cmd_list);
-	if (cmd_cnt == 1 && is_builtin(*cmd_list) == 1)
-		return (execute_builtin(*cmd_list, envp));
+	/*if (cmd_cnt == 1 && is_builtin(*cmd_list) == 1)
+		return (execute_builtin(*cmd_list, envp));*/
 	env_path = get_path(*envp);
 	env_path_split = ft_split(env_path, ':');
 	execute_test_util(cmd_list, cmd_cnt, env_path_split, envp);
