@@ -1,6 +1,8 @@
 #include "execute.h"
 #include "utils.h"
 
+
+
 extern char	**environ;
 
 int cnt_env(t_envp *envp)
