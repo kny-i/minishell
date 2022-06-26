@@ -107,13 +107,18 @@ char	*get_path(t_envp *envp)
 	return (tmp->content);
 }
 
-void	execve_cmd(t_cmd *cmd_list, char **env_path_split)
+void	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
 {
 	int		i;
 	char	**args;
 	char	**path_tmp;
 
 	i = 0;
+	if (is_builtin(cmd_list) == 1)
+	{
+		execute_builtin(cmd_list, envp);
+		return ;
+	}
 	args = list_to_args(cmd_list);
 	path_tmp = env_path_split;
 	cmd_list->cmd = for_free(ft_strjoin("/", cmd_list->cmd), cmd_list->cmd);
@@ -134,7 +139,7 @@ void	close_dup(int fd, int oldfd, int newfd, bool flg)
 	x_close(oldfd);
 }
 
-void	execve_test(int i, int fd[][2], t_cmd *tmp_cmd, char **env_path_split, int num_cmd)
+void	execve_test(int i, int fd[][2], t_cmd *tmp_cmd, char **env_path_split, int num_cmd, t_envp **envp)
 {
 	if (i != num_cmd)
 	{
@@ -143,12 +148,18 @@ void	execve_test(int i, int fd[][2], t_cmd *tmp_cmd, char **env_path_split, int 
 		close_dup(fd[i][0], fd[i][1], 1, true);
 	}
 	if (i != 0)
+<<<<<<< HEAD
 //		close_dup(fd[i][1], fd[i][0], 0, true);
 		close_dup(fd[i - 1][1], fd[i - 1][0], 0, true);
 	execve_cmd(tmp_cmd, env_path_split);
+=======
+		close_dup(fd[i][1], fd[i][0], 0, true);
+//		close_dup(fd[i - 1][1], fd[i - 1][0], 0, true);
+	execve_cmd(tmp_cmd, env_path_split, envp);
+>>>>>>> 1f686deb7e2937d5823c6a9f41a1ca4e0267982d
 }
 
-void	execute_test_util(t_cmd **cmd_list, int num_cmd, char **env_path_split)
+void	execute_test_util(t_cmd **cmd_list, int num_cmd, char **env_path_split, t_envp **envp)
 {
 	t_cmd	*tmp_cmd;
 	int		i;
@@ -167,6 +178,7 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, char **env_path_split)
 	{
 		pid = x_fork();
 		if (pid == 0)
+<<<<<<< HEAD
 		{
 				if (tmp_cmd->fd_out != 1)
 				{
@@ -202,6 +214,11 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, char **env_path_split)
 			}
 		}
 //			close_dup(fd[i][1], fd[i][0], 0, false);
+=======
+			execve_test(i, fd, tmp_cmd, env_path_split, num_cmd, envp);
+		else if (i > 0)
+			close_dup(fd[i][1], fd[i][0], 0, false);
+>>>>>>> 1f686deb7e2937d5823c6a9f41a1ca4e0267982d
 //			close_dup(fd[i - 1][1], fd[i - 1][0], 0, false);
 		i += 1;
 		tmp_cmd = tmp_cmd->next;
@@ -222,6 +239,8 @@ int execute_test(t_cmd **cmd_list, t_envp **envp)
 		return (execute_builtin(*cmd_list, envp));
 	env_path = get_path(*envp);
 	env_path_split = ft_split(env_path, ':');
-	execute_test_util(cmd_list, cmd_cnt, env_path_split);
+	execute_test_util(cmd_list, cmd_cnt, env_path_split, envp);
 	return (0);
 }
+
+
