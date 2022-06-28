@@ -118,6 +118,7 @@ void	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
 	i = 0;
 	if (is_builtin(cmd_list) == 1)
 	{
+		//環境変数の更新ができない
 		execute_builtin(cmd_list, envp);
 		exit(0);
 	}
@@ -175,13 +176,13 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, char **env_path_split, t_e
 		pid = x_fork();
 		if (pid == 0)
 		{
-				if (tmp_cmd->fd_out != 1)
-				{
-					fd[i][1] = tmp_cmd->fd_out;
-					x_dup2(fd[i][1], 1);
-					x_close(fd[i][1]);
-					x_close(fd[i][0]);
-				}
+			if (tmp_cmd->fd_out != 1)
+			{
+				fd[i][1] = tmp_cmd->fd_out;
+				x_dup2(fd[i][1], 1);
+				x_close(fd[i][1]);
+				x_close(fd[i][0]);
+			}
 			if (tmp_cmd->next != NULL)
 			{
 				x_dup2(fd[i][1], 1);
@@ -224,9 +225,10 @@ int execute_test(t_cmd **cmd_list, t_envp **envp)
 	char	*env_path;
 	char	**env_path_split;
 
+
 	cmd_cnt = count_cmd(*cmd_list);
-	/*if (cmd_cnt == 1 && is_builtin(*cmd_list) == 1)
-		return (execute_builtin(*cmd_list, envp));*/
+	if (cmd_cnt == 1 && is_builtin(*cmd_list) == 1)
+		return (execute_builtin(*cmd_list, envp));
 	env_path = get_path(*envp);
 	env_path_split = ft_split(env_path, ':');
 	execute_test_util(cmd_list, cmd_cnt, env_path_split, envp);

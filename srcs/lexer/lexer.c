@@ -36,7 +36,7 @@ t_token	*token_init_01(t_cmd_len **len)
 	new = malloc(sizeof(t_token));
 	if (new == NULL)
 		exit(1);
-	new->data = malloc(sizeof((*len)->len + 1));
+	new->data = malloc(sizeof(char) * ((*len)->len + 1)); //おかし
 	if (new->data == NULL)
 		exit(1);
 	ft_bzero(new->data, (*len)->len);
