@@ -1,6 +1,6 @@
 NAME := minishell
 ifeq ($(shell uname), Darwin)
-	CFLAGS += -I$(shell brew --prefix readline)/include -g3 -fsanitize=address
+	CFLAGS += -I$(shell brew --prefix readline)/include
 	LDFLAGS += -L$(shell brew --prefix readline)/lib -lreadline
 else
 #	CFLAGS += #-Wall -Wextra -Werror

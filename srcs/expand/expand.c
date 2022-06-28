@@ -82,11 +82,13 @@ void	check_redirect(t_cmd *cmd_list)
 				tmp = tmp->next;
 				cmd_list->fd_out = open(tmp->next->content, O_WRONLY | O_APPEND, S_IWUSR | S_IRUSR);
 			//	open_append(cmd_list, tmp->next->content);
+				//del_node(*tmp->next->next);
 				return ;
 			}
 			cmd_list->fd_out = open(tmp->next->content, O_WRONLY | O_CREAT | O_TRUNC, S_IWUSR | S_IRUSR);
 			printf("cmd_list->fd_out = %d\n", cmd_list->fd_out);
 		//	open_create(cmd_list, tmp->next->content);
+			//del_node(*tmp->next);
 			return ;
 		}
 		tmp = tmp->next;
@@ -110,6 +112,7 @@ void	check_args(t_cmd *cmd_list, t_envp **envp_list)
 	}
 }
 
+
 void	expand_env(t_cmd **cmd, t_envp **envp_list)
 {
 	t_cmd	*cur_cmd;
@@ -117,10 +120,10 @@ void	expand_env(t_cmd **cmd, t_envp **envp_list)
 	cur_cmd = *cmd;
 	while (cur_cmd != NULL)
 	{
-		if (*cur_cmd->cmd != '\0')
-			cur_cmd->cmd = for_free(check_cmd(cur_cmd->cmd, envp_list), cur_cmd->cmd);
+		if ((cur_cmd)->cmd != NULL)
+			(cur_cmd)->cmd = for_free(check_cmd((cur_cmd)->cmd, envp_list), (cur_cmd)->cmd);
 		check_args(cur_cmd, envp_list);
-		cur_cmd = cur_cmd->next;
+		cur_cmd = (cur_cmd)->next;
 	}
 
 }
