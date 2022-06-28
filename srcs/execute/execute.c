@@ -67,6 +67,8 @@ int	get_list_size(t_list *args)
 	tmp = args;
 	while (tmp != NULL)
 	{
+		if (strcmp(tmp->content, ">") == 0 || strcmp(tmp->content, "<") == 0)
+			break;
 		tmp = tmp->next;
 		i += 1;
 	}
@@ -89,6 +91,8 @@ char	**list_to_args(t_cmd *cmd)
 	len += 1;
 	while (tmp != NULL)
 	{
+		if (strcmp(tmp->content, ">") == 0 || strcmp(tmp->content, "<") == 0)
+			break;
 		res[len] = ft_substr(tmp->content, 0, ft_strlen(tmp->content));
 		tmp = tmp->next;
 		len += 1;
@@ -123,6 +127,14 @@ void	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
 		exit(0);
 	}
 	args = list_to_args(cmd_list);
+	int k;
+	k = 0;
+	while (args[k] != NULL)
+	{
+		fprintf(stderr," args = %s\n", args[k]);
+		k++;
+
+	}
 	path_tmp = env_path_split;
 	cmd_list->cmd = for_free(ft_strjoin("/", cmd_list->cmd), cmd_list->cmd);
 	while (path_tmp[i] != NULL)
