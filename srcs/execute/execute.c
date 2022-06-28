@@ -227,8 +227,8 @@ int execute_test(t_cmd **cmd_list, t_envp **envp)
 
 
 	cmd_cnt = count_cmd(*cmd_list);
-	/*if (cmd_cnt == 1 && is_builtin(*cmd_list) == 1)
-		return (execute_builtin(*cmd_list, envp));*/
+	if (cmd_cnt == 1 && is_builtin(*cmd_list) == 1)
+		return (execute_builtin(*cmd_list, envp));
 	env_path = get_path(*envp);
 	env_path_split = ft_split(env_path, ':');
 	execute_test_util(cmd_list, cmd_cnt, env_path_split, envp);
