@@ -68,7 +68,7 @@ char	*check_cmd(char *cmd, t_envp **envp_list)
 	return (new_str);
 }
 
-void	check_redirect(t_cmd *cmd_list)
+void	check_redirect_out(t_cmd *cmd_list)
 {
 	t_list	*tmp;
 
@@ -96,13 +96,33 @@ void	check_redirect(t_cmd *cmd_list)
 	cmd_list->fd_out = 1;
 }
 
+void	check_redirect_input(t_cmd *cmd_list)
+{
+	t_list *tmp;
 
+	tmp = cmd_list->args;
+	while (tmp != NULL)
+	{
+		if (*tmp->content == '<')
+		{
+			printf("[%s]\n", tmp->next->content);
+			cmd_list->fd_in = x_open(tmp->next->content);
+			printf("cmd_list->fd_in = %d\n", cmd_list->fd_in);
+			//	open_create(cmd_list, tmp->next->content);
+			//del_node(*tmp->next);
+			return ;
+		}
+		tmp = tmp->next;
+	}
+	cmd_list->fd_in = 0;
+}
 
 void	check_args(t_cmd *cmd_list, t_envp **envp_list)
 {
 	t_list	*tmp;
 
-	check_redirect(cmd_list);
+	check_redirect_out(cmd_list);
+	check_redirect_input(cmd_list);
 	tmp = cmd_list->args;
 	while (tmp != NULL)
 	{

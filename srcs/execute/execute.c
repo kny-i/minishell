@@ -67,7 +67,12 @@ int	get_list_size(t_list *args)
 	tmp = args;
 	while (tmp != NULL)
 	{
-		if (strcmp(tmp->content, ">") == 0 || strcmp(tmp->content, "<") == 0)
+		if (strcmp(tmp->content, "<") == 0 )
+		{
+			tmp = tmp->next->next;
+			continue;
+		}
+		if (strcmp(tmp->content, ">") == 0)
 			break;
 		tmp = tmp->next;
 		i += 1;
@@ -91,7 +96,12 @@ char	**list_to_args(t_cmd *cmd)
 	len += 1;
 	while (tmp != NULL)
 	{
-		if (strcmp(tmp->content, ">") == 0 || strcmp(tmp->content, "<") == 0)
+		if (strcmp(tmp->content, "<") == 0)
+		{
+			tmp = tmp->next->next;
+			continue;
+		}
+		if (strcmp(tmp->content, ">") == 0)
 			break;
 		res[len] = ft_substr(tmp->content, 0, ft_strlen(tmp->content));
 		tmp = tmp->next;
@@ -127,13 +137,11 @@ void	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
 		exit(0);
 	}
 	args = list_to_args(cmd_list);
-	int k;
-	k = 0;
+	int k = 0;
 	while (args[k] != NULL)
 	{
-		fprintf(stderr," args = %s\n", args[k]);
+		printf("[%s]\n", args[k]);
 		k++;
-
 	}
 	path_tmp = env_path_split;
 	cmd_list->cmd = for_free(ft_strjoin("/", cmd_list->cmd), cmd_list->cmd);
@@ -195,14 +203,21 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, char **env_path_split, t_e
 				x_close(fd[i][1]);
 				x_close(fd[i][0]);
 			}
-			if (tmp_cmd->next != NULL)
+			else if (tmp_cmd->next != NULL)
 			{
 				x_dup2(fd[i][1], 1);
 				x_close(fd[i][0]);
 				x_close(fd[i][1]);
 		//		close_dup(fd[i][0], fd[i][1], 1, true);
 			}
-			if (i != 0)
+			if (tmp_cmd->fd_in != 0)
+			{
+				fd[i - 1][0] = tmp_cmd->fd_in;
+				x_dup2(fd[i - 1][0], 0);
+				x_close(fd[i - 1][0]);
+				x_close(fd[i - 1][1]);
+			}
+			else if (i != 0)
 			{
 				x_dup2(fd[i - 1][0], 0);
 				x_close(fd[i - 1][0]);
@@ -220,6 +235,8 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, char **env_path_split, t_e
 				x_close(fd[i - 1][0]);
 				x_close(fd[i - 1][1]);
 			}
+			/*x_close(fd[i - 1][0]);
+			x_close(fd[i - 1][1]);*/
 		}
 //			close_dup(fd[i][1], fd[i][0], 0, false);
 //			close_dup(fd[i - 1][1], fd[i - 1][0], 0, false);
