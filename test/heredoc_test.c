@@ -103,6 +103,6 @@ int main(int argc, char *argv[])
 	scanf("%s", out_file);
 
 //	do_heredoc(end_str);
-	here_document_to_fd(end_str, out_file);
+//	here_document_to_fd(end_str, out_file);
 	return (0);
 }
