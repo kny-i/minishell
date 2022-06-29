@@ -212,7 +212,9 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, char **env_path_split, t_e
 			{
 				fd[i - 1][0] = tmp_cmd->fd_in;
 				x_dup2(fd[i - 1][0], 0);
+				fprintf(stderr, "%s\n", "test");
 				x_close(fd[i - 1][0]);
+				printf("__test__0\n");
 				x_close(fd[i - 1][1]);
 			}
 			else if (i != 0)
