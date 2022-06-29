@@ -93,44 +93,45 @@ void	check_redirect_out(t_cmd *cmd_list)
 		}
 		tmp = tmp->next;
 	}
-	cmd_list->fd_out = 1;
 }
 
 void	check_redirect_input(t_cmd *cmd_list)
 {
-	t_cmd *tmp;
+	t_list *tmp;
 	char	*document;
 
-	tmp = cmd_list;
-	while (tmp->args != NULL)
+	tmp = cmd_list->args;
+	while (tmp != NULL)
 	{
-		if (*tmp->args->content == '<')
+		if (*tmp->content == '<')
 		{
-			if (*tmp->args->next->content == '<')
+			if (*tmp->next->content == '<')
 			{
-				tmp->fd_in = open(".heredoc",  O_CREAT | O_WRONLY | O_TRUNC, S_IWUSR | S_IRUSR);
+				cmd_list->fd_in = open(".heredoc",  O_CREAT | O_WRONLY | O_TRUNC, S_IWUSR | S_IRUSR);
+				printf("fd_in = [%d]\n", cmd_list->fd_in);
 				while (1)
 				{
 					document = readline("> ");
-					if (strcmp(tmp->args->next->next->content, document) == 0)
+					if (strcmp(tmp->next->next->content, document) == 0)
 					{
 						free(document);
+						tmp = tmp->next->next;
 						break ;
 					}
-					write(tmp->fd_in, document, strlen(document));
-					write(tmp->fd_in, "\n", 1);
+					write(cmd_list->fd_in, document, strlen(document));
+					write(cmd_list->fd_in, "\n", 1);
 					free(document);
 				}
 				return ;
 			}
-			printf("[%s]\n", tmp->args->next->content);
-			cmd_list->fd_in = x_open(tmp->args->next->content);
+			printf("[%s]\n", tmp->next->content);
+			cmd_list->fd_in = x_open(tmp->next->content);
 			printf("cmd_list->fd_in = %d\n", cmd_list->fd_in);
-			//	open_create(cmd_list, tmp->args->next->content);
-			//del_node(*tmp->args->next);
+			//	open_create(cmd_list, tmp->next->content);
+			//del_node(*tmp->next);
 			return ;
 		}
-		tmp->args = tmp->args->next;
+		tmp = tmp->next;
 	}
 }
 

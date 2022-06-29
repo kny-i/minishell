@@ -33,7 +33,10 @@ void	minishell(char *environ[])
 		free(line);
 		line = NULL;
 		expand(&cmd_list, &env_list);
-	/*	while (cmd_list != NULL)
+
+/*		int i = 0;
+
+		while (cmd_list != NULL)
 		{
 			printf("cmd[%d] = [%s]\n", i,  cmd_list->cmd);
 			int k = 0;
