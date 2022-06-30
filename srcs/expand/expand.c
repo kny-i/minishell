@@ -93,18 +93,39 @@ void	check_redirect_out(t_cmd *cmd_list)
 		}
 		tmp = tmp->next;
 	}
-	cmd_list->fd_out = 1;
 }
 
 void	check_redirect_input(t_cmd *cmd_list)
 {
 	t_list *tmp;
+	char	*document;
 
 	tmp = cmd_list->args;
 	while (tmp != NULL)
 	{
 		if (*tmp->content == '<')
 		{
+			if (*tmp->next->content == '<')
+			{
+				cmd_list->fd_in = open(".heredoc",  O_CREAT | O_WRONLY | O_TRUNC, S_IWUSR | S_IRUSR);
+				printf("fd_in = [%d]\n", cmd_list->fd_in);
+				while (1)
+				{
+					document = readline("> ");
+					if (strcmp(tmp->next->next->content, document) == 0)
+					{
+						free(document);
+						cmd_list->heredocend = ft_substr(".heredoc", 0, ft_strlen(".heredoc"));
+						tmp = tmp->next->next;
+						break ;
+					}
+					write(cmd_list->fd_in, document, strlen(document));
+					write(cmd_list->fd_in, "\n", 1);
+					free(document);
+				}
+				cmd_list->fd_in = 0;
+				return ;
+			}
 			printf("[%s]\n", tmp->next->content);
 			cmd_list->fd_in = x_open(tmp->next->content);
 			printf("cmd_list->fd_in = %d\n", cmd_list->fd_in);
@@ -114,7 +135,6 @@ void	check_redirect_input(t_cmd *cmd_list)
 		}
 		tmp = tmp->next;
 	}
-	cmd_list->fd_in = 0;
 }
 
 void	check_args(t_cmd *cmd_list, t_envp **envp_list)
