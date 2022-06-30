@@ -69,7 +69,9 @@ int	get_list_size(t_list *args)
 		{
 			if (strcmp(tmp->next->content, "<") == 0)
 			{
-				tmp = tmp->next->next->next->next;
+				i += 1;
+//				tmp = tmp->next->next->next->next;
+				tmp = tmp->next->next->next;
 				continue;
 			}
 			tmp = tmp->next->next;
@@ -103,7 +105,10 @@ char	**list_to_args(t_cmd *cmd)
 		{
 			if (strcmp(tmp->next->content, "<") == 0)
 			{
-				tmp = tmp->next->next->next->next;
+				res[len] = ft_substr(cmd->heredocend, 0, ft_strlen(cmd->heredocend));
+				len += 1;
+			//	tmp = tmp->next->next->next->next;
+				tmp = tmp->next->next->next;
 				continue;
 			}
 			tmp = tmp->next->next;
@@ -131,6 +136,18 @@ char	*get_path(t_envp *envp)
 	return (tmp->content);
 }
 
+void	print_args(char **args)
+{
+	char **tmp;
+
+	tmp = args;
+	printf("printargs\n");
+	for (int i = 0; tmp[i] != NULL; i++)
+	{
+		printf("args[%d] = %s\n", i, tmp[i]);
+	}
+}
+
 void	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
 {
 	int		i;
@@ -145,7 +162,7 @@ void	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
 		exit(0);
 	}
 	args = list_to_args(cmd_list);
-
+//	print_args(args);
 	path_tmp = env_path_split;
 	cmd_list->cmd = for_free(ft_strjoin("/", cmd_list->cmd), cmd_list->cmd);
 	while (path_tmp[i] != NULL)
@@ -232,6 +249,9 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, char **env_path_split, t_e
 //			execve_test(i, fd, tmp_cmd, env_path_split, num_cmd);
 		else //if (i > 0)
 		{
+			wait(NULL);
+		if (tmp_cmd->heredocend != NULL)
+			unlink(tmp_cmd->heredocend);
 	//		x_close(fd[i][0]);
 	//		x_close(fd[i][0]);
 			if (i > 0)
@@ -248,8 +268,8 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, char **env_path_split, t_e
 		tmp_cmd = tmp_cmd->next;
 	}
 	i = 0;
-	while (i++ < num_cmd)
-		wait(NULL);
+//	while (i++ < num_cmd)
+//		wait(NULL);
 }
 
 int execute_test(t_cmd **cmd_list, t_envp **envp)

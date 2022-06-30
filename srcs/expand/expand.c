@@ -115,6 +115,7 @@ void	check_redirect_input(t_cmd *cmd_list)
 					if (strcmp(tmp->next->next->content, document) == 0)
 					{
 						free(document);
+						cmd_list->heredocend = ft_substr(".heredoc", 0, ft_strlen(".heredoc"));
 						tmp = tmp->next->next;
 						break ;
 					}
@@ -122,6 +123,7 @@ void	check_redirect_input(t_cmd *cmd_list)
 					write(cmd_list->fd_in, "\n", 1);
 					free(document);
 				}
+				cmd_list->fd_in = 0;
 				return ;
 			}
 			printf("[%s]\n", tmp->next->content);

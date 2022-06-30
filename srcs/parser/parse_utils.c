@@ -9,6 +9,7 @@ t_cmd	*cmd_new(char *cmd)
 		return (NULL);
 	res->next = NULL;
 	res->args = NULL;
+	res->heredocend = NULL;
 	res->cmd = cmd;
 	res->fd_out = 1;
 	res->fd_in = 0;

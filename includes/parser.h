@@ -14,6 +14,7 @@ typedef struct s_cmd
 	t_list	*args;
 //	char			*stdin_str;
 //	t_list			*heredoc_end;
+	char	*heredocend;
 	int		fd_out;
 	int		fd_in;
 //	t_cmd	*prev;
