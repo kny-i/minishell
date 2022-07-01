@@ -55,6 +55,28 @@ t_cmd *parse(t_lexer *lexerbuf)
 	return (list);
 }
 
+void	free_token(t_token *token_list)
+{
+	t_token	*tmp;
+
+	while (token_list != NULL)
+	{
+		tmp = token_list->next;
+		free(token_list->data);
+		token_list->data = NULL;
+		free(token_list);
+		token_list = NULL;
+		token_list = tmp;
+	}
+}
+
+void	free_lex(t_lexer *lexerbuf)
+{
+	free_token(lexerbuf->list_token);
+	free(lexerbuf);
+	lexerbuf = NULL;
+}
+
 t_cmd	*lex_pars(char *input)
 {
 	t_cmd	*cmd_list;
@@ -63,5 +85,9 @@ t_cmd	*lex_pars(char *input)
 	lexerbuf.num_token = 0;
 	lexer_build(input, &lexerbuf);
 	cmd_list = parse(&lexerbuf);
+	free_lex(&lexerbuf);
 	return (cmd_list);
 }
+
+//t_cmd_len
+//t_token && t_token->data

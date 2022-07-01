@@ -138,18 +138,6 @@ char	*get_path(t_envp *envp)
 	return (tmp->content);
 }
 
-void	print_args(char **args)
-{
-	char **tmp;
-
-	tmp = args;
-	printf("printargs\n");
-	for (int i = 0; tmp[i] != NULL; i++)
-	{
-		printf("args[%d] = %s\n", i, tmp[i]);
-	}
-}
-
 void	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
 {
 	int		i;
@@ -164,7 +152,6 @@ void	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
 		exit(0);
 	}
 	args = list_to_args(cmd_list);
-//	print_args(args);
 	path_tmp = env_path_split;
 	cmd_list->cmd = for_free(ft_strjoin("/", cmd_list->cmd), cmd_list->cmd);
 	while (path_tmp[i] != NULL)
@@ -261,23 +248,12 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, char **env_path_split, t_e
 	//		wait(NULL);
 	//	if (tmp_cmd->heredocend != NULL)
 	//		unlink(tmp_cmd->heredocend);
-	//		if (tmp_cmd->fd_in != 0)
-	//		{
-	//			x_close(fd[i][0]);
-	//			x_close(fd[i][1]);
-	//		}
-	//		x_close(fd[i][0]);
-	//		x_close(fd[i][0]);
 			if (i > 0)
 			{
 				x_close(fd[i - 1][0]);
 				x_close(fd[i - 1][1]);
 			}
-			/*x_close(fd[i - 1][0]);
-			x_close(fd[i - 1][1]);*/
 		}
-//			close_dup(fd[i][1], fd[i][0], 0, false);
-//			close_dup(fd[i - 1][1], fd[i - 1][0], 0, false);
 		i += 1;
 		tmp_cmd = tmp_cmd->next;
 	}

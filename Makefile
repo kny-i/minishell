@@ -3,7 +3,7 @@ ifeq ($(shell uname), Darwin)
 	CFLAGS += -I$(shell brew --prefix readline)/include
 	LDFLAGS += -L$(shell brew --prefix readline)/lib -lreadline
 else
-#	CFLAGS += #-Wall -Wextra -Werror
+	CFLAGS += -fsanitize=leak
 	LDFLAGS += -L/usr/include -lreadline
 endif
 INCLUDE := ./includes
@@ -35,7 +35,8 @@ SRCS := $(SRCS_DIR)/main.c \
 		$(SRCS_DIR)/gnl/get_next_line_utils.c \
 		$(SRCS_DIR)/expand/expand.c \
 		$(SRCS_DIR)/expand/expand_env_cmd.c \
-		$(SRCS_DIR)/builtin/env.c
+		$(SRCS_DIR)/builtin/env.c \
+		$(SRCS_DIR)/free/free_all.c
 
 
 

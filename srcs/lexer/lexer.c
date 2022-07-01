@@ -176,6 +176,19 @@ t_cmd_len	*len_until_space(char *input, t_cmd_len *len)
 	return (res);
 }
 
+void	free_cmd_len(t_cmd_len *len)
+{
+	t_cmd_len	*tmp;
+
+	while (len != NULL)
+	{
+		tmp = len->next;
+		free(len);
+		len = NULL;
+		len = tmp;
+	}
+}
+
 void	lexer_build(char *input, t_lexer *lexerbuf)
 {
 	int 		i_input;
@@ -189,6 +202,7 @@ void	lexer_build(char *input, t_lexer *lexerbuf)
 	i_token = 0;
 	len = len_until_space(input, len);
 	token = token_init_01(&len);
+	free_cmd_len(len);
 	lexerbuf->list_token = token;
 	status = STATE_GENERAL;
 	while (input[i_input] != '\0')

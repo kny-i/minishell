@@ -3,6 +3,7 @@
 #include "parser.h"
 #include "env.h"
 #include "expand.h"
+#include "free.h"
 
 void	print_env(t_envp *env)
 {
@@ -55,6 +56,7 @@ void	minishell(char *environ[])
 		//	add_history(line);
 		//	launch(line, environ, lexerbuf);
 		//	free(line);
+		free_func(cmd_list);
 	}
 	printf("exit minishell\n");
 	exit(0);
