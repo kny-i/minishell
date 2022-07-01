@@ -74,7 +74,8 @@ int	get_list_size(t_list *args)
 				tmp = tmp->next->next->next;
 				continue;
 			}
-			tmp = tmp->next->next;
+//			tmp = tmp->next->next;
+			tmp = tmp->next;
 			continue;
 		}
 		if (strcmp(tmp->content, ">") == 0)
@@ -111,7 +112,8 @@ char	**list_to_args(t_cmd *cmd)
 				tmp = tmp->next->next->next;
 				continue;
 			}
-			tmp = tmp->next->next;
+//			tmp = tmp->next->next;
+			tmp = tmp->next;
 			continue;
 		}
 		if (strcmp(tmp->content, ">") == 0)
@@ -230,6 +232,13 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, char **env_path_split, t_e
 				x_close(fd[i][1]);
 		//		close_dup(fd[i][0], fd[i][1], 1, true);
 			}
+			if (i == 0 && tmp_cmd->fd_in != 0)
+			{
+				fd[i][0] = tmp_cmd->fd_in;
+				x_dup2(fd[i][0], 0);
+				x_close(fd[i][0]);
+			//	x_close(fd[i][1]);
+			}
 			else if (tmp_cmd->fd_in != 0)
 			{
 				fd[i - 1][0] = tmp_cmd->fd_in;
@@ -249,9 +258,14 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, char **env_path_split, t_e
 //			execve_test(i, fd, tmp_cmd, env_path_split, num_cmd);
 		else //if (i > 0)
 		{
-			wait(NULL);
-		if (tmp_cmd->heredocend != NULL)
-			unlink(tmp_cmd->heredocend);
+	//		wait(NULL);
+	//	if (tmp_cmd->heredocend != NULL)
+	//		unlink(tmp_cmd->heredocend);
+	//		if (tmp_cmd->fd_in != 0)
+	//		{
+	//			x_close(fd[i][0]);
+	//			x_close(fd[i][1]);
+	//		}
 	//		x_close(fd[i][0]);
 	//		x_close(fd[i][0]);
 			if (i > 0)
@@ -268,8 +282,9 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, char **env_path_split, t_e
 		tmp_cmd = tmp_cmd->next;
 	}
 	i = 0;
-//	while (i++ < num_cmd)
-//		wait(NULL);
+	while (i++ < num_cmd)
+		wait(NULL);
+	unlink(".heredoc");
 }
 
 int execute_test(t_cmd **cmd_list, t_envp **envp)

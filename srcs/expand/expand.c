@@ -108,7 +108,6 @@ void	check_redirect_input(t_cmd *cmd_list)
 			if (*tmp->next->content == '<')
 			{
 				cmd_list->fd_in = open(".heredoc",  O_CREAT | O_WRONLY | O_TRUNC, S_IWUSR | S_IRUSR);
-				printf("fd_in = [%d]\n", cmd_list->fd_in);
 				while (1)
 				{
 					document = readline("> ");
@@ -126,9 +125,9 @@ void	check_redirect_input(t_cmd *cmd_list)
 				cmd_list->fd_in = 0;
 				return ;
 			}
-			printf("[%s]\n", tmp->next->content);
+//			printf("[%s]\n", tmp->next->content);
 			cmd_list->fd_in = x_open(tmp->next->content);
-			printf("cmd_list->fd_in = %d\n", cmd_list->fd_in);
+//			printf("cmd_list->fd_in = %d\n", cmd_list->fd_in);
 			//	open_create(cmd_list, tmp->next->content);
 			//del_node(*tmp->next);
 			return ;
