@@ -202,7 +202,6 @@ void	lexer_build(char *input, t_lexer *lexerbuf)
 	i_token = 0;
 	len = len_until_space(input, len);
 	token = token_init_01(&len);
-	free_cmd_len(len);
 	lexerbuf->list_token = token;
 	status = STATE_GENERAL;
 	while (input[i_input] != '\0')
@@ -218,5 +217,6 @@ void	lexer_build(char *input, t_lexer *lexerbuf)
 			status = chstatus_end(token, &i_token, input[i_input], char_type, STATE_IN_DQUOTE);
 		i_input += 1;
 	}
+	free_cmd_len(len);
 	token->data[i_token] = '\0';
 }
