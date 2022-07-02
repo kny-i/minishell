@@ -1,6 +1,6 @@
 #include "free.h"
 
-void    free_func(t_cmd *cmd_list)
+void    free_cmd(t_cmd *cmd_list)
 {
 	t_cmd	*tmp;
 

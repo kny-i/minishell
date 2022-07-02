@@ -85,8 +85,8 @@ t_cmd	*lex_pars(char *input)
 	lexerbuf.num_token = 0;
 	lexer_build(input, &lexerbuf);
 	cmd_list = parse(&lexerbuf);
-	free_token_list(lexerbuf.list_token);
-	free_lex(&lexerbuf);
+	//free_token_list(lexerbuf.list_token);
+	//free_lex(&lexerbuf);
 	return (cmd_list);
 }
 
