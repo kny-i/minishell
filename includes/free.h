@@ -4,6 +4,6 @@
 # include <stdlib.h>
 # include "parser.h"
 
-void    free_func(t_cmd *cmd_list);
+void    free_cmd(t_cmd *cmd_list);
 
 #endif // !FREE_H

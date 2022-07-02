@@ -56,7 +56,7 @@ void	minishell(char *environ[])
 		//	add_history(line);
 		//	launch(line, environ, lexerbuf);
 		//	free(line);
-		free_func(cmd_list);
+		free_cmd(cmd_list);
 		system("leaks minishell");
 	}
 	printf("exit minishell\n");
