@@ -30,6 +30,7 @@ void	minishell(char *environ[])
 		line = readline("minishell> ");
 		if (line == NULL)
 			break;
+		add_history(line);
 		cmd_list = lex_pars(line);
 		free(line);
 		line = NULL;
@@ -57,6 +58,7 @@ void	minishell(char *environ[])
 		//	launch(line, environ, lexerbuf);
 		//	free(line);
 		free_cmd(cmd_list);
+		//free_token()
 		system("leaks minishell");
 	}
 	printf("exit minishell\n");
