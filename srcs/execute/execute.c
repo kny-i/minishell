@@ -138,6 +138,12 @@ char	*get_path(t_envp *envp)
 	return (tmp->content);
 }
 
+void	execute_abs(char **args, char *cmd)
+{
+	execve(cmd, args, environ);
+	exit(0);
+}
+
 void	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
 {
 	int		i;
@@ -154,14 +160,19 @@ void	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
 		exit(0);
 	}
 	path_tmp = env_path_split;
-	cmd_list->cmd = for_free(ft_strjoin("/", cmd_list->cmd), cmd_list->cmd);
-	while (path_tmp[i] != NULL)
+	if (*cmd_list->cmd == '/')
+		execute_abs(args, cmd_list->cmd);
+	else
 	{
-		path_tmp[i] = for_free(ft_strjoin(path_tmp[i], cmd_list->cmd), path_tmp[i]);
-		execve(path_tmp[i], args, environ);
-		i += 1;
+		cmd_list->cmd = for_free(ft_strjoin("/", cmd_list->cmd), cmd_list->cmd);
+		while (path_tmp[i] != NULL)
+		{
+			path_tmp[i] = for_free(ft_strjoin(path_tmp[i], cmd_list->cmd), path_tmp[i]);
+			execve(path_tmp[i], args, environ);
+			i += 1;
+		}
 	}
-	exit(1);
+	exit(0);
 }
 
 void	close_dup(int fd, int oldfd, int newfd, bool flg)

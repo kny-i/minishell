@@ -39,6 +39,8 @@ char	*check_cmd(char *cmd, t_envp **envp_list)
 
 	if (cmd[0] == '$')
 	{
+		if (cmd[1] == '?')
+			return (ft_strdup(cmd));
 		res = ft_substr(cmd, 1, ft_strlen(cmd));
 		new_str = for_free(get_env_cmd_general(res, envp_list), res);
 	}
