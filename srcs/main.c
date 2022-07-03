@@ -51,9 +51,9 @@ void	minishell(char *environ[])
 	t_cmd *cmd_list;
 	t_envp *env_list;
 
+	env_list = creat_tenv(environ);
 	while (1)
 	{
-	env_list = creat_tenv(environ);
 		sig_input();
 		line = readline("minishell> ");
 		if (line == NULL)
@@ -63,12 +63,12 @@ void	minishell(char *environ[])
 		if (cmd_list != NULL)
 		{
 		expand(&cmd_list, &env_list);
-		print_cmd_list(cmd_list);
+	//	print_cmd_list(cmd_list);
 
 		execute_test(&cmd_list, &env_list);
 		}
 		free_cmd(cmd_list);
-		free_env_list(env_list);
+	//	free_env_list(env_list);
 	//	system("leaks minishell");
 	}
 	printf("exit minishell\n");
