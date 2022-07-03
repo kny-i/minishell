@@ -59,7 +59,7 @@ void	free_token_list(t_token *token_list)
 {
 	t_token	*tmp;
 
-	while (token_list != NULL)
+	while (token_list->next != NULL)
 	{
 		tmp = token_list->next;
 		free(token_list->data);
@@ -70,11 +70,17 @@ void	free_token_list(t_token *token_list)
 	}
 }
 
-void	free_lex(t_lexer *lexerbuf)
+void	print_lex(t_lexer *lexerbuf)
 {
-	free_token_list(lexerbuf->list_token);
-//	free(lexerbuf);
-//	lexerbuf = NULL;
+	t_token	*tmp;
+
+	printf("num_token = %d\n", lexerbuf->num_token);
+	tmp = lexerbuf->list_token;
+	for (; tmp != NULL; tmp = tmp->next)
+	{
+		printf("tmp->data = %s\n", tmp->data);
+	}
+
 }
 
 t_cmd	*lex_pars(char *input)
@@ -84,11 +90,10 @@ t_cmd	*lex_pars(char *input)
 
 	lexerbuf.num_token = 0;
 	lexer_build(input, &lexerbuf);
+	free(input);
+	input = NULL;
+//	print_lex(&lexerbuf);
 	cmd_list = parse(&lexerbuf);
-	//free_token_list(lexerbuf.list_token);
-	//free_lex(&lexerbuf);
+	free_token_list(lexerbuf.list_token);
 	return (cmd_list);
 }
-
-//t_cmd_len
-//t_token && t_token->data

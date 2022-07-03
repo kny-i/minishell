@@ -1,5 +1,19 @@
 #include "utils.h"
 
+
+void    *ft_xmalloc(size_t bytes)
+{
+    void    *temp;
+
+    temp = malloc(bytes);
+    if (temp == 0)
+	{
+		perror("malloc");
+		exit(1);
+	}
+    return (temp);
+}
+
 int	x_pipe(int fd[2])
 {
 	int status;

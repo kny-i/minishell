@@ -32,8 +32,8 @@ void	minishell(char *environ[])
 			break;
 		add_history(line);
 		cmd_list = lex_pars(line);
-		free(line);
-		line = NULL;
+//		free(line);		//<- lex_parsでfree
+//		line = NULL;
 		expand(&cmd_list, &env_list);
 
 /*		int i = 0;
@@ -52,7 +52,7 @@ void	minishell(char *environ[])
 			i++;
 		}*/
 		execute_test(&cmd_list, &env_list);
-	//	execute(&cmd_list, environ);
+		//execute(&cmd_list, environ);
 		//	printf("line is '%s'\n", line);
 		//	add_history(line);
 		//	launch(line, environ, lexerbuf);

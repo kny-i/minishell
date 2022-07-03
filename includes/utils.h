@@ -15,4 +15,6 @@ char	*x_strdup(char *str);
 char **x_split(char *str, char c);
 char	*for_free(char *res, char *free_str);
 
+void    *ft_xmalloc(size_t bytes);
+
 #endif

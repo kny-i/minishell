@@ -263,13 +263,29 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, char **env_path_split, t_e
 	unlink(".heredoc");
 }
 
+void	print_cmd(t_cmd **cmd)
+{
+	t_cmd	*tmp;
+
+	tmp = *cmd;
+	for(; tmp != NULL; tmp = tmp->next)
+	{
+		printf("cmd = %s\n", tmp->cmd);
+		for (t_list *list = tmp->args; list != NULL; list = list->next)
+			printf("%s ", list->content);
+		putchar('\n');
+
+	}
+
+}
+
 int execute_test(t_cmd **cmd_list, t_envp **envp)
 {
 	int		cmd_cnt;
 	char	*env_path;
 	char	**env_path_split;
 
-
+	print_cmd(cmd_list);
 	cmd_cnt = count_cmd(*cmd_list);
 	if (cmd_cnt == 1 && is_builtin(*cmd_list) == 1)
 		return (execute_builtin(*cmd_list, envp));
