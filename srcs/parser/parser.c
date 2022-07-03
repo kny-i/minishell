@@ -1,5 +1,6 @@
 #include "parser.h"
 #include "lexer.h"
+#include "utils.h"
 
 void get_cmd_name(t_cmd *cmd_node, t_token **token)
 {
@@ -15,8 +16,13 @@ void get_cmd_args(t_cmd *cmd, t_token **token)
 {
 	char	*args_tmp;
 
-	while ((*token) != NULL && strcmp((*token)->data, "|") != 0)
+	while ((*token) != NULL && ft_strcmp((*token)->data, "|") != 0)
 	{
+		if ((*token)->data == NULL)
+		{
+			(*token) = (*token)->next;
+			continue ;
+		}
 		args_tmp = ft_strdup((*token)->data);
 		ft_lstadd_back(&(cmd->args), ft_lstnew(args_tmp));
 		(*token) = (*token)->next;

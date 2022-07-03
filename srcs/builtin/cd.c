@@ -18,6 +18,7 @@ int cd_to_home(char **args, t_envp *env)
 		perror("chdir error");
 		exit(1);
 	}
+	free(home_path);
 	return (0);
 }
 

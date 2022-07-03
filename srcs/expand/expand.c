@@ -122,7 +122,7 @@ void	check_args(t_cmd *cmd_list, t_envp **envp_list)
 	tmp = cmd_list->args;
 	while (tmp != NULL)
 	{
-		if (*tmp->content != '\0')
+		if (tmp->content != NULL)
 			tmp->content = for_free(check_cmd(tmp->content, envp_list), tmp->content);
 		tmp = tmp->next;
 	}
@@ -144,16 +144,64 @@ void	expand_env(t_cmd **cmd, t_envp **envp_list)
 
 }
 
-char	*expand_quot_cmd(char *cmd)
+int	check_type(char c)
 {
+	if (c == '\'')
+		return (1);
+	else if (c == '\"')
+		return (2);
+	return (0);
+}
+
+int	check_quote(char **res, char *cmd, int is_quote)
+{
+	char	*str;
+
+	if (check_type(*cmd) == is_quote)
+		return (0);
+	str = ft_substr(cmd, 0, 1);
+	*res = for_free(ft_strjoin(*res, str), *res);
+	free(str);
+	return (is_quote);
+}
+
+int	check_quote_args(char **res, char *cmd)
+{
+	char	*str;
+
+	if (*cmd == '\'')
+		return (1);
+	else if (*cmd == '\"')
+		return (2);
+	str = ft_substr(cmd, 0, 1);
+	*res = for_free(ft_strjoin(*res, str), *res);
+	free(str);
+	return (0);
+}
+
+char	*expand_quot(char *cmd)
+{
+	int		i;
+	int		is_quote;	//0->none, 1->quote, 2->dquote
+	int		type;
+	char	*cmd_tmp;
 	char	*res;
 
-	res = cmd;
-	if (cmd[0] == '\'' || cmd[0] == '\"')
+	i = 0;
+	is_quote = 0;
+	res = NULL;
+	cmd_tmp = cmd;
+	while (*cmd_tmp)
 	{
-		res = ft_substr(cmd, 1, ft_strlen(cmd) - 2);
-		free(cmd);
+		if (is_quote == 0)
+			is_quote = check_quote_args(&res, cmd_tmp);
+		else if (is_quote == 1)
+			is_quote = check_quote(&res, cmd_tmp, is_quote);
+		else if (is_quote == 2)
+			is_quote = check_quote(&res, cmd_tmp, is_quote);
+		cmd_tmp++;
 	}
+	free(cmd);
 	return (res);
 }
 
@@ -164,7 +212,7 @@ void	expand_quot_args(t_list	*list)
 	tmp = list;
 	while (tmp != NULL)
 	{
-		tmp->content = expand_quot_cmd(tmp->content);
+		tmp->content = expand_quot(tmp->content);
 		tmp = tmp->next;
 	}
 }
@@ -172,7 +220,7 @@ void	expand_quot_args(t_list	*list)
 void expand(t_cmd **cmd, t_envp **envp)
 {
 	expand_env(cmd,envp);
-	(*cmd)->cmd = expand_quot_cmd((*cmd)->cmd);
+	(*cmd)->cmd = expand_quot((*cmd)->cmd);
 	expand_quot_args((*cmd)->args);
 }
 

@@ -15,6 +15,7 @@ int echo_core(char **str)
 		is_noption = true;
 		i++;
 	}
+	is_first = true;
 	while (str[i] != NULL)
 	{
 		if (is_first == false)
@@ -29,12 +30,12 @@ int echo_core(char **str)
 	return (0);
 }
 
-int echo_core_test(t_cmd *cmd_list)
+int echo_core_test(t_cmd *cmd_list, char **str)
 {
 	int i;
 	bool is_noption;
 	bool is_first;
-	char	**str = list_to_args(cmd_list);
+//	char	**str = list_to_args(cmd_list);
 
 	i = 1;// skip the first str which is "echo"
 	is_noption = false;
@@ -43,6 +44,7 @@ int echo_core_test(t_cmd *cmd_list)
 		is_noption = true;
 		i++;
 	}
+	is_first = true;
 	while (str[i] != NULL)
 	{
 		if (is_first == false)
