@@ -4,18 +4,14 @@
 
 char	*get_env_cmd_general(char *cmd, t_envp **env_list)
 {
-	int		i;
 	char	*tmp;
 	t_envp *tmp_list;
 
-	i = 1;
-	while (ft_isalpha(cmd[i]) || cmd[i] == '?')
-		i += 1;
 	tmp_list = *env_list;
-	tmp = ft_substr(cmd, 0, i);
+	tmp = ft_strdup(cmd);
 	while (tmp_list->next != NULL)
 	{
-		if (ft_strcmp(tmp_list->env_name, tmp + 1) == 0)
+		if (ft_strcmp(tmp_list->env_name, tmp) == 0)
 		{
 			free(tmp);
 			return (ft_substr(tmp_list->content, 0, ft_strlen(tmp_list->content)));
@@ -32,7 +28,6 @@ char	*expand_dquot(char *cmd, t_envp **envp_list)
 
 	len = ft_strlen(cmd);
 	res = ft_substr(cmd, 2, len - 3);
-	printf("ress = %s\n", res);
 	res = for_free(get_env_cmd_general(res, envp_list), res);
 	return (res);
 }
@@ -40,20 +35,22 @@ char	*expand_dquot(char *cmd, t_envp **envp_list)
 char	*check_cmd(char *cmd, t_envp **envp_list)
 {
 	char	*new_str;
+	char	*res;
 
 	if (cmd[0] == '$')
-		new_str = get_env_cmd_general(cmd, envp_list);
+	{
+		res = ft_substr(cmd, 1, ft_strlen(cmd));
+		new_str = for_free(get_env_cmd_general(res, envp_list), res);
+	}
 	else if (cmd[0] == '\"')
 	{
 		if (ft_strchr(cmd, '$') != NULL)
-			new_str = get_env_cmd_general(cmd, envp_list);
-		//	new_str = expand_dquot(cmd, envp_list);
+			new_str = expand_dquot(cmd, envp_list);
 		else
 			new_str = ft_substr(cmd, 0, ft_strlen(cmd));
 	}
 	else
 		new_str = ft_substr(cmd, 0, ft_strlen(cmd));
-//	printf("%s\n", new_str);
 	return (new_str);
 }
 
