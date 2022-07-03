@@ -23,7 +23,7 @@ void	minishell(char *environ[])
 	t_cmd *cmd_list;
 	t_envp *env_list;
 
-	env_list = creat_tenv(environ);
+//	env_list = creat_tenv(environ);
 	while (1)
 	{
 		sig_input();
@@ -32,34 +32,13 @@ void	minishell(char *environ[])
 			break;
 		add_history(line);
 		cmd_list = lex_pars(line);
-//		free(line);		//<- lex_parsでfree
-//		line = NULL;
-		expand(&cmd_list, &env_list);
-
-/*		int i = 0;
-
-		while (cmd_list != NULL)
+		if (cmd_list != NULL)
 		{
-			printf("cmd[%d] = [%s]\n", i,  cmd_list->cmd);
-			int k = 0;
-			while (cmd_list->args != NULL)
-			{
-				printf("args[%d][%d] = [%s]\n", i, k, cmd_list->args->content);
-				cmd_list->args = cmd_list->args->next;
-				k++;
-			}
-			cmd_list = cmd_list->next;
-			i++;
-		}*/
-		execute_test(&cmd_list, &env_list);
-		//execute(&cmd_list, environ);
-		//	printf("line is '%s'\n", line);
-		//	add_history(line);
-		//	launch(line, environ, lexerbuf);
-		//	free(line);
+	//	expand(&cmd_list, &env_list);
+	//	execute_test(&cmd_list, &env_list);
 		free_cmd(cmd_list);
-		//free_token()
-		system("leaks minishell");
+		}
+	//	system("leaks minishell");
 	}
 	printf("exit minishell\n");
 	exit(0);

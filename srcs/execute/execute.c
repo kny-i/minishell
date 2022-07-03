@@ -279,19 +279,35 @@ void	print_cmd(t_cmd **cmd)
 
 }
 
+void	free_env_split(char **env_path)
+{
+	int	i;
+
+	i = 0;
+	while (env_path[i] != NULL)
+	{
+		free(env_path[i]);
+		env_path[i] = NULL;
+		i += 1;
+	}
+	free(env_path);
+	env_path = NULL;
+}
+
 int execute_test(t_cmd **cmd_list, t_envp **envp)
 {
 	int		cmd_cnt;
 	char	*env_path;
 	char	**env_path_split;
 
-	print_cmd(cmd_list);
+//	print_cmd(cmd_list);
 	cmd_cnt = count_cmd(*cmd_list);
 	if (cmd_cnt == 1 && is_builtin(*cmd_list) == 1)
 		return (execute_builtin(*cmd_list, envp));
 	env_path = get_path(*envp);
 	env_path_split = ft_split(env_path, ':');
 	execute_test_util(cmd_list, cmd_cnt, env_path_split, envp);
+	free_env_split(env_path_split);
 	return (0);
 }
 
