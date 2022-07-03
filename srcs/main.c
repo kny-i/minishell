@@ -65,7 +65,7 @@ void	minishell(char *environ[])
 		expand(&cmd_list, &env_list);
 		print_cmd_list(cmd_list);
 
-	//	execute_test(&cmd_list, &env_list);
+		execute_test(&cmd_list, &env_list);
 		}
 		free_cmd(cmd_list);
 		free_env_list(env_list);
