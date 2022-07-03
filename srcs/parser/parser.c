@@ -37,7 +37,7 @@ void set_cmd_info(t_cmd *list, t_token **token)
 	}
 }
 
-t_cmd *parse(t_lexer *lexerbuf)
+t_cmd *parse(t_token *lexerbuf)
 {
 	t_cmd *list;
 	t_cmd *new_node;
@@ -45,9 +45,11 @@ t_cmd *parse(t_lexer *lexerbuf)
 
 	list = NULL;
 	new_node = NULL;
-	token = lexerbuf->list_token;
+	token = lexerbuf;
 	while (token != NULL)
 	{
+		if (token->data == NULL)
+			return (NULL);
 		cmd_add_back(&list, cmd_new(NULL));
 		if (new_node == NULL)
 			new_node = list;
@@ -77,14 +79,14 @@ void	free_token_list(t_token *token_list)
 	token_list = NULL;
 }
 
-void	print_lex(t_lexer *lexerbuf)
+void	print_lex(t_token *lexerbuf)
 {
 	t_token	*tmp;
 
+	printf("print_lex\n");
 	if (lexerbuf == NULL)
 		return ;
-	printf("num_token = %d\n", lexerbuf->num_token);
-	tmp = lexerbuf->list_token;
+	tmp = lexerbuf;
 	for (; tmp != NULL; tmp = tmp->next)
 	{
 		printf("tmp->data = %s\n", tmp->data);
@@ -95,14 +97,13 @@ void	print_lex(t_lexer *lexerbuf)
 t_cmd	*lex_pars(char *input)
 {
 	t_cmd	*cmd_list;
-	t_lexer	lexerbuf;
+	t_token	*lexerbuf;
 
-	lexerbuf.num_token = 0;
 	lexer_build(input, &lexerbuf);
 	free(input);
 	input = NULL;
-	print_lex(&lexerbuf);
-	cmd_list = parse(&lexerbuf);
-	free_token_list(lexerbuf.list_token);
+//	print_lex(lexerbuf);
+	cmd_list = parse(lexerbuf);
+	free_token_list(lexerbuf);
 	return (cmd_list);
 }
