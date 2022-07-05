@@ -104,12 +104,19 @@ t_cmd	*lex_pars(char *input)
 {
 	t_cmd	*cmd_list;
 	t_token	*lexerbuf;
+	int		res;
 
-	lexer_build(input, &lexerbuf);
+	res = lexer_build(input, &lexerbuf);
 	free(input);
 	input = NULL;
+	if (res != STATE_GENERAL)
+	{
+		printf("syntax error\n");
+		free_token_list(lexerbuf);
+		return (NULL);
+	}
 //	print_lex(lexerbuf);
-	cmd_list = parse(lexerbuf);
 	free_token_list(lexerbuf);
+	cmd_list = parse(lexerbuf);
 	return (cmd_list);
 }
