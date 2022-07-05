@@ -100,7 +100,7 @@ int	assign_general(t_token **token, char *input, int char_type)
 	return (status);
 }
 
-void	lexer_build(char *input, t_token **lexerbuf)
+int		lexer_build(char *input, t_token **lexerbuf)
 {
 	int 		status;
 	int			char_type;
@@ -122,4 +122,5 @@ void	lexer_build(char *input, t_token **lexerbuf)
 			status = chstatus_end(token, input_tmp, char_type, STATE_IN_DQUOTE);
 		*(input_tmp++);
 	}
+	return (status);
 }
