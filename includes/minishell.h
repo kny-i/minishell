@@ -27,6 +27,18 @@
 # define FAILURE 1
 # define SUCCESS 0
 
+typedef struct  s_sig_info  t_sig_info;
+typedef struct s_sig_info
+{
+
+	int		pid;
+	int		exit_status;
+}   t_sig_info;
+
+t_sig_info	g_signal;
+
+
+
 typedef struct s_lexer	t_lexer;
 
 //signal.c

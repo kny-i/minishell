@@ -1,5 +1,6 @@
 #include "execute.h"
 #include "utils.h"
+#include "minishell.h"
 
 extern char	**environ;
 
@@ -144,7 +145,7 @@ void	execute_abs(char **args, char *cmd)
 	exit(0);
 }
 
-void	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
+int		execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
 {
 	int		i;
 	char	**args;
@@ -159,7 +160,9 @@ void	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
 		execute_builtin(cmd_list, envp, args);
 		exit(0);
 	}
+		int	res;
 	path_tmp = env_path_split;
+		char	*s = cmd_list->cmd;
 	if (*cmd_list->cmd == '/')
 		execute_abs(args, cmd_list->cmd);
 	else
@@ -168,9 +171,16 @@ void	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
 		while (path_tmp[i] != NULL)
 		{
 			path_tmp[i] = for_free(ft_strjoin(path_tmp[i], cmd_list->cmd), path_tmp[i]);
-			execve(path_tmp[i], args, environ);
+			res = execve(path_tmp[i], args, environ);
 			i += 1;
 		}
+	}
+	if (res == -1)
+	{
+		printf("minishell: %s: command not found\n", s);
+		g_signal.exit_status = 127;
+		//return (127);
+		printf("g_signal.exit = %d\n", g_signal.exit_status);
 	}
 	exit(0);
 }
@@ -215,6 +225,7 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, char **env_path_split, t_e
 	while (i < num_cmd)
 	{
 		pid = x_fork();
+		g_signal.pid = 0;
 		if (pid == 0)
 		{
 			if (tmp_cmd->fd_out != 1)
@@ -270,6 +281,7 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, char **env_path_split, t_e
 	while (i++ < num_cmd)
 		wait(NULL);
 	unlink(".heredoc");
+				g_signal.pid = 1;
 }
 
 void	print_cmd(t_cmd **cmd)
@@ -325,7 +337,7 @@ int execute_test(t_cmd **cmd_list, t_envp **envp)
 	char	**env_path_split;
 
 	cmd_cnt = count_cmd(*cmd_list);
-	if (cmd_cnt == 1 && is_builtin(*cmd_list) == 1)
+	if (is_builtin(*cmd_list) == 1)
 	{
 		args = list_to_args(*cmd_list);
 		execute_builtin(*cmd_list, envp, args);

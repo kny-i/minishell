@@ -22,7 +22,6 @@ SRCS := $(SRCS_DIR)/main.c \
 		$(SRCS_DIR)/builtin/pwd.c \
 		$(SRCS_DIR)/builtin/unset.c \
 		$(SRCS_DIR)/lexer/lexer.c \
-		$(SRCS_DIR)/astree/astree.c \
 		$(SRCS_DIR)/utils/x_func.c \
 		$(SRCS_DIR)/execute/execute.c \
 		$(SRCS_DIR)/builtin/builtin_core.c \
@@ -34,7 +33,6 @@ SRCS := $(SRCS_DIR)/main.c \
 		$(SRCS_DIR)/gnl/get_next_line.c \
 		$(SRCS_DIR)/gnl/get_next_line_utils.c \
 		$(SRCS_DIR)/expand/expand.c \
-		$(SRCS_DIR)/expand/expand_env_cmd.c \
 		$(SRCS_DIR)/builtin/env.c \
 		$(SRCS_DIR)/free/free_all.c
 

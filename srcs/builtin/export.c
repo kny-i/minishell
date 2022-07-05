@@ -114,7 +114,7 @@ int	export_core(char **args, t_envp **env)
 			if (is_env(env_name, *env) == 1)
 				env_content_change(env_name, content, env);
 			else
-				env_add_back(env, ft_envnew(env_name,content));
+				env_add_back(env, ft_envnew(env_name, content));
 			i++;
 			//free(line);
 			continue;
