@@ -4,49 +4,49 @@
 
 extern char	**environ;
 
-int cnt_env(t_envp *envp)
+int	cnt_env(t_envp *envp)
 {
-    int env_cnt;
+	int	env_cnt;
 
-    env_cnt = 0;
-    while (envp != NULL)
-    {
-        env_cnt++;
-        envp = envp->next;
-    }
-    return (env_cnt);
+	env_cnt = 0;
+	while (envp != NULL)
+	{
+		env_cnt++;
+		envp = envp->next;
+	}
+	return (env_cnt);
 }
 
-char **list_to_env(t_envp *envp)
+char	**list_to_env(t_envp *envp)
 {
-    char **str;
-    int i;
-    int num_env;
-    
-    i = 0;
-    str = NULL;
-    num_env = cnt_env(envp);
-    str = (char **) ft_calloc(num_env + 1, sizeof (char *));
-    if (str == NULL)
-    {
-        perror("calloc error");
-        exit(1);
-    }
-    while (envp != NULL)
-    {
-        str[i] = ft_substr(envp->env_name, 0, ft_strlen(envp->env_name) + 1);
-        str[i] = for_free(ft_strjoin(str[i], "="), str[i]);
-        str[i] = for_free(ft_strjoin(str[i], envp->content), str[i]);
-        i++;
-        envp = envp->next;
-    }
-    str[i] = NULL;
-    return (str);
+	char	**str;
+	int		i;
+	int		num_env;
+
+	i = 0;
+	str = NULL;
+	num_env = cnt_env(envp);
+	str = (char **) ft_calloc(num_env + 1, sizeof (char *));
+	if (str == NULL)
+	{
+		perror("calloc error");
+		exit(1);
+	}
+	while (envp != NULL)
+	{
+		str[i] = ft_substr(envp->env_name, 0, ft_strlen(envp->env_name) + 1);
+		str[i] = for_free(ft_strjoin(str[i], "="), str[i]);
+		str[i] = for_free(ft_strjoin(str[i], envp->content), str[i]);
+		i++;
+		envp = envp->next;
+	}
+	str[i] = NULL;
+	return (str);
 }
 
-int count_cmd(t_cmd *cmd)
+int	count_cmd(t_cmd *cmd)
 {
-	int cmd_cnt;
+	int	cmd_cnt;
 
 	cmd_cnt = 0;
 	while (cmd != NULL)
@@ -71,16 +71,14 @@ int	get_list_size(t_list *args)
 			if (strcmp(tmp->next->content, "<") == 0)
 			{
 				i += 1;
-//				tmp = tmp->next->next->next->next;
 				tmp = tmp->next->next->next;
-				continue;
+				continue ;
 			}
-//			tmp = tmp->next->next;
 			tmp = tmp->next;
-			continue;
+			continue ;
 		}
 		if (strcmp(tmp->content, ">") == 0)
-			break;
+			break ;
 		tmp = tmp->next;
 		i += 1;
 	}
@@ -109,16 +107,14 @@ char	**list_to_args(t_cmd *cmd)
 			{
 				res[len] = ft_substr(cmd->heredocend, 0, ft_strlen(cmd->heredocend));
 				len += 1;
-			//	tmp = tmp->next->next->next->next;
 				tmp = tmp->next->next->next;
-				continue;
+				continue ;
 			}
-//			tmp = tmp->next->next;
 			tmp = tmp->next;
-			continue;
+			continue ;
 		}
 		if (strcmp(tmp->content, ">") == 0)
-			break;
+			break ;
 		res[len] = ft_substr(tmp->content, 0, ft_strlen(tmp->content));
 		tmp = tmp->next;
 		len += 1;

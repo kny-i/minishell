@@ -34,7 +34,8 @@ SRCS := $(SRCS_DIR)/main.c \
 		$(SRCS_DIR)/gnl/get_next_line_utils.c \
 		$(SRCS_DIR)/expand/expand.c \
 		$(SRCS_DIR)/builtin/env.c \
-		$(SRCS_DIR)/free/free_all.c
+		$(SRCS_DIR)/free/free_all.c \
+		$(SRCS_DIR)/execute/execute_utils.c
 
 OBJS := $(patsubst $(SRCS_DIR)%,$(OBJS_DIr)%,$(SRCS:.c=.o))
 
