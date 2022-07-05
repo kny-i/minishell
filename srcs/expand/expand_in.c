@@ -27,22 +27,17 @@ static int	launch_heredoc(t_cmd *cmd, char *str, bool flg)
 	return (0);
 }
 
-static int  check_cmd(t_cmd *cmd)
+static int  check_cmd_in(t_cmd *cmd, t_list *args)
 {
-	t_list  *tmp;
-
-	tmp = cmd->args;
 	if (cmd->cmd[0] == '<')
 	{
-		if (tmp->content[0] == '<')
+		if (args->content[0] == '<')
 		{
-			cmd->fd_in = launch_heredoc(cmd, tmp->next->content, false);
-			unlink(tmp->next->content);
-	//		update_cmd_in(cmd);
+			cmd->fd_in = launch_heredoc(cmd, args->next->content, false);
+			unlink(args->next->content);
 			return (0);
 		}
 		printf("minishell: error\n");
-	//	erase_cmd(cmd);
 		return (1); 
 	}
 	return (0);
@@ -54,7 +49,7 @@ int check_redirect_input(t_cmd *cmd_list)
 
 	tmp = cmd_list->args;
 	if (cmd_list->cmd[0] == '<')
-		return (check_cmd(cmd_list));
+		return (check_cmd_in(cmd_list, tmp));
 	while (tmp != NULL)
 	{
 		if (tmp->content[0] == '<')
@@ -73,5 +68,6 @@ int check_redirect_input(t_cmd *cmd_list)
 		}
 		tmp = tmp->next;
 	}
+//	update_cmd_in(cmd_list);
 	return (0);
 }
