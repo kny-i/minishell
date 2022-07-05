@@ -47,9 +47,9 @@ int	chstatus_end(t_token *token, char *input, int char_type, int status)
 	str = ft_substr(input, 0, 1);
 	token->data = for_free(ft_strjoin(token->data, str), token->data);
 	free(str);
-	if (char_type == CHAR_QOUTE)
+	if (char_type == CHAR_QOUTE && status == STATE_IN_QUOTE)
 		return (STATE_GENERAL);
-	else if (char_type == CHAR_DQOUTE)
+	else if (char_type == CHAR_DQOUTE && status == STATE_IN_DQUOTE)
 		return (STATE_GENERAL);
 	return (status);
 }
@@ -100,6 +100,21 @@ int	assign_general(t_token **token, char *input, int char_type)
 	return (status);
 }
 
+int		check_status(int char_type, int status)
+{
+	if (char_type == CHAR_GREATER || char_type == CHAR_LESSER || char_type == CHAR_PIPE)
+	{
+		printf("test00\n");
+		return (0);
+	}
+	if (status != STATE_GENERAL)
+	{
+		printf("test01\n");
+		return (0);
+	}
+	return (1);
+}
+
 int		lexer_build(char *input, t_token **lexerbuf)
 {
 	int 		status;
@@ -122,5 +137,5 @@ int		lexer_build(char *input, t_token **lexerbuf)
 			status = chstatus_end(token, input_tmp, char_type, STATE_IN_DQUOTE);
 		*(input_tmp++);
 	}
-	return (status);
+	return (check_status(char_type, status));
 }
