@@ -62,6 +62,7 @@ void	minishell(char *environ[])
 		cmd_list = lex_pars(line);
 		if (cmd_list != NULL)
 		{
+			printf("test\n");
 		expand(&cmd_list, &env_list);
 	//	print_cmd_list(cmd_list);
 

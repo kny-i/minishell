@@ -85,21 +85,6 @@ void	free_token_list(t_token *token_list)
 	token_list = NULL;
 }
 
-void	print_lex(t_token *lexerbuf)
-{
-	t_token	*tmp;
-
-	printf("print_lex\n");
-	if (lexerbuf == NULL)
-		return ;
-	tmp = lexerbuf;
-	for (; tmp != NULL; tmp = tmp->next)
-	{
-		printf("tmp->data = %s\n", tmp->data);
-	}
-
-}
-
 t_cmd	*lex_pars(char *input)
 {
 	t_cmd	*cmd_list;
@@ -115,8 +100,7 @@ t_cmd	*lex_pars(char *input)
 		free_token_list(lexerbuf);
 		return (NULL);
 	}
-//	print_lex(lexerbuf);
-	free_token_list(lexerbuf);
 	cmd_list = parse(lexerbuf);
+	free_token_list(lexerbuf);
 	return (cmd_list);
 }
