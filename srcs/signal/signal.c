@@ -6,7 +6,7 @@ void	signal_handler(int sig)
 	ft_putstr_fd("\b\b  \b\b", 1);
 	if (g_signal.pid == 0)
 	{
-		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, SIG_IGN);
 		return ;
 	}
 	(void) sig;
@@ -16,6 +16,18 @@ void	signal_handler(int sig)
 	rl_on_new_line();
 	rl_redisplay();
 }
+
+void	handle_quit(int sig)
+{
+	printf("\b\b  \b\b");
+	if (g_signal.pid == 0)
+	{
+		signal(SIGQUIT, SIG_IGN);
+		return ;
+	}
+	return ;
+}
+
 void	sig_input()
 {
 /*	struct sigaction	sa;
@@ -25,7 +37,8 @@ void	sig_input()
 	sigaction(SIGINT, &sa, NULL);*/
 	g_signal.pid = 1;
 	g_signal.exit_status = 0;
-	signal(SIGINT, signal_handler);
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, &signal_handler);
+	signal(SIGQUIT, &handle_quit);
+//	signal(SIGQUIT, SIG_IGN);
 
 }
