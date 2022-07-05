@@ -3,6 +3,7 @@
 #include "env.h"
 #include "minishell.h"
 
+
 int env_core(t_envp *env)
 {
 	while (env != NULL)
