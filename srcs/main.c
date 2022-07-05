@@ -5,7 +5,7 @@
 #include "expand.h"
 #include "free.h"
 
-void	print_env(t_envp *env)
+/*void	print_env(t_envp *env)
 {
 	t_envp	*tmp;
 
@@ -29,7 +29,7 @@ void	print_cmd_list(t_cmd *cmd_list)
 			printf("%s ", list->content);
 		putchar('\n');
 	}
-}
+}*/
 
 void	free_env_list(t_envp *env_list)
 {
@@ -48,29 +48,24 @@ void	free_env_list(t_envp *env_list)
 void	minishell(char *environ[])
 {
 	char	*line;
-	t_cmd *cmd_list;
-	t_envp *env_list;
+	t_cmd	*cmd_list;
+	t_envp	*env_list;
 
 	env_list = creat_tenv(environ);
-		sig_input();
+	sig_input();
 	while (1)
 	{
 		line = readline("minishell> ");
 		if (line == NULL)
-			break;
+			break ;
 		add_history(line);
 		cmd_list = lex_pars(line);
 		if (cmd_list != NULL)
 		{
-			printf("test\n");
-		expand(&cmd_list, &env_list);
-	//	print_cmd_list(cmd_list);
-
-		execute_test(&cmd_list, &env_list);
+			expand(&cmd_list, &env_list);
+			execute_test(&cmd_list, &env_list);
 		}
 		free_cmd(cmd_list);
-	//	free_env_list(env_list);
-	//	system("leaks minishell");
 	}
 	printf("exit minishell\n");
 	exit(0);
