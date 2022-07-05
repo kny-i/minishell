@@ -52,9 +52,9 @@ void	minishell(char *environ[])
 	t_envp *env_list;
 
 	env_list = creat_tenv(environ);
+		sig_input();
 	while (1)
 	{
-		sig_input();
 		line = readline("minishell> ");
 		if (line == NULL)
 			break;

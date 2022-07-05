@@ -11,6 +11,7 @@ char	*get_env_cmd_general(char *cmd, t_envp **env_list)
 	tmp = ft_strdup(cmd);
 	while (tmp_list->next != NULL)
 	{
+		printf("tmp_list->env_name = %s\n", tmp_list->env_name);
 		if (ft_strcmp(tmp_list->env_name, tmp) == 0)
 		{
 			free(tmp);
@@ -42,6 +43,7 @@ char	*check_cmd(char *cmd, t_envp **envp_list)
 		if (cmd[1] == '?')
 			return (ft_strdup(cmd));
 		res = ft_substr(cmd, 1, ft_strlen(cmd));
+	//	printf("res = %s\n", res);
 		new_str = for_free(get_env_cmd_general(res, envp_list), res);
 	}
 	else if (cmd[0] == '\"')
