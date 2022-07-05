@@ -11,7 +11,6 @@ char	*get_env_cmd_general(char *cmd, t_envp **env_list)
 	tmp = ft_strdup(cmd);
 	while (tmp_list->next != NULL)
 	{
-		printf("tmp_list->env_name = %s\n", tmp_list->env_name);
 		if (ft_strcmp(tmp_list->env_name, tmp) == 0)
 		{
 			free(tmp);

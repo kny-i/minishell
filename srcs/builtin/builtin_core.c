@@ -7,7 +7,7 @@ int	execute_builtin(t_cmd *cmd_list,t_envp **enpvp, char **darray_args)
 	char *tmp;
 	char **args;
 
-	printf("[%s]\n", "original builtins");
+//	printf("[%s]\n", "original builtins");
 	args = darray_args;
 //	args = list_to_args(cmd_list);
 	tmp = cmd_list->cmd;
