@@ -14,7 +14,8 @@ void 	x_dup2(int fd1, int fd2);
 char	*x_strdup(char *str);
 char **x_split(char *str, char c);
 char	*for_free(char *res, char *free_str);
-
+void	free_env_split(char **env_path);
+void	free_args(char **args);
 void    *ft_xmalloc(size_t bytes);
 
 #endif

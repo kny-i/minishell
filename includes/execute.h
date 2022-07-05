@@ -16,5 +16,7 @@ int	cnt_env(t_envp *envp);
 char	**list_to_env(t_envp *envp);
 int	count_cmd(t_cmd *cmd);
 int	get_list_size(t_list *args);
+char	**list_to_args(t_cmd *cmd);
+void	list_to_args_loop(t_list *tmp_args, int *len, char **res, t_cmd	*cmd);
 
 #endif
