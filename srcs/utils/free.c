@@ -5,7 +5,7 @@ char	*for_free(char *res, char *free_str)
 	if (free_str != NULL)
 		free(free_str);
 	free_str = NULL;
-	return(res);
+	return (res);
 }
 
 void	free_env_split(char **env_path)

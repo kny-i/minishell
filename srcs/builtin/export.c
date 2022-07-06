@@ -2,9 +2,9 @@
 #include "env.h"
 #include "utils.h"
 
-void 	env_add_back(t_envp **envp, t_envp *new)
+void	env_add_back(t_envp **envp, t_envp *new)
 {
-	t_envp *tmp;
+	t_envp	*tmp;
 
 	tmp = *envp;
 	while (tmp->next != NULL)
@@ -12,12 +12,12 @@ void 	env_add_back(t_envp **envp, t_envp *new)
 	tmp->next = new;
 }
 
-bool has_char(const char *str, char c)
+bool	has_char(const char *str, char c)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(str[i] != '\0')
+	while (str[i] != '\0')
 	{
 		if (str[i] == c)
 			return (true);
@@ -26,17 +26,17 @@ bool has_char(const char *str, char c)
 	return (false);
 }
 
-char *strcpy_untill_c(char *dst,const char *src, char c)
+char	*strcpy_untill_c(char *dst, const char *src, char c)
 {
-	int i;
-	int k;
+	int	i;
+	int	k;
 
 	i = 0;
 	k = 0;
-	while(src[i] != c)
+	while (src[i] != c)
 		i++;
 	dst = (char *) x_calloc(sizeof (char), i);
-	while(src[k] != c)
+	while (src[k] != c)
 	{
 		dst[k] = src[k];
 		k++;
@@ -44,9 +44,9 @@ char *strcpy_untill_c(char *dst,const char *src, char c)
 	return (dst);
 }
 
-void print_env_expo(t_envp *envp)
+void	print_env_expo(t_envp *envp)
 {
-	while (envp!= NULL)
+	while (envp != NULL)
 	{
 		ft_putstr_fd("export ", 1);
 		ft_putstr_fd(envp->env_name, 1);
@@ -55,13 +55,13 @@ void print_env_expo(t_envp *envp)
 		ft_putstr_fd(envp->content, 1);
 		ft_putchar_fd('"', 1);
 		ft_putchar_fd('\n', 1);
-		envp= envp->next;
+		envp = envp->next;
 	}
 }
 
-bool is_env(char *env_name, t_envp *envp)
+bool	is_env(char *env_name, t_envp *envp)
 {
-	while(envp != NULL)
+	while (envp != NULL)
 	{
 		if (ft_strcmp(env_name, envp->env_name) == 0)
 			return (true);
@@ -70,9 +70,9 @@ bool is_env(char *env_name, t_envp *envp)
 	return (false);
 }
 
-void env_content_change(char *env_name, char *content, t_envp **envp)
+void	env_content_change(char *env_name, char *content, t_envp **envp)
 {
-	t_envp *tmp;
+	t_envp	*tmp;
 
 	tmp = *envp;
 	while (tmp != NULL)
@@ -85,11 +85,11 @@ void env_content_change(char *env_name, char *content, t_envp **envp)
 
 int	export_core(char **args, t_envp **env)
 {
-	char **tmp;
-	char *line;
-	char *env_name;
-	char *content;
-	int	 i;
+	char	**tmp;
+	char	*line;
+	char	*env_name;
+	char	*content;
+	int		i;
 
 	tmp = args;
 	i = 1; //skip the first str which is expor
@@ -102,10 +102,10 @@ int	export_core(char **args, t_envp **env)
 		{
 			i++;
 			free(line);
-			continue;
+			continue ;
 		}
 		env_name = strcpy_untill_c(env_name, line, '=');
-		while(*line != '=')
+		while (*line != '=')
 			line++;
 		line++;//skip '='
 		content = line;

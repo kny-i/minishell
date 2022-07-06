@@ -1,7 +1,6 @@
 #include "env.h"
 #include "utils.h"
 
-
 int	cnt_env(t_envp *envp)
 {
 	int	env_cnt;
@@ -27,9 +26,9 @@ char	*get_path(t_envp *envp)
 	return (tmp->content);
 }
 
-t_envp *ft_envnew(char *env_name, char *content)
+t_envp	*ft_envnew(char *env_name, char *content)
 {
-	t_envp *envp_list;
+	t_envp	*envp_list;
 
 	envp_list = ft_calloc(1, sizeof(t_envp));
 	if (envp_list == NULL)
@@ -41,7 +40,6 @@ t_envp *ft_envnew(char *env_name, char *content)
 	envp_list->next = NULL;
 	envp_list->env_name = env_name;
 	return (envp_list);
-
 }
 
 t_envp	*creat_tenv(char **envp)
@@ -55,7 +53,7 @@ t_envp	*creat_tenv(char **envp)
 	i = 0;
 	env_tmp = ft_envnew(NULL, NULL);
 	env_list = env_tmp;
-	while(envp[i] != NULL)
+	while (envp[i] != NULL)
 	{
 		k = 0;
 		while (envp[i][k] != '=')
@@ -66,7 +64,7 @@ t_envp	*creat_tenv(char **envp)
 			j++;
 		env_tmp->content = ft_substr(envp[i], k + 1, j);
 		if (envp[i + 1] == NULL)
-			break;
+			break ;
 		env_tmp->next = ft_envnew(NULL, NULL);
 		env_tmp = env_tmp->next;
 		i++;

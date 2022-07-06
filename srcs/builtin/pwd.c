@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int pwd_core(void)
+int	pwd_core(void)
 {
 	char	*pwd_path;
 

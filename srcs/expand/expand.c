@@ -30,7 +30,7 @@ char	*get_env_cmd_general(char *cmd, t_envp **env_list)
 char	*expand_dquot(char *cmd, t_envp **envp_list)
 {
 	char	*res;
-	int		len;
+	size_t	len;
 
 	len = ft_strlen(cmd);
 	res = ft_substr(cmd, 2, len - 3);
@@ -76,7 +76,6 @@ static int	check_args(t_cmd *cmd_list, t_envp **envp_list)
 	}
 	return (0);
 }
-
 
 bool	expand_env(t_cmd **cmd, t_envp **envp_list)
 {
