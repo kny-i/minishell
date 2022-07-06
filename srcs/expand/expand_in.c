@@ -38,7 +38,7 @@ static int	check_cmd_in(t_cmd *cmd, t_list *args)
 			return (0);
 		}
 		printf("minishell: error\n");
-		return (1); 
+		return (1);
 	}
 	return (0);
 }
