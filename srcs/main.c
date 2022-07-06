@@ -1,9 +1,9 @@
 #include "minishell.h"
+#include "utils.h"
 #include "lexer.h"
 #include "parser.h"
 #include "env.h"
 #include "expand.h"
-#include "free.h"
 
 void    print_env(t_envp *env)
 {

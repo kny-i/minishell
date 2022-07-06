@@ -37,7 +37,6 @@ SRCS := $(SRCS_DIR)/main.c \
 		$(SRCS_DIR)/expand/expand_out.c \
 		$(SRCS_DIR)/expand/expand_in.c \
 		$(SRCS_DIR)/builtin/env.c \
-		$(SRCS_DIR)/free/free_all.c \
 		$(SRCS_DIR)/execute/execute_utils.c \
 		$(SRCS_DIR)/execute/execve_utils.c
 

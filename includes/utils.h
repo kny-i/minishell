@@ -2,6 +2,8 @@
 #define UTILS_H
 
 #include "./minishell.h"
+# include <stdlib.h>
+# include "parser.h"
 
 int	x_pipe(int fd[2]);
 int		ft_strcmp(const char *s1, const char *s2);
@@ -17,5 +19,6 @@ char	*for_free(char *res, char *free_str);
 void	free_env_split(char **env_path);
 void	free_args(char **args);
 void    *ft_xmalloc(size_t bytes);
+void	free_cmd(t_cmd *cmd_list);
 
 #endif
