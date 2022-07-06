@@ -27,7 +27,7 @@ static int	launch_heredoc(t_cmd *cmd, char *str, bool flg)
 	return (0);
 }
 
-static int  check_cmd_in(t_cmd *cmd, t_list *args)
+static int	check_cmd_in(t_cmd *cmd, t_list *args)
 {
 	if (cmd->cmd[0] == '<')
 	{
