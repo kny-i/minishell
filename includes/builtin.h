@@ -17,5 +17,10 @@ int pwd_core(void);
 int env_core(t_envp *env);
 int	unset_core(char **args, t_envp **envp);
 int exit_core(char **args);
+void	env_add_back(t_envp **envp, t_envp *new);
+bool	has_char(const char *str, char c);
+char	*strcpy_untill_c(char *dst, const char *src, char c);
+void	print_env_expo(t_envp *envp);
+bool	is_env(char *env_name, t_envp *envp);
 
 #endif
