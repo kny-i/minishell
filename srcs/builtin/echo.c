@@ -1,14 +1,13 @@
 #include "builtin.h"
 #include <utils.h>
 
-
-int echo_core(char **str)
+int	echo_core(char **str)
 {
-	int i;
-	bool is_noption;
-	bool is_first;
+	int		i;
+	bool	is_noption;
+	bool	is_first;
 
-	i = 1;// skip the first str which is "echo"
+	i = 1;
 	is_noption = false;
 	if (ft_strcmp(str[i], "$?") == 0)
 		printf("%d\n", g_signal.exit_status);
@@ -32,14 +31,13 @@ int echo_core(char **str)
 	return (0);
 }
 
-int echo_core_test(t_cmd *cmd_list, char **str)
+int	echo_core_test(t_cmd *cmd_list, char **str)
 {
-	int i;
-	bool is_noption;
-	bool is_first;
-//	char	**str = list_to_args(cmd_list);
+	int		i;
+	bool	is_noption;
+	bool	is_first;
 
-	i = 1;// skip the first str which is "echo"
+	i = 1;
 	is_noption = false;
 	if (ft_strcmp(str[i], "$?") == 0)
 	{

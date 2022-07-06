@@ -2,9 +2,9 @@
 #include <unistd.h>
 #include "env.h"
 
-int cd_to_home(char **args, t_envp *env)
+int	cd_to_home(char **args, t_envp *env)
 {
-	char *home_path;
+	char	*home_path;
 
 	home_path = get_env_content(env, "HOME");
 	if (home_path == NULL)
@@ -23,13 +23,13 @@ int cd_to_home(char **args, t_envp *env)
 	return (0);
 }
 
-int cd_core(char **args, t_envp *env)
+int	cd_core(char **args, t_envp *env)
 {
 	if (args[1] == NULL)
 	{
 		return (cd_to_home(args, env));
 	}
-	if(chdir(args[1]) == -1)
+	if (chdir(args[1]) == -1)
 	{
 		perror(args[0]);
 		g_signal.exit_status = 1;

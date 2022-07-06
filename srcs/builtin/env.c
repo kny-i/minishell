@@ -3,8 +3,7 @@
 #include "env.h"
 #include "minishell.h"
 
-
-int env_core(t_envp *env)
+int	env_core(t_envp *env)
 {
 	while (env != NULL)
 	{
@@ -14,5 +13,5 @@ int env_core(t_envp *env)
 		ft_putchar_fd('\n', 1);
 		env = env->next;
 	}
-	return(0);
+	return (0);
 }
