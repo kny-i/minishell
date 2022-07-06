@@ -1,5 +1,4 @@
 #include "free.h"
-
 void	free_cmd(t_cmd *cmd_list)
 {
 	t_cmd	*tmp;
