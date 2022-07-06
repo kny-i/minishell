@@ -39,11 +39,6 @@ int	echo_core_test(t_cmd *cmd_list, char **str)
 
 	i = 1;
 	is_noption = false;
-	if (ft_strcmp(str[i], "$?") == 0)
-	{
-		printf("%d\n", g_signal.exit_status);
-		return (0);
-	}
 	if (str[1] != NULL && ft_strcmp("-n", str[1]) == 0)
 	{
 		is_noption = true;
@@ -56,7 +51,10 @@ int	echo_core_test(t_cmd *cmd_list, char **str)
 			ft_putchar_fd(' ', cmd_list->fd_out);
 		else
 			is_first = false;
-		ft_putstr_fd(str[i], cmd_list->fd_out);
+		if (ft_strcmp(str[i], "$?") == 0)
+			printf("%d\n", g_signal.exit_status);
+		else
+			ft_putstr_fd(str[i], cmd_list->fd_out);
 		i++;
 	}
 	if (is_noption == false)
