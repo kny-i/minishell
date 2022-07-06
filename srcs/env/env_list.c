@@ -2,6 +2,19 @@
 #include "utils.h"
 
 
+int	cnt_env(t_envp *envp)
+{
+	int	env_cnt;
+
+	env_cnt = 0;
+	while (envp != NULL)
+	{
+		env_cnt++;
+		envp = envp->next;
+	}
+	return (env_cnt);
+}
+
 char	*get_path(t_envp *envp)
 {
 	t_envp	*tmp;

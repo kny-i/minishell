@@ -3,86 +3,37 @@
 #include "minishell.h"
 #include "env.h"
 
-extern char	**environ;
-
-void	execute_abs(char **args, char *cmd)
+void	fd_actions(int i, int **fd, t_cmd *tmp_cmd, int num_cmd)
 {
-	execve(cmd, args, environ);
-	exit(0);
-}
-
-void	execve_not_builtin(char **path_tmp, t_cmd *cmd_list, \
-										char **args, int *res)
-{
-	int	i;
-
-	i = 0;
-	if (*cmd_list->cmd == '/')
-		execute_abs(args, cmd_list->cmd);
-	else
+	if (tmp_cmd->fd_out != 1)
 	{
-		cmd_list->cmd = for_free(ft_strjoin("/", cmd_list->cmd), cmd_list->cmd);
-		while (path_tmp[i] != NULL)
-		{
-			path_tmp[i] = for_free(ft_strjoin(path_tmp[i], \
-									cmd_list->cmd), path_tmp[i]);
-			*res = execve(path_tmp[i], args, environ);
-			i += 1;
-		}
-	}
-	if (*res == -1)
-	{
-		g_signal.exit_status = 127;
-		printf("g_signal.exit = %d\n", g_signal.exit_status);
-	}
-}
-
-int	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
-{
-	char	**args;
-	char	**path_tmp;
-	int		res;
-
-	args = list_to_args(cmd_list);
-	if (is_builtin(cmd_list) == 1)
-	{
-		execute_builtin(cmd_list, envp, args);
-		exit(0);
-	}
-	path_tmp = env_path_split;
-	execve_not_builtin(path_tmp, cmd_list, args, &res);
-	exit(0);
-}
-
-void	close_dup(int fd, int oldfd, int newfd, bool flg)
-{
-	if (flg)
-		x_dup2(oldfd, newfd);
-	x_close(fd);
-	x_close(oldfd);
-}
-
-void	execve_test(int i, int fd[][2], t_cmd *tmp_cmd, \
-						char **env_path_split, int	num_cmd, t_envp **envp)
-{
-	if (i != num_cmd)
-	{
-		if (tmp_cmd->fd_out != 1)
-			fd[i][1] = tmp_cmd->fd_out;
+		fd[i][1] = tmp_cmd->fd_out;
 		close_dup(fd[i][0], fd[i][1], 1, true);
 	}
-	if (i != 0)
-		close_dup(fd[i][1], fd[i][0], 0, true);
-	execve_cmd(tmp_cmd, env_path_split, envp);
+	else if (i < num_cmd - 1)
+		close_dup(fd[i][0], fd[i][1], 1, true);
+	if (i == 0 && tmp_cmd->fd_in != 0)
+	{
+		fd[i][0] = tmp_cmd->fd_in;
+		close_dup(fd[i][1], fd[i][0], 0, false);
+	}
+	else if (tmp_cmd->fd_in != 0)
+	{
+		fd[i - 1][0] = tmp_cmd->fd_in;
+		close_dup(fd[i - 1][1], fd[i - 1][0], 0, true);
+	}
+	else if (i != 0)
+		close_dup(fd[i - 1][1], fd[i - 1][0], 0, true);
 }
 
-void
-void	execute_test_loop(int num_cmd, t_cmd *tmp_cmd, \
+void	execute_test_loop(t_cmd *tmp_cmd, \
 					char **env_path_split, t_envp **envp, int **fd)
 {
 	int		i;
 	pid_t	pid;
+	int		num_cmd;
 
+	num_cmd = count_cmd(tmp_cmd);
 	i = 0;
 	while (i < num_cmd)
 	{
@@ -90,48 +41,11 @@ void	execute_test_loop(int num_cmd, t_cmd *tmp_cmd, \
 		g_signal.pid = 0;
 		if (pid == 0)
 		{
-			if (tmp_cmd->fd_out != 1)
-			{
-				fd[i][1] = tmp_cmd->fd_out;
-				x_dup2(fd[i][1], 1);
-				x_close(fd[i][1]);
-				x_close(fd[i][0]);
-			}
-			else if (tmp_cmd->next != NULL)
-			{
-				x_dup2(fd[i][1], 1);
-				x_close(fd[i][0]);
-				x_close(fd[i][1]);
-			}
-			if (i == 0 && tmp_cmd->fd_in != 0)
-			{
-				fd[i][0] = tmp_cmd->fd_in;
-				x_dup2(fd[i][0], 0);
-				x_close(fd[i][0]);
-			}
-			else if (tmp_cmd->fd_in != 0)
-			{
-				fd[i - 1][0] = tmp_cmd->fd_in;
-				x_dup2(fd[i - 1][0], 0);
-				x_close(fd[i - 1][0]);
-				x_close(fd[i - 1][1]);
-			}
-			else if (i != 0)
-			{
-				x_dup2(fd[i - 1][0], 0);
-				x_close(fd[i - 1][0]);
-				x_close(fd[i - 1][1]);
-			}
+			fd_actions(i, fd, tmp_cmd, num_cmd);
 			execve_cmd(tmp_cmd, env_path_split, envp);
 		}
 		else
-		{
-			if (i > 0)
-			{
-				x_close(fd[i - 1][0]);
-				x_close(fd[i - 1][1]);
-			}
-		}
+			close_parents_fd(i, fd);
 		i += 1;
 		tmp_cmd = tmp_cmd->next;
 	}
@@ -143,7 +57,6 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, \
 	t_cmd	*tmp_cmd;
 	int		i;
 	int		**fd;
-	pid_t	pid;
 	int		k;
 
 	tmp_cmd = *cmd_list;
@@ -160,7 +73,7 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, \
 		x_pipe(fd[i]);
 		i += 1;
 	}
-	execute_test_loop(num_cmd, tmp_cmd, env_path_split, envp, fd);
+	execute_test_loop(tmp_cmd, env_path_split, envp, fd);
 	i = 0;
 	while (i++ < num_cmd)
 		wait(NULL);
@@ -189,4 +102,3 @@ int	execute_test(t_cmd **cmd_list, t_envp **envp)
 	free_env_split(env_path_split);
 	return (0);
 }
-
