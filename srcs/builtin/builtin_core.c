@@ -12,7 +12,7 @@ int	execute_builtin(t_cmd *cmd_list, t_envp **enpvp, char **darray_args)
 	if (ft_strcmp("cd", tmp) == 0)
 		return (cd_core(args, *enpvp));
 	else if (ft_strcmp("echo", tmp) == 0)
-		return (echo_core_test(cmd_list, args));
+		return (echo_core(cmd_list, args));
 	else if (ft_strcmp("env", tmp) == 0)
 		return (env_core(*enpvp));
 	else if (ft_strcmp("exit", tmp) == 0)
