@@ -57,14 +57,13 @@ void    minishell(char *environ[])
 	{
 		line = readline("minishell> ");
 		if (line == NULL)
-			break;
+			break ;
 		add_history(line);
 		cmd_list = lex_pars(line);
-
 		if (expand(&cmd_list, &env_list))
 		{
 			print_cmd_list(cmd_list);
-		//	execute_test(&cmd_list, &env_list);
+			execute_test(&cmd_list, &env_list);
 		}
 		free_cmd(cmd_list);
 		//    free_env_list(env_list);

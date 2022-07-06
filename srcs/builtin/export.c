@@ -48,7 +48,7 @@ void	print_env_expo(t_envp *envp)
 {
 	while (envp != NULL)
 	{
-		ft_putstr_fd("export ", 1);
+		ft_putstr_fd("declare -x ", 1);
 		ft_putstr_fd(envp->env_name, 1);
 		ft_putchar_fd('=', 1);
 		ft_putchar_fd('"', 1);
