@@ -44,13 +44,13 @@ t_envp *ft_envnew(char *env_name, char *content)
 
 }
 
-t_envp *creat_tenv(char **envp)
+t_envp	*creat_tenv(char **envp)
 {
-	t_envp *env_tmp;
-	t_envp *env_list;
-	int i;
-	int k;
-	int j;
+	t_envp	*env_tmp;
+	t_envp	*env_list;
+	int		i;
+	int		k;
+	int		j;
 
 	i = 0;
 	env_tmp = ft_envnew(NULL, NULL);
@@ -74,7 +74,7 @@ t_envp *creat_tenv(char **envp)
 	return (env_list);
 }
 
-char *get_env_content(t_envp *env, char *name)
+char	*get_env_content(t_envp *env, char *name)
 {
 	while (env != NULL)
 	{
