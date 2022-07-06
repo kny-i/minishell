@@ -10,7 +10,6 @@ void	signal_handler(int sig)
 		return ;
 	}
 	(void) sig;
-//	fflush(stdout);
 	ft_putstr_fd("\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
@@ -20,26 +19,17 @@ void	signal_handler(int sig)
 void	handle_quit(int sig)
 {
 	printf("\b\b  \b\b");
-//		printf("pid = %d\n", g_signal.exit_status);
 	if (g_signal.pid == 0)
 	{
 		signal(EOF, SIG_DFL);
 		return ;
 	}
-	return ;
 }
 
-void	sig_input()
+void	sig_input(void)
 {
-/*	struct sigaction	sa;
-
-	sa.sa_handler = &handle_sig;
-	sa.sa_flags = SA_RESTART;
-	sigaction(SIGINT, &sa, NULL);*/
 	g_signal.pid = 1;
 	g_signal.exit_status = 0;
 	signal(SIGINT, &signal_handler);
 	signal(SIGQUIT, &handle_quit);
-//	signal(SIGQUIT, SIG_IGN);
-
 }
