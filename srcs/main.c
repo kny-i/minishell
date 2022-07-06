@@ -5,9 +5,9 @@
 #include "expand.h"
 #include "free.h"
 
-void	print_env(t_envp *env)
+void    print_env(t_envp *env)
 {
-	t_envp	*tmp;
+	t_envp    *tmp;
 
 	tmp = env;
 	for (; tmp != NULL; tmp = tmp->next)
@@ -17,9 +17,9 @@ void	print_env(t_envp *env)
 	}
 }
 
-void	print_cmd_list(t_cmd *cmd_list)
+void    print_cmd_list(t_cmd *cmd_list)
 {
-	t_cmd	*tmp;
+	t_cmd    *tmp;
 
 	tmp  = cmd_list;
 	for(; tmp != NULL; tmp = tmp->next)
@@ -31,9 +31,9 @@ void	print_cmd_list(t_cmd *cmd_list)
 	}
 }
 
-void	free_env_list(t_envp *env_list)
+void    free_env_list(t_envp *env_list)
 {
-	t_envp	*tmp;
+	t_envp    *tmp;
 
 	while (env_list != NULL)
 	{
@@ -45,14 +45,14 @@ void	free_env_list(t_envp *env_list)
 	}
 }
 
-void	minishell(char *environ[])
+void    minishell(char *environ[])
 {
-	char	*line;
+	char    *line;
 	t_cmd *cmd_list;
 	t_envp *env_list;
 
 	env_list = creat_tenv(environ);
-		sig_input();
+	sig_input();
 	while (1)
 	{
 		line = readline("minishell> ");
@@ -60,23 +60,23 @@ void	minishell(char *environ[])
 			break;
 		add_history(line);
 		cmd_list = lex_pars(line);
-//		if (cmd_list != NULL)
+
 		if (expand(&cmd_list, &env_list))
 		{
 			print_cmd_list(cmd_list);
 		//	execute_test(&cmd_list, &env_list);
 		}
 		free_cmd(cmd_list);
-	//	free_env_list(env_list);
-	//	system("leaks minishell");
+		//    free_env_list(env_list);
+		//    system("leaks minishell");
 	}
 	printf("exit minishell\n");
 	exit(0);
 }
 
-int	main(int argc, char *argv[])
+int    main(int argc, char *argv[])
 {
-	extern char	**environ;
+	extern char    **environ;
 
 	if (argc == 1)
 		minishell(environ);

@@ -2,6 +2,31 @@
 #include "utils.h"
 
 
+int	cnt_env(t_envp *envp)
+{
+	int	env_cnt;
+
+	env_cnt = 0;
+	while (envp != NULL)
+	{
+		env_cnt++;
+		envp = envp->next;
+	}
+	return (env_cnt);
+}
+
+char	*get_path(t_envp *envp)
+{
+	t_envp	*tmp;
+
+	tmp = envp;
+	while (ft_strcmp(tmp->env_name, "PATH"))
+	{
+		tmp = tmp->next;
+	}
+	return (tmp->content);
+}
+
 t_envp *ft_envnew(char *env_name, char *content)
 {
 	t_envp *envp_list;
