@@ -51,7 +51,7 @@ void    minishell(char *environ[])
 	t_cmd *cmd_list;
 	t_envp *env_list;
 
-	env_list = creat_tenv(environ);
+	env_list = create_tenv(environ);
 	sig_input();
 	while (1)
 	{
@@ -73,9 +73,9 @@ void    minishell(char *environ[])
 	exit(0);
 }
 
-int    main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	extern char    **environ;
+	extern char	**environ;
 
 	if (argc == 1)
 		minishell(environ);

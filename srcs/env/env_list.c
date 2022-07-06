@@ -42,7 +42,7 @@ t_envp	*ft_envnew(char *env_name, char *content)
 	return (envp_list);
 }
 
-t_envp	*creat_tenv(char **envp)
+t_envp	*create_tenv(char **envp)
 {
 	t_envp	*env_tmp;
 	t_envp	*env_list;
