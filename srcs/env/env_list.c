@@ -41,29 +41,10 @@ t_envp	*create_tenv(char **envp)
 {
 	t_envp	*env_tmp;
 	t_envp	*env_list;
-	int		i;
-	int		k;
-	int		j;
 
-	i = 0;
 	env_tmp = ft_envnew(NULL, NULL);
 	env_list = env_tmp;
-	while (envp[i] != NULL)
-	{
-		k = 0;
-		while (envp[i][k] != '=')
-			k++;
-		env_tmp->env_name = ft_substr(envp[i], 0, k);
-		j = 0;
-		while (envp[i][j] != '\0')
-			j++;
-		env_tmp->content = ft_substr(envp[i], k + 1, j);
-		if (envp[i + 1] == NULL)
-			break ;
-		env_tmp->next = ft_envnew(NULL, NULL);
-		env_tmp = env_tmp->next;
-		i++;
-	}
+	create_tenv_utils(envp, env_tmp);
 	return (env_list);
 }
 
