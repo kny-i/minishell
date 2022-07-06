@@ -24,7 +24,8 @@ void	execve_not_builtin(char **path_tmp, t_cmd *cmd_list, \
 		cmd_list->cmd = for_free(ft_strjoin("/", cmd_list->cmd), cmd_list->cmd);
 		while (path_tmp[i] != NULL)
 		{
-			path_tmp[i] = for_free(ft_strjoin(path_tmp[i], cmd_list->cmd), path_tmp[i]);
+			path_tmp[i] = for_free(ft_strjoin(path_tmp[i], \
+									cmd_list->cmd), path_tmp[i]);
 			*res = execve(path_tmp[i], args, environ);
 			i += 1;
 		}
@@ -61,7 +62,8 @@ void	close_dup(int fd, int oldfd, int newfd, bool flg)
 	x_close(oldfd);
 }
 
-void	execve_test(int i, int fd[][2], t_cmd *tmp_cmd, char **env_path_split, int num_cmd, t_envp **envp)
+void	execve_test(int i, int fd[][2], t_cmd *tmp_cmd, \
+						char **env_path_split, int	num_cmd, t_envp **envp)
 {
 	if (i != num_cmd)
 	{
@@ -74,20 +76,13 @@ void	execve_test(int i, int fd[][2], t_cmd *tmp_cmd, char **env_path_split, int 
 	execve_cmd(tmp_cmd, env_path_split, envp);
 }
 
-void	execute_test_util(t_cmd **cmd_list, int num_cmd, char **env_path_split, t_envp **envp)
+void
+void	execute_test_loop(int num_cmd, t_cmd *tmp_cmd, \
+					char **env_path_split, t_envp **envp, int **fd)
 {
-	t_cmd	*tmp_cmd;
 	int		i;
-	int		fd[num_cmd][2];
 	pid_t	pid;
 
-	i = 0;
-	tmp_cmd = *cmd_list;
-	while (i < num_cmd)
-	{
-		x_pipe(fd[i]);
-		i += 1;
-	}
 	i = 0;
 	while (i < num_cmd)
 	{
@@ -140,6 +135,32 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, char **env_path_split, t_e
 		i += 1;
 		tmp_cmd = tmp_cmd->next;
 	}
+}
+
+void	execute_test_util(t_cmd **cmd_list, int num_cmd, \
+								char **env_path_split, t_envp**envp)
+{
+	t_cmd	*tmp_cmd;
+	int		i;
+	int		**fd;
+	pid_t	pid;
+	int		k;
+
+	tmp_cmd = *cmd_list;
+	fd = (int **)x_calloc(num_cmd, sizeof(int *));
+	k = 0;
+	while (k < num_cmd)
+	{
+		fd [k] = (int *) x_calloc(2, sizeof(int));
+		k++;
+	}
+	i = 0;
+	while (i < num_cmd)
+	{
+		x_pipe(fd[i]);
+		i += 1;
+	}
+	execute_test_loop(num_cmd, tmp_cmd, env_path_split, envp, fd);
 	i = 0;
 	while (i++ < num_cmd)
 		wait(NULL);
