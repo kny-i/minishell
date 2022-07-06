@@ -94,7 +94,7 @@ t_cmd	*lex_pars(char *input)
 	res = lexer_build(input, &lexerbuf);
 	free(input);
 	input = NULL;
-	if (res != STATE_GENERAL)
+	if (res == 0)
 	{
 		printf("syntax error\n");
 		free_token_list(lexerbuf);
