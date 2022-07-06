@@ -30,12 +30,7 @@ t_envp	*ft_envnew(char *env_name, char *content)
 {
 	t_envp	*envp_list;
 
-	envp_list = ft_calloc(1, sizeof(t_envp));
-	if (envp_list == NULL)
-	{
-		perror("calloc error");
-		exit(1);
-	}
+	envp_list = x_calloc(1, sizeof(t_envp));
 	envp_list->content = content;
 	envp_list->next = NULL;
 	envp_list->env_name = env_name;
