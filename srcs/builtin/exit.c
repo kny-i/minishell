@@ -2,7 +2,7 @@
 
 bool	is_exit_status(char *num)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (num[i] != '\0')
@@ -14,14 +14,14 @@ bool	is_exit_status(char *num)
 	return (true);
 }
 
-int exit_core(char **args)
+int	exit_core(char **args)
 {
-	if(args[1] == NULL)
+	if (args[1] == NULL)
 	{
 		ft_putendl_fd("exit", 1);
 		exit(0);
 	}
-	else if(is_exit_status(args[1]) == false)
+	else if (is_exit_status(args[1]) == false)
 	{
 		ft_putendl_fd("exit", 1);
 		ft_putstr_fd("minishell: exit:", 2);
