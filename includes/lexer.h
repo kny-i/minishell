@@ -7,8 +7,7 @@
 # include <stdio.h>
 # include "../libft/libft.h"
 
-
-typedef enum	e_token_type
+typedef enum e_token_type
 {
 	CHAR_GENERAL		= -1,
 	CHAR_PIPE			= '|',
@@ -21,20 +20,18 @@ typedef enum	e_token_type
 	CHAR_GREATER		= '>',
 	CHAR_LESSER			= '<',
 	CHAR_NULL			= 0,
-
 	TOKEN				= -1,
 }	t_token_type;
 
-typedef enum	e_status
+typedef enum e_status
 {
 	STATE_IN_DQUOTE,
 	STATE_IN_QUOTE,
 	STATE_GENERAL,
 }	t_status;
 
-
-typedef struct s_token	t_token;
-typedef struct s_lexer	t_lexer;
+typedef struct s_token		t_token;
+typedef struct s_lexer		t_lexer;
 typedef struct s_cmd_len	t_cmd_len;
 
 typedef struct s_cmd_len
@@ -43,7 +40,6 @@ typedef struct s_cmd_len
 	int			stauts;
 	t_cmd_len	*next;
 }	t_cmd_len;
-
 
 typedef struct s_token
 {
