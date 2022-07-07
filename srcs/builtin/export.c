@@ -14,7 +14,6 @@ void	env_content_change(char *env_name, char *content, t_envp **envp)
 		tmp = tmp->next;
 	}
 }
-
 int	export_core(char **args, t_envp **env)
 {
 	char	**tmp;
