@@ -46,6 +46,8 @@ char	*strcpy_untill_c(char *dst, const char *src, char c)
 
 void	print_env_expo(t_envp *envp)
 {
+	if (envp->env_name == NULL)
+		return ;
 	while (envp != NULL)
 	{
 		ft_putstr_fd("declare -x ", 1);

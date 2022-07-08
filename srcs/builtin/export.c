@@ -28,6 +28,11 @@ int	export_core(char **args, t_envp **env)
 		print_env_expo(*env);
 	while (tmp[i] != NULL)
 	{
+		if (ft_isalpha(tmp[1][1]) == 0 && tmp[1][1] != '_')
+		{
+			printf("'%s': not a valid identifier\n", tmp[1]);
+			break ;
+		}
 		line = x_strdup(tmp[i]);
 		if (has_char(line, '=') == 0 || line[0] == '=')
 		{

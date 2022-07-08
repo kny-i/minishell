@@ -3,7 +3,7 @@
 
 void	signal_handler(int sig)
 {
-	//ft_putstr_fd("\b\b  \b\b", 1);
+	//printf("\b\b  \b\b");
 	if (g_signal.pid == 0)
 	{
 		signal(EOF, SIG_DFL);

@@ -32,6 +32,7 @@ void	execve_not_builtin(char **path_tmp, t_cmd *cmd_list, \
 	}
 	if (*res == -1)
 	{
+		printf("command not found\n");
 		g_signal.exit_status = 127;
 		printf("g_signal.exit = %d\n", g_signal.exit_status);
 	}

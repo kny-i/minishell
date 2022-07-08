@@ -19,7 +19,7 @@ char	*get_path(t_envp *envp)
 	t_envp	*tmp;
 
 	tmp = envp;
-	while (ft_strcmp(tmp->env_name, "PATH"))
+	while (tmp != NULL && ft_strcmp(tmp->env_name, "PATH"))
 	{
 		tmp = tmp->next;
 	}
