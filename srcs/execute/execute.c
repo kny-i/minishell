@@ -3,27 +3,56 @@
 #include "minishell.h"
 #include "env.h"
 
-void	fd_actions(int i, int **fd, t_cmd *tmp_cmd, int num_cmd)
+void	set_input(int **fd, int i, t_cmd *tmp_cmd)
 {
-	if (tmp_cmd->fd_out != 1)
+	if (tmp_cmd->fd_in == 0)
+	{
+		if (i != 0)
+			close_dup(fd[i - 1][1], fd[i - 1][0], 0);
+
+	}
+	else
+	{
+		if (i == 0)
+		{
+			fd[i][0] = tmp_cmd->fd_in;
+			close_dup(fd[i][1], fd[i][0], 0);
+		}
+		else
+		{
+			fd[i - 1][0] = tmp_cmd->fd_in;
+			close_dup(fd[i - 1][1], fd[i - 1][0], 0);
+
+		}
+	}
+}
+
+void	set_output(int **fd, int i, t_cmd *tmp_cmd, int num_cmd)
+{
+	if (tmp_cmd->fd_out == 1)
+	{
+		if (i != num_cmd - 1)
+			close_dup(fd[i][0], fd[i][1], 1);;
+	}
+	else
 	{
 		fd[i][1] = tmp_cmd->fd_out;
-		close_dup(fd[i][0], fd[i][1], 1, true);
+		close_dup(fd[i][0], fd[i][1], 1);
 	}
-	else if (i < num_cmd - 1)
-		close_dup(fd[i][0], fd[i][1], 1, true);
-	if (i == 0 && tmp_cmd->fd_in != 0)
+
+}
+
+void	fd_actions(int i, int **fd, t_cmd *tmp_cmd, int num_cmd)
+{
+	set_input(fd, i, tmp_cmd);
+	set_output(fd, i, tmp_cmd, num_cmd);
+	int j = 0;
+	while (j < num_cmd - 1)
 	{
-		fd[i][0] = tmp_cmd->fd_in;
-		close_dup(fd[i][1], fd[i][0], 0, false);
+		close(fd[j][0]);
+		close(fd[j][1]);
+		j++;
 	}
-	else if (tmp_cmd->fd_in != 0)
-	{
-		fd[i - 1][0] = tmp_cmd->fd_in;
-		close_dup(fd[i - 1][1], fd[i - 1][0], 0, true);
-	}
-	else if (i != 0)
-		close_dup(fd[i - 1][1], fd[i - 1][0], 0, true);
 }
 
 void	execute_test_loop(t_cmd *tmp_cmd, \
@@ -49,6 +78,12 @@ void	execute_test_loop(t_cmd *tmp_cmd, \
 		i += 1;
 		tmp_cmd = tmp_cmd->next;
 	}
+/*	i = 0;
+	while (i < num_cmd)
+	{
+		close_parents_fd(i, fd);
+		i++;
+	}*/
 }
 
 void	execute_test_util(t_cmd **cmd_list, int num_cmd, \
@@ -68,15 +103,15 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, \
 		k++;
 	}
 	i = 0;
-	while (i < num_cmd)
+	while (i < num_cmd - 1)
 	{
 		x_pipe(fd[i]);
 		i += 1;
 	}
 	execute_test_loop(tmp_cmd, env_path_split, envp, fd);
-	i = 0;
-	while (i++ < num_cmd)
-		wait(NULL);
+	/*while (i++ < num_cmd)
+		wait(NULL);*/
+	while (wait(NULL) > 0);
 	unlink(".heredoc");
 	g_signal.pid = 1;
 }
@@ -102,3 +137,31 @@ int	execute_test(t_cmd **cmd_list, t_envp **envp)
 	free_env_split(env_path_split);
 	return (0);
 }
+
+/*int	execute(t_cmd **cmd_list, t_envp **envp)
+{
+	int		cmd_cnt;
+	char	*env_path;
+	char	**args;
+	char	**env_path_split;
+	int		i;
+
+	cmd_cnt = count_cmd(*cmd_list);
+	if (is_builtin(*cmd_list) == 1)
+	{
+		args = list_to_args(*cmd_list);
+		execute_builtin(*cmd_list, envp, args);
+		free_args(args);
+		return (0);
+	}
+	else
+	{
+		i = 0;
+		while (i < cmd_cnt)
+		{
+			if (i != cmd_cnt)
+				x_pipe([i % 2]);
+			
+		}
+	}
+}*/
