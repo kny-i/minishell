@@ -55,12 +55,13 @@ int	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
 	exit(0);
 }
 
-void	close_dup(int fd, int oldfd, int newfd, bool flg)
+void	close_dup(int fd, int oldfd, int newfd)
 {
-	if (flg)
-		x_dup2(oldfd, newfd);
-	x_close(fd);
-	x_close(oldfd);
+
+	x_dup2(oldfd, newfd);
+	//x_close(oldfd);
+/*	x_close(fd);
+	x_close(oldfd);*/
 }
 
 void	close_parents_fd(int i, int **fd)
