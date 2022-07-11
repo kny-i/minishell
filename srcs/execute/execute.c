@@ -62,8 +62,6 @@ void	execute_test_loop(t_cmd *tmp_cmd, \
 	pid_t	pid;
 	int		num_cmd;
 
-	char	*cmd[] = {"cat", NULL};
-
 	num_cmd = count_cmd(tmp_cmd);
 	i = 0;
 	while (i < num_cmd)
@@ -80,12 +78,6 @@ void	execute_test_loop(t_cmd *tmp_cmd, \
 		i += 1;
 		tmp_cmd = tmp_cmd->next;
 	}
-/*	i = 0;
-	while (i < num_cmd)
-	{
-		close_parents_fd(i, fd);
-		i++;
-	}*/
 }
 
 void	execute_test_util(t_cmd **cmd_list, int num_cmd, \
@@ -111,8 +103,6 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, \
 		i += 1;
 	}
 	execute_test_loop(tmp_cmd, env_path_split, envp, fd);
-	/*while (i++ < num_cmd)
-		wait(NULL);*/
 	while (wait(NULL) > 0);
 	unlink(".heredoc");
 	g_signal.pid = 1;
