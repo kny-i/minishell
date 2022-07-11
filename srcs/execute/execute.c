@@ -80,6 +80,18 @@ void	execute_test_loop(t_cmd *tmp_cmd, \
 	}
 }
 
+void fd_free(int **fd)
+{
+	int i;
+
+	i = 0;
+	while (fd[i] != NULL)
+	{
+		free(fd[i]);
+		i++;
+	}
+	free(fd);
+}
 void	execute_test_util(t_cmd **cmd_list, int num_cmd, \
 								char **env_path_split, t_envp**envp)
 {
@@ -105,6 +117,7 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, \
 	execute_test_loop(tmp_cmd, env_path_split, envp, fd);
 	while (wait(NULL) > 0);
 	unlink(".heredoc");
+	fd_free(fd);
 	g_signal.pid = 1;
 }
 
