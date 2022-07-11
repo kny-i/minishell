@@ -24,7 +24,9 @@ static int	launch_heredoc(t_cmd *cmd, char *str, bool flg)
 		write(fd, "\n", 1);
 		free(document);
 	}
-	return (0);
+	close(fd);
+	fd = open(".heredoc", O_RDONLY);
+	return (fd);
 }
 
 static int	check_cmd_in(t_cmd *cmd, t_list *args)

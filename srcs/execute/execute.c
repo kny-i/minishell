@@ -62,6 +62,8 @@ void	execute_test_loop(t_cmd *tmp_cmd, \
 	pid_t	pid;
 	int		num_cmd;
 
+	char	*cmd[] = {"cat", NULL};
+
 	num_cmd = count_cmd(tmp_cmd);
 	i = 0;
 	while (i < num_cmd)
@@ -103,7 +105,7 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, \
 		k++;
 	}
 	i = 0;
-	while (i < num_cmd - 1)
+	while (i < num_cmd)
 	{
 		x_pipe(fd[i]);
 		i += 1;
