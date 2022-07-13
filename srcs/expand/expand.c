@@ -8,6 +8,25 @@ int		check_quote_args(char **res, char *cmd);
 char	*expand_quot(char *cmd);
 void	expand_quot_args(t_list	*list);
 
+char	*rm_after_sp(char *cmd)
+{
+	char *str;
+	int		i;
+
+	i = 0;
+	while (cmd[i] != '\0' && cmd[i] != ' ')
+		i++;
+	str = (char *) ft_substr(cmd, 0, i);
+	if (str == NULL)
+	{
+		perror("error substr");
+		exit(1);
+	}
+	free(cmd);
+	cmd = NULL;
+	return (str);
+}
+
 char	*get_env_cmd_general(char *cmd, t_envp **env_list)
 {
 	char	*tmp;
@@ -45,6 +64,7 @@ char	*check_cmd(char *cmd, t_envp **envp_list)
 
 	if (cmd[0] == '$')
 	{
+		cmd = rm_after_sp(cmd);
 		if (cmd[1] == '?')
 			return (ft_strdup(cmd));
 		res = ft_substr(cmd, 1, ft_strlen(cmd) - 1);
@@ -71,7 +91,7 @@ static int	check_args(t_cmd *cmd_list, t_envp **envp_list)
 	{
 		if (tmp->content == NULL)
 			return (1);
-		tmp->content = for_free(check_cmd(tmp->content, envp_list), tmp->content);
+		tmp->content = check_cmd(tmp->content, envp_list);
 		tmp = tmp->next;
 	}
 	return (0);

@@ -7,7 +7,10 @@ extern char	**environ;
 
 void	execute_abs(char **args, char *cmd)
 {
-	execve(cmd, args, environ);
+	if (execve(cmd, args, environ) == -1)
+	{
+		printf("command not found\n");
+	}
 	exit(0);
 }
 
