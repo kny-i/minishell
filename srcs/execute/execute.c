@@ -129,7 +129,7 @@ void 	execute_test(t_cmd **cmd_list, t_envp **envp)
 	char	**env_path_split;
 
 	cmd_cnt = count_cmd(*cmd_list);
-	if (is_builtin(*cmd_list) == 1)
+	if (is_builtin(*cmd_list) == 1 && cmd_cnt == 1)
 	{
 		args = list_to_args(*cmd_list);
 		g_signal.exit_status = execute_builtin(*cmd_list, envp, args);
