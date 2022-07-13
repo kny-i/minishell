@@ -49,7 +49,7 @@ int	get_list_size(t_list *args)
 
 	i = 0;
 	tmp = args;
-	while (tmp != NULL)
+	while (tmp != NULL && tmp->content != NULL)
 	{
 		if (strcmp(tmp->content, "<") == 0 )
 		{
@@ -72,7 +72,7 @@ int	get_list_size(t_list *args)
 
 void	list_to_args_loop(t_list *tmp_args, int *len, char **res, t_cmd	*cmd)
 {
-	while (tmp_args != NULL)
+	while (tmp_args != NULL && tmp_args->content != NULL)
 	{
 		if (strcmp(tmp_args->content, "<") == 0)
 		{

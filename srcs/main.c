@@ -60,9 +60,10 @@ void    minishell(char *environ[])
 			break ;
 		add_history(line);
 		cmd_list = lex_pars(line);
+		printf("__test__0\n");
 		if (expand(&cmd_list, &env_list))
 		{
-			print_cmd_list(cmd_list);
+			//print_cmd_list(cmd_list);
 			execute_test(&cmd_list, &env_list);
 		}
 		free_cmd(cmd_list);
