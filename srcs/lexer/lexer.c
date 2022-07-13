@@ -104,12 +104,10 @@ int		check_status(int char_type, int status)
 {
 	if (char_type == CHAR_GREATER || char_type == CHAR_LESSER || char_type == CHAR_PIPE)
 	{
-		printf("test00\n");
 		return (0);
 	}
 	if (status != STATE_GENERAL)
 	{
-		printf("test01\n");
 		return (0);
 	}
 	return (1);
