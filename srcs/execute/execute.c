@@ -80,12 +80,12 @@ void	execute_test_loop(t_cmd *tmp_cmd, \
 	}
 }
 
-void fd_free(int **fd)
+void fd_free(int **fd, int num_cmd)
 {
 	int i;
 
 	i = 0;
-	while (fd[i] != NULL)
+	while (i < num_cmd)
 	{
 		free(fd[i]);
 		i++;
@@ -105,7 +105,7 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, \
 	k = 0;
 	while (k < num_cmd)
 	{
-		fd [k] = (int *) x_calloc(2, sizeof(int));
+		fd[k] = (int *) x_calloc(2, sizeof(int));
 		k++;
 	}
 	i = 0;
@@ -117,7 +117,7 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, \
 	execute_test_loop(tmp_cmd, env_path_split, envp, fd);
 	while (wait(NULL) > 0);
 	unlink(".heredoc");
-	fd_free(fd);
+	fd_free(fd, num_cmd);
 	g_signal.pid = 1;
 }
 
@@ -138,9 +138,13 @@ void 	execute_test(t_cmd **cmd_list, t_envp **envp)
 	}
 	env_path = get_path(*envp);
 	env_path_split = ft_split(env_path, ':');
+	if (env_path_split == NULL)
+	{
+		perror("split error");
+		exit (1);
+	}
 	execute_test_util(cmd_list, cmd_cnt, env_path_split, envp);
 	free_env_split(env_path_split);
-	return ;
 }
 
 /*int	execute(t_cmd **cmd_list, t_envp **envp)

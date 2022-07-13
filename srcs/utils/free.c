@@ -13,9 +13,11 @@ void	free_env_split(char **env_path)
 	int	i;
 
 	i = 0;
+
 	while (env_path[i] != NULL)
 	{
-		//free(env_path[i]);
+
+		free(env_path[i]);
 		env_path[i] = NULL;
 		i += 1;
 	}
