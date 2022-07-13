@@ -66,7 +66,7 @@ void    minishell(char *environ[])
 			execute_test(&cmd_list, &env_list);
 		}
 		free_cmd(cmd_list);
-		//    free_env_list(env_list);
+		//free_env_list(env_list);
 		//    system("leaks minishell");
 	}
 	printf("exit minishell\n");

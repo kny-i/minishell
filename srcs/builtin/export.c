@@ -25,14 +25,18 @@ int	export_core(char **args, t_envp **env)
 	tmp = args;
 	i = 1;
 	if (tmp[i] == NULL)
+	{
 		print_env_expo(*env);
+		return (0);
+	}
+	printf("[%c]\n", tmp[1][0]);
+	if ((ft_isalpha(tmp[1][0]) == 0) && tmp[1][0] != '_')
+	{
+		printf("'%s': not a valid identifier\n", tmp[1]);
+		return(1);
+	}
 	while (tmp[i] != NULL)
 	{
-		if (ft_isalpha(tmp[1][1]) == 0 && tmp[1][1] != '_')
-		{
-			printf("'%s': not a valid identifier\n", tmp[1]);
-			break ;
-		}
 		line = x_strdup(tmp[i]);
 		if (has_char(line, '=') == 0 || line[0] == '=')
 		{

@@ -121,7 +121,7 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, \
 	g_signal.pid = 1;
 }
 
-int	execute_test(t_cmd **cmd_list, t_envp **envp)
+void 	execute_test(t_cmd **cmd_list, t_envp **envp)
 {
 	int		cmd_cnt;
 	char	*env_path;
@@ -132,15 +132,15 @@ int	execute_test(t_cmd **cmd_list, t_envp **envp)
 	if (is_builtin(*cmd_list) == 1)
 	{
 		args = list_to_args(*cmd_list);
-		execute_builtin(*cmd_list, envp, args);
+		g_signal.exit_status = execute_builtin(*cmd_list, envp, args);
 		free_args(args);
-		return (0);
+		return ;
 	}
 	env_path = get_path(*envp);
 	env_path_split = ft_split(env_path, ':');
 	execute_test_util(cmd_list, cmd_cnt, env_path_split, envp);
 	free_env_split(env_path_split);
-	return (0);
+	return ;
 }
 
 /*int	execute(t_cmd **cmd_list, t_envp **envp)
