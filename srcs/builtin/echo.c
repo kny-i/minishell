@@ -1,23 +1,20 @@
 #include "builtin.h"
 #include <utils.h>
 
-void	echo_print_str(char **str, int i, bool is_first, t_cmd *cmd_list)
+void	echo_print_str(char **str, int i, bool is_first)
 {
 	while (str[i] != NULL)
 	{
 		if (is_first == false)
-			ft_putchar_fd(' ', cmd_list->fd_out);
+			ft_putchar_fd(' ', 1);
 		else
 			is_first = false;
-		if (ft_strcmp(str[i], "$?") == 0)
-			printf("%d\n", g_signal.exit_status);
-		else
-			ft_putstr_fd(str[i], cmd_list->fd_out);
+		ft_putstr_fd(str[i], 1);
 		i++;
 	}
 }
 
-int	echo_core(t_cmd *cmd_list, char **str)
+int	echo_core(char **str)
 {
 	int		i;
 	bool	is_noption;
@@ -31,8 +28,8 @@ int	echo_core(t_cmd *cmd_list, char **str)
 		i++;
 	}
 	is_first = true;
-	echo_print_str(str, i, is_first, cmd_list);
+	echo_print_str(str, i, is_first);
 	if (is_noption == false)
-		ft_putchar_fd('\n', cmd_list->fd_out);
+		ft_putchar_fd('\n', 1);
 	return (0);
 }

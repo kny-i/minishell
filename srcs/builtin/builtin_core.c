@@ -2,7 +2,7 @@
 #include "execute.h"
 #include "utils.h"
 
-int	execute_builtin(t_cmd *cmd_list, t_envp **enpvp, char **darray_args)
+int	execute_builtin(t_envp **enpvp, char **darray_args)
 {
 	char	**args;
 
@@ -10,7 +10,7 @@ int	execute_builtin(t_cmd *cmd_list, t_envp **enpvp, char **darray_args)
 	if (ft_strcmp("cd", args[0]) == 0)
 		return (cd_core(args, *enpvp));
 	else if (ft_strcmp("echo", args[0]) == 0)
-		return (echo_core(cmd_list, args));
+		return (echo_core(args));
 	else if (ft_strcmp("env", args[0]) == 0)
 		return (env_core(*enpvp));
 	else if (ft_strcmp("exit", args[0]) == 0)

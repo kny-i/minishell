@@ -5,6 +5,7 @@
 int	print_pars_error(char *str)
 {
 	printf("syntax error near unexpected token `%s\'\n", str);
+	g_signal.is_finished = true;
 	//g_signal = 2;
 	return (0);
 }
@@ -16,7 +17,6 @@ void	create_new_cmd(t_cmd **cmd_list, t_token *token, int *flg)
 	if (*token->next->data == '|')
 	{
 		*flg = print_pars_error(token->next->data);
-		//return ;
 	}
 	(*cmd_list)->next = cmd_new();
 	*cmd_list = (*cmd_list)->next;
