@@ -116,6 +116,7 @@ int	assign_general(t_token **token, char *input, int char_type)
 static int	print_lexer_error(char *str)
 {
 	printf("syntax error near unexpected token `%s\'\n", str);
+	g_signal.exit_status = 258;
 	g_signal.is_finished = true;
 	//g_signal = 2;
 	return (0);

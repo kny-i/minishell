@@ -20,7 +20,6 @@ void	execve_not_builtin(char **path, t_cmd *cmd_list, \
 	int	i;
 	char	*tmp;
 	char	**path_tmp = path;
-	//char	**args = list_to_args(cmd_list);
 
 	i = 0;
 	if (args[0][0] == '/' || ft_strncmp(args[0], "./", 2) == 0)
@@ -40,8 +39,6 @@ void	execve_not_builtin(char **path, t_cmd *cmd_list, \
 	}
 	else
 	{
-		/*printf("args[0] = [%s]\n", args[0]);
-		printf("args[1] = [%s]\n", args[1]);*/
 		tmp = ft_strjoin("/", args[0]);
 		while (path_tmp[i] != NULL)
 		{

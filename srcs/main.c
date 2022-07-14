@@ -42,12 +42,13 @@ void    minishell(char *environ[])
 	t_cmd *cmd_list;
 	t_envp *env_list;
 
+	init_gvalue();
 	env_list = create_tenv(environ);
 	while (1)
 	{
 		g_signal.fd = dup(0);
-		init_gvalue();
 		sig_input();
+		g_signal.is_finished = false;
 		line = readline("minishell> ");
 		if (line == NULL)
 			break ;
