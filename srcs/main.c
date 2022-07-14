@@ -52,13 +52,14 @@ void    minishell(char *environ[])
 		if (line == NULL)
 			break ;
 		add_history(line);
-
 		cmd_list = lex_pars(line, cmd_list);
 		if (cmd_list && expand(cmd_list, env_list) && !g_signal.is_finished)
-			execute_test(&cmd_list, &env_list);
-		free_cmd(cmd_list);
+			print_pars(cmd_list);
+			//execute_test(&cmd_list, &env_list);
+		//free_cmd(cmd_list);
 		//free_env_list(env_list);
 		//    system("leaks minishell");
+		unlink(".heredoc");//マクロに
 	}
 	printf("exit minishell\n");
 	exit(0);

@@ -1,3 +1,5 @@
+#include "minishell.h"
+#include "signal.h"
 #include "expand.h"
 #include "utils.h"
 
@@ -160,8 +162,11 @@ int	launch_heredoc(char *end_str, int *flg)
 		return (*flg++);
 	while (1)
 	{
+		sig_input_heredoc();
 		line = readline("> ");
-		if (!ft_strcmp(end_str, line))
+		if (line == NULL)
+			break ;
+		if (!ft_strcmp(end_str, line))// || line == NULL)
 		{
 			free(line);
 			break ;
@@ -172,8 +177,8 @@ int	launch_heredoc(char *end_str, int *flg)
 	}
 	close(fd);
 	fd = open(".heredoc", O_RDONLY);
-	if (fd == -1)
-		return (*flg++);
+	dup2(g_signal.fd_in, 0);
+	close(g_signal.fd_in);
 	return (fd);
 }
 

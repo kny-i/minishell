@@ -14,40 +14,47 @@ void	execute_abs(char **args, char *cmd)
 	exit(0);
 }
 
-void	execve_not_builtin(char **path_tmp, t_cmd *cmd_list, \
+void	execve_not_builtin(char **path, t_cmd *cmd_list, \
 										char **args, int *res)
 {
 	int	i;
+	char	*tmp;
+	char	**path_tmp = path;
+	//char	**args = list_to_args(cmd_list);
 
 	i = 0;
-	if (*cmd_list->cmd == '/' || ft_strncmp(cmd_list->cmd, "./", 2) == 0)
+	if (args[0][0] == '/' || ft_strncmp(args[0], "./", 2) == 0)
 	{
-		if (access(cmd_list->cmd, F_OK) == -1)
+		if (access(args[0], F_OK) == -1)
 		{
-			printf("%s: No such file or directory\n", cmd_list->cmd);
+			printf("hgoe\n");
+			printf("%s: No such file or directory\n", "foooooo");
 			exit(127);
 		}
-		else if (access(cmd_list->cmd, X_OK) == -1)
+		else if (access(args[0], X_OK) == -1)
 		{
-			printf("%s: Permission denied\n", cmd_list->cmd);
+			printf("%s: Permission denied\n", args[0]);
 			exit (126);
 		}
-			execute_abs(args, cmd_list->cmd);
+		printf("g_signal.exit = %d\n", g_signal.exit_status);
+		execute_abs(args, args[0]);
 	}
 	else
 	{
-		cmd_list->cmd = for_free(ft_strjoin("/", cmd_list->cmd), cmd_list->cmd);
-
+		tmp = ft_strjoin("/", args[0]);
+		//args[0] = for_free(ft_strjoin("/", args[0]), args[0]);
 		while (path_tmp[i] != NULL)
 		{
+			path_tmp[i] = for_free(ft_strjoin(path_tmp[i], tmp), path_tmp[i]);
 			*res = execve(path_tmp[i], args, environ);
+			//printf("res = %d\n", *res);
 			i += 1;
 		}
+	}
 	if (*res == -1)
 	{
 		printf("command not found\n");
-		g_signal.exit_status = 127;
-		printf("g_signal.exit = %d\n", g_signal.exit_status);
+		exit(127);
 	}
 }
 

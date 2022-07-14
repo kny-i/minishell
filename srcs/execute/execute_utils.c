@@ -51,49 +51,24 @@ int	get_list_size(t_list *args)
 	tmp = args;
 	while (tmp != NULL && tmp->content != NULL)
 	{
-		if (strcmp(tmp->content, "<") == 0 )
-		{
-			if (strcmp(tmp->next->content, "<") == 0)
-			{
-				i += 1;
-				tmp = tmp->next->next->next;
-				continue ;
-			}
-			tmp = tmp->next;
-			continue ;
-		}
-		if (strcmp(tmp->content, ">") == 0)
-			break ;
 		tmp = tmp->next;
-		i += 1;
+		i++;
 	}
 	return (i);
 }
 
-void	list_to_args_loop(t_list *tmp_args, int *len, char **res, t_cmd	*cmd)
+void	list_to_args_loop(t_list *args_list, char **execve_args)
 {
-	while (tmp_args != NULL && tmp_args->content != NULL)
+	int	i;
+
+	i = 0;
+	while (args_list != NULL && args_list->content != NULL)
 	{
-		if (strcmp(tmp_args->content, "<") == 0)
-		{
-			if (strcmp(tmp_args->next->content, "<") == 0)
-			{
-				res[*len] = ft_substr(cmd->heredocend, \
-										0, ft_strlen(cmd->heredocend));
-				len += 1;
-				tmp_args = tmp_args->next->next->next;
-				continue ;
-			}
-			tmp_args = tmp_args->next;
-			continue ;
-		}
-		if (strcmp(tmp_args->content, ">") == 0)
-			break ;
-		res[*len] = ft_substr(tmp_args->content, \
-										0, ft_strlen(tmp_args->content));
-		tmp_args = tmp_args->next;
-		*len += 1;
+		execve_args[i] = ft_strdup(args_list->content);
+		args_list = args_list->next;
+		i++;
 	}
+	execve_args[i] == NULL;
 }
 
 char	**list_to_args(t_cmd *cmd)
@@ -104,12 +79,8 @@ char	**list_to_args(t_cmd *cmd)
 
 	tmp = cmd->args;
 	len = get_list_size(cmd->args);
-	res = (char **)malloc(sizeof(char *) * (len + 2));
-	if (res == NULL)
-		exit(1);
+	res = (char **)ft_xmalloc(sizeof(char *) * (len + 1));
 	len = 0;
-	len += 1;
-	list_to_args_loop(tmp, &len, res, cmd);
-	res[len] = NULL;
+	list_to_args_loop(tmp, res);
 	return (res);
 }

@@ -5,7 +5,7 @@
 
 void	set_input(int **fd, int i, t_cmd *tmp_cmd)
 {
-	if (tmp_cmd->fd_in == 0)
+	if (tmp_cmd->fd_in == -1)
 	{
 		if (i != 0)
 			close_dup(fd[i - 1][1], fd[i - 1][0], 0);
@@ -29,7 +29,7 @@ void	set_input(int **fd, int i, t_cmd *tmp_cmd)
 
 void	set_output(int **fd, int i, t_cmd *tmp_cmd, int num_cmd)
 {
-	if (tmp_cmd->fd_out == 1)
+	if (tmp_cmd->fd_out == -1)
 	{
 		if (i != num_cmd - 1)
 			close_dup(fd[i][0], fd[i][1], 1);;
@@ -129,7 +129,7 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, \
 	k = 0;
 	while (k < num_cmd)
 	{
-		fd[k] = (int *) x_calloc(2, sizeof(int));
+		fd[k] = (int *)x_calloc(2, sizeof(int));
 		k++;
 	}
 	i = 0;
@@ -140,7 +140,7 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, \
 	}
 	execute_test_loop(tmp_cmd, env_path_split, envp, fd);
 	waic_child();
-	unlink(".heredoc");
+	//unlink(".heredoc");
 	fd_free(fd, num_cmd);
 }
 
