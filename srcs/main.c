@@ -45,7 +45,7 @@ void    minishell(char *environ[])
 	env_list = create_tenv(environ);
 	while (1)
 	{
-		g_signal.fd_in = dup(0);
+		g_signal.fd = dup(0);
 		init_gvalue();
 		sig_input();
 		line = readline("minishell> ");
@@ -54,8 +54,8 @@ void    minishell(char *environ[])
 		add_history(line);
 		cmd_list = lex_pars(line, cmd_list);
 		if (cmd_list && expand(cmd_list, env_list) && !g_signal.is_finished)
-			print_pars(cmd_list);
-			//execute_test(&cmd_list, &env_list);
+			execute_test(&cmd_list, &env_list);
+			//print_pars(cmd_list);
 		//free_cmd(cmd_list);
 		//free_env_list(env_list);
 		//    system("leaks minishell");

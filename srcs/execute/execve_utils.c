@@ -41,13 +41,13 @@ void	execve_not_builtin(char **path, t_cmd *cmd_list, \
 	}
 	else
 	{
+		/*printf("args[0] = [%s]\n", args[0]);
+		printf("args[1] = [%s]\n", args[1]);*/
 		tmp = ft_strjoin("/", args[0]);
-		//args[0] = for_free(ft_strjoin("/", args[0]), args[0]);
 		while (path_tmp[i] != NULL)
 		{
 			path_tmp[i] = for_free(ft_strjoin(path_tmp[i], tmp), path_tmp[i]);
 			*res = execve(path_tmp[i], args, environ);
-			//printf("res = %d\n", *res);
 			i += 1;
 		}
 	}

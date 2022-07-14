@@ -13,7 +13,7 @@ void	create_new_cmd(t_cmd **cmd_list, t_token *token, int *flg)
 {
 	t_cmd	*new;
 
-	if (token->next->data == "|")
+	if (*token->next->data == '|')
 	{
 		*flg = print_pars_error(token->next->data);
 		//return ;
@@ -137,7 +137,7 @@ t_cmd	*lex_pars(char *input, t_cmd *cmd_list)
 
 	res = lexer_build(input, &lexerbuf);
 	free(input);
-	if (res == 0)
+	if (res == 0 || lexerbuf->data == NULL)
 		return (NULL);
 	//print_lex(lexerbuf);
 	else if (res == 1)

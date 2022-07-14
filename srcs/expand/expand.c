@@ -157,7 +157,7 @@ int	launch_heredoc(char *end_str, int *flg)
 	char	*line;
 	int		fd;
 
-	fd = open(".heredoc", O_RDONLY | O_CREAT | O_TRUNC, S_IWUSR | S_IRUSR);
+	fd = open(".heredoc", O_WRONLY | O_CREAT | O_TRUNC, S_IWUSR | S_IRUSR);
 	if (fd == -1)
 		return (*flg++);
 	while (1)
@@ -176,10 +176,10 @@ int	launch_heredoc(char *end_str, int *flg)
 		free(line);
 	}
 	close(fd);
-	fd = open(".heredoc", O_RDONLY);
-	dup2(g_signal.fd_in, 0);
-	close(g_signal.fd_in);
-	return (fd);
+	int fd_1 = open(".heredoc", O_RDONLY);
+	dup2(g_signal.fd, 0);
+	close(g_signal.fd);
+	return (fd_1);
 }
 
 bool	launch_expand_redirect(t_cmd *cmd_list)

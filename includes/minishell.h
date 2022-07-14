@@ -30,7 +30,7 @@
 typedef struct s_sig_info	t_sig_info;
 typedef struct s_sig_info
 {
-	int		fd_in;
+	int		fd;
 	bool	is_finished;
 	int		exit_status;
 }				t_sig_info;

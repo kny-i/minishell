@@ -68,7 +68,7 @@ void	list_to_args_loop(t_list *args_list, char **execve_args)
 		args_list = args_list->next;
 		i++;
 	}
-	execve_args[i] == NULL;
+	execve_args[i] = NULL;
 }
 
 char	**list_to_args(t_cmd *cmd)
