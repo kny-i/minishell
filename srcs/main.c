@@ -44,6 +44,11 @@ void    free_env_list(t_envp *env_list)
 		env_list = tmp;
 	}
 }
+void init_gvalue(void)
+{
+	g_signal.is_heredoc_finished = false;
+	g_signal.exit_status = 0;
+}
 
 void    minishell(char *environ[])
 {
@@ -52,9 +57,10 @@ void    minishell(char *environ[])
 	t_envp *env_list;
 
 	env_list = create_tenv(environ);
-	sig_input();
 	while (1)
 	{
+		sig_input();
+		init_gvalue();
 		line = readline("minishell> ");
 		if (line == NULL)
 			break ;

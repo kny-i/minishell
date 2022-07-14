@@ -3,12 +3,6 @@
 
 void	signal_handler(int sig)
 {
-	//printf("\b\b  \b\b");
-	if (g_signal.pid == 0)
-	{
-		signal(EOF, SIG_DFL);
-		return ;
-	}
 	(void) sig;
 	ft_putstr_fd("\n", 1);
 	rl_replace_line("", 0);
@@ -16,22 +10,29 @@ void	signal_handler(int sig)
 	rl_redisplay();
 }
 
-void	handle_quit(int sig)
+void	signal_handler_heredoc(int sig)
 {
-	//printf("\b\b  \b\b");
-	if (g_signal.pid == 0)
-	{
-		signal(SIGQUIT, SIG_DFL);
-		return;
-	}
-	signal(SIGQUIT, SIG_IGN);
-	(void)sig;
+	pid_t pid;
+
+	(void)signal;
+	pid = getpid();
+	printf("[%d]\n", kill (pid, EOF));
 }
 
 void	sig_input(void)
 {
-	g_signal.pid = 1;
-	g_signal.exit_status = 0;
 	signal(SIGINT, &signal_handler);
-	signal(SIGQUIT, &handle_quit);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	sig_input_child(void)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+}
+
+void	sig_input_heredoc(void)
+{
+	signal(SIGINT, &signal_handler_heredoc);
+	signal(SIGQUIT, SIG_IGN);
 }

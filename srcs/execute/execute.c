@@ -70,6 +70,7 @@ void	execute_test_loop(t_cmd *tmp_cmd, \
 		g_signal.pid = 0;
 		if (pid == 0)
 		{
+			sig_input_child();
 			fd_actions(i, fd, tmp_cmd, num_cmd);
 			execve_cmd(tmp_cmd, env_path_split, envp);
 		}
@@ -106,7 +107,7 @@ void 	waic_child(void )
 			if (status == SIGINT)
 				printf("\n");
 			else if (status == SIGQUIT)
-				printf("^\\Quit: 3\n");
+				printf("Quit: 3\n");
 			g_signal.exit_status = status + 128;
 		}
 		else

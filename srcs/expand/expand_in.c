@@ -12,7 +12,11 @@ static int	launch_heredoc(t_cmd *cmd, char *str, bool flg)
 		return (fd);
 	while (1)
 	{
+		sig_input_heredoc();
+
 		document = readline("> ");
+		if (document == NULL)
+			break ;
 		if (ft_strcmp(str, document) == 0)
 		{
 			free(document);
