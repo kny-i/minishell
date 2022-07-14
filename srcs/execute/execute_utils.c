@@ -108,7 +108,6 @@ char	**list_to_args(t_cmd *cmd)
 	if (res == NULL)
 		exit(1);
 	len = 0;
-	res[len] = ft_substr(cmd->cmd, 0, ft_strlen(cmd->cmd));
 	len += 1;
 	list_to_args_loop(tmp, &len, res, cmd);
 	res[len] = NULL;

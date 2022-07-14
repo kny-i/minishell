@@ -8,7 +8,6 @@ int	execute_builtin(t_cmd *cmd_list, t_envp **enpvp, char **darray_args)
 	char	**args;
 
 	args = darray_args;
-	tmp = cmd_list->cmd;
 	if (ft_strcmp("cd", tmp) == 0)
 		return (cd_core(args, *enpvp));
 	else if (ft_strcmp("echo", tmp) == 0)

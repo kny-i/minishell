@@ -2,7 +2,7 @@
 #include "parser.h"
 #include "utils.h"
 
-int	get_char_type_01(char c)
+int	get_char_type(char c)
 {
 	char	res;
 
@@ -14,16 +14,10 @@ int	get_char_type_01(char c)
 		res = CHAR_PIPE;
 	else if (c == ' ')
 		res = CHAR_WHITESPACE;
-	else if (c == '\t')
-		res = CHAR_TAB;
-	else if (c == '\n')
-		res = CHAR_NEWLINE;
 	else if (c == '>')
 		res = CHAR_GREATER;
 	else if (c == '<')
 		res = CHAR_LESSER;
-	else if (c == CHAR_NULL)
-		res = CHAR_NULL;
 	else
 		res = CHAR_GENERAL;
 	return (res);
@@ -54,6 +48,16 @@ int	chstatus_end(t_token *token, char *input, int char_type, int status)
 	return (status);
 }
 
+bool	compare_redirect(char *str)
+{
+	if (ft_strlen(str) == 1)
+	{
+		if (!ft_strcmp(str, ">") || !ft_strcmp(str, "<"))
+			return (true);
+	}
+	return (false);
+}
+
 int	check_return_status(t_token **token, int status)
 {
 	if ((*token)->data != NULL)
@@ -64,17 +68,29 @@ int	check_return_status(t_token **token, int status)
 	return (status);
 }
 
-void	assign_token(t_token **token, char *input)
+int	join_return_status(t_token **token, char *str, int char_type, int status)
 {
-	(*token)->data = for_free(ft_strjoin((*token)->data, input), (*token)->data);
-	(*token)->next = token_new();
-	*token = (*token)->next;
-}
-
-int	join_return_status(t_token **token, char *str, int status)
-{
+	if (char_type == CHAR_GENERAL && compare_redirect((*token)->data))
+		status = check_return_status(&(*token), status);
 	(*token)->data = for_free(ft_strjoin((*token)->data, str), (*token)->data);
 	return (status);
+}
+
+int	check_token_return_status(t_token **token, char *input, int char_type, int status)
+{
+	if (char_type == CHAR_PIPE)
+	{
+		status = check_return_status(&(*token), status);
+		status = join_return_status(&(*token), input, char_type, status);
+		return (check_return_status(&(*token), status));
+	}
+	else if (compare_redirect((*token)->data))
+	{
+		status = join_return_status(&(*token), input, char_type, status);
+		return (check_return_status(&(*token), status));
+	}
+	status = check_return_status(&(*token), status);
+	return (join_return_status(&(*token), input, char_type, status));
 }
 
 int	assign_general(t_token **token, char *input, int char_type)
@@ -84,32 +100,36 @@ int	assign_general(t_token **token, char *input, int char_type)
 
 	str = ft_substr(input, 0, 1);
 	if (char_type == CHAR_QOUTE)
-		status = join_return_status(&(*token), str, STATE_IN_QUOTE);
+		status = join_return_status(&(*token), str, char_type, STATE_IN_QUOTE);
 	else if (char_type == CHAR_DQOUTE)
-		status = join_return_status(&(*token), str, STATE_IN_DQUOTE);
+		status = join_return_status(&(*token), str, char_type, STATE_IN_DQUOTE);
 	else if (char_type == CHAR_GENERAL)
-		status = join_return_status(&(*token), str, STATE_GENERAL);
+		status = join_return_status(&(*token), str, char_type, STATE_GENERAL);
 	else if (char_type == CHAR_WHITESPACE)
 		status = check_return_status(&(*token), STATE_GENERAL);
-	else// if (char_type == CHAR_PIPE || char_type == CHAR_GREATER || char_type == CHAR_LESSER)
-	{
-		status  = check_return_status(&(*token), STATE_GENERAL);
-		assign_token(&(*token), str);
-	}
+	else
+		status = check_token_return_status(&(*token), str, char_type, STATE_GENERAL);
 	free(str);
 	return (status);
 }
 
+static int	print_lexer_error(char *str)
+{
+	printf("syntax error near unexpected token `%s\'\n", str);
+	//g_signal = 2;
+	return (0);
+}
+
 int		check_status(int char_type, int status)
 {
-	if (char_type == CHAR_GREATER || char_type == CHAR_LESSER || char_type == CHAR_PIPE)
-	{
-		return (0);
-	}
-	if (status != STATE_GENERAL)
-	{
-		return (0);
-	}
+	if (char_type == CHAR_GREATER || char_type == CHAR_LESSER)
+		return (print_lexer_error("newline"));
+	else if (char_type == CHAR_PIPE)
+		return (print_lexer_error("|"));
+	if (status == STATE_IN_DQUOTE)
+		return (print_lexer_error("\""));
+	else if (status == STATE_IN_QUOTE)
+		return (print_lexer_error("\'"));
 	return (1);
 }
 
@@ -123,17 +143,16 @@ int		lexer_build(char *input, t_token **lexerbuf)
 	token = token_new();
 	*lexerbuf = token;
 	status = STATE_GENERAL;
-	input_tmp = input;
-	while (*input_tmp)
+	while (*input)
 	{
-		char_type = get_char_type_01(*input_tmp);
+		char_type = get_char_type(*input);
 		if (status == STATE_GENERAL)
-			status = assign_general(&token, input_tmp, char_type);
+			status = assign_general(&token, input, char_type);
 		else if (status == STATE_IN_QUOTE)
-			status = chstatus_end(token, input_tmp, char_type, STATE_IN_QUOTE);
+			status = chstatus_end(token, input, char_type, STATE_IN_QUOTE);
 		else if (status == STATE_IN_DQUOTE)
-			status = chstatus_end(token, input_tmp, char_type, STATE_IN_DQUOTE);
-		*(input_tmp++);
+			status = chstatus_end(token, input, char_type, STATE_IN_DQUOTE);
+		*(input++);
 	}
 	return (check_status(char_type, status));
 }

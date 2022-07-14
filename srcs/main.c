@@ -17,20 +17,6 @@ void    print_env(t_envp *env)
 	}
 }
 
-void    print_cmd_list(t_cmd *cmd_list)
-{
-	t_cmd    *tmp;
-
-	tmp  = cmd_list;
-	for(; tmp != NULL; tmp = tmp->next)
-	{
-		printf("cmd = %s\n", tmp->cmd);
-		for (t_list *list = tmp->args; list != NULL; list = list->next)
-			printf("%s ", list->content);
-		putchar('\n');
-	}
-}
-
 void    free_env_list(t_envp *env_list)
 {
 	t_envp    *tmp;
@@ -66,13 +52,16 @@ void    minishell(char *environ[])
 		if (line == NULL)
 			break ;
 		add_history(line);
+
+		cmd_list = lex_pars(line, cmd_list);
+		if (cmd_list && expand(cmd_list, env_list))
 		cmd_list = lex_pars(line);
 		if (expand(&cmd_list, &env_list) && g_signal.is_finished == false)
+
 		{
-			//print_cmd_list(cmd_list);
 			execute_test(&cmd_list, &env_list);
 		}
-		free_cmd(cmd_list);
+		free_cmd(cmd_list);*/
 		//free_env_list(env_list);
 		//    system("leaks minishell");
 	}

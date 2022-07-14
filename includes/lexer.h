@@ -14,12 +14,8 @@ typedef enum e_token_type
 	CHAR_QOUTE			= '\'',
 	CHAR_DQOUTE			= '\"',
 	CHAR_WHITESPACE		= ' ',
-	CHAR_ESCAPESEQUENCE	= '\\',
-	CHAR_TAB			= '\t',
-	CHAR_NEWLINE		= '\n',
 	CHAR_GREATER		= '>',
 	CHAR_LESSER			= '<',
-	CHAR_NULL			= 0,
 	TOKEN				= -1,
 }	t_token_type;
 
