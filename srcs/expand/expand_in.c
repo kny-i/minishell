@@ -39,7 +39,7 @@ static int	check_cmd_in(t_cmd *cmd, t_list *args)
 			unlink(args->next->content);
 			return (0);
 		}
-		printf("minishell: error\n");
+		printf("minishell: %s: No such file or sirectory\n", cmd->cmd);
 		return (1);
 	}
 	return (0);

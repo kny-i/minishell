@@ -92,6 +92,30 @@ void fd_free(int **fd, int num_cmd)
 	}
 	free(fd);
 }
+
+void 	waic_child(void )
+{
+	int status;
+
+
+	while (wait(&status) > 0);
+	if (status < 256)
+	{
+		if (status == SIGINT || status == SIGQUIT)
+		{
+			if (status == SIGINT)
+				printf("\n");
+			else if (status == SIGQUIT)
+				printf("^\\Quit: 3\n");
+			g_signal.exit_status = status + 128;
+		}
+		else
+			g_signal.exit_status = status;
+	}
+	else
+		g_signal.exit_status = WEXITSTATUS(status);
+}
+
 void	execute_test_util(t_cmd **cmd_list, int num_cmd, \
 								char **env_path_split, t_envp**envp)
 {
@@ -115,7 +139,7 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, \
 		i += 1;
 	}
 	execute_test_loop(tmp_cmd, env_path_split, envp, fd);
-	while (wait(NULL) > 0);
+	waic_child();
 	unlink(".heredoc");
 	fd_free(fd, num_cmd);
 	g_signal.pid = 1;
