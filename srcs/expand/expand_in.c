@@ -1,6 +1,8 @@
 #include "expand.h"
 #include "lexer.h"
 #include "utils.h"
+#include "minishell.h"
+#include "get_next_line.h"
 
 static int	launch_heredoc(t_cmd *cmd, char *str, bool flg)
 {
@@ -12,7 +14,10 @@ static int	launch_heredoc(t_cmd *cmd, char *str, bool flg)
 		return (fd);
 	while (1)
 	{
+		sig_input_heredoc();
 		document = readline("> ");
+		if (document == NULL)
+			break ;
 		if (ft_strcmp(str, document) == 0)
 		{
 			free(document);
@@ -26,6 +31,8 @@ static int	launch_heredoc(t_cmd *cmd, char *str, bool flg)
 	}
 	close(fd);
 	fd = open(".heredoc", O_RDONLY);
+	dup2(g_signal.fd_in, 0);
+	close(g_signal.fd_in);
 	return (fd);
 }
 
@@ -39,7 +46,7 @@ static int	check_cmd_in(t_cmd *cmd, t_list *args)
 			unlink(args->next->content);
 			return (0);
 		}
-		printf("minishell: error\n");
+		printf("minishell: %s: No such file or sirectory\n", cmd->cmd);
 		return (1);
 	}
 	return (0);

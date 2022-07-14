@@ -30,7 +30,8 @@
 typedef struct s_sig_info	t_sig_info;
 typedef struct s_sig_info
 {
-	int		pid;
+	int		fd_in;
+	bool	is_finished;
 	int		exit_status;
 }				t_sig_info;
 
@@ -40,5 +41,6 @@ typedef struct s_lexer		t_lexer;
 
 //signal.c
 void	sig_input(void );
-
+void	sig_input_child(void);
+void	sig_input_heredoc(void);
 #endif
