@@ -44,6 +44,11 @@ void    free_env_list(t_envp *env_list)
 		env_list = tmp;
 	}
 }
+void init_gvalue(void)
+{
+	g_signal.exit_status = 0;
+	g_signal.is_finished = false;
+}
 
 void    minishell(char *environ[])
 {
@@ -52,15 +57,17 @@ void    minishell(char *environ[])
 	t_envp *env_list;
 
 	env_list = create_tenv(environ);
-	sig_input();
 	while (1)
 	{
+		g_signal.fd_in = dup(0);
+		init_gvalue();
+		sig_input();
 		line = readline("minishell> ");
 		if (line == NULL)
 			break ;
 		add_history(line);
 		cmd_list = lex_pars(line);
-		if (expand(&cmd_list, &env_list))
+		if (expand(&cmd_list, &env_list) && g_signal.is_finished == false)
 		{
 			//print_cmd_list(cmd_list);
 			execute_test(&cmd_list, &env_list);
