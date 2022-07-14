@@ -20,19 +20,11 @@ void	execve_not_builtin(char **path_tmp, t_cmd *cmd_list, \
 	int	i;
 
 	i = 0;
-	if (*cmd_list->cmd == '/')
-		execute_abs(args, cmd_list->cmd);
-	else
-	{
-		cmd_list->cmd = for_free(ft_strjoin("/", cmd_list->cmd), cmd_list->cmd);
 		while (path_tmp[i] != NULL)
 		{
-			path_tmp[i] = for_free(ft_strjoin(path_tmp[i], \
-									cmd_list->cmd), path_tmp[i]);
 			*res = execve(path_tmp[i], args, environ);
 			i += 1;
 		}
-	}
 	if (*res == -1)
 	{
 		printf("command not found\n");

@@ -1,18 +1,28 @@
 #include "parser.h"
 
-t_cmd	*cmd_new(char *cmd)
+t_redirect	*redirect_new()
+{
+	t_redirect	*new;
+
+	new = (t_redirect *)ft_xmalloc(sizeof(t_redirect));
+	new->file_name = NULL;
+	new->redirect_type = 0;
+	return (new);
+}
+
+t_cmd	*cmd_new()
 {
 	t_cmd	*res;
 
-	res = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
+	res = (t_cmd *)ft_xmalloc(sizeof(t_cmd));
 	if (res == NULL)
 		return (NULL);
 	res->next = NULL;
-	res->args = NULL;
+	res->args = ft_lstnew(NULL);
 	res->heredocend = NULL;
-	res->cmd = cmd;
-	res->fd_out = 1;
-	res->fd_in = 0;
+	res->fd_out = -1;
+	res->fd_in = -1;
+	res->redirect = redirect_new();
 	return (res);
 }
 
