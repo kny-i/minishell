@@ -35,12 +35,13 @@ char	*strcpy_untill_c(char *dst, const char *src, char c)
 	k = 0;
 	while (src[i] != c)
 		i++;
-	dst = (char *) x_calloc(sizeof (char), i);
+	dst = (char *) x_calloc(sizeof (char), i + 1);
 	while (src[k] != c)
 	{
 		dst[k] = src[k];
 		k++;
 	}
+	dst[k] = '\0';
 	return (dst);
 }
 

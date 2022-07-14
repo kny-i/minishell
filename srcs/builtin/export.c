@@ -29,7 +29,6 @@ int	export_core(char **args, t_envp **env)
 		print_env_expo(*env);
 		return (0);
 	}
-	printf("[%c]\n", tmp[1][0]);
 	if ((ft_isalpha(tmp[1][0]) == 0) && tmp[1][0] != '_')
 	{
 		printf("'%s': not a valid identifier\n", tmp[1]);
