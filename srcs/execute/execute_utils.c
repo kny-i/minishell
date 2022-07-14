@@ -47,6 +47,7 @@ int	get_list_size(t_list *args)
 	t_list	*tmp;
 	int		i;
 
+
 	i = 0;
 	tmp = args;
 	while (tmp != NULL && tmp->content != NULL)
