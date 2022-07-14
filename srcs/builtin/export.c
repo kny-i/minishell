@@ -5,12 +5,16 @@
 void	env_content_change(char *env_name, char *content, t_envp **envp)
 {
 	t_envp	*tmp;
-
+	char 	*tmp_str;
 	tmp = *envp;
 	while (tmp != NULL)
 	{
 		if (ft_strcmp(env_name, tmp->env_name) == 0)
+		{
+			tmp_str = tmp->content;
 			tmp->content = content;
+			free(tmp_str);
+		}
 		tmp = tmp->next;
 	}
 }
@@ -21,9 +25,11 @@ int	export_core(char **args, t_envp **env)
 	char	*env_name;
 	char	*content;
 	int		i;
+	int		k;
 
 	tmp = args;
 	i = 1;
+	k = 0;
 	if (tmp[i] == NULL)
 	{
 		print_env_expo(*env);
@@ -44,20 +50,25 @@ int	export_core(char **args, t_envp **env)
 			continue ;
 		}
 		env_name = strcpy_untill_c(env_name, line, '=');
-		while (*line != '=')
-			line++;
-		line++;
-		content = line;
+		while (line[k] != '=')
+			k++;
+		k++;
+		content = ft_substr(line, k + 1, ft_strlen(line) - k);
+		free(line);
 		if (env_name != NULL)
 		{
 			if (is_env(env_name, *env) == 1)
+			{
 				env_content_change(env_name, content, env);
+				free(env_name);
+
+			}
 			else
 				env_add_back(env, ft_envnew(env_name, content));
 			i++;
+			env_name = NULL;
 			continue ;
 		}
-		free(line);
 		i++;
 	}
 	return (0);
