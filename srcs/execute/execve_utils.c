@@ -67,7 +67,7 @@ int	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
 	args = list_to_args(cmd_list);
 	if (is_builtin(cmd_list) == 1)
 	{
-		execute_builtin(cmd_list, envp, args);
+		execute_builtin(envp, args);
 		exit(0);
 	}
 	path_tmp = env_path_split;
