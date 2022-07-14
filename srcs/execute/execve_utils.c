@@ -27,8 +27,7 @@ void	execve_not_builtin(char **path, t_cmd *cmd_list, \
 	{
 		if (access(args[0], F_OK) == -1)
 		{
-			printf("hgoe\n");
-			printf("%s: No such file or directory\n", "foooooo");
+			printf("%s: No such file or directory\n", args[0]);
 			exit(127);
 		}
 		else if (access(args[0], X_OK) == -1)
@@ -58,7 +57,7 @@ void	execve_not_builtin(char **path, t_cmd *cmd_list, \
 	}
 }
 
-int	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
+void 	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
 {
 	char	**args;
 	char	**path_tmp;
@@ -72,7 +71,6 @@ int	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
 	}
 	path_tmp = env_path_split;
 	execve_not_builtin(path_tmp, cmd_list, args, &res);
-	exit(0);
 }
 
 void	close_dup(int fd, int oldfd, int newfd)
