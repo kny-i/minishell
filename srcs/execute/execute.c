@@ -67,7 +67,6 @@ void	execute_test_loop(t_cmd *tmp_cmd, \
 	while (i < num_cmd)
 	{
 		pid = x_fork();
-		g_signal.pid = 0;
 		if (pid == 0)
 		{
 			sig_input_child();
@@ -143,7 +142,6 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, \
 	waic_child();
 	unlink(".heredoc");
 	fd_free(fd, num_cmd);
-	g_signal.pid = 1;
 }
 
 void 	execute_test(t_cmd **cmd_list, t_envp **envp)

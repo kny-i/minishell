@@ -1,6 +1,8 @@
 #include "expand.h"
 #include "lexer.h"
 #include "utils.h"
+#include "minishell.h"
+#include "get_next_line.h"
 
 static int	launch_heredoc(t_cmd *cmd, char *str, bool flg)
 {
@@ -13,7 +15,6 @@ static int	launch_heredoc(t_cmd *cmd, char *str, bool flg)
 	while (1)
 	{
 		sig_input_heredoc();
-
 		document = readline("> ");
 		if (document == NULL)
 			break ;
@@ -30,6 +31,8 @@ static int	launch_heredoc(t_cmd *cmd, char *str, bool flg)
 	}
 	close(fd);
 	fd = open(".heredoc", O_RDONLY);
+	dup2(g_signal.fd_in, 0);
+	close(g_signal.fd_in);
 	return (fd);
 }
 
