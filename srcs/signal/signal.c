@@ -18,12 +18,14 @@ void	signal_handler(int sig)
 
 void	handle_quit(int sig)
 {
-	printf("\b\b  \b\b");
+	//printf("\b\b  \b\b");
 	if (g_signal.pid == 0)
 	{
-		signal(EOF, SIG_DFL);
-		return ;
+		signal(SIGQUIT, SIG_DFL);
+		return;
 	}
+	signal(SIGQUIT, SIG_IGN);
+	(void)sig;
 }
 
 void	sig_input(void)
