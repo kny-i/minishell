@@ -140,7 +140,6 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, \
 	}
 	execute_test_loop(tmp_cmd, env_path_split, envp, fd);
 	waic_child();
-	//unlink(".heredoc");
 	fd_free(fd, num_cmd);
 }
 
@@ -169,31 +168,3 @@ void 	execute_test(t_cmd **cmd_list, t_envp **envp)
 	execute_test_util(cmd_list, cmd_cnt, env_path_split, envp);
 	free_env_split(env_path_split);
 }
-
-/*int	execute(t_cmd **cmd_list, t_envp **envp)
-{
-	int		cmd_cnt;
-	char	*env_path;
-	char	**args;
-	char	**env_path_split;
-	int		i;
-
-	cmd_cnt = count_cmd(*cmd_list);
-	if (is_builtin(*cmd_list) == 1)
-	{
-		args = list_to_args(*cmd_list);
-		execute_builtin(*cmd_list, envp, args);
-		free_args(args);
-		return (0);
-	}
-	else
-	{
-		i = 0;
-		while (i < cmd_cnt)
-		{
-			if (i != cmd_cnt)
-				x_pipe([i % 2]);
-			
-		}
-	}
-}*/
