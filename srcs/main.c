@@ -44,10 +44,10 @@ void    minishell(char *environ[])
 
 	init_gvalue();
 	env_list = create_tenv(environ);
+	sig_input();
 	while (1)
 	{
 		g_signal.fd = dup(0);
-		sig_input();
 		g_signal.is_finished = false;
 		line = readline("minishell> ");
 		if (line == NULL)

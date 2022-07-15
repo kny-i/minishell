@@ -6,8 +6,8 @@ int	pwd_core(void)
 
 	pwd_path = getcwd(NULL, 0);
 	if (pwd_path == NULL)
-		return (FAILURE);
+		return (1);
 	ft_putendl_fd(pwd_path, 1);
 	free(pwd_path);
-	return (SUCCESS);
+	return (0);
 }

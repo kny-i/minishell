@@ -32,7 +32,6 @@ int	cd_core(char **args, t_envp *env)
 	if (chdir(args[1]) == -1)
 	{
 		perror(args[0]);
-		g_signal.exit_status = 1;
 		return (1);
 	}
 	return (0);
