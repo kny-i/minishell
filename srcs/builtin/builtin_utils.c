@@ -1,5 +1,4 @@
-#include "builtin.h"
-#include "utils.h"
+#include "minishell.h"
 
 bool	is_builtin(t_cmd *cmd)
 {

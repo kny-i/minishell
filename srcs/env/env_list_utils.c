@@ -1,5 +1,4 @@
-#include "env.h"
-#include "utils.h"
+#include "minishell.h"
 
 void	create_tenv_utils(char **envp, t_envp *env_tmp)
 {

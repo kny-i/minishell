@@ -1,7 +1,4 @@
-#include "execute.h"
-#include "utils.h"
 #include "minishell.h"
-#include "env.h"
 
 void	set_input(int **fd, int i, t_cmd *tmp_cmd)
 {

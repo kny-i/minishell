@@ -1,7 +1,4 @@
 #include "minishell.h"
-#include "signal.h"
-#include "expand.h"
-#include "utils.h"
 
 bool	is_expand(char *content, bool is_check_qoute)
 {

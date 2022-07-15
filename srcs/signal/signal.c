@@ -1,5 +1,4 @@
 #include "minishell.h"
-#include <readline/readline.h>
 
 void	signal_handler(int sig)
 {

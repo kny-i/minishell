@@ -1,6 +1,4 @@
-#include "parser.h"
-#include "lexer.h"
-#include "utils.h"
+#include "minishell.h"
 
 int	print_pars_error(char *str)
 {

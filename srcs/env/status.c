@@ -1,4 +1,4 @@
-#include "env.h"
+#include "minishell.h"
 
 void	set_status(char **envp, int status)
 {

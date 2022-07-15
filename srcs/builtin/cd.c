@@ -1,6 +1,4 @@
 #include "minishell.h"
-#include <unistd.h>
-#include "env.h"
 
 int	cd_to_home(char **args, t_envp *env)
 {

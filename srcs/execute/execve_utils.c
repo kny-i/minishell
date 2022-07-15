@@ -1,5 +1,3 @@
-#include "execute.h"
-#include "utils.h"
 #include "minishell.h"
 
 extern char	**environ;

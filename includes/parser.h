@@ -2,19 +2,18 @@
 # define PARSER_H
 
 # include <stdio.h>
-# include "lexer.h"
 # include "minishell.h"
-# include "utils.h"
 
 typedef struct s_redirect	t_redirect;
-struct	s_redirect
+typedef struct	s_redirect
 {
 	char		*file_name;
 	int			redirect_type;
 	t_redirect	*next;
-}		t_redirect;
-typedef struct s_cmd		t_cmd;
-struct s_cmd
+}	t_redirect;
+
+typedef struct s_cmd	t_cmd;
+typedef struct s_cmd
 {
 	t_list		*args;
 	char		*heredocend;

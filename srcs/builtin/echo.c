@@ -1,5 +1,4 @@
-#include "builtin.h"
-#include <utils.h>
+#include "minishell.h"
 
 void	echo_print_str(char **str, int i, bool is_first)
 {

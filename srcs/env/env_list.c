@@ -1,5 +1,4 @@
-#include "env.h"
-#include "utils.h"
+#include "minishell.h"
 
 int	cnt_env(t_envp *envp)
 {

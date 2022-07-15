@@ -1,6 +1,4 @@
-#include "lexer.h"
-#include "parser.h"
-#include "utils.h"
+#include "minishell.h"
 
 int	get_char_type(char c)
 {

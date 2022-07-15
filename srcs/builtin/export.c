@@ -1,6 +1,4 @@
-#include "builtin.h"
-#include "env.h"
-#include "utils.h"
+#include "minishell.h"
 
 void	env_content_change(char *env_name, char *content, t_envp **envp)
 {
@@ -52,7 +50,6 @@ int	export_core(char **args, t_envp **env)
 		env_name = strcpy_untill_c(env_name, line, '=');
 		while (line[k] != '=')
 			k++;
-		k++;
 		content = ft_substr(line, k + 1, ft_strlen(line) - k);
 		free(line);
 		if (env_name != NULL)

@@ -14,13 +14,14 @@
 # include <sys/wait.h>
 # include <stdbool.h>
 # include "../libft/libft.h"
+# include "./get_next_line.h"
 # include "./lexer.h"
-# include "./parser.h"
-# include "./execute.h"
 # include "./builtin.h"
-//# include "./env.h"
-//# include "./get_next_line.h"
-//# include "./expand.h"
+# include "./env.h"
+# include "./execute.h"
+# include "./expand.h"
+# include "./parser.h"
+# include "./utils.h"
 
 typedef struct s_sig_info	t_sig_info;
 typedef struct s_sig_info

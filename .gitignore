@@ -57,3 +57,5 @@ dkms.conf
 *.idea
 *.vscode
 *.DS_Store
+objs/*
+minishell

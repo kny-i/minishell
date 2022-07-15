@@ -1,11 +1,7 @@
 #ifndef LEXER_H
 # define LEXER_H
 
-# include <glob.h>
-# include <stdlib.h>
-# include <stdbool.h>
-# include <stdio.h>
-# include "../libft/libft.h"
+# include "minishell.h"
 
 typedef enum e_token_type
 {

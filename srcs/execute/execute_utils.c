@@ -1,6 +1,4 @@
-#include "execute.h"
-#include "utils.h"
-#include "env.h"
+#include "minishell.h"
 
 char	**list_to_env(t_envp *envp)
 {

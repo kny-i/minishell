@@ -1,6 +1,4 @@
-#include "builtin.h"
-#include "execute.h"
-#include "utils.h"
+#include "minishell.h"
 
 int	execute_builtin(t_envp **enpvp, char **darray_args)
 {
