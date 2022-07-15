@@ -8,7 +8,7 @@ void	set_input(int **fd, int i, t_cmd *tmp_cmd)
 	if (tmp_cmd->fd_in == -1)
 	{
 		if (i != 0)
-			close_dup(fd[i - 1][1], fd[i - 1][0], 0);
+			x_dup2(fd[i - 1][0], 0);
 
 	}
 	else
@@ -16,12 +16,12 @@ void	set_input(int **fd, int i, t_cmd *tmp_cmd)
 		if (i == 0)
 		{
 			fd[i][0] = tmp_cmd->fd_in;
-			close_dup(fd[i][1], fd[i][0], 0);
+			x_dup2(fd[i][0], 0);
 		}
 		else
 		{
 			fd[i - 1][0] = tmp_cmd->fd_in;
-			close_dup(fd[i - 1][1], fd[i - 1][0], 0);
+			x_dup2(fd[i - 1][0], 0);
 
 		}
 	}
@@ -32,12 +32,12 @@ void	set_output(int **fd, int i, t_cmd *tmp_cmd, int num_cmd)
 	if (tmp_cmd->fd_out == -1)
 	{
 		if (i != num_cmd - 1)
-			close_dup(fd[i][0], fd[i][1], 1);;
+			x_dup2(fd[i][1], 1);
 	}
 	else
 	{
 		fd[i][1] = tmp_cmd->fd_out;
-		close_dup(fd[i][0], fd[i][1], 1);
+		x_dup2(fd[i][1], 1);
 	}
 
 }

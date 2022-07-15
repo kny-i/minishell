@@ -1,7 +1,6 @@
 #include "execute.h"
 #include "utils.h"
 #include "minishell.h"
-#include "env.h"
 
 extern char	**environ;
 
@@ -62,21 +61,9 @@ void 	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
 
 	args = list_to_args(cmd_list);
 	if (is_builtin(cmd_list) == 1)
-	{
-		execute_builtin(envp, args);
-		exit(0);
-	}
+		exit(execute_builtin(envp, args));
 	path_tmp = env_path_split;
 	execve_not_builtin(path_tmp, cmd_list, args, &res);
-}
-
-void	close_dup(int fd, int oldfd, int newfd)
-{
-
-	x_dup2(oldfd, newfd);
-	//x_close(oldfd);
-/*	x_close(fd);
-	x_close(oldfd);*/
 }
 
 void	close_parents_fd(int i, int **fd)
