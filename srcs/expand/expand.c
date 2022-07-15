@@ -18,10 +18,15 @@ bool	is_expand(char *content, bool is_check_qoute)
 char	*get_env_str(char *env_name, t_envp *env_list)
 {
 	t_envp	*tmp_env_list;
+	char	*exit_status;
 
 	tmp_env_list = env_list;
 	if (ft_strcmp(env_name, "?") == 0)
-		return (for_free(ft_strdup(ft_itoa(g_signal.exit_status)), env_name));
+	{
+		exit_status = ft_itoa(g_signal.exit_status);
+		env_name = for_free(ft_strdup(exit_status), env_name);
+		return (for_free(env_name, exit_status));
+	}
 	while (env_list)
 	{
 		if (!ft_strncmp(env_name, env_list->env_name, ft_strlen(env_name)))

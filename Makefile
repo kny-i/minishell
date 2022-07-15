@@ -4,7 +4,7 @@ ifeq ($(shell uname), Darwin)
 	LDFLAGS += -L$(shell brew --prefix readline)/lib -lreadline
 
 else
-#	CFLAGS += -fsanitize=leak -g
+	CFLAGS += -fsanitize=leak -g
 	LDFLAGS += -L/usr/include -lreadline
 endif
 INCLUDE := ./includes

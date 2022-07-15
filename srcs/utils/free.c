@@ -40,11 +40,25 @@ void	free_args(char **args)
 	args = NULL;
 }
 
+void	free_redirect(t_redirect *redirect)
+{
+	t_redirect	*tmp;
+
+	while (redirect != NULL)
+	{
+		tmp = redirect->next;
+		free(redirect->file_name);
+		free(redirect);
+		redirect = tmp;
+	}
+}
+
 void	free_cmd(t_cmd *cmd_list)
 {
 	t_cmd	*tmp;
 	t_list	*args;
 
+	printf("debug\n");
 	while (cmd_list != NULL)
 	{
 		args = cmd_list->args;
@@ -52,6 +66,7 @@ void	free_cmd(t_cmd *cmd_list)
 		args = NULL;
 		free(cmd_list->heredocend);
 		cmd_list->heredocend = NULL;
+		free_redirect(cmd_list->redirect);
 		tmp = cmd_list->next;
 		free(cmd_list);
 		cmd_list = tmp;
