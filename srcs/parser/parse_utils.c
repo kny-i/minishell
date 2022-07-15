@@ -25,19 +25,3 @@ t_cmd	*cmd_new()
 	res->redirect = redirect_new();
 	return (res);
 }
-
-void	cmd_add_back(t_cmd **lst, t_cmd *new)
-{
-	t_cmd	*now;
-
-	if (*lst == NULL)
-		*lst = new;
-	else
-	{
-		now = *lst;
-		while (now->next != NULL)
-			now = now->next;
-		now->next = new;
-//		new->prev = now;
-	}
-}
