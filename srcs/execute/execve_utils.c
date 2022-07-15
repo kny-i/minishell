@@ -53,7 +53,7 @@ void	execve_not_builtin(char **path, t_cmd *cmd_list, \
 	}
 }
 
-void 	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
+void	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
 {
 	char	**args;
 	char	**path_tmp;

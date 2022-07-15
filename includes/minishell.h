@@ -16,16 +16,11 @@
 # include "../libft/libft.h"
 # include "./lexer.h"
 # include "./parser.h"
-//# include "./astree.h"
-//# include "./utils.h"
 # include "./execute.h"
 # include "./builtin.h"
 //# include "./env.h"
 //# include "./get_next_line.h"
 //# include "./expand.h"
-
-# define FAILURE 1
-# define SUCCESS 0
 
 typedef struct s_sig_info	t_sig_info;
 typedef struct s_sig_info

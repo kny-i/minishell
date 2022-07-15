@@ -89,7 +89,7 @@ void	expand_env_redirect(t_redirect *redirect, t_envp *env_list)
 
 char	*trime_qoute(char *content)
 {
-	int		len;
+	size_t	len;
 	char	*res;
 
 	len = ft_strlen(content);

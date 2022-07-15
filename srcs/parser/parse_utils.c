@@ -1,6 +1,6 @@
 #include "parser.h"
 
-t_redirect	*redirect_new()
+t_redirect	*redirect_new(void )
 {
 	t_redirect	*new;
 
@@ -10,7 +10,7 @@ t_redirect	*redirect_new()
 	return (new);
 }
 
-t_cmd	*cmd_new()
+t_cmd	*cmd_new(void )
 {
 	t_cmd	*res;
 

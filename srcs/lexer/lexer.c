@@ -23,9 +23,9 @@ int	get_char_type(char c)
 	return (res);
 }
 
-t_token *token_new()
+t_token	*token_new(void )
 {
-	t_token *res;
+	t_token	*res;
 
 	res = ft_xmalloc(sizeof(t_token));
 	res->data = NULL;
@@ -95,8 +95,8 @@ int	check_token_return_status(t_token **token, char *input, int char_type, int s
 
 int	assign_general(t_token **token, char *input, int char_type)
 {
-	int	status;
-	char    *str;
+	int		status;
+	char	*str;
 
 	str = ft_substr(input, 0, 1);
 	if (char_type == CHAR_QOUTE)
@@ -118,11 +118,10 @@ static int	print_lexer_error(char *str)
 	printf("syntax error near unexpected token `%s\'\n", str);
 	g_signal.exit_status = 258;
 	g_signal.is_finished = true;
-	//g_signal = 2;
 	return (0);
 }
 
-int		check_status(int char_type, int status)
+int	check_status(int char_type, int status)
 {
 	if (char_type == CHAR_GREATER || char_type == CHAR_LESSER)
 		return (print_lexer_error("newline"));
@@ -137,10 +136,10 @@ int		check_status(int char_type, int status)
 
 int		lexer_build(char *input, t_token **lexerbuf)
 {
-	int 		status;
+	int			status;
 	int			char_type;
-	char        *input_tmp;
-	t_token 	*token;
+	char		*input_tmp;
+	t_token		*token;
 
 	token = token_new();
 	*lexerbuf = token;

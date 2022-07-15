@@ -9,7 +9,6 @@ void	set_input(int **fd, int i, t_cmd *tmp_cmd)
 	{
 		if (i != 0)
 			x_dup2(fd[i - 1][0], 0);
-
 	}
 	else
 	{
@@ -22,7 +21,6 @@ void	set_input(int **fd, int i, t_cmd *tmp_cmd)
 		{
 			fd[i - 1][0] = tmp_cmd->fd_in;
 			x_dup2(fd[i - 1][0], 0);
-
 		}
 	}
 }
@@ -39,14 +37,15 @@ void	set_output(int **fd, int i, t_cmd *tmp_cmd, int num_cmd)
 		fd[i][1] = tmp_cmd->fd_out;
 		x_dup2(fd[i][1], 1);
 	}
-
 }
 
 void	fd_actions(int i, int **fd, t_cmd *tmp_cmd, int num_cmd)
 {
+	int		j;
+
+	j = 0;
 	set_input(fd, i, tmp_cmd);
 	set_output(fd, i, tmp_cmd, num_cmd);
-	int j = 0;
 	while (j < num_cmd - 1)
 	{
 		close(fd[j][0]);
@@ -80,9 +79,9 @@ void	execute_test_loop(t_cmd *tmp_cmd, \
 	}
 }
 
-void fd_free(int **fd, int num_cmd)
+void	fd_free(int **fd, int num_cmd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < num_cmd)
@@ -93,10 +92,9 @@ void fd_free(int **fd, int num_cmd)
 	free(fd);
 }
 
-void 	waic_child(void )
+void	waic_child(void )
 {
-	int status;
-
+	int	status;
 
 	while (wait(&status) > 0);
 	if (status < 256)
@@ -143,7 +141,7 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, \
 	fd_free(fd, num_cmd);
 }
 
-void 	execute_test(t_cmd **cmd_list, t_envp **envp)
+void	execute_test(t_cmd **cmd_list, t_envp **envp)
 {
 	int		cmd_cnt;
 	char	*env_path;

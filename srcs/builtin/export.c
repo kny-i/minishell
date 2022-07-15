@@ -38,7 +38,7 @@ int	export_core(char **args, t_envp **env)
 	if ((ft_isalpha(tmp[1][0]) == 0) && tmp[1][0] != '_')
 	{
 		printf("'%s': not a valid identifier\n", tmp[1]);
-		return(1);
+		return (1);
 	}
 	while (tmp[i] != NULL)
 	{
@@ -61,7 +61,6 @@ int	export_core(char **args, t_envp **env)
 			{
 				env_content_change(env_name, content, env);
 				free(env_name);
-
 			}
 			else
 				env_add_back(env, ft_envnew(env_name, content));

@@ -1,7 +1,8 @@
 NAME := minishell
 ifeq ($(shell uname), Darwin)
-	CFLAGS +=  -I$(shell brew --prefix readline)/include -fsanitize=address -g
+	CFLAGS +=  -I$(shell brew --prefix readline)/include -fsanitize=leak -g
 	LDFLAGS += -L$(shell brew --prefix readline)/lib -lreadline
+
 else
 #	CFLAGS += -fsanitize=leak -g
 	LDFLAGS += -L/usr/include -lreadline
