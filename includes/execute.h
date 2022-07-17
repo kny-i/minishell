@@ -20,5 +20,7 @@ void	execve_not_builtin(char **path_tmp, t_cmd *cmd_list, \
 void	close_dup(int fd, int oldfd, int newfd);
 void	close_parents_fd(int i, int **fd);
 void	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp);
+void	fd_free(int **fd, int num_cmd);
+void	fd_actions(int i, int **fd, t_cmd *tmp_cmd, int num_cmd);
 
 #endif
