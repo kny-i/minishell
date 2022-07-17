@@ -25,7 +25,7 @@ t_token	*token_new(void )
 {
 	t_token	*res;
 
-	res = ft_xmalloc(sizeof(t_token));
+	res = (t_token *)ft_xmalloc(sizeof(t_token));
 	res->data = NULL;
 	res->next = NULL;
 	res->type = -1;
