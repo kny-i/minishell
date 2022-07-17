@@ -23,6 +23,8 @@ SRCS := $(SRCS_DIR)/main.c \
 		$(SRCS_DIR)/builtin/pwd.c \
 		$(SRCS_DIR)/builtin/unset.c \
 		$(SRCS_DIR)/lexer/lexer.c \
+		$(SRCS_DIR)/lexer/lexer_utils.c \
+		$(SRCS_DIR)/lexer/lexer_utils2.c \
 		$(SRCS_DIR)/utils/x_func.c \
 		$(SRCS_DIR)/utils/x_func_second.c \
 		$(SRCS_DIR)/execute/execute.c \
@@ -30,8 +32,9 @@ SRCS := $(SRCS_DIR)/main.c \
 		$(SRCS_DIR)/builtin/builtin_utils.c \
 		$(SRCS_DIR)/env/status.c \
 		$(SRCS_DIR)/env/env_list.c \
-		$(SRCS_DIR)/parser/parse_utils.c \
 		$(SRCS_DIR)/parser/parser.c \
+		$(SRCS_DIR)/parser/parse_utils.c \
+		$(SRCS_DIR)/parser/print_pars_lex.c \
 		$(SRCS_DIR)/gnl/get_next_line.c \
 		$(SRCS_DIR)/gnl/get_next_line_utils.c \
 		$(SRCS_DIR)/builtin/env.c \

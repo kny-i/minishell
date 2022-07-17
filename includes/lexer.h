@@ -48,5 +48,8 @@ typedef struct s_lexer
 
 int		lexer_build(char *input, t_token **lexerbuf);
 int		get_char_type(char c);
+int		assign_general(t_token **token, char *input, int char_type);
+t_token	*token_new(void);
+void	free_token_list(t_token *token_list);
 
 #endif // !LEXER_H

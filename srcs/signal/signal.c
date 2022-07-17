@@ -6,6 +6,7 @@ void	signal_handler(int sig)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
+	printf("  \b\b");
 	g_signal.exit_status = 1;
 }
 
@@ -26,6 +27,7 @@ void	sig_input(void)
 
 void	sig_input_child(void)
 {
+	printf("\b\b  \b\b");
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 }
