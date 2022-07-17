@@ -7,6 +7,7 @@ t_redirect	*redirect_new(void )
 	new = (t_redirect *)ft_xmalloc(sizeof(t_redirect));
 	new->file_name = NULL;
 	new->redirect_type = 0;
+	new->next = NULL;
 	return (new);
 }
 

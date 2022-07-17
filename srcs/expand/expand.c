@@ -110,7 +110,7 @@ char	*launch_expand(char *content, t_envp *env_list)
 	int		status;
 	int		i;
 
-	//res = NULL;
+	res = NULL;
 	i = 0;
 	while (content[i])
 	{
