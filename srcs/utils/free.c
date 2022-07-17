@@ -58,7 +58,6 @@ void	free_cmd(t_cmd *cmd_list)
 	t_cmd	*tmp;
 	t_list	*args;
 
-	printf("debug\n");
 	while (cmd_list != NULL)
 	{
 		args = cmd_list->args;

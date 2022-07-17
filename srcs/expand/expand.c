@@ -30,10 +30,12 @@ char	*search_env(char *env_name, t_envp *env_list)
 char	*get_expand_str(char *content, int *i, t_envp *env_list)
 {
 	int		len;
+	int		status;
 	char	*res;
 
 	len = 1;
-	if (get_status(content[len]) != CHAR_GENERAL)
+	status = get_status(content[len]);
+	if (status == STATE_IN_QUOTE || status == STATE_IN_DQUOTE)
 		return (ft_strdup(""));
 	if (!ft_isalpha(content[len]))
 		return (ft_substr(content, 0, len));
@@ -55,7 +57,10 @@ char	*expand_qoute(char *content, int *i, char *new_content)
 	*i += 1;	//最初は'だから
 	status = get_status(content[*i]);
 	if (status == STATE_IN_QUOTE)
-		return (ft_strdup(new_content));
+	{
+		tmp = for_free(ft_strdup(new_content), new_content);
+		return (tmp);
+	}
 	while (status != STATE_IN_QUOTE)
 	{
 		tmp = ft_substr(content + *i, 0, 1);
@@ -75,7 +80,10 @@ char	*expand_dqoute(char *content, int *i, char *new_content, t_envp *env_list)
 	*i += 1;	//最初は"だから
 	status = get_status(content[*i]);
 	if (status == STATE_IN_DQUOTE)
-		return (ft_strdup(new_content));
+	{
+		tmp = for_free(ft_strdup(new_content), new_content);
+		return (tmp);
+	}
 	while (status != STATE_IN_DQUOTE)
 	{
 		if (!ft_strncmp(content + *i, "$", 1))
@@ -116,9 +124,9 @@ char	*launch_expand(char *content, t_envp *env_list)
 	{
 		status = get_status(content[i]);
 		if (status == STATE_IN_QUOTE)
-			res = for_free(expand_qoute(content, &i, res), res);
+			res = expand_qoute(content, &i, res);
 		else if (status == STATE_IN_DQUOTE)
-			res = for_free(expand_dqoute(content, &i, res, env_list), res);
+			res = expand_dqoute(content, &i, res, env_list);
 		else
 			res = for_free(expand_general(content + i, &i, res, env_list), res);
 		i++;
