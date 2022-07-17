@@ -161,11 +161,108 @@ void	expand_redirect(t_cmd *cmd_list, t_envp *env_list)
 	}
 }
 
+int	redirect_open_out(char *filename, bool is_append, int *flg)
+{
+	int	fd;
+
+	if (is_append)
+		fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, S_IWUSR | S_IRUSR);
+	else
+		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IWUSR | S_IRUSR);
+	if (fd == -1)
+	{
+		perror(filename);
+		*flg = 1;
+	}
+	return (fd);
+}
+
+int	redirect_open_in(char *filename, int *flg)
+{
+	int	fd;
+
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+	{
+		perror(filename);
+		*flg = 1;
+	}
+	return (fd);
+}
+
+int	launch_heredoc(char *end_str, int *flg)
+{
+	char	*line;
+	int		fd;
+
+	fd = open(".heredoc", O_WRONLY | O_CREAT | O_TRUNC, S_IWUSR | S_IRUSR);
+	if (fd == -1)
+		return (*flg++);
+	while (1)
+	{
+		sig_input_heredoc();
+		line = readline("> ");
+		if (line == NULL)
+			break ;
+		if (!ft_strcmp(end_str, line))// || line == NULL)
+		{
+			free(line);
+			break ;
+		}
+		write(fd, line, ft_strlen(line));
+		write(fd, "\n", 1);
+		free(line);
+	}
+	close(fd);
+	int fd_1 = open(".heredoc", O_RDONLY);
+	dup2(g_signal.fd, 0);
+	close(g_signal.fd);
+	return (fd_1);
+}
+
+bool	launch_expand_redirect(t_cmd *cmd_list)
+{
+	t_redirect	*redirect;
+	int			flg;
+
+	redirect = cmd_list->redirect;
+	flg = 0;
+	while (redirect != NULL && redirect->file_name != NULL)
+	{
+		if (redirect->redirect_type == 1)		//	">"
+			cmd_list->fd_out = redirect_open_out(redirect->file_name, false, &flg);
+		else if (redirect->redirect_type == 2)	//	">>"
+			cmd_list->fd_out = redirect_open_out(redirect->file_name, true, &flg);
+		else if (redirect->redirect_type == 3)	//	"<"
+			cmd_list->fd_in = redirect_open_in(redirect->file_name, &flg);
+		else if (redirect->redirect_type == 4)	//	"<<" unlinkの使用変更する
+			cmd_list->fd_in = launch_heredoc(redirect->file_name, &flg);
+		if (flg)
+			return (false);
+		redirect = redirect->next;
+	}
+	return (true);
+}
+
+bool	open_redirect(t_cmd *cmd_list)
+{
+	t_cmd	*cur_cmd;
+
+	cur_cmd = cmd_list;
+	while (cur_cmd)
+	{
+		if (launch_expand_redirect(cur_cmd) == false)
+			return (false);
+		cur_cmd = cur_cmd->next;
+	}
+	return (true);
+}
+
 bool	expand(t_cmd *cmd_list, t_envp *env_list)
 {
 	expand_args(cmd_list, env_list);
 	expand_redirect(cmd_list, env_list);
-//	if (open_redirect(cmd_list) == false)
-//		return (false);
+	if (open_redirect(cmd_list) == false)
+		return (false);
 	return (true);
 }
