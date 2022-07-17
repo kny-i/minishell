@@ -11,29 +11,33 @@ void	execute_abs(char **args, char *cmd)
 	exit(0);
 }
 
+void	execve_path(char **args)
+{
+	if (access(args[0], F_OK) == -1)
+	{
+		printf("%s: No such file or directory\n", args[0]);
+		exit(127);
+	}
+	else if (access(args[0], X_OK) == -1)
+	{
+		printf("%s: Permission denied\n", args[0]);
+		exit (126);
+	}
+	printf("g_signal.exit = %d\n", g_signal.exit_status);
+	execute_abs(args, args[0]);
+}
+
 void	execve_not_builtin(char **path, t_cmd *cmd_list, \
 										char **args, int *res)
 {
-	int	i;
+	int		i;
 	char	*tmp;
-	char	**path_tmp = path;
+	char	**path_tmp;
 
+	path_tmp = path;
 	i = 0;
 	if (args[0][0] == '/' || ft_strncmp(args[0], "./", 2) == 0)
-	{
-		if (access(args[0], F_OK) == -1)
-		{
-			printf("%s: No such file or directory\n", args[0]);
-			exit(127);
-		}
-		else if (access(args[0], X_OK) == -1)
-		{
-			printf("%s: Permission denied\n", args[0]);
-			exit (126);
-		}
-		printf("g_signal.exit = %d\n", g_signal.exit_status);
-		execute_abs(args, args[0]);
-	}
+		execve_path(args);
 	else
 	{
 		tmp = ft_strjoin("/", args[0]);

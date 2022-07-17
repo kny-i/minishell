@@ -50,7 +50,7 @@ void    minishell(char *environ[])
 		add_history(line);
 		cmd_list = lex_pars(line, cmd_list);
 		if (cmd_list && expand(cmd_list, env_list) && !g_signal.is_finished)
-			execute_test(&cmd_list, &env_list);
+			execute(&cmd_list, &env_list);
 			//print_pars(cmd_list);
 		free_cmd(cmd_list);
 		unlink(HEREDOC);
@@ -60,7 +60,6 @@ void    minishell(char *environ[])
 	printf("exit minishell\n");
 	exit(0);
 }
-
 
 int	main(int argc, char *argv[])
 {
