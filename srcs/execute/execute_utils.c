@@ -49,6 +49,8 @@ char	**list_to_args(t_cmd *cmd)
 	int		len;
 
 	tmp = cmd->args;
+	if (tmp->content == NULL)
+		return (NULL);
 	len = get_list_size(cmd->args);
 	res = (char **)ft_xmalloc(sizeof(char *) * (len + 1));
 	len = 0;

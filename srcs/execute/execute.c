@@ -93,6 +93,8 @@ void	execute(t_cmd **cmd_list, t_envp **envp)
 				ft_strcmp((*cmd_list)->args->content, "cd") == 0)
 	{
 		args = list_to_args(*cmd_list);
+		if (args == NULL)		//ついか
+			return ;
 		g_signal.exit_status = execute_builtin(envp, args);
 		free_args(args);
 		return ;
