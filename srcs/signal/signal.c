@@ -8,7 +8,6 @@ void	sig_input(void)
 
 void	sig_input_child(void)
 {
-	printf("\b\b  \b\b");
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 }

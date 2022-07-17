@@ -89,8 +89,8 @@ void	execute(t_cmd **cmd_list, t_envp **envp)
 	char	**env_path_split;
 
 	cmd_cnt = count_cmd(*cmd_list);
-	if (is_builtin(*cmd_list) == 1 \
-				&& cmd_cnt == 1 && ft_strcmp((*cmd_list)->args->content, "cd"))
+	if (is_builtin(*cmd_list) == 1 && cmd_cnt == 1 && \
+				ft_strcmp((*cmd_list)->args->content, "cd") == 0)
 	{
 		args = list_to_args(*cmd_list);
 		g_signal.exit_status = execute_builtin(envp, args);
