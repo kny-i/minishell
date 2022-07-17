@@ -28,7 +28,11 @@ void	insert_redirect_list(t_redirect **redirect, t_token **token, int *flg)
 	(*redirect)->redirect_type = is_redirect((*token)->data);
 	*token = (*token)->next;
 	if (is_redirect((*token)->data) != 0)
+	{
 		*flg = print_pars_error((*token)->data);	//return ; 必要だと思う
+		printf("print_message\n");
+		return ;
+	}
 	(*redirect)->file_name = ft_strdup((*token)->data);
 	(*redirect)->next = redirect_new();
 	*redirect = (*redirect)->next;
@@ -84,6 +88,7 @@ t_cmd	*lex_pars(char *input, t_cmd *cmd_list)
 		cmd_list = cp_cmd_list;
 		parser(lexerbuf, cp_cmd_list, &res);
 	}
+	print_pars(cmd_list);
 	free_token_list(lexerbuf);
 	if (res == 0)
 		return (NULL);
