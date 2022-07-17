@@ -63,6 +63,7 @@ void	execute_test_loop(t_cmd *tmp_cmd, \
 	while (i < num_cmd)
 	{
 		pid = x_fork();
+		signal(SIGINT, SIG_IGN);
 		if (pid == 0)
 		{
 			sig_input_child();

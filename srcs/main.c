@@ -39,9 +39,9 @@ void    minishell(char *environ[])
 
 	init_gvalue();
 	env_list = create_tenv(environ);
-	sig_input();
 	while (1)
 	{
+		sig_input();
 		g_signal.fd = dup(0);
 		g_signal.is_finished = false;
 		line = readline("minishell> ");
@@ -54,6 +54,7 @@ void    minishell(char *environ[])
 			//print_pars(cmd_list);
 		free_cmd(cmd_list);
 		unlink(HEREDOC);
+		//system("leaks -q minishell");
 	}
 	free_env_list(env_list);
 	printf("exit minishell\n");
