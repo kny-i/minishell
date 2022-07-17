@@ -45,8 +45,8 @@ void	fd_actions(int i, int **fd, t_cmd *tmp_cmd, int num_cmd)
 	set_output(fd, i, tmp_cmd, num_cmd);
 	while (j < num_cmd - 1)
 	{
-		close(fd[j][0]);
-		close(fd[j][1]);
+		x_close(fd[j][0]);
+		x_close(fd[j][1]);
 		j++;
 	}
 }
