@@ -40,6 +40,7 @@ SRCS := $(SRCS_DIR)/main.c \
 		$(SRCS_DIR)/env/env_list_utils.c\
 		$(SRCS_DIR)/builtin/export_utils.c \
 		$(SRCS_DIR)/expand/expand.c \
+		$(SRCS_DIR)/signal/signal_handlers.c \
 
 
 OBJS := $(patsubst $(SRCS_DIR)%,$(OBJS_DIr)%,$(SRCS:.c=.o))

@@ -41,4 +41,7 @@ typedef struct s_lexer		t_lexer;
 void	sig_input(void );
 void	sig_input_child(void);
 void	sig_input_heredoc(void);
+void	signal_handler(int sig);
+void	signal_handler_heredoc(int sig);
+
 #endif
