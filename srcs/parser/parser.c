@@ -8,18 +8,6 @@ int	print_pars_error(char *str)
 	return (0);
 }
 
-void	create_new_cmd(t_cmd **cmd_list, t_token *token, int *flg)
-{
-	t_cmd	*new;
-
-	if (*token->next->data == '|')
-	{
-		*flg = print_pars_error(token->next->data);
-	}
-	(*cmd_list)->next = cmd_new();
-	*cmd_list = (*cmd_list)->next;
-}
-
 int	is_redirect(char *data)
 {
 	if (!ft_strcmp(data, ">"))
@@ -80,53 +68,6 @@ void	parser(t_token *token, t_cmd *cmd_list, int *flg)
 	}
 }
 
-void	free_token_list(t_token *token_list)
-{	
-	t_token	*tmp;
-
-	while (token_list->next != NULL)
-	{
-		tmp = token_list->next;
-		free(token_list->data);
-		token_list->data = NULL;
-		free(token_list);
-		token_list = NULL;
-		token_list = tmp;
-	}
-	free(token_list->data);
-	token_list->data = NULL;
-	free(token_list);
-	token_list = NULL;
-}
-
-void	print_lex(t_token *lex)
-{
-	t_token	*tmp;
-
-	tmp = lex;
-	for (; tmp; tmp = tmp->next)
-		printf("data = %s\n", tmp->data);
-}
-
-void	print_pars(t_cmd *cmd_list)
-{
-	t_cmd	*tmp;
-
-	tmp = cmd_list;
-	printf("print_pars\n");
-	for (; tmp; tmp = tmp->next)
-	{
-		t_list		*list = tmp->args;
-		t_redirect	*redirect = tmp->redirect;
-		for (; list && list->content != NULL; list = list->next)
-			printf("%s ", list->content);
-		putchar('\n');
-		for (; redirect && redirect->file_name != NULL; redirect = redirect->next)
-			printf("%s ", redirect->file_name);
-		putchar('\n');
-	}
-}
-
 t_cmd	*lex_pars(char *input, t_cmd *cmd_list)
 {
 	t_cmd	*cp_cmd_list;
@@ -137,7 +78,6 @@ t_cmd	*lex_pars(char *input, t_cmd *cmd_list)
 	free(input);
 	if (res == 0 || lexerbuf->data == NULL)
 		return (NULL);
-	//print_lex(lexerbuf);
 	else if (res == 1)
 	{
 		cp_cmd_list = cmd_new();
@@ -145,5 +85,7 @@ t_cmd	*lex_pars(char *input, t_cmd *cmd_list)
 		parser(lexerbuf, cp_cmd_list, &res);
 	}
 	free_token_list(lexerbuf);
+	if (res == 0)
+		return (NULL);
 	return (cmd_list);
 }
