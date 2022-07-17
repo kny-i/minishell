@@ -51,7 +51,7 @@ void	fd_actions(int i, int **fd, t_cmd *tmp_cmd, int num_cmd)
 	}
 }
 
-void	execute_test_loop(t_cmd *tmp_cmd, \
+void	execute_loop(t_cmd *tmp_cmd, \
 					char **env_path_split, t_envp **envp, int **fd)
 {
 	int		i;
@@ -112,7 +112,7 @@ void	waic_child(void )
 		g_signal.exit_status = WEXITSTATUS(status);
 }
 
-void	execute_test_util(t_cmd **cmd_list, int num_cmd, \
+void	execute_util(t_cmd **cmd_list, int num_cmd, \
 								char **env_path_split, t_envp**envp)
 {
 	t_cmd	*tmp_cmd;
@@ -134,12 +134,12 @@ void	execute_test_util(t_cmd **cmd_list, int num_cmd, \
 		x_pipe(fd[i]);
 		i += 1;
 	}
-	execute_test_loop(tmp_cmd, env_path_split, envp, fd);
+	execute_loop(tmp_cmd, env_path_split, envp, fd);
 	waic_child();
 	fd_free(fd, num_cmd);
 }
 
-void	execute_test(t_cmd **cmd_list, t_envp **envp)
+void	execute(t_cmd **cmd_list, t_envp **envp)
 {
 	int		cmd_cnt;
 	char	*env_path;
@@ -161,6 +161,6 @@ void	execute_test(t_cmd **cmd_list, t_envp **envp)
 		perror("split error");
 		exit (1);
 	}
-	execute_test_util(cmd_list, cmd_cnt, env_path_split, envp);
+	execute_util(cmd_list, cmd_cnt, env_path_split, envp);
 	free_env_split(env_path_split);
 }

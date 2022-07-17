@@ -8,7 +8,7 @@
 
 int		count_cmd(t_cmd *cmd);
 char	**list_to_args(t_cmd *cmd);
-void	execute_test(t_cmd **cmd_list, t_envp **envp);
+void	execute(t_cmd **cmd_list, t_envp **envp);
 char	**list_to_env(t_envp *envp);
 int		count_cmd(t_cmd *cmd);
 int		get_list_size(t_list *args);
