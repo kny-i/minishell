@@ -23,6 +23,8 @@
 # include "./parser.h"
 # include "./utils.h"
 
+# define HEREDOC ".heredoc"
+
 typedef struct s_sig_info	t_sig_info;
 typedef struct s_sig_info
 {
