@@ -2,7 +2,7 @@
 
 char	*for_free(char *res, char *free_str)
 {
-	if (free_str != NULL)
+	if (free_str)
 		free(free_str);
 	free_str = NULL;
 	return (res);
@@ -58,7 +58,6 @@ void	free_cmd(t_cmd *cmd_list)
 	t_cmd	*tmp;
 	t_list	*args;
 
-	printf("debug\n");
 	while (cmd_list != NULL)
 	{
 		args = cmd_list->args;
@@ -66,7 +65,8 @@ void	free_cmd(t_cmd *cmd_list)
 		args = NULL;
 		free(cmd_list->heredocend);
 		cmd_list->heredocend = NULL;
-		free_redirect(cmd_list->redirect);
+		if (cmd_list->redirect)
+			free_redirect(cmd_list->redirect);
 		tmp = cmd_list->next;
 		free(cmd_list);
 		cmd_list = tmp;
