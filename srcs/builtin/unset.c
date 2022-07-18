@@ -20,14 +20,19 @@ void	unset_utils(t_envp *tmp, char **args, int i)
 		if (ft_strcmp(tmp->next->env_name, args[i]) == 0)
 		{
 			if (tmp->next->next != NULL)
+			{
+				tmp_env = tmp->next;
 				tmp->next = tmp->next->next;
+				free_env(tmp_env);
+			}
+
 			else
 			{
 				tmp_env = tmp->next;
 				tmp->next = NULL;
 				free_env(tmp_env);
-				break ;
 			}
+			break;
 		}
 		tmp = tmp->next;
 	}
