@@ -54,8 +54,6 @@ void	parser(t_token *token, t_cmd *cmd_list, int *flg)
 	redirect = cmd_list->redirect;
 	if (token->data == NULL)
 		*flg = 0;
-	if (!ft_strcmp(token->data, "|"))
-		*flg = print_pars_error(token->data);
 	while (*flg && token != NULL && token->data != NULL)
 	{
 		if (!ft_strcmp(token->data, "|"))
@@ -72,23 +70,41 @@ void	parser(t_token *token, t_cmd *cmd_list, int *flg)
 	}
 }
 
+int	check_validate_redirect(t_token *lexerbuf)
+{
+	t_token	*token;
+
+	token = lexerbuf;
+	if (!ft_strncmp(token->data, "|", 1))
+		return (print_pars_error(token->data));
+	while (token != NULL && token->next != NULL)
+	{
+		if (is_redirect(token->data))
+		{
+			token = token->next;
+			if (is_redirect(token->data))
+				return (print_pars_error(token->data));
+		}
+		token = token->next;
+	}
+	return (1);
+}
+
 t_cmd	*lex_pars(char *input, t_cmd *cmd_list)
 {
 	t_cmd	*cp_cmd_list;
 	t_token	*lexerbuf;
 	int		res;
 
-	res = lexer_build(input, &lexerbuf);
+	if (res = lexer_build(input, &lexerbuf))
+		res = check_validate_redirect(lexerbuf);
 	free(input);
-	if (res == 0 || lexerbuf->data == NULL)
-		return (NULL);
-	else if (res == 1)
+	if (res == 1)
 	{
 		cp_cmd_list = cmd_new();
 		cmd_list = cp_cmd_list;
 		parser(lexerbuf, cp_cmd_list, &res);
 	}
-	print_pars(cmd_list);
 	free_token_list(lexerbuf);
 	if (res == 0)
 		return (NULL);

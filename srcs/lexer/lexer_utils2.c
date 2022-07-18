@@ -4,7 +4,7 @@ void	free_token_list(t_token *token_list)
 {	
 	t_token	*tmp;
 
-	while (token_list->next != NULL)
+	while (token_list->next != NULL && token_list->data != NULL)
 	{
 		tmp = token_list->next;
 		free(token_list->data);

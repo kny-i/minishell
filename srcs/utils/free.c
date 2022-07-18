@@ -44,7 +44,6 @@ void	free_redirect(t_redirect *redirect)
 
 	while (redirect != NULL)
 	{
-		printf("hgoe\n");
 		tmp = redirect->next;
 		free(redirect->file_name);
 		free(redirect);
@@ -58,15 +57,8 @@ void	free_cmd(t_cmd *cmd_list)
 	t_cmd	*tmp;
 	t_list	*args;
 
-/*	if (cmd_list == NULL)
-	{
-		printf("test_01\n");
-		free(cmd_list);
-		return ;
-	}*/
 	while (cmd_list != NULL)
 	{
-		printf("hoge\n");
 		args = cmd_list->args;
 		ft_lstclear(&args, free);
 		args = NULL;
