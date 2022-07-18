@@ -3,12 +3,18 @@
 void	free_env(t_envp *envp)
 {
 	free(envp->env_name);
+	envp->env_name = NULL;
 	free(envp->content);
+	envp->content = NULL;
 	free(envp);
+	envp = NULL;
 }
 
 void	unset_utils(t_envp *tmp, char **args, int i)
 {
+	t_envp *tmp_env;
+
+
 	while (tmp->next != NULL)
 	{
 		if (ft_strcmp(tmp->next->env_name, args[i]) == 0)
@@ -16,8 +22,12 @@ void	unset_utils(t_envp *tmp, char **args, int i)
 			if (tmp->next->next != NULL)
 				tmp->next = tmp->next->next;
 			else
+			{
+				tmp_env = tmp->next;
 				tmp->next = NULL;
-			break ;
+				free_env(tmp_env);
+				break ;
+			}
 		}
 		tmp = tmp->next;
 	}
