@@ -96,8 +96,11 @@ t_cmd	*lex_pars(char *input, t_cmd *cmd_list)
 	t_token	*lexerbuf;
 	int		res;
 
-	if (res = lexer_build(input, &lexerbuf))
+	res = lexer_build(input, &lexerbuf);
+	if (res == 1 && lexerbuf->data)
 		res = check_validate_redirect(lexerbuf);
+	else
+		res = 0;
 	free(input);
 	if (res == 1)
 	{
