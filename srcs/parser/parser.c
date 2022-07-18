@@ -98,8 +98,6 @@ t_cmd	*lex_pars(char *input, t_cmd *cmd_list)
 
 	res = lexer_build(input, &lexerbuf);
 	free(input);
-	if (res == 0 || lexerbuf->data == NULL)
-		return (NULL);
 	res = check_validate_redirect(lexerbuf);
 	if (res == 1)
 	{

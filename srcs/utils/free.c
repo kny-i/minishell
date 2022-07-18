@@ -46,7 +46,6 @@ void	free_redirect(t_redirect *redirect)
 
 	while (redirect != NULL)
 	{
-		printf("hgoe\n");
 		tmp = redirect->next;
 		free(redirect->file_name);
 		free(redirect);
