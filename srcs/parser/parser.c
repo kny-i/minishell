@@ -96,9 +96,9 @@ t_cmd	*lex_pars(char *input, t_cmd *cmd_list)
 	t_token	*lexerbuf;
 	int		res;
 
-	res = lexer_build(input, &lexerbuf);
+	if (res = lexer_build(input, &lexerbuf))
+		res = check_validate_redirect(lexerbuf);
 	free(input);
-	res = check_validate_redirect(lexerbuf);
 	if (res == 1)
 	{
 		cp_cmd_list = cmd_new();
