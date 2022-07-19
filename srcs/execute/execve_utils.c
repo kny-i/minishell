@@ -38,7 +38,7 @@ void	execve_not_builtin(char **path, t_cmd *cmd_list, \
 	i = 0;
 	if (args[0][0] == '/' || ft_strncmp(args[0], "./", 2) == 0)
 		execve_path(args);
-	else
+	else if (path != NULL)
 	{
 		tmp = ft_strjoin("/", args[0]);
 		while (path_tmp[i] != NULL)
@@ -48,6 +48,8 @@ void	execve_not_builtin(char **path, t_cmd *cmd_list, \
 			i += 1;
 		}
 	}
+	else
+		*res = -1;
 	if (*res == -1)
 	{
 		printf("command not found\n");

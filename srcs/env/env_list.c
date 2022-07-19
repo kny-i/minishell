@@ -18,11 +18,13 @@ char	*get_path(t_envp *envp)
 	t_envp	*tmp;
 
 	tmp = envp;
-	while (tmp != NULL && ft_strcmp(tmp->env_name, "PATH"))
+	while (tmp != NULL)
 	{
+		if (ft_strcmp(tmp->env_name, "PATH") == 0)
+			return (tmp->content);
 		tmp = tmp->next;
 	}
-	return (tmp->content);
+	return (NULL);
 }
 
 t_envp	*ft_envnew(char *env_name, char *content)
