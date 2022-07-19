@@ -19,8 +19,8 @@ t_cmd	*cmd_new(void )
 	res->next = NULL;
 	res->args = ft_lstnew(NULL);
 	res->heredocend = NULL;
-	res->fd_out = -1;
-	res->fd_in = -1;
+	res->fd_out = 1;
+	res->fd_in = 0;
 	res->redirect = redirect_new();
 	return (res);
 }
