@@ -23,7 +23,6 @@ void	execve_path(char **args)
 		printf("%s: Permission denied\n", args[0]);
 		exit (126);
 	}
-	printf("g_signal.exit = %d\n", g_signal.exit_status);
 	execute_abs(args, args[0]);
 }
 
