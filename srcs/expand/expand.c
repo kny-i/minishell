@@ -1,6 +1,7 @@
 #include "minishell.h"
 
-char	*expand_general(char *content, int *i, char *new_content, t_envp *env_list)
+char	*expand_general(char *content, int *i, \
+				char *new_content, t_envp *env_list)
 {
 	int		status;
 	char	*tmp;
@@ -47,7 +48,8 @@ void	expand_args(t_cmd *cmd_list, t_envp *env_list)
 		cur_list = cur_cmd_list->args;
 		while (cur_list != NULL && cur_list->content != NULL)
 		{
-			cur_list->content = for_free(launch_expand(cur_list->content, env_list), cur_list->content);
+			cur_list->content = for_free \
+			(launch_expand(cur_list->content, env_list), cur_list->content);
 			cur_list = cur_list->next;
 		}
 		cur_cmd_list = cur_cmd_list->next;

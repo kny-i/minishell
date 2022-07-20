@@ -58,15 +58,30 @@ char	*get_expand_str(char *content, int *i, t_envp *env_list)
 	return (res);
 }
 
+int	heredoc_end(int fd)
+{
+	int	ret_fd;
+
+	close(fd);
+	ret_fd = open(".heredoc", O_RDONLY);
+	if (ret_fd == -1)
+	{
+		perror("open error");
+		exit(1);
+	}
+	dup2(g_signal.fd, 0);
+	close(g_signal.fd);
+	return (ret_fd);
+}
+
 int	launch_heredoc(char *end_str, int *flg)
 {
 	char	*line;
 	int		fd;
-	int		fd_1;
 
 	fd = open(".heredoc", O_WRONLY | O_CREAT | O_TRUNC, S_IWUSR | S_IRUSR);
 	if (fd == -1)
-		return (*flg + 1);
+		return ((*flg) + 1);
 	while (1)
 	{
 		sig_input_heredoc();
@@ -82,9 +97,5 @@ int	launch_heredoc(char *end_str, int *flg)
 		write(fd, "\n", 1);
 		free(line);
 	}
-	close(fd);
-	fd_1 = open(".heredoc", O_RDONLY);
-	dup2(g_signal.fd, 0);
-	close(g_signal.fd);
-	return (fd_1);
+	return (heredoc_end(fd));
 }

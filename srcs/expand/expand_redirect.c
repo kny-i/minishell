@@ -24,9 +24,11 @@ bool	launch_expand_redirect(t_cmd *cmd_list)
 	while (redirect != NULL && redirect->file_name != NULL)
 	{
 		if (redirect->redirect_type == 1)
-			cmd_list->fd_out = redirect_open_out(redirect->file_name, false, &flg);
+			cmd_list->fd_out = redirect_open_out \
+									(redirect->file_name, false, &flg);
 		else if (redirect->redirect_type == 2)
-			cmd_list->fd_out = redirect_open_out(redirect->file_name, true, &flg);
+			cmd_list->fd_out = redirect_open_out \
+									(redirect->file_name, true, &flg);
 		else if (redirect->redirect_type == 3)
 			cmd_list->fd_in = redirect_open_in(redirect->file_name, &flg);
 		else if (redirect->redirect_type == 4)
@@ -78,7 +80,9 @@ void	expand_redirect(t_cmd *cmd_list, t_envp *env_list)
 		cur_redirect = cur_cmd_list->redirect;
 		while (cur_redirect != NULL && cur_redirect->file_name != NULL)
 		{
-			cur_redirect->file_name = for_free(launch_expand(cur_redirect->file_name, env_list), cur_redirect->file_name);
+			cur_redirect->file_name = for_free \
+			(launch_expand(cur_redirect->file_name, env_list), \
+											cur_redirect->file_name);
 			cur_redirect = cur_redirect->next;
 		}
 		cur_cmd_list = cur_cmd_list->next;
