@@ -36,5 +36,6 @@ int	exit_core(char **args)
 		perror("too many arguments");
 		exit(255);
 	}
+	ft_putendl_fd("exit", 1);
 	exit(ft_atoi(args[1]));
 }
