@@ -19,5 +19,6 @@ void	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp);
 void	fd_free(int **fd, int num_cmd);
 void	fd_actions(int i, int **fd, t_cmd *tmp_cmd, int num_cmd);
 bool	is_parent_exe(t_cmd *cmd_list, int cmd_cnt);
-
+int		is_redirect(char *data);
+void	insert_redirect_list(t_redirect **redirect, t_token **token, int *flg);
 #endif

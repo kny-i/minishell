@@ -28,7 +28,8 @@ int	join_return_status(t_token **token, char *str, int char_type, int status)
 	return (status);
 }
 
-int	check_token_return_status(t_token **token, char *input, int char_type, int status)
+int	check_token_return_status(t_token **token, \
+				char *input, int char_type, int status)
 {
 	if (char_type == CHAR_PIPE)
 	{
@@ -60,7 +61,8 @@ int	assign_general(t_token **token, char *input, int char_type)
 	else if (char_type == CHAR_WHITESPACE)
 		status = check_return_status(&(*token), STATE_GENERAL);
 	else
-		status = check_token_return_status(&(*token), str, char_type, STATE_GENERAL);
+		status = check_token_return_status(&(*token), \
+												str, char_type, STATE_GENERAL);
 	free(str);
 	return (status);
 }

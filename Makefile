@@ -45,6 +45,7 @@ SRCS := $(SRCS_DIR)/main.c \
 		$(SRCS_DIR)/expand/expand.c \
 		$(SRCS_DIR)/signal/signal_handlers.c \
 		$(SRCS_DIR)/execute/fd_actions.c \
+		$(SRCS_DIR)/parser/parse_redirect.c \
 
 
 OBJS := $(patsubst $(SRCS_DIR)%,$(OBJS_DIr)%,$(SRCS:.c=.o))

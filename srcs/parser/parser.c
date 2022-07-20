@@ -8,36 +8,6 @@ int	print_pars_error(char *str)
 	return (0);
 }
 
-int	is_redirect(char *data)
-{
-	if (!ft_strcmp(data, ">"))
-		return (1);
-	else if (!ft_strcmp(data, ">>"))
-		return (2);
-	else if (!ft_strcmp(data, "<"))
-		return (3);
-	else if (!ft_strcmp(data, "<<"))
-		return (4);
-	else if (!ft_strcmp(data, "|"))
-		return (5);
-	return (0);
-}
-
-void	insert_redirect_list(t_redirect **redirect, t_token **token, int *flg)
-{
-	(*redirect)->redirect_type = is_redirect((*token)->data);
-	*token = (*token)->next;
-	if (is_redirect((*token)->data) != 0)
-	{
-		*flg = print_pars_error((*token)->data);	//return ; 必要だと思う
-		printf("print_message\n");
-		return ;
-	}
-	(*redirect)->file_name = ft_strdup((*token)->data);
-	(*redirect)->next = redirect_new();
-	*redirect = (*redirect)->next;
-}
-
 void	insert_general_list(t_list **args, t_token *token)
 {
 	(*args)->content = ft_strdup(token->data);
@@ -46,7 +16,7 @@ void	insert_general_list(t_list **args, t_token *token)
 }
 
 void	parser(t_token *token, t_cmd *cmd_list, int *flg)
-{	//flg > 0 確定
+{
 	t_list		*args;
 	t_redirect	*redirect;
 
