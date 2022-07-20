@@ -60,7 +60,6 @@ int	lexer_build(char *input, t_token **lexerbuf)
 {
 	int			status;
 	int			char_type;
-	char		*input_tmp;
 	t_token		*token;
 
 	token = token_new();

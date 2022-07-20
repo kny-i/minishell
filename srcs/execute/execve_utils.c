@@ -27,8 +27,7 @@ void	execve_path(char **args)
 	execute_abs(args, args[0]);
 }
 
-void	execve_not_builtin(char **path, t_cmd *cmd_list, \
-										char **args, int *res)
+void	execve_not_builtin(char **path, char **args, int *res)
 {
 	int		i;
 	char	*tmp;
@@ -69,7 +68,7 @@ void	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
 	if (is_builtin(cmd_list) == 1)
 		exit(execute_builtin(envp, args));
 	path_tmp = env_path_split;
-	execve_not_builtin(path_tmp, cmd_list, args, &res);
+	execve_not_builtin(path_tmp, args, &res);
 }
 
 void	close_parents_fd(int i, int **fd)

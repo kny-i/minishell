@@ -66,5 +66,6 @@ int	main(int argc, char *argv[])
 
 	if (argc == 1)
 		minishell(environ);
+	(void)argv;
 	return (0);
 }

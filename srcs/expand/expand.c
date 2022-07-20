@@ -3,10 +3,8 @@
 char	*expand_general(char *content, int *i, \
 				char *new_content, t_envp *env_list)
 {
-	int		status;
 	char	*tmp;
 
-	status = get_status(*content);
 	if (!ft_strncmp(content, "$", 1))
 		tmp = get_expand_str(content, i, env_list);
 	else

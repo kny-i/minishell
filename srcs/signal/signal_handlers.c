@@ -7,11 +7,12 @@ void	signal_handler(int sig)
 	rl_replace_line("", 0);
 	rl_redisplay();
 	g_signal.exit_status = 1;
+	(void)sig;
 }
 
 void	signal_handler_heredoc(int sig)
 {
-	(void)signal;
+	(void)sig;
 	close(0);
 	ft_putstr_fd("\n", 1);
 	g_signal.is_finished = true;

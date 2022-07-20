@@ -27,8 +27,6 @@ t_cmd	*cmd_new(void )
 
 void	create_new_cmd(t_cmd **cmd_list, t_token *token, int *flg)
 {
-	t_cmd	*new;
-
 	if (*token->next->data == '|')
 		*flg = print_pars_error(token->next->data);
 	(*cmd_list)->next = cmd_new();

@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	cd_to_home(char **args, t_envp *env)
+int	cd_to_home(t_envp *env)
 {
 	char	*home_path;
 
@@ -25,7 +25,7 @@ int	cd_core(char **args, t_envp *env)
 {
 	if (args[1] == NULL)
 	{
-		return (cd_to_home(args, env));
+		return (cd_to_home(env));
 	}
 	if (chdir(args[1]) == -1)
 	{
