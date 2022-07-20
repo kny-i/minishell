@@ -56,7 +56,7 @@ int	check_status(int char_type, int status)
 	return (1);
 }
 
-int		lexer_build(char *input, t_token **lexerbuf)
+int	lexer_build(char *input, t_token **lexerbuf)
 {
 	int			status;
 	int			char_type;
@@ -75,7 +75,7 @@ int		lexer_build(char *input, t_token **lexerbuf)
 			status = chstatus_end(token, input, char_type, STATE_IN_QUOTE);
 		else if (status == STATE_IN_DQUOTE)
 			status = chstatus_end(token, input, char_type, STATE_IN_DQUOTE);
-		*(input++);
+		input++;
 	}
 	return (check_status(char_type, status));
 }

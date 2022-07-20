@@ -51,7 +51,6 @@ void	free_redirect(t_redirect *redirect)
 		free(redirect);
 		redirect = tmp;
 	}
-
 }
 
 void	free_cmd(t_cmd *cmd_list)

@@ -89,10 +89,7 @@ void	execute(t_cmd **cmd_list, t_envp **envp)
 	char	**env_path_split;
 
 	cmd_cnt = count_cmd(*cmd_list);
-	if (is_builtin(*cmd_list) == 1 && cmd_cnt == 1 && \
-				(ft_strcmp((*cmd_list)->args->content, "cd") == 0 || \
-				ft_strcmp((*cmd_list)->args->content, "exit") == 0 || \
-				ft_strcmp((*cmd_list)->args->content, "unset") == 0 ))
+	if (is_parent_exe(*cmd_list, cmd_cnt) == true)
 	{
 		args = list_to_args(*cmd_list);
 		if (args == NULL)
@@ -103,14 +100,7 @@ void	execute(t_cmd **cmd_list, t_envp **envp)
 	}
 	env_path = get_path(*envp);
 	if (env_path != NULL)
-	{
-		env_path_split = ft_split(env_path, ':');
-		if (env_path_split == NULL)
-		{
-			perror("split error");
-			exit (1);
-		}
-	}
+		env_path_split = x_split(env_path, ':');
 	else
 		env_path_split = NULL;
 	execute_util(cmd_list, cmd_cnt, env_path_split, envp);

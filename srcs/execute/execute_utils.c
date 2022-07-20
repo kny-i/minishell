@@ -57,3 +57,15 @@ char	**list_to_args(t_cmd *cmd)
 	list_to_args_loop(tmp, res);
 	return (res);
 }
+
+bool	is_parent_exe(t_cmd *cmd_list, int cmd_cnt)
+{
+	if (is_builtin(cmd_list) == 1 && cmd_cnt == 1 && \
+				(ft_strcmp((cmd_list)->args->content, "cd") == 0 || \
+				ft_strcmp((cmd_list)->args->content, "exit") == 0 || \
+				ft_strcmp((cmd_list)->args->content, "unset") == 0 || \
+				ft_strcmp((cmd_list)->args->content, "export") == 0))
+		return (true);
+	else
+		return (false);
+}
