@@ -49,7 +49,7 @@ int	check_validate_redirect(t_token *lexerbuf)
 		return (print_pars_error(token->data));
 	while (token != NULL && token->next != NULL)
 	{
-		if (is_redirect(token->data))
+		if (is_redirect(token->data) > 0 && is_redirect(token->data) < 5)
 		{
 			token = token->next;
 			if (is_redirect(token->data))

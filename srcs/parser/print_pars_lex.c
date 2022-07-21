@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-/*
+
 void	print_lex(t_token *lex)
 {
 	t_token	*tmp;
@@ -27,4 +27,4 @@ void	print_pars(t_cmd *cmd_list)
 			printf("%s ", redirect->file_name);
 		putchar('\n');
 	}
-}*/
+}

@@ -45,7 +45,7 @@ void	minishell(char *environ[])
 		sig_input();
 		g_signal.fd = dup(0);
 		g_signal.is_finished = false;
-		line = readline("minishell> ");
+		line = readline("\x1b[34mminishell\x1b[39m> ");
 		if (line == NULL)
 			break ;
 		add_history(line);
