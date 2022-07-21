@@ -60,12 +60,10 @@ void	minishell(char *environ[])
 	exit(0);
 }
 
-int	main(int argc, char *argv[])
+int	main(int argc, char *argv[], char *envp[])
 {
-	extern char	**environ;
-
 	if (argc == 1)
-		minishell(environ);
+		minishell(envp);
 	(void)argv;
 	return (0);
 }
