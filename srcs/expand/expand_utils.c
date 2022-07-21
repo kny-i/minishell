@@ -47,13 +47,16 @@ char	*get_expand_str(char *content, int *i, t_envp *env_list)
 	if (!ft_isalpha(content[len]) && content[len] != '?')
 		return (ft_substr(content, 0, len));
 	if (content[len] == '?')
+	{
 		*i += 1;
+		len++;
+	}
 	while (ft_isalpha(content[len]) == 1)
 	{
 		len++;
 		*i += 1;
 	}
-	res = ft_substr(content, 1, len);
+	res = ft_substr(content, 1, len - 1);
 	res = for_free(search_env(res, env_list), res);
 	return (res);
 }
