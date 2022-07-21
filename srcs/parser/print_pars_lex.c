@@ -1,5 +1,6 @@
 #include "minishell.h"
 
+/*
 
 void	print_lex(t_token *lex)
 {
@@ -28,3 +29,4 @@ void	print_pars(t_cmd *cmd_list)
 		putchar('\n');
 	}
 }
+*/
