@@ -1,17 +1,15 @@
 #include "minishell.h"
 
-extern char	**environ;
-
-void	execute_abs(char **args, char *cmd)
+void	execute_abs(char **args, char *cmd, char **env)
 {
-	if (execve(cmd, args, environ) == -1)
+	if (execve(cmd, args, env) == -1)
 	{
 		printf("command not found\n");
 	}
 	exit(0);
 }
 
-void	execve_path(char **args)
+void	execve_path(char **args, char **env)
 {
 	if (access(args[0], F_OK) == -1)
 	{
@@ -23,10 +21,10 @@ void	execve_path(char **args)
 		printf("%s: Permission denied\n", args[0]);
 		exit (126);
 	}
-	execute_abs(args, args[0]);
+	execute_abs(args, args[0], env);
 }
 
-void	execve_not_builtin(char **path, char **args, int *res)
+void	execve_not_builtin(char **path, char **args, int *res, char **env)
 {
 	int		i;
 	char	*tmp;
@@ -35,14 +33,14 @@ void	execve_not_builtin(char **path, char **args, int *res)
 	path_tmp = path;
 	i = 0;
 	if (args[0][0] == '/' || ft_strncmp(args[0], "./", 2) == 0)
-		execve_path(args);
+		execve_path(args, env);
 	else if (path != NULL)
 	{
 		tmp = ft_strjoin("/", args[0]);
 		while (path_tmp[i] != NULL)
 		{
 			path_tmp[i] = for_free(ft_strjoin(path_tmp[i], tmp), path_tmp[i]);
-			*res = execve(path_tmp[i], args, environ);
+			*res = execve(path_tmp[i], args, env);
 			i += 1;
 		}
 	}
@@ -60,6 +58,7 @@ void	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
 	char	**args;
 	char	**path_tmp;
 	int		res;
+	char	**env;
 
 	args = list_to_args(cmd_list);
 	if (args == NULL)
@@ -67,7 +66,8 @@ void	execve_cmd(t_cmd *cmd_list, char **env_path_split, t_envp **envp)
 	if (is_builtin(cmd_list) == 1)
 		exit(execute_builtin(envp, args));
 	path_tmp = env_path_split;
-	execve_not_builtin(path_tmp, args, &res);
+	env = list_to_env(*envp);
+	execve_not_builtin(path_tmp, args, &res, env);
 }
 
 void	close_parents_fd(int i, int **fd)
