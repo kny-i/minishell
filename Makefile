@@ -24,7 +24,7 @@ SRCS := $(SRCS_DIR)/main.c \
 		$(SRCS_DIR)/builtin/unset.c \
 		$(SRCS_DIR)/lexer/lexer.c \
 		$(SRCS_DIR)/lexer/lexer_utils.c \
-		$(SRCS_DIR)/lexer/lexer_utils2.c \
+		$(SRCS_DIR)/lexer/lexer_token.c \
 		$(SRCS_DIR)/utils/x_func.c \
 		$(SRCS_DIR)/utils/x_func_second.c \
 		$(SRCS_DIR)/execute/execute.c \
