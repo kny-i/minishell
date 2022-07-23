@@ -43,7 +43,7 @@ char	*get_expand_str(char *content, int *i, t_envp *env_list)
 	len = 1;
 	status = get_status(content[len]);
 	if (status == STATE_IN_QUOTE || status == STATE_IN_DQUOTE)
-		return (ft_strdup(""));
+		return (ft_strdup("$"));
 	if (!ft_isalpha(content[len]) && content[len] != '?')
 		return (ft_substr(content, 0, len));
 	if (content[len] == '?')
